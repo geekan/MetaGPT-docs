@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "1.0.0-rc.24",
+    "vue": "^3.3.7"
+  },
+  "dependencies": {
+    "@iconify/json": "^2.2.137",
+    "@types/node": "^20.8.10",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "unocss": "^0.57.1",
+    "unplugin-auto-import": "^0.16.7",
+    "unplugin-icons": "^0.17.3",
+    "unplugin-vue-components": "^0.25.2"
+  }
+}

@@ -1,0 +1,761 @@
+{
+    "info": "Game setup:\nPlayer1: Werewolf,\nPlayer2: Villager,\nPlayer3: Villager,\nPlayer4: Seer,\nPlayer5: Witch,\nPlayer6: Guard,\nPlayer7: Werewolf,\n",
+    "data": [
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "It\u2019s dark, everyone close your eyes. I will talk with you/your team secretly at night.\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Guard, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Guard, now tell me who you protect tonight?\n                   You only choose one from the following living options please: ['Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6', 'Player7'].\n                   Or you can pass. For example: Protect ...\n"
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "REFLECTION",
+            "text": ""
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "THOUGHTS",
+            "text": "As it's the first night, I don't have any information about the roles of the other players. Therefore, I can't make an informed decision about who to protect. However, I can't pass either as it's my responsibility as a guard to protect someone. I decide to protect Player1 tonight as a random choice."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "RESPONSE",
+            "text": "Player1"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Guard, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Werewolves, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Werewolves, I secretly tell you that ['Player1', 'Player7'] are\n                   all of the 2 werewolves! Keep in mind you are teammates. The rest players are not werewolves.\n                   choose one from the following living options please:\n                   ['Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6', 'Player7']. For example: Kill ...\n"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "REFLECTION",
+            "text": ""
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "THOUGHTS",
+            "text": "As it's the first night, I don't have any information about the roles of the other players. However, I know that Player7 is also a werewolf, so I won't hunt him. I'll randomly choose a player to hunt. I'll choose Player3."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "RESPONSE",
+            "text": "Player3"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "REFLECTION",
+            "text": ""
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "THOUGHTS",
+            "text": "As Player1 has already chosen to Hunt Player3, I need to decide who to Hunt next. Player2, Player4, Player5, and Player6 are all potential targets. However, I don't have any specific information about their roles yet. Therefore, I will randomly choose one of them to Hunt. I will choose Player4 because there is no specific strategy to follow at this moment."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "RESPONSE",
+            "text": "Player4"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Werewolves, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, tonight Player4 has been killed by the werewolves.\n                   You have a bottle of antidote, would you like to save him/her? If so, say \"Save\", else, say \"Pass\".\n"
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": ""
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "Player4 was killed tonight. I need to consider whether saving Player4 would be beneficial for the villagers' team. If Player4 is a villager, saving him could give us an advantage. However, if he is a werewolf, saving him could be detrimental. I also need to consider that I can only use my antidote once, so I need to make sure it's the right time to use it."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "PASS"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, you also have a bottle of poison, would you like to use it to kill one of the living players?\n                   Choose one from the following living options: ['Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6', 'Player7'].\n                   If so, say ONLY \"Poison PlayerX\", replace PlayerX with the actual player name, else, say \"Pass\".\n"
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Unknown, living. No information available yet.\nPlayer2: Unknown, living. No information available yet.\nPlayer3: Unknown, living. No information available yet.\nPlayer4: Dead, possibly killed by werewolves as no other roles have been revealed.\nPlayer5: Witch, living. This is you.\nPlayer6: Unknown, living. No information available yet.\nPlayer7: Unknown, living. No information available yet.\nGAME_STATE_SUMMARIZATION: One player is dead, possibly killed by werewolves. No roles have been claimed yet except your own as the Witch. The game is still in early stages."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "As it's the first night, I have no information about the roles of the other players. It's risky to use the poison without any clues about who the werewolves might be. I don't want to accidentally kill a villager. My strategy suggests not to poison a player randomly or at the first night. Therefore, I decide to hold onto my poison for now until I have more information."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "PASS"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Seer, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Seer, you can check one player's identity. Who are you going to verify its identity tonight?\n                    Choose only one from the following living options:['Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6', 'Player7'].\n"
+        },
+        {
+            "role": "Seer",
+            "player_name": "Player4",
+            "msg_type": "REFLECTION",
+            "text": ""
+        },
+        {
+            "role": "Seer",
+            "player_name": "Player4",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. As it's the first night, I don't have any information about the other players' roles. 2. I need to start gathering information to help the villagers win. 3. I decide to Verify Player1, as they are the first on the list and I have no other information to base my decision on."
+        },
+        {
+            "role": "Seer",
+            "player_name": "Player4",
+            "msg_type": "RESPONSE",
+            "text": "Player1"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Player1 is a werewolf\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Seer, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "It's daytime. Everyone woke up except those who had been killed.\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "['Player4'] was killed last night!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Living players: ['Player1', 'Player2', 'Player3', 'Player5', 'Player6', 'Player7'], now freely talk about the current situation based on your observation and\n                    reflection with a few sentences. Decide whether to reveal your identity based on your reflection.\n"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "REFLECTION",
+            "text": "Player1: I am a werewolf, alive.\nPlayer2: Unknown role, alive. No claims or accusations made yet.\nPlayer3: Unknown role, alive. No claims or accusations made yet.\nPlayer4: Unknown role, dead. Possibly killed by werewolves.\nPlayer5: Unknown role, alive. No claims or accusations made yet.\nPlayer6: Unknown role, alive. No claims or accusations made yet.\nPlayer7: Werewolf, alive. My partner.\nGAME_STATE_SUMMARIZATION: One player is dead, possibly by werewolves. All other players, including myself and my werewolf partner, are alive. No one has made any claims or accusations yet."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. I need to keep my werewolf identity hidden, so I should claim a role that is believable and not too suspicious. 2. I should not claim the same role as my werewolf partner, Player7, to avoid suspicion. 3. I should also try to divert suspicion onto another player, preferably one who has not claimed a role yet, to keep the focus off of me and my partner."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "RESPONSE",
+            "text": "I am the Seer. Last night, I had a vision that Player2 might be a werewolf. I suggest we keep a close eye on him."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player2",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, because he claimed to be the Seer and no one contradicted him.\nPlayer2: Villager (myself), because I know my own role.\nPlayer3: Unknown, because he hasn't claimed a role or taken any notable actions.\nPlayer4: Unknown, because he was killed before he could claim a role or take any notable actions.\nPlayer5: Unknown, because he hasn't claimed a role or taken any notable actions.\nPlayer6: Unknown, because he hasn't claimed a role or taken any notable actions.\nPlayer7: Unknown, because he hasn't claimed a role or taken any notable actions.\nGAME_STATE_SUMMARIZATION: Player1 claimed to be the Seer and accused me, Player2, of being a werewolf. The rest of the players haven't claimed any roles yet."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player2",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1 claimed to be the Seer and accused me of being a werewolf. As a villager, I know this is not true. 2. I need to defend myself and convince others that I am not a werewolf. 3. I should also try to figure out who might be the werewolf based on their reactions to Player1's accusation."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player2",
+            "msg_type": "RESPONSE",
+            "text": "I understand Player1's suspicion, but I assure you all that I am a villager. I have no special abilities, but I am committed to helping the village win. I suggest we all stay vigilant and watch for any suspicious behavior."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, because he claimed to be and no one contradicted.\nPlayer2: Villager, because he claimed to be and there is no evidence against him yet.\nPlayer3: Villager, because that's me.\nPlayer4: Unknown, possibly a villager since he was killed by werewolves.\nPlayer5: Unknown, no claim yet.\nPlayer6: Unknown, no claim yet.\nPlayer7: Unknown, no claim yet.\nGAME_STATE_SUMMARIZATION: Player1 claimed to be the Seer and accused Player2 of being a werewolf, but Player2 claimed to be a villager. Player4 was killed, possibly by werewolves. The rest of the players have not claimed their roles yet."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1 claimed to be the Seer and accused Player2 of being a werewolf. However, Player2 claimed to be a villager. As a villager, I need to be careful about who to trust. 2. Player4 was killed, possibly by werewolves. This means that the werewolves are among us and we need to find them as soon as possible. 3. Since the moderator's instruction is to speak, I should express my thoughts and suspicions. I don't have any special abilities, so I don't need to worry about someone falsely claiming my role. I should focus on observing the behavior of the other players and try to figure out who the werewolves might be."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "RESPONSE",
+            "text": "I understand the suspicions against Player2, but we should not rush to conclusions. We need to observe everyone's behavior and make a decision based on evidence, not just accusations. As a villager, I am committed to helping the village win. Let's stay vigilant and work together to find the werewolves."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. He claimed to be the seer and accused Player2 of being a werewolf.\nPlayer2: Possibly a werewolf, living. He was accused by Player1, but he claimed to be a villager.\nPlayer3: Villager, living. He claimed to be a villager and did not accuse anyone.\nPlayer4: Unknown role, dead. He was killed by werewolves.\nPlayer5: Witch, living. This is me.\nPlayer6: Unknown role, living. He did not claim any role or accuse anyone.\nPlayer7: Unknown role, living. He did not claim any role or accuse anyone.\nGAME_STATE_SUMMARIZATION: There is a conflict between Player1 and Player2. Player1, who claims to be the seer, accuses Player2 of being a werewolf. However, Player2 insists that he is a villager. The rest of the players have not revealed their roles yet."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process:1. The current situation is that Player1, who claims to be the seer, accuses Player2 of being a werewolf. However, Player2 insists that he is a villager. The rest of the players have not revealed their roles yet.2. As a witch, I have the ability to save or kill players. However, I have already decided not to use my abilities in the previous night, which means I can't use them anymore. Therefore, my role as a witch is not very useful at this point.3. Considering the conflict between Player1 and Player2, it's hard to decide who is telling the truth. However, if Player1 is indeed the seer, his role is very important for the villagers. Therefore, it might be beneficial to support Player1 and vote against Player2.4. On the other hand, if Player2 is indeed a villager, voting against him would be a loss for the villagers. Therefore, it might be better to stay neutral and observe the situation further."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "I understand the suspicions against Player2, but I also believe that we should not rush to conclusions. As a villager, I am committed to helping the village win. Let's stay vigilant and work together to find the werewolves."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. Player1 claimed to be the Seer and no one contradicted this claim. He accused Player2 of being a werewolf.\nPlayer2: Villager, living. Player2 claimed to be a villager and no one contradicted this claim. He was accused by Player1.\nPlayer3: Villager, living. Player3 didn't claim any role but stated he is a villager. He didn't accuse anyone.\nPlayer4: Unknown, dead. Player4 was killed by werewolves. He didn't claim any role or accuse anyone before his death.\nPlayer5: Villager, living. Player5 didn't claim any role but stated he is a villager. He didn't accuse anyone.\nPlayer6: Guard, living. I am the Guard and I haven't accused anyone.\nPlayer7: Unknown, living. Player7 didn't claim any role or accuse anyone.\nGAME_STATE_SUMMARIZATION: Player1, the Seer, accused Player2 of being a werewolf. Player2, Player3, and Player5 claimed to be villagers. Player4 was killed by werewolves. I am the Guard. Player7's role is still unknown."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Since Player1 claimed to be the Seer and accused Player2 of being a werewolf, it's possible that Player1 might be targeted by the werewolves next. As the Guard, I should consider protecting Player1 tonight. 2. However, revealing my identity as the Guard might put me at risk, as the werewolves might target me next. 3. Therefore, I should not reveal my identity yet, but I should express my agreement with Player1's suspicion towards Player2 to divert the werewolves' attention."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "RESPONSE",
+            "text": "I agree with Player1's suspicion towards Player2. We should keep a close eye on him. Let's stay vigilant and work together to find the werewolves."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Werewolf, because he is my teammate.\nPlayer2: Villager, because he claimed to be a villager and no one contradicted him.\nPlayer3: Villager, because he claimed to be a villager and no one contradicted him.\nPlayer4: Unknown, because he was killed before he could claim a role.\nPlayer5: Villager, because he claimed to be a villager and no one contradicted him.\nPlayer6: Villager, because he did not claim a special role and sided with Player1 who is a werewolf.\nPlayer7: Werewolf, because it's me.\nGAME_STATE_SUMMARIZATION: There are 2 werewolves (Player1 and myself) and 4 villagers alive. Player1, posing as the Seer, has successfully turned suspicion towards Player2."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Based on the moderator's instruction, I need to speak about the current situation. 2. I need to support Player1's claim of being a Seer and his suspicion towards Player2, as he is my werewolf teammate. This will help to divert attention away from us. 3. However, I should not claim the same role as Player1. Instead, I could claim to be a villager, which is a safe choice as there are more villagers than any other role. This will help me blend in with the villagers and avoid suspicion."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "RESPONSE",
+            "text": "I agree with Player1's suspicion towards Player2. As a villager, I believe we should be cautious and keep a close eye on Player2. Let's work together to find the werewolves and protect our village."
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Now vote and tell me who you think is the werewolf. Don\u2019t mention your role.\n                    You only choose one from the following living options please:\n                    ['Player1', 'Player2', 'Player3', 'Player5', 'Player6', 'Player7']. Say ONLY: I vote to eliminate ...\n"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Werewolf (myself), claimed to be Seer to divert suspicion.\nPlayer2: Villager, no special role claimed, suspected by Player1 (me) and Player6.\nPlayer3: Villager, no special role claimed, not suspected by anyone.\nPlayer4: Villager, killed by werewolves, no special role claimed.\nPlayer5: Villager, no special role claimed, not suspected by anyone.\nPlayer6: Villager, no special role claimed, sides with Player1 (me).\nPlayer7: Werewolf (my partner), no special role claimed, sides with Player1 (me).\nGAME_STATE_SUMMARIZATION: Player1 (me) and Player7 are werewolves. Player1 (me) claimed to be Seer and accused Player2, who is suspected by Player6 as well. Player4 was killed by werewolves. The rest of the players are villagers with no special roles claimed."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. I need to continue impersonating the Seer role to avoid suspicion. 2. Player2 is currently under suspicion due to my previous claim, so it might be beneficial to keep the focus on him. 3. However, I need to be careful not to be too aggressive in accusing Player2, as it might raise suspicion against me. 4. I should vote to eliminate Player2, as it aligns with my previous claim and keeps the suspicion away from me and my werewolf partner, Player7."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player2"
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player2",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, because he claimed so and no one contradicted him.\nPlayer2: Villager (myself), because I know my own role.\nPlayer3: Possibly a villager, as he didn't claim any special role and is trying to keep the peace.\nPlayer4: Unknown, as he was killed before he could claim a role.\nPlayer5: Possibly a villager, as he didn't claim any special role and is trying to keep the peace.\nPlayer6: Possibly a werewolf, as he quickly agreed with Player1's suspicion towards me without providing any evidence.\nPlayer7: Possibly a werewolf, as he quickly agreed with Player1's suspicion towards me without providing any evidence.\nGAME_STATE_SUMMARIZATION: Player1 claimed to be the Seer and accused me, Player2, of being a werewolf. Player6 and Player7 quickly agreed with him, which is suspicious. Player3 and Player5 are trying to keep the peace. Player4 was killed, possibly by werewolves."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player2",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1 claimed to be the Seer and accused me of being a werewolf. However, as a villager, I know that I am not a werewolf. 2. Player6 and Player7 quickly agreed with Player1's accusation without providing any evidence, which is suspicious. They could be werewolves trying to divert attention away from themselves. 3. Player3 and Player5 are trying to keep the peace and have not claimed any special roles. They could be villagers or they could be werewolves trying to appear innocent. 4. Based on this, I believe that Player6 or Player7 is the most suspicious. I will vote to eliminate one of them."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player2",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player6"
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, because he claimed to be the Seer and no one contradicted him.\nPlayer2: Possibly a werewolf, because Player1 claimed to have a vision that Player2 might be a werewolf.\nPlayer3 (You): Villager, because that's your role.\nPlayer4: Unknown, because he was killed before he could claim a role.\nPlayer5: Villager, because he claimed to be a villager and no one contradicted him.\nPlayer6: Unknown, because he hasn't claimed a role yet.\nPlayer7: Villager, because he claimed to be a villager and no one contradicted him.\nGAME_STATE_SUMMARIZATION: Currently, Player1 (Seer) has accused Player2 of being a werewolf, and Player2 has defended himself as a villager. The rest of the players are either siding with Player1 or urging caution. There are still two werewolves among us."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1, who claims to be the Seer, suspects Player2 to be a werewolf. 2. Player2, however, defends himself as a villager. 3. As a villager, my goal is to eliminate the werewolves. Based on the current situation, Player2 is the most suspicious due to the Seer's vision. However, it's also possible that Player1 is a werewolf pretending to be a Seer to mislead us. But since no one else claimed to be the Seer, I'm inclined to believe Player1. 4. Therefore, I decide to vote to eliminate Player2."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player2"
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. He claimed to be the Seer and no one has contradicted him yet.\nPlayer2: Possibly a werewolf, living. He was accused by Player1 who claimed to be the Seer.\nPlayer3: Villager, living. He claimed to be a villager and has not shown any suspicious behavior.\nPlayer4: Unknown, dead. He was killed by werewolves, so he was likely a villager.\nPlayer5: Witch, living. This is myself.\nPlayer6: Villager, living. He has not claimed any special role and has not been accused by anyone.\nPlayer7: Villager, living. He has not claimed any special role and has not been accused by anyone.\nGAME_STATE_SUMMARIZATION: Player1, who claimed to be the Seer, accused Player2 of being a werewolf. The rest of the players are siding with either Player1 or Player2. As the Witch, I need to decide who to trust."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1, who claims to be the Seer, has accused Player2 of being a werewolf. This is a serious accusation, and Player1 has not been contradicted by anyone else claiming to be the Seer. 2. Player2 has defended himself, but his defense is not very convincing. 3. I have to make a decision based on the information available. If Player1 is telling the truth, then eliminating Player2 would be beneficial for the villagers. However, if Player1 is lying, then we would be eliminating a potential ally. 4. Considering the current situation, I believe it's safer to side with Player1. As the Witch, I have the ability to save a player in the future, so if Player1 turns out to be lying, I can potentially rectify the situation."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player2"
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. He claimed to be the Seer and accused Player2 of being a werewolf.\nPlayer2: Possible werewolf, living. He was accused by Player1, the Seer, and defended himself by claiming to be a villager.\nPlayer3: Villager, living. He claimed to be a villager and did not accuse anyone.\nPlayer4: Unknown, dead. He was possibly killed by werewolves.\nPlayer5: Villager, living. He claimed to be a villager and accused Player2.\nPlayer6: Guard, living. I am the Guard and I sided with Player1, accusing Player2.\nPlayer7: Villager, living. He claimed to be a villager and sided with Player1, accusing Player2.\nGAME_STATE_SUMMARIZATION: Player2 is under suspicion of being a werewolf by the Seer and several villagers, while the Guard (myself) and other villagers are still alive."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. The moderator's instruction is to vote, so I need to decide who I think is the most suspicious. 2. Player1, who claims to be the Seer, has accused Player2 of being a werewolf. Player2 defended himself by claiming to be a villager, but his defense was not very convincing. 3. Given the current situation, I think it's best to vote for Player2. If he is indeed a werewolf, we can eliminate a threat. If he is not, we can at least confirm that Player1 is not the Seer and is likely a werewolf."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player2"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Werewolf (Living), because the moderator told me so.\nPlayer2: Villager (Living), because he claimed to be a villager and no one contradicted him.\nPlayer3: Villager (Living), because he claimed to be a villager and no one contradicted him.\nPlayer4: Unknown (Dead), because he was killed by werewolves.\nPlayer5: Villager (Living), because he claimed to be a villager and no one contradicted him.\nPlayer6: Villager (Living), because he claimed to be a villager and no one contradicted him.\nPlayer7: Werewolf (Living), because I am Player7 and I know my role.\nGAME_STATE_SUMMARIZATION: Currently, there are 2 werewolves (Player1 and myself) and 4 villagers alive. Player2 is suspected by most players."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. The majority of players are suspecting Player2, including my werewolf partner Player1. 2. To blend in with the villagers and not to arouse suspicion, I should also vote against Player2. 3. This will also help to eliminate one more villager, bringing the werewolves closer to victory."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player2"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "['Player2'] was eliminated.\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "It\u2019s dark, everyone close your eyes. I will talk with you/your team secretly at night.\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Guard, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Guard, now tell me who you protect tonight?\n                   You only choose one from the following living options please: ['Player1', 'Player3', 'Player5', 'Player6', 'Player7'].\n                   Or you can pass. For example: Protect ...\n"
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, because he claimed so and his claim is not contradicted.\nPlayer2: Possibly a werewolf, because he was accused by the Seer and voted out by the villagers.\nPlayer3: Villager, because he claimed so and his claim is not contradicted.\nPlayer4: Unknown, because he was killed by werewolves and did not claim any role.\nPlayer5: Villager, because he claimed so and his claim is not contradicted.\nPlayer6: Guard (myself)\nPlayer7: Villager, because he claimed so and his claim is not contradicted.\nGAME_STATE_SUMMARIZATION: One werewolf (Player2) might have been eliminated, and the Seer (Player1) is still alive. The rest are likely villagers."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1 claimed to be the Seer and his claim was not contradicted. This makes him a valuable asset to the villagers and a likely target for the werewolves. 2. I, as the Guard, have the ability to protect one player each night. 3. Given that the Seer is a crucial role and Player1 has revealed himself as the Seer, it would be strategic to protect him tonight to ensure his survival and continued contribution to the villagers' cause."
+        },
+        {
+            "role": "Guard",
+            "player_name": "Player6",
+            "msg_type": "RESPONSE",
+            "text": "Player1"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Guard, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Werewolves, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Werewolves, I secretly tell you that ['Player1', 'Player7'] are\n                   all of the 2 werewolves! Keep in mind you are teammates. The rest players are not werewolves.\n                   choose one from the following living options please:\n                   ['Player1', 'Player3', 'Player5', 'Player6', 'Player7']. For example: Kill ...\n"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "REFLECTION",
+            "text": "Player1: I am a werewolf, pretending to be the Seer to mislead the villagers.\nPlayer2: He was a villager, and was wrongly accused and voted out by the villagers.\nPlayer3: He might be a villager as he didn't claim any role and didn't accuse anyone.\nPlayer4: He was a villager, and was killed by us, the werewolves.\nPlayer5: He might be a villager as he didn't claim any role and didn't accuse anyone.\nPlayer6: He might be a villager as he didn't claim any role but sided with me.\nPlayer7: He is my werewolf partner.\nGAME_STATE_SUMMARIZATION: There are 2 werewolves (Player1 and Player7) and 3 villagers (Player3, Player5, Player6) alive. Player1 successfully misled the villagers and got Player2, a villager, voted out."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1 is me, and Player7 is my werewolf partner, so we should not hunt either of us. 2. Player3, Player5, and Player6 are all potential villagers. 3. Player6 agreed with my suspicion towards Player2 in the previous round, which indicates that he might trust me and my judgment. Therefore, it might be beneficial for us to keep him alive for now. 4. Between Player3 and Player5, neither of them claimed any special role or showed any suspicious behavior. Therefore, it doesn't matter much which one we choose to hunt. However, to make a decision, I will choose to hunt Player3 because he was the first one to speak after me in the previous round, which might indicate that he is more active and potentially more threatening."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "RESPONSE",
+            "text": "Hunt Player3"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Werewolf (living), because I am his partner.\nPlayer2: Villager (dead), because he claimed to be a villager and was voted out.\nPlayer3: Unknown (living), because he has not claimed a role yet.\nPlayer4: Unknown (dead), because he was killed by werewolves and did not claim a role.\nPlayer5: Unknown (living), because he has not claimed a role yet.\nPlayer6: Unknown (living), because he has not claimed a role yet.\nPlayer7: Werewolf (living), because it's me.\nGAME_STATE_SUMMARIZATION: Player1 and I are the remaining werewolves, Player2 was a villager and was voted out, Player4 was killed by us. The roles of Player3, Player5, and Player6 are still unknown."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1 is my werewolf partner, so I won't hunt him. 2. Player3, Player5, and Player6 have not claimed their roles yet, so they are all potential threats. 3. Player6 agreed with Player1's suspicion towards Player2, who was a villager, which means Player6 might be a seer or a witch. 4. Therefore, I decide to hunt Player6 to eliminate the potential threat."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player7",
+            "msg_type": "RESPONSE",
+            "text": "Player6"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Werewolves, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, tonight Player6 has been killed by the werewolves.\n                   You have a bottle of antidote, would you like to save him/her? If so, say \"Save\", else, say \"Pass\".\n"
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. He claimed to be the Seer and no one contradicted him.\nPlayer2: Werewolf, dead. He was accused by the majority and eliminated.\nPlayer3: Villager, living. He claimed to be a villager and his behavior is consistent with this role.\nPlayer4: Unknown, dead. He didn't claim any role before he was killed.\nPlayer5: Witch, living. This is me.\nPlayer6: Unknown, dead. He didn't claim any role before he was killed.\nPlayer7: Villager, living. He claimed to be a villager and his behavior is consistent with this role.\nGAME_STATE_SUMMARIZATION: One werewolf has been eliminated, and the Seer is still alive. There are still unknown roles among the living players."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "Player6 was killed tonight. He didn't claim any role before he was killed, so his role is unknown. However, considering the current game state, we have already eliminated one werewolf and the Seer is still alive. There are still unknown roles among the living players. Saving Player6 might bring more confusion and suspicion among the villagers. Moreover, as a witch, I need to consider the long-term strategy. If I use the antidote now, I won't be able to use it later when it might be more needed, for example, to save the Seer. Therefore, I decide not to save Player6."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "PASS"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, you also have a bottle of poison, would you like to use it to kill one of the living players?\n                   Choose one from the following living options: ['Player1', 'Player3', 'Player5', 'Player6', 'Player7'].\n                   If so, say ONLY \"Poison PlayerX\", replace PlayerX with the actual player name, else, say \"Pass\".\n"
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. He claimed to be the Seer and no one contradicted him.\nPlayer2: Villager, dead. He claimed to be a villager and was killed by villagers.\nPlayer3: Villager, living. He didn't claim any role and didn't accuse anyone.\nPlayer4: Unknown, dead. He didn't claim any role before he was killed by werewolves.\nPlayer5: Witch, living. This is me.\nPlayer6: Unknown, dead. He didn't claim any role before he was killed by werewolves.\nPlayer7: Villager, living. He didn't claim any role but sided with Player1 and Player6.\nGAME_STATE_SUMMARIZATION: There are 3 villagers, 1 witch, and 2 unknown roles left. Player1 is the Seer and there is no contradiction. Player2 was killed by villagers and Player6 was killed by werewolves."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1 claimed to be the Seer and no one contradicted him, so he is likely to be the Seer. 2. Player3 and Player7 didn't claim any role but they didn't accuse anyone either, so they might be villagers. 3. I am the Witch, so I know I am not a werewolf. 4. Therefore, the werewolves must be among the dead players or Player3 and Player7. 5. Since I can only poison a living player, I should choose between Player3 and Player7. 6. Player7 sided with Player1 and Player6, who were suspicious of Player2. Player2 turned out to be a villager, so Player7 might have been trying to mislead us. 7. Therefore, I suspect Player7 might be a werewolf."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "Poison Player7"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Witch, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Seer, please open your eyes!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Seer, you can check one player's identity. Who are you going to verify its identity tonight?\n                    Choose only one from the following living options:['Player1', 'Player3', 'Player5', 'Player6', 'Player7'].\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Seer, close your eyes\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "It's daytime. Everyone woke up except those who had been killed.\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "['Player6', 'Player7'] was killed last night!\n"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Living players: ['Player1', 'Player3', 'Player5'], now freely talk about the current situation based on your observation and\n                    reflection with a few sentences. Decide whether to reveal your identity based on your reflection.\n"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "REFLECTION",
+            "text": "Player1: I am a Werewolf, pretending to be the Seer to mislead the villagers.\nPlayer2: He was a Villager, who was voted out due to my false accusation.\nPlayer3: He might be a Villager, as he has not claimed any role and has not been targeted by werewolves.\nPlayer4: He was a Villager, killed by werewolves.\nPlayer5: He might be a Villager or a special role, as he has not claimed any role and has not been targeted by werewolves.\nPlayer6: He was a Villager, killed by werewolves.\nPlayer7: He was my Werewolf partner, unfortunately killed by our own team due to miscommunication.\nGAME_STATE_SUMMARIZATION: I am the only remaining werewolf, with two players left. The villagers do not seem to suspect me yet, but I must be careful in my next moves."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. I need to continue pretending to be the Seer to mislead the villagers. 2. I should cast suspicion on Player3 or Player5, as they are the only other living players. 3. I need to be careful not to arouse suspicion, as I am the only remaining werewolf and the villagers could easily vote me out if they suspect me."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "RESPONSE",
+            "text": "As the Seer, I had a vision last night that Player3 might be a werewolf. I suggest we keep a close eye on him. Let's work together to protect our village."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. He claimed to be the Seer and no one has contradicted him yet.\nPlayer2: Villager, dead. He claimed to be a villager and was voted out by the villagers.\nPlayer3: Villager (You), living. You haven't claimed any role yet.\nPlayer4: Unknown, dead. He was killed by werewolves, so he could have been a villager or a special role.\nPlayer5: Unknown, living. He hasn't claimed any role yet.\nPlayer6: Unknown, dead. He was killed by werewolves, so he could have been a villager or a special role.\nPlayer7: Unknown, dead. He was killed by werewolves, so he could have been a villager or a special role.\nGAME_STATE_SUMMARIZATION: There are 3 players left, one of them is a Seer and the other two are unknown. Two players were killed by werewolves, indicating that there are still 2 werewolves in the game."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Based on the moderator's instruction, I need to speak my opinion. 2. Player1, who claims to be the Seer, has accused Player3 (me) of being a werewolf. I need to defend myself and convince others that I am a villager. 3. I also need to be careful not to accuse Player1 directly since he might be the real Seer. Instead, I should focus on Player5 who has not claimed any role yet."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "RESPONSE",
+            "text": "I understand Player1's suspicion, but I assure you all that I am a villager. I have no special abilities, but I am committed to helping the village win. I suggest we all stay vigilant and watch for any suspicious behavior. Player5 has not claimed any role yet, which is a bit suspicious. Let's stay vigilant and work together to find the werewolves."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. He claimed to be the Seer and his actions are consistent with this role.\nPlayer2: Villager, dead. He claimed to be a villager and was killed by villagers' vote.\nPlayer3: Werewolf, living. Player1, the Seer, had a vision that Player3 might be a werewolf.\nPlayer4: Unknown, dead. He was killed by werewolves, but didn't claim any role.\nPlayer5: Witch, living. This is you.\nPlayer6: Unknown, dead. He was killed by werewolves, but didn't claim any role.\nPlayer7: Unknown, dead. He was killed by your poison, but didn't claim any role.\nGAME_STATE_SUMMARIZATION: There is one living werewolf (Player3) according to the Seer's vision, one living special role (You, the Witch), and one living villager (Player1, the Seer). Two villagers and one unknown role are dead."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1, the Seer, has identified Player3 as a potential werewolf. As the Witch, my goal is to help the villagers win, so it's in my best interest to trust the Seer's vision. 2. However, revealing my identity as the Witch may put me at risk, as the werewolves could target me next. 3. Given the current situation, it might be beneficial for me to reveal my identity to gain the trust of Player1, the Seer, and to convince him to vote against Player3."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "I understand the suspicions against Player3, and I also have something to reveal. I am the Witch. I have been using my abilities to try and protect the village. I suggest we all stay vigilant and work together to find the werewolves. Let's vote wisely."
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Now vote and tell me who you think is the werewolf. Don\u2019t mention your role.\n                    You only choose one from the following living options please:\n                    ['Player1', 'Player3', 'Player5']. Say ONLY: I vote to eliminate ...\n"
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "REFLECTION",
+            "text": "Player1: I am a Werewolf, pretending to be the Seer to mislead the villagers.\nPlayer2: He was a Villager, voted out by the villagers due to my false accusation.\nPlayer3: He is likely a Villager as he has not claimed any special role.\nPlayer4: He was a Villager, killed by us werewolves.\nPlayer5: She claimed to be the Witch, and no one contradicted her claim. She is likely the Witch.\nPlayer6: He was a Villager, killed by us werewolves.\nPlayer7: He was my Werewolf partner, killed by us werewolves due to miscommunication.\nGAME_STATE_SUMMARIZATION: I am the only remaining Werewolf, with one Villager and the Witch still alive. I need to continue pretending to be the Seer and try to convince the Witch to side with me."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. I need to continue pretending to be the Seer to mislead the villagers. 2. Player5 claimed to be the Witch and no one contradicted her claim, so she is likely the Witch. 3. Player3 has not claimed any special role, so he is likely a Villager. 4. I need to convince the Witch to side with me, so I should vote to eliminate Player3, the likely Villager. This way, it will be just me and the Witch left, and I can try to convince her to side with me in the next round."
+        },
+        {
+            "role": "Werewolf",
+            "player_name": "Player1",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player3"
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, living. Player1 claimed to be the Seer and no one contradicted him, so he is likely telling the truth.\nPlayer2: Villager, dead. Player2 claimed to be a villager and was killed, possibly by the werewolves.\nPlayer3: Villager, living. This is you. You are a villager and have not claimed any special role.\nPlayer4: Unknown, dead. Player4 did not claim a role before being killed, so his role is unknown.\nPlayer5: Witch, living. Player5 claimed to be the Witch and no one contradicted her, so she is likely telling the truth.\nPlayer6: Unknown, dead. Player6 did not claim a role before being killed, so his role is unknown.\nPlayer7: Unknown, dead. Player7 did not claim a role before being killed, so his role is unknown.\nGAME_STATE_SUMMARIZATION: There are 3 players left: 1 Seer, 1 Witch, and 1 Villager (you). Player1 (Seer) accuses you of being a werewolf, while you suspect Player5 (Witch)."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. I'm a villager and I don't have any special abilities. Player1, who claims to be the Seer, suspects me of being a werewolf. However, Player5, who claims to be the Witch, has not been suspected by anyone. 2. Since Player5 has not been suspected, it's possible that she is a werewolf trying to blend in. 3. Given that I'm innocent, I should vote to eliminate Player5, who I find the most suspicious."
+        },
+        {
+            "role": "Villager",
+            "player_name": "Player3",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player5"
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "REFLECTION",
+            "text": "Player1: Seer, because he claimed it and no one contradicted him.\nPlayer2: Possibly a Villager, because he claimed it and was killed by villagers' vote.\nPlayer3: Possible Werewolf, because he was accused by Player1 who is possibly the Seer.\nPlayer4: Unknown, because he didn't claim any role before being killed by werewolves.\nPlayer5 (myself): Witch, because it's my role.\nPlayer6: Unknown, because he didn't claim any role before being killed by werewolves.\nPlayer7: Unknown, because he didn't claim any role before being killed by my poison.\nGAME_STATE_SUMMARIZATION: There is a conflict between Player1 and Player3, and Player3 might be a werewolf. There are 3 players left, including me, the Witch."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "THOUGHTS",
+            "text": "My step-by-step thought process: 1. Player1, who is likely the Seer, has accused Player3 of being a werewolf. 2. Player3 has countered this by pointing out that I have not claimed a role yet, which he finds suspicious. 3. I have already revealed my role as the Witch, so Player3's suspicion of me might be a desperate move to divert attention from himself. 4. Considering the current situation, it's more beneficial for me to vote against Player3. If Player3 is indeed a werewolf, we will win the game. If not, I will still be alive and have another chance to find the werewolf."
+        },
+        {
+            "role": "Witch",
+            "player_name": "Player5",
+            "msg_type": "RESPONSE",
+            "text": "I vote to eliminate Player3"
+        },
+        {
+            "role": "Moderator",
+            "player_name": "Moderator",
+            "msg_type": "RESPONSE",
+            "text": "Game over! villagers all dead. The winner is the werewolf"
+        }
+    ]
+}
