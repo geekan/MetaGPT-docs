@@ -1,5 +1,10 @@
 ---
 pageClass: blog-page
+sidebar: false
+prev: false
+next: false
+editLink: false
+footer: false
 ---
 
 # Werewolf

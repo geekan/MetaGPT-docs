@@ -15,5 +15,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["env.d.ts", "src/**/*", ".vitepress/**/*"]
+  "include": ["env.d.ts", "auto-imports.d.ts", "src/**/*", ".vitepress/**/*"]
 }

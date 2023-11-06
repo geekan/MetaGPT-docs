@@ -1,4 +1,7 @@
 import { ComputedRef } from 'vue';
+import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat.js';
+dayjs.extend(LocalizedFormat);
 
 /**
  * 下载文件
@@ -46,13 +49,15 @@ export const isTargetType = (param: unknown, type: `[object ${string}]`) => {
  * @param param 参数
  * @returns boolean
  */
-export const isBoolean = (param: unknown) => isTargetType(param, '[object Boolean]');
+export const isBoolean = (param: unknown) =>
+  isTargetType(param, '[object Boolean]');
 /**
  * 判断一个值是否是Object
  * @param param 参数
  * @returns boolean
  */
-export const isObject = (param: unknown) => isTargetType(param, '[object Object]');
+export const isObject = (param: unknown) =>
+  isTargetType(param, '[object Object]');
 
 /**
  * 轮训某个值或者状态
@@ -62,7 +67,9 @@ export const isObject = (param: unknown) => isTargetType(param, '[object Object]
  */
 export const loop = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fn: (...arg: any[]) => { exit: boolean } | void | Promise<{ exit: boolean }> | Promise<void>,
+  fn: (
+    ...arg: any[]
+  ) => { exit: boolean } | void | Promise<{ exit: boolean }> | Promise<void>,
   delay: ComputedRef<number>
 ) => {
   let timer: number;
@@ -162,4 +169,10 @@ export const draw = (dom: HTMLCanvasElement) => {
   };
 
   fn();
+};
+
+export const formateDate = (date: string) => {
+  const includeYear = dayjs().year() !== dayjs(date).year();
+  const formatter = includeYear ? 'MMM D, YYYY' : 'MMM D';
+  return dayjs(date).format(formatter);
 };

@@ -25,6 +25,7 @@ export default defineConfig({
       UnoCSS(),
       AutoImport({
         imports: ['vue'],
+        dts: '../auto-imports.d.ts',
       }),
     ],
     server: {
@@ -36,8 +37,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Docs', link: '/guide/introduction', activeMatch: '/guide/' },
-      { text: 'Blog', link: '/blog/', activeMatch: '/blog/' },
-      { text: 'RFCs', link: '/rfcs/', activeMatch: '/rfcs/' },
+      { text: 'Blog', link: '/blog/agents', activeMatch: '/blog/' },
+      { text: 'RFCs', link: '/rfcs/demo', activeMatch: '/rfcs/' },
     ],
     logo: {
       light: '/logo-dark.svg',
@@ -56,6 +57,14 @@ export default defineConfig({
             ],
           },
         ],
+      },
+      '/blog/': {
+        base: '/blog/',
+        items: [{ text: 'Agents', link: 'agents' }],
+      },
+      '/rfcs/': {
+        base: '/rfcs/',
+        items: [{ text: 'demo', link: 'demo' }],
       },
     },
     editLink: {
