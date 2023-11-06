@@ -13,9 +13,18 @@
     "@types/node": "^20.8.10",
     "@vitejs/plugin-vue": "^4.4.0",
     "dayjs": "^1.11.10",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "simple-git-hooks": "^2.9.0",
     "unocss": "^0.57.1",
     "unplugin-auto-import": "^0.16.7",
     "unplugin-icons": "^0.17.3",
     "unplugin-vue-components": "^0.25.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "prettier --write"
   }
 }
