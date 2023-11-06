@@ -27,6 +27,6 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
-    "*.{js,ts,vue}": "prettier --write"
+    "*.{js,ts,vue,mts,mjs}": "prettier --write"
   }
 }
