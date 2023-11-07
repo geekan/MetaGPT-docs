@@ -38,7 +38,11 @@ export default defineConfig({
     nav: [
       { text: 'Docs', link: '/guide/introduction', activeMatch: '/guide/' },
       { text: 'Blog', link: '/blog/agents', activeMatch: '/blog/' },
-      { text: 'RFCs', link: '/rfcs/demo', activeMatch: '/rfcs/' },
+      {
+        text: 'RFCs',
+        link: '/rfcs/[T]RFC-116-MetaGPT优化方案',
+        activeMatch: '/rfcs/',
+      },
     ],
     logo: {
       light: '/logo-dark.svg',
@@ -133,7 +137,12 @@ export default defineConfig({
       },
       '/rfcs/': {
         base: '/rfcs/',
-        items: [{ text: 'demo', link: 'demo' }],
+        items: [
+          {
+            text: '[T]RFC-116-MetaGPT优化方案',
+            link: '[T]RFC-116-MetaGPT优化方案',
+          },
+        ],
       },
     },
     editLink: {

@@ -9,7 +9,7 @@ list:
       - Werewolf
       - Agent
     link: /blog/werewolf/
-    banner: /blog/werewolf/banner.jpeg
+    banner: /blog-banners/werewolf.jpeg
 ---
 
 <script setup>
