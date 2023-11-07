@@ -13,7 +13,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/introduction
+      link: /guide/get_started/introduction
     - theme: alt
       text: View on Github
       link: https://github.com/geekan/MetaGPT

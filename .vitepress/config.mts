@@ -50,6 +50,7 @@ export default defineConfig({
           {
             text: 'Get Started', collapsed: false,
             items: [
+              { text: 'Introduction', link: 'get_started/introduction' },
               { text: 'Quickstart', link: 'get_started/quickstart' },
               { text: 'Installation', link: 'get_started/installation' },
               { text: 'Setup', link: 'get_started/setup' },
@@ -89,6 +90,7 @@ export default defineConfig({
             items: [
               { text: 'Agent communication', link: 'in_depth_guides/agent_communication.md' },
               { text: 'Memory', link: 'in_depth_guides/memory.md' },
+              { text: 'Use your local LLM', link: 'in_depth_guides/use_local_llm.md' },
             ],
           },
           {
