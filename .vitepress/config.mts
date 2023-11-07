@@ -40,7 +40,7 @@ export default defineConfig({
       { text: 'Blog', link: '/blog/agents', activeMatch: '/blog/' },
       {
         text: 'RFCs',
-        link: '/rfcs/[T]RFC-116-MetaGPT优化方案',
+        link: '/rfcs/RFC-116-MetaGPT优化方案',
         activeMatch: '/rfcs/',
       },
     ],
@@ -139,8 +139,8 @@ export default defineConfig({
         base: '/rfcs/',
         items: [
           {
-            text: '[T]RFC-116-MetaGPT优化方案',
-            link: '[T]RFC-116-MetaGPT优化方案',
+            text: 'RFC-116-MetaGPT优化方案',
+            link: 'RFC-116-MetaGPT优化方案',
           },
         ],
       },
