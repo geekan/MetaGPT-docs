@@ -14,7 +14,7 @@ export default defineConfig({
       lang: 'en',
       themeConfig: {
         nav: [
-          { text: 'Docs', link: '/guide/introduction', activeMatch: '/guide/' },
+          { text: 'Docs', link: '/guide/get_started/introduction', activeMatch: '/guide/' },
           { text: 'Blog', link: '/blog/agents', activeMatch: '/blog/' },
           {
             text: 'RFCs',
@@ -107,7 +107,7 @@ export default defineConfig({
         nav: [
           {
             text: '文档',
-            link: '/zhcn/guide/introduction',
+            link: '/zhcn/guide/get_started/introduction',
             activeMatch: '/zhcn/guide/',
           },
           {
@@ -121,6 +121,54 @@ export default defineConfig({
             activeMatch: '/zhcn/rfcs/',
           },
         ],
+        sidebar: {
+          '/guide/': {
+            base: '/guide/',
+            items: [
+              {
+                text: '开始', collapsed: false,
+                items: [
+                  { text: '介绍', link: '/zhcn/guide/get_started/introduction' },
+                  { text: '快速开始', link: '/zhcn/guide/get_started/quickstart' },
+                  { text: '按照', link: '/zhcn/guide/get_started/installation' },
+                  { text: '配置', link: '/zhcn/guide/get_started/setup' },
+                ],
+              },
+              {
+                text: '教程', collapsed: false,
+                items: [
+                ],
+              },
+              {
+                text: '用例', collapsed: false,
+                items: [
+                  {
+                    text: '单智能体',
+                    items: [
+                    ]
+                  },
+                  {
+                    text: '多智能体',
+                    items: [
+                    ]
+                  },
+                ],
+              },
+              {
+                text: 'In-Depth Guides', collapsed: false,
+                items: [
+                ],
+              },
+              {
+                text: '贡献', collapsed: false,
+                items: [
+                ],
+              },
+              {
+                text: 'API', collapsed: false,
+              },
+            ],
+          },
       },
     },
   },
