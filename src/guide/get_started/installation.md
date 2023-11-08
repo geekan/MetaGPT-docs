@@ -24,7 +24,7 @@ pip install git+https://github.com/geekan/MetaGPT
 ```
 
 ## Install in development mode
-Recommended for developers and researchers who want to make in-depth customization for their use cases, experiment new ideas, or craft advanced features, such as a new memory mechanism, based on the framework.
+Recommended for developers and researchers looking to customize the framework for their unique requirements, experiment on new ideas, or create sophisticated functionalities like a novel memory mechanism using the framework.
 ```
 git clone https://github.com/geekan/MetaGPT.git
 cd /your/path/to/MetaGPT
