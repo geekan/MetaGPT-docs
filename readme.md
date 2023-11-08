@@ -26,4 +26,6 @@ The dev server should be running at http://localhost:5173. Visit the URL in your
  | ├─ public      #  you can put resource here
  | ├─ utils       # some utils
  | ├─ index.md    # home page;
+ | ├─ zhcn        # 中文文档  same as src; config at ./vitepress/config.mts   [locales.zhcn.themeConfig]
+
 ```
