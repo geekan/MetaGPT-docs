@@ -28,7 +28,7 @@ Remember: If you follow the `git clone` approach in [Installation](./installatio
 > Note:
 > MetaGPT will read your setup in this priority order: `config/key.yaml > config/config.yaml > environment variable`
 
-Here you are good to go! See [Quickstart](./quickstart) or our [tutorials](/guide/tutorials/agent_101) for your first run!
+Here you are good to go! See [Quickstart](./quickstart) or our [Tutorials](/guide/tutorials/agent_101) for your first run!
 
 ## Setup for different model providers
 ### OpenAI

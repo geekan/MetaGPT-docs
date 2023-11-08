@@ -14,7 +14,7 @@ export default defineConfig({
       lang: 'en',
       themeConfig: {
         nav: [
-          { text: 'Docs', link: '/guide/introduction', activeMatch: '/guide/' },
+          { text: 'Docs', link: '/guide/get_started/introduction', activeMatch: '/guide/' },
           { text: 'Blog', link: '/blog/agents', activeMatch: '/blog/' },
           {
             text: 'RFCs',
