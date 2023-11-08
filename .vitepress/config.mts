@@ -122,16 +122,16 @@ export default defineConfig({
           },
         ],
         sidebar: {
-          '/guide/': {
-            base: '/guide/',
+          '/zhcn/guide/': {
+            base: '/zhcn/guide/',
             items: [
               {
                 text: '开始', collapsed: false,
                 items: [
-                  { text: '介绍', link: '/zhcn/guide/get_started/introduction' },
-                  { text: '快速开始', link: '/zhcn/guide/get_started/quickstart' },
-                  { text: '安装', link: '/zhcn/guide/get_started/installation' },
-                  { text: '配置', link: '/zhcn/guide/get_started/setup' },
+                  { text: '介绍', link: 'get_started/introduction' },
+                  { text: '快速开始', link: 'get_started/quickstart' },
+                  { text: '安装', link: 'get_started/installation' },
+                  { text: '配置', link: 'get_started/setup' },
                 ],
               },
               {
