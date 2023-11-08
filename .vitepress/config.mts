@@ -130,7 +130,7 @@ export default defineConfig({
                 items: [
                   { text: '介绍', link: '/zhcn/guide/get_started/introduction' },
                   { text: '快速开始', link: '/zhcn/guide/get_started/quickstart' },
-                  { text: '按照', link: '/zhcn/guide/get_started/installation' },
+                  { text: '安装', link: '/zhcn/guide/get_started/installation' },
                   { text: '配置', link: '/zhcn/guide/get_started/setup' },
                 ],
               },
