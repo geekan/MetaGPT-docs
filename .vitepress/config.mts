@@ -175,7 +175,7 @@ export default defineConfig({
                 items: [],
               },
               {
-                text: '用例',
+                text: '示例',
                 collapsed: false,
                 items: [
                   {
@@ -189,7 +189,7 @@ export default defineConfig({
                 ],
               },
               {
-                text: 'In-Depth Guides',
+                text: '深入指导',
                 collapsed: false,
                 items: [],
               },
