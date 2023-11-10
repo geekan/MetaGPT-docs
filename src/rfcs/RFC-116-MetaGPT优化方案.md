@@ -256,7 +256,9 @@ class RoleContext(BaseModel):
     news: list[Type[Message]] = Field(default=[])
 ```
   `Role`中的所有`self._rc.env.memory`操作变更为`self._rc.memory`操作。
+
 2. 所有消息转发都由`Environment`类的`Env`对象负责。禁止`Role`对象之间通过访问对方的私有消息存储来交换消息。
+
 <img src="../../src/public/image/rfc116/32d67809-99f6-496e-9800-2a28c8eb73c5.png" width="600px">
 
 3. 所有`Role`对象增加一个私有的消息buffer，来接收异步`put_message`写入的消息。`Role`对象的observe操作(observe-think-act)需要同时看消息buffer和memory。
