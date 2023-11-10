@@ -236,6 +236,9 @@ export default defineConfig({
       pattern: 'https://github.com/vuejs/vitepress/edit/main/src/:path',
       text: 'Edit this page on GitHub',
     },
+    outline: {
+      level: [2, 3],
+    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/geekan/MetaGPT' },
       { icon: 'discord', link: 'https://discord.com/invite/wCp6Q3fsAk' },
