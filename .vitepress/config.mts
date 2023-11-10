@@ -51,7 +51,7 @@ export default defineConfig({
                     link: 'tutorials/multi_agent_101.md',
                   },
                   { text: 'Use memories' },
-                  { text: 'Customize thinking process' },
+                  { text: 'Think and act', link: 'tutorials/agent_think_act.md' },
                 ],
               },
               {
@@ -106,7 +106,7 @@ export default defineConfig({
                 collapsed: false,
                 items: [
                   {
-                    text: 'contribute_guide',
+                    text: 'Contribute guide',
                     link: 'contribute/contribute_guide.md',
                   },
                 ],
@@ -189,7 +189,7 @@ export default defineConfig({
                 ],
               },
               {
-                text: '深入指导',
+                text: '进阶指南',
                 collapsed: false,
                 items: [],
               },
