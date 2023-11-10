@@ -44,7 +44,7 @@
 
 ##### 2.1.1.1 现状
 
-<img src="../../src/public/image/rfc116/8d9c341f-2bd4-4ab3-942f-2a8981f8eabd.png" width="800px"/>
+![img](/public/image/rfcs/rfc116/8d9c341f-2bd4-4ab3-942f-2a8981f8eabd.png)
 
 现有设计适合简单、轻量的智能体应用。
 
@@ -54,7 +54,7 @@
 2. 共享式的消息存放不支持跨网的消息消费；
 3. 共享式的消息存放不支持个性化role对象的记忆压缩和信息隔离，如下图所示：
 
-<img src="../../src/public/image/rfc116/12423f9c-1f3c-48dc-b91f-ee23f4e95efd.png" width="400px"/>
+![img](/public/image/rfcs/rfc116/12423f9c-1f3c-48dc-b91f-ee23f4e95efd.png)
 
 ##### 2.1.1.2 新的架构方案
 
@@ -66,7 +66,7 @@
 2. 外部可通过调Env的stop函数来终止event loop;
 3. 外部通过调start函数来启动event loop。start参数中可指定event loop是否在空闲时自动终止。
 
-<img src="../../src/public/image/rfc116/4d85b0bd-ec56-4c8a-9820-f678cd989089.png" width="800px"/>
+![img](/public/image/rfcs/rfc116/4d85b0bd-ec56-4c8a-9820-f678cd989089.png)
 
 新架构中：
 
@@ -89,7 +89,7 @@
 
 现存的消息结构如图所示：
 
-<img src="../../src/public/image/rfc116/19970c7b-dcb9-4c0a-be4f-5f7af1b29261.png" width="300px"/>
+![img](/public/image/rfcs/rfc116/19970c7b-dcb9-4c0a-be4f-5f7af1b29261.png)
 
 其中：
 
@@ -132,7 +132,7 @@
 ##### 2.1.3.2 新的消息结构
 新的消息结构如图所示：
 
-<img src="../../src/public/image/rfc116/4edb8a4c-245b-4d02-a065-8e39937e732e.png" width="400px" />
+![img](/public/image/rfcs/rfc116/4edb8a4c-245b-4d02-a065-8e39937e732e.png)
 
 
 其中：
@@ -258,7 +258,7 @@ class RoleContext(BaseModel):
 
 2. 所有消息转发都由`Environment`类的`Env`对象负责。禁止`Role`对象之间通过访问对方的私有消息存储来交换消息。
 
-<img src="../../src/public/image/rfc116/32d67809-99f6-496e-9800-2a28c8eb73c5.png" width="600px">
+![img](/public/image/rfcs/rfc116/32d67809-99f6-496e-9800-2a28c8eb73c5.png)
 
 3. 所有`Role`对象增加一个私有的消息buffer，来接收异步`put_message`写入的消息。`Role`对象的observe操作(observe-think-act)需要同时看消息buffer和memory。
 
