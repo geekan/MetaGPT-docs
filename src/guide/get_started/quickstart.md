@@ -54,6 +54,12 @@ Finally, run it and get the code!
 await company.run(n_round=5)
 ```
 
+Expect similar output as below:
+
+<video  controls>
+  <source src="https://user-images.githubusercontent.com/2707039/250054654-5e8c1062-8c35-440f-bb20-2b0320f8d27d.mp4" type="video/mp4">
+</video>
+
 <b>Try this example on the spot:</b>
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1X8XSn8AN1WFv_PwtTres62OoVUNfHRAH?usp=sharing)
