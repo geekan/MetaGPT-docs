@@ -115,6 +115,10 @@ export default defineConfig({
                 text: 'API',
                 collapsed: false,
               },
+              {
+                text: 'FAQ',
+                link: 'faq',
+              },
             ],
           },
           '/blog/': {
@@ -201,6 +205,10 @@ export default defineConfig({
               {
                 text: 'API',
                 collapsed: false,
+              },
+              {
+                text: '常见问题解答',
+                link: 'faq',
               },
             ],
           },
