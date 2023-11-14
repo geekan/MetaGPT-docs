@@ -51,6 +51,7 @@ export default defineConfig({
                     link: 'tutorials/multi_agent_101.md',
                   },
                   { text: 'Use memories' },
+                  { text: 'Human engagement' },
                   { text: 'Think and act', link: 'tutorials/agent_think_act.md' },
                 ],
               },
@@ -62,12 +63,25 @@ export default defineConfig({
                     text: 'Agent',
                     items: [
                       {
-                        text: 'Data analyst: analyze and visualize datasets',
-                        link: 'use_cases/agent/data_analyst.md',
-                      },
-                      {
                         text: 'Researcher: search web and write reports',
                         link: 'use_cases/agent/researcher.md',
+                      },
+                      {
+                        text: 'Machine Learning Engineer: analyze, visualize, and model datasets',
+                        link: 'use_cases/agent/ml_engineer.md',
+                      },
+                      {
+                        text: 'Document Assistant: retrieval-augmented generation (RAG)',
+                      },
+                      {
+                        text: 'Photographer: generate images with prompts',
+                      },
+                      {
+                        text: 'Invoice Assistant: extract structured info from invoices',
+                      },
+                      {
+                        text: 'Creative',
+                        link: 'use_cases/agent/creative.md',
                       },
                     ],
                   },
@@ -75,12 +89,31 @@ export default defineConfig({
                     text: 'MultiAgent',
                     items: [
                       {
-                        text: 'Software company: develop softwares in a line',
+                        text: 'Software Company: develop softwares in a line',
                         link: 'use_cases/multi_agent/software_company.md',
+                        items: [
+                          {
+                            text: 'Gallery',
+                          },
+                        ]
                       },
                       {
-                        text: 'Werewolf game: agents playing strategy games',
+                        text: 'Public Square: agents gather for a chat',
+                        items: [
+                          {
+                            text: 'Gallery',
+                          },
+                        ]
+                      },
+                      {
+                        text: 'Werewolf: agents playing strategy games',
                         link: 'use_cases/multi_agent/werewolf_game.md',
+                      },
+                      {
+                        text: 'Minecraft: agents collectively explore the world',
+                      },
+                      {
+                        text: 'Virtual Town: daily life of an agent community',
                       },
                     ],
                   },
