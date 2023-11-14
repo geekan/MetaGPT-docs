@@ -51,7 +51,10 @@ export default defineConfig({
                     link: 'tutorials/multi_agent_101.md',
                   },
                   { text: 'Use memories' },
-                  { text: 'Think and act', link: 'tutorials/agent_think_act.md' },
+                  {
+                    text: 'Think and act',
+                    link: 'tutorials/agent_think_act.md',
+                  },
                 ],
               },
               {
@@ -172,7 +175,13 @@ export default defineConfig({
               {
                 text: '教程',
                 collapsed: false,
-                items: [],
+                items: [
+                  { text: '概念', link: 'tutorials/Concepts' },
+                  { text: '智能体 101', link: 'tutorials/agent_101' },
+                  { text: '多智能体 101', link: 'tutorials/multi_agent_101' },
+                  { text: '记忆' },
+                  { text: '思考和动作', link: 'tutorials/agent_think_act' },
+                ],
               },
               {
                 text: '示例',
