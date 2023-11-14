@@ -182,4 +182,4 @@ python examples/debate.py --idea "Talk about how the U.S. should respond to clim
 ```
 A sample run
 
-![img](/public/image/guide/tutorials/debate_log.png)
+![img](/image/guide/tutorials/debate_log.png)
