@@ -115,7 +115,7 @@ The mermaid.ink project provides the function to convert Mermaid text into diagr
 Comparison
 | Mermaid Engine | nodejs | pyppeteer | playwright | ink |
 | -------------- | ------ | --------- | ---------- | --- |
-| Installation Complexity | ★★★★★ | ★★ | ★★★ | ★ |
+| Installation Simplicity | ★ | ★★★ | ★★ | ★★★★★ |
 | Platform Compatibility | ★★★★★ | ★★★★ | ★★★ | ★★★★★ |
 | Generates png | ✔ | ✔ | ✔ | ✔ |
 | Generates svg | ✔ | ✔ | ✔ | ✔ |

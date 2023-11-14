@@ -172,7 +172,7 @@ def main(idea: str, investment: float = 3.0, n_round: int = 10):
 if __name__ == '__main__':
     fire.Fire(main)
 ```
-### Complete script of this section
+## Complete script of this section
 
 https://github.com/geekan/MetaGPT/blob/main/examples/debate.py
 
