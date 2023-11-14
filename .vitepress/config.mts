@@ -51,7 +51,10 @@ export default defineConfig({
                     link: 'tutorials/multi_agent_101.md',
                   },
                   { text: 'Use memories' },
-                  { text: 'Think and act', link: 'tutorials/agent_think_act.md' },
+                  {
+                    text: 'Think and act',
+                    link: 'tutorials/agent_think_act.md',
+                  },
                 ],
               },
               {
