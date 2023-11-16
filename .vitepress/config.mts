@@ -8,6 +8,7 @@ export default defineConfig({
   title: 'MetaGPT',
   description: 'The Multi-Agent Framework',
   srcDir: './src',
+  ignoreDeadLinks: true,
   locales: {
     root: {
       label: 'English',
@@ -95,7 +96,7 @@ export default defineConfig({
                           {
                             text: 'Gallery',
                           },
-                        ]
+                        ],
                       },
                       {
                         text: 'Public Square',
@@ -103,7 +104,7 @@ export default defineConfig({
                           {
                             text: 'Gallery',
                           },
-                        ]
+                        ],
                       },
                       {
                         text: 'Debate',
@@ -222,12 +223,12 @@ export default defineConfig({
                   {
                     text: '智能体',
                     items: [
-                      { text: '调研员', },
-                      { text: '机器学习工程师', },
-                      { text: '文库助手', },
-                      { text: '摄影师', },
-                      { text: '票据助手', },
-                      { text: '创意角色', },
+                      { text: '调研员' },
+                      { text: '机器学习工程师' },
+                      { text: '文库助手' },
+                      { text: '摄影师' },
+                      { text: '票据助手' },
+                      { text: '创意角色' },
                     ],
                   },
                   {
