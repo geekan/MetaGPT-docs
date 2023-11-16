@@ -49,11 +49,17 @@ company.hire(
 company.invest(investment=3.0)
 company.start_project(idea="write a cli blackjack game")
 ```
-最后，执行并得到生成的游戏代码！
+最后，运行并得到生成的游戏代码！
 ```python
 await company.run(n_round=5)
 ```
 
-<b>直接试试下面的例子</b>
+运行效果大致如下:
+
+<video  controls>
+  <source src="https://user-images.githubusercontent.com/2707039/250054654-5e8c1062-8c35-440f-bb20-2b0320f8d27d.mp4" type="video/mp4">
+</video>
+
+<b>直接使用Colab运行</b>
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1X8XSn8AN1WFv_PwtTres62OoVUNfHRAH?usp=sharing)

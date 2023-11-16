@@ -1,17 +1,6 @@
-# MultiAgent 101
-In Agent101, we briefly discussed the creation of a single agent. While a single agent may suffice for many situations, more complex tasks often demand collaboration and teamwork. This is where multiple agents become necessary. The core advantage of MetaGPT also lies in the easy and flexible development of a team of agents. Under MetaGPT framework, users can enable interactions between agents with a minimal amount of codes.
+# Debate: Agent Confrontation
 
-After this tutorial, you will be able to:
-1. Run the software startup example
-2. Develop your first team of agents
-
-## Run the software startup example
-```shell
-python startup.py --idea "write a cli blackjack game"
-```
-
-## Develop your first team of agents
-Hope you find the software startup example enlightenning. Perhaps now you're inspired to develop a team of agents tailored to your unique needs. In this section, we will illustrate the development process using a playful example.
+In this use case, we will illustrate the development process of a playful example.
 
 Imagine, just for a moment, if we were to simulate agents representing Biden and Trump working together. It's a fun experiment, isn't it? Given their known disagreements, such a combination could lead to some lively exchanges. This serves as an ideal example to showcase how to design multiple agents and facilitate interactions between them. We will deb our experiment the "Biden-Trump Debate".
 
@@ -184,4 +173,4 @@ python examples/debate.py --idea "Talk about how the U.S. should respond to clim
 ```
 A sample run
 
-![img](/image/guide/tutorials/debate_log.png)
+![img](/image/guide/use_cases/debate_log.png)
