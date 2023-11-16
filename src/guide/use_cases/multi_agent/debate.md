@@ -1,5 +1,5 @@
 # MultiAgent 101
-In [Agent101](agent_101), we briefly discussed the creation of a single agent. While a single agent may suffice for many situations, more complex tasks often demand collaboration and teamwork. This is where multiple agents become necessary. The core advantage of MetaGPT also lies in the easy and flexible development of a team of agents. Under MetaGPT framework, users can enable interactions between agents with a minimal amount of codes.
+In Agent101, we briefly discussed the creation of a single agent. While a single agent may suffice for many situations, more complex tasks often demand collaboration and teamwork. This is where multiple agents become necessary. The core advantage of MetaGPT also lies in the easy and flexible development of a team of agents. Under MetaGPT framework, users can enable interactions between agents with a minimal amount of codes.
 
 After this tutorial, you will be able to:
 1. Run the software startup example
