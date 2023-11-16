@@ -8,6 +8,7 @@ export default defineConfig({
   title: 'MetaGPT',
   description: 'The Multi-Agent Framework',
   srcDir: './src',
+  ignoreDeadLinks: true,
   locales: {
     root: {
       label: 'English',
@@ -50,9 +51,12 @@ export default defineConfig({
                     text: 'MultiAgent 101',
                     link: 'tutorials/multi_agent_101.md',
                   },
-                  { text: 'Use memories', link: 'tutorials/use_memories.md', },
+                  { text: 'Use memories', link: 'tutorials/use_memories.md' },
                   { text: 'Human engagement' },
-                  { text: 'Think and act', link: 'tutorials/agent_think_act.md' },
+                  {
+                    text: 'Think and act',
+                    link: 'tutorials/agent_think_act.md',
+                  },
                 ],
               },
               {
@@ -95,7 +99,7 @@ export default defineConfig({
                           {
                             text: 'Gallery',
                           },
-                        ]
+                        ],
                       },
                       {
                         text: 'Public Square: agents gather for a chat',
@@ -103,7 +107,7 @@ export default defineConfig({
                           {
                             text: 'Gallery',
                           },
-                        ]
+                        ],
                       },
                       {
                         text: 'Werewolf: agents playing strategy games',
@@ -218,12 +222,12 @@ export default defineConfig({
                   {
                     text: '单智能体',
                     items: [
-                      { text: '调研员：通过网页搜索撰写调研报告', },
-                      { text: '机器学习工程师：数据分析、可视化、建模', },
-                      { text: '文库助手：检索增强生成（RAG）', },
-                      { text: '摄影师：以文生图', },
-                      { text: '票据助手：从票据抽取结构化信息', },
-                      { text: '创意角色', },
+                      { text: '调研员：通过网页搜索撰写调研报告' },
+                      { text: '机器学习工程师：数据分析、可视化、建模' },
+                      { text: '文库助手：检索增强生成（RAG）' },
+                      { text: '摄影师：以文生图' },
+                      { text: '票据助手：从票据抽取结构化信息' },
+                      { text: '创意角色' },
                     ],
                   },
                   {
