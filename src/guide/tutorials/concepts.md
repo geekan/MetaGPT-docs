@@ -5,6 +5,8 @@ After this tutorial, you will be able to:
 
 The goal is to provide an intuitive and <b>simplified</b> explanation of the concepts so that users have a background to further explore the tutorial series. While we aim for clarity, we also recognize simplifications can produce inaccuracy or omission. Therefore, we encourage more navigation over subsequent documents for a complete comprehension.
 
+You may also jump to [Agent101](agent_101) if you want hands-on coding first.
+
 ## Agent
 Academia and industry have proposed various definitions for the term "agent". Roughly speaking, an agent should be able to think or plan like human, possesses memories or even emotions, is equipped with a certain skill set to interact with the environment, other agents, and human. An agent, in a comprehensive examination, is a sophisticated system by itself.
 

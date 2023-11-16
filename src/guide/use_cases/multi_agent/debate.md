@@ -16,7 +16,7 @@ Hope you find the software startup example enlightenning. Perhaps now you're ins
 Imagine, just for a moment, if we were to simulate agents representing Biden and Trump working together. It's a fun experiment, isn't it? Given their known disagreements, such a combination could lead to some lively exchanges. This serves as an ideal example to showcase how to design multiple agents and facilitate interactions between them. We will deb our experiment the "Biden-Trump Debate".
 
 In general, we need two steps to set up a debate between them:
-1. Define a role Debator capable of a speaking action, which we suggest taking reference from [Agent101](agent_101)
+1. Define a role Debator capable of a speaking action, which we suggest taking reference from Agent101
 2. Take care of the communication between Debator, that is, have Biden listen to Trump and Trump to Biden
 3. Initialize two Debator instances, Biden and Trump, create a team with an environment to put them in, and enable them to interact with each other
 
