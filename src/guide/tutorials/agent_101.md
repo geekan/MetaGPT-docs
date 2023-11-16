@@ -5,10 +5,10 @@ After this tutorial, you will be able to:
 1. Use off-the-shelf agents
 2. Develop your first agent capable of one or more actions
 
-## Usage of off-the-shelf agents
+## Use off-the-shelf agents
+Import any role, initialize it, run it with a starting message, done!
 
 ```python
-Import any role, initialize it, run it with a starting message, done!
 import asyncio
 
 from metagpt.roles.product_manager import ProductManager
@@ -31,14 +31,14 @@ Consider agent from a practical usage viewpoint, what are the bare essentials fo
 
 ![flowchart](/image/guide/tutorials/agent_run_flowchart.png)
 
-### Agent with a single action
+## Agent with a single action
 
 Suppose we want to write codes in natural language and want an agent to do this for us. Let's call this agent SimpleCoder and we need two steps to put it to work:
 
 1. Define a write code action
 2. Equip the agent with the action
 
-#### Define Actions
+### Define Actions
 
 In MetaGPT, class `Action` is the logical abstraction for an action. Users may use LLM to empower this Action by simply invoking the self.\_aask function, which will make LLM api call under the hood.
 
@@ -101,12 +101,12 @@ class SimpleCoder(Role):
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo
+        todo = self._rc.todo # todo will be SimpleWriteCode()
 
         msg = self.get_memories(k=1)[0] # find the most recent k messages
 
-        code_text = await SimpleWriteCode().run(msg.content)
-        msg = Message(content=code_text, role=self.profile, cause_by=todo)
+        code_text = await todo.run(msg.content)
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
 ```
@@ -205,7 +205,7 @@ async def main():
 asyncio.run(main)
 ```
 
-## Complete script of this section
+## Complete script of this tutorial
 
 https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_agent.py
 

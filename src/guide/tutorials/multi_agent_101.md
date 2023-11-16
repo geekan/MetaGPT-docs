@@ -1,185 +1,222 @@
 # MultiAgent 101
-In [Agent101](agent_101), we briefly discussed the creation of a single agent. While a single agent may suffice for many situations, more complex tasks often demand collaboration and teamwork. This is where multiple agents become necessary. The core advantage of MetaGPT also lies in the easy and flexible development of a team of agents. Under MetaGPT framework, users can enable interactions between agents with a minimal amount of codes.
+We briefly discussed the creation of a single agent in last chapter. While a single agent may suffice for many situations, more complex tasks often demand collaboration and teamwork. This is where multiple agents become necessary. The core advantage of MetaGPT also lies in the easy and flexible development of a team of agents. Under MetaGPT framework, users can enable interactions between agents with a minimal amount of codes.
 
 After this tutorial, you will be able to:
-1. Run the software startup example
+1. Understand how agents interact with each other
 2. Develop your first team of agents
 
 ## Run the software startup example
 ```shell
-python startup.py --idea "write a cli blackjack game"
+python startup.py --idea "write a cli flappy bird game"
 ```
 
 ## Develop your first team of agents
-Hope you find the software startup example enlightenning. Perhaps now you're inspired to develop a team of agents tailored to your unique needs. In this section, we will illustrate the development process using a playful example.
+Hope you find the software startup example enlightenning. Perhaps now you're inspired to develop a team of agents tailored to your unique needs. In this section, we continue with the simple coding example in [Agent101](agent_101) but add more roles to introduce a very basic collaboration.
 
-Imagine, just for a moment, if we were to simulate agents representing Biden and Trump working together. It's a fun experiment, isn't it? Given their known disagreements, such a combination could lead to some lively exchanges. This serves as an ideal example to showcase how to design multiple agents and facilitate interactions between them. We will deb our experiment the "Biden-Trump Debate".
+Together with the coder, let's also hire a tester and a reviewer. This starts to look like a development team, doesn't it? In general, we need three steps to set up the team and make it function:
+1. Define each role capable of intended actions
+2. Think about the Standard Operating Procedure (SOP), and ensure each role adhere to it. This is made possible by making each role observe the corresponding output from upstream, and publish its own for the downstream.
+3. Initialize all roles, create a team with an environment to put them in, and enable them to interact with each other
 
-In general, we need two steps to set up a debate between them:
-1. Define a role Debator capable of a speaking action, which we suggest taking reference from [Agent101](agent_101)
-2. Take care of the communication between Debator, that is, have Biden listen to Trump and Trump to Biden
-3. Initialize two Debator instances, Biden and Trump, create a team with an environment to put them in, and enable them to interact with each other
+Complete code is available at the end of this tutorial
 
-Complete code is available at the end of this section
+### Define Action and Role
+Following the same process as [Agent101](agent_101), we can define three `Role`s with their respective `Action`s:
+- A `SimpleCoder` with a `SimpleWriteCode` action, taking instruction from the user and writing the main code
+- A `SimpleTester` with a `SimpleWriteTest` action, taking the main code from `SimpleWriteCode` output and providing a test suite for it
+- A `SimpleReviewer` with a `SimpleWriteReview` action, reviewing the test cases from `SimpleWriteTest` output and check their coverage and quality
 
-### Define Action
-First, we need to define our `Action`. It's a debate setting, so let's name it as `SpeakAloud`
+By giving the outline above, we actually make our SOP clear. We will talk about how to set up the `Role` according to it shortly.
+
+#### Define Action
+We list the three `Action`s.
+
 ```python
-class SpeakAloud(Action):
-    """Action: Speak out aloud in a debate (quarrel)"""
+class SimpleWriteCode(Action):
 
     PROMPT_TEMPLATE = """
-    ## BACKGROUND
-    Suppose you are {name}, you are in a debate with {opponent_name}.
-    ## DEBATE HISTORY
-    Previous rounds:
-    {context}
-    ## YOUR TURN
-    Now it's your turn, you should closely respond to your opponent's latest argument, state your position, defend your arguments, and attack your opponent's arguments,
-    craft a strong and emotional response in 80 words, in {name}'s rhetoric and viewpoints, your will argue:
+    Write a python function that can {instruction} and provide two runnnable test cases.
+    Return ```python your_code_here ``` with NO other texts,
+    your code:
     """
 
-    def __init__(self, name="SpeakAloud", context=None, llm=None):
+    def __init__(self, name="SimpleWriteCode", context=None, llm=None):
         super().__init__(name, context, llm)
 
-    async def run(self, context: str, name: str, opponent_name: str):
+    async def run(self, instruction: str):
 
-        prompt = self.PROMPT_TEMPLATE.format(context=context, name=name, opponent_name=opponent_name)
+        prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
+
+        rsp = await self._aask(prompt)
+
+        code_text = parse_code(rsp)
+
+        return code_text
+```
+
+```python
+class SimpleWriteTest(Action):
+
+    PROMPT_TEMPLATE = """
+    Context: {context}
+    Write {k} unit tests using pytest for the given function, assuming you have imported it.
+    Return ```python your_code_here ``` with NO other texts,
+    your code:
+    """
+
+    def __init__(self, name="SimpleWriteTest", context=None, llm=None):
+        super().__init__(name, context, llm)
+
+    async def run(self, context: str, k: int = 3):
+
+        prompt = self.PROMPT_TEMPLATE.format(context=context, k=k)
+
+        rsp = await self._aask(prompt)
+
+        code_text = parse_code(rsp)
+
+        return code_text
+```
+```python
+class SimpleWriteReview(Action):
+
+    PROMPT_TEMPLATE = """
+    Context: {context}
+    Review the test cases and provide one critical comments:
+    """
+
+    def __init__(self, name="SimpleWriteReview", context=None, llm=None):
+        super().__init__(name, context, llm)
+
+    async def run(self, context: str):
+
+        prompt = self.PROMPT_TEMPLATE.format(context=context)
 
         rsp = await self._aask(prompt)
 
         return rsp
 ```
-### Define Role
-We will define a common `Role` called `Debator`. 
+#### Define Role
+In many multi-agent scenarios, defining a `Role` can be as simple as 10 lines of codes. For `SimpleCoder`, we do two things:
+1. Equip the `Role` with the appropriate `Action`s with `_init_actions`, this is identical to setting up a single agent
+2. A multi-agent operation: we make the `Role` `_watch` important upstream messages from users or other agents. Recall our SOP, `SimpleCoder` takes user instruction, which is a `Message` caused by `BossRequirement` in MetaGPT. Therefore, we add `self._watch([BossRequirement])`.
 
-Here `_init_actions` make our `Role` possess the `SpeakAloud` action we just define. We also `_watch` both `SpeakAloud` and `BossRequirement`, because we want each debator to pay attention to messages of `SpeakAloud` from his opponent, as well as `BossRequirement` (human instruction) from users.
+That's all users have to do. For those who are interested in the mechanism under the hood, see [Mechanism Explained](#mechanism-explained) of this chapter.
+
 ```python
-class Debator(Role):
+class SimpleCoder(Role):
     def __init__(
         self,
-        name: str,
-        profile: str,
-        opponent_name: str,
+        name: str = "Alice",
+        profile: str = "SimpleCoder",
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
-        self.name = name
-        self.opponent_name = opponent_name
-```
-Next, we make each debator listen to his opponent's argument. This is done by overwriting the `_observe` function. This is an important point because there will be "SpeakAloud messages" (`Message` triggered by `SpeakAloud`) from both Trump and Biden in the environment. We don't want Trump to process his own "SpeakAloud message" from the last round, but instead those from Biden, and vice versa. (We will take care of this process with a general message routing mechanism in updates shortly to come. You won't need this step after the updates)
-```python
-async def _observe(self) -> int:
-        await super()._observe()
-        # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
-```
-Finally, we enable each debator to send counter arguments back to his opponent. Here we construct a context from message history, make the `Debator` run his possessed `SpeakAloud` action, and craft a new `Message` with the counter argument content. Notice we define that each `Debator` will send the `Message` to his opponent.
-```python
-async def _act(self) -> Message:
-    logger.info(f"{self._setting}: ready to {self._rc.todo}")
-    todo = self._rc.todo # An instance of SpeakAloud
-
-    memories = self.get_memories()
-    context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
-    # print(context)
-
-    rsp = await todo.run(context=context, name=self.name, opponent_name=self.opponent_name)
-
-    msg = Message(
-        content=rsp,
-        role=self.profile,
-        cause_by=type(todo),
-        sent_from=self.name,
-        send_to=self.opponent_name,
-    )
-
-    return msg
+        self._watch([BossRequirement])
+        self._init_actions([SimpleWriteCode])
 ```
 
-<b>Complete code of the Debator</b>
+---
+Similar to above, for `SimpleTester`, we:
+1. Equip the `SimpleTester` with `SimpleWriteTest` action using `_init_actions`
+2. Make the `Role` `_watch` important upstream messages from other agents. Recall our SOP, `SimpleTester` takes main code from `SimpleCoder`, which is a `Message` caused by `SimpleWriteCode`. Therefore, we add `self._watch([SimpleWriteCode])`.
+>An extended question: Think about what it means if we use `self._watch([SimpleWriteCode, SimpleWriteReview])` instead, feel free to try this too 
+
+Additionally, we want to show that you can define your own acting logic for the agent. This applies to situation where the `Action` takes more than one input, you want to modify the input, to use particular memories, or to make any other changes to reflect specific logic. Hence, we:
+
+3. Overwrite the `_act` function, just like what we did in a single-agent setting in [Agent101](agent_101). Here, we want `SimpleTester` to use all memories as context for writing the test cases, and we want 5 test cases.
 
 ```python
-class Debator(Role):
+class SimpleTester(Role):
     def __init__(
         self,
-        name: str,
-        profile: str,
-        opponent_name: str,
+        name: str = "Bob",
+        profile: str = "SimpleTester",
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
-        self.name = name
-        self.opponent_name = opponent_name
-
-    async def _observe(self) -> int:
-        await super()._observe()
-        # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
+        self._init_actions([SimpleWriteTest])
+        self._watch([SimpleWriteCode])
+        # self._watch([SimpleWriteCode, SimpleWriteReview]) # feel free to try this too
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo # An instance of SpeakAloud
+        todo = self._rc.todo
 
-        memories = self.get_memories()
-        context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
+        # context = self.get_memories(k=1)[0].content # use the most recent memory as context
+        context = self.get_memories() # use all memories as context
 
-        rsp = await todo.run(context=context, name=self.name, opponent_name=self.opponent_name)
+        code_text = await todo.run(context, k=5) # specify arguments
 
-        msg = Message(
-            content=rsp,
-            role=self.profile,
-            cause_by=type(todo),
-            sent_from=self.name,
-            send_to=self.opponent_name,
-        )
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
 ```
-### Create a team and add roles
-Now that we have defined our `Debator`s, let's put them together to see what will come up. We set up a `Team` and "hire" Biden and Trump. In this example, we will send our instruction (as a `BossRequirement` under the hood) to Biden to have him start first. If you want Trump to speak first, set send_to as "Trump".
-
-Run the `Team`, we should see the friendly conversation between them!
+---
+Define `SimpleReviewer` following the same procedure:
 ```python
-async def debate(idea: str, investment: float = 3.0, n_round: int = 5):
-    """Run a team of presidents and watch they quarrel. :) """
-    Biden = Debator(name="Biden", profile="Democrat", opponent_name="Trump")
-    Trump = Debator(name="Trump", profile="Republican", opponent_name="Biden")
-    team = Team()
-    team.hire([Biden, Trump])
-    team.invest(investment)
-    team.start_project(idea, send_to="Biden") # send debate topic to Biden and let him speak first
-    await team.run(n_round=n_round)
+class SimpleReviewer(Role):
+    def __init__(
+        self,
+        name: str = "Charlie",
+        profile: str = "SimpleReviewer",
+        **kwargs,
+    ):
+        super().__init__(name, profile, **kwargs)
+        self._init_actions([SimpleWriteReview])
+        self._watch([SimpleWriteTest])
+```
 
-def main(idea: str, investment: float = 3.0, n_round: int = 10):
-    """
-    :param idea: Debate topic, such as "Topic: The U.S. should commit more in climate change fighting" 
-                 or "Trump: Climate change is a hoax"
-    :param investment: contribute a certain dollar amount to watch the debate
-    :param n_round: maximum rounds of the debate
-    :return:
-    """
-    if platform.system() == "Windows":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(debate(idea, investment, n_round))
+### Create a team and add roles
+Now that we have defined our three `Role`s, it's time to put them together. We initialize all of them, set up a `Team`, and `hire` them. 
+
+Run the `Team`, we should see the collaboration between them!
+```python
+async def main(
+    idea: str = "write a function that calculates the product of a list",
+    investment: float = 3.0,
+    n_round: int = 5,
+):
+    logger.info(idea)
+
+    team = Team()
+    team.hire(
+        [
+            SimpleCoder(),
+            SimpleTester(),
+            SimpleReviewer(),
+        ]
+    )
+
+    team.invest(investment=investment)
+    team.start_project(idea)
+    await team.run(n_round=n_round)
 
 if __name__ == '__main__':
     fire.Fire(main)
 ```
-## Complete script of this section
+## Complete script of this tutorial
 
-https://github.com/geekan/MetaGPT/blob/main/examples/debate.py
+https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agents.py
 
 Run it with
 ```sh
-python examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
+python examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
 ```
-A sample run
 
-![img](/image/guide/tutorials/debate_log.png)
+Or try it on Colab
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
+
+## Mechanism Explained
+While users can write a few lines of code to set up a running `Role`, it's beneficial to describe the inner mechanism so that users understands the implication of the setup code and have a whole picture of the framework.
+
+![img](/image/guide/tutorials/multi_agents_flowchart.png)
+
+Internally, as shown in the right part of the diagram, the `Role` will `_observe` `Message` from the `Environment`. If there is a `Message` caused by the particular `Action`s the `Role` `_watch`, then it is a valid observation, triggering the `Role`'s subsequent thoughts and actions. In `_think`, the `Role` will choose one of its capable `Action`s and set it as todo. During `_act`, `Role` executes the todo, i.e., runs the `Action` and obtains the output. The output is encapsulated in a `Message` to be finally `_publish` to the `Environment`, finishing a complete agent run.
+
+In each step, either `_observe`, `_think`, or `_act`, the `Role` will interact with its `Memory`, through adding or retrieval. Moreover, MetaGPT provides different modes of the `react` process. For these parts, please see [Use Memories](use_memories) and [Think and act](agent_think_act)
+
+When each `Role` is set up appropriately, we may see the corresponding SOP to the example earlier in this tutorial, demonstrated by the left half of the diagram. The dotted box suggests the SOP can be extended if we make `SimpleTester` `_watch` both `SimpleWriteCode` and `SimpleWriteReview`.
+
+We encourage developers with interest to see the [code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/role.py) of `Role`, as we believe it is quite readable. Checking out `run`, `_observe`, `react`, `_think`, `_act`, `_publish` should provide one with a decent understanding.
