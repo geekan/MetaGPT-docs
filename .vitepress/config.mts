@@ -50,7 +50,7 @@ export default defineConfig({
                     text: 'MultiAgent 101',
                     link: 'tutorials/multi_agent_101.md',
                   },
-                  { text: 'Use memories' },
+                  { text: 'Use memories', link: 'tutorials/use_memories.md', },
                   { text: 'Human engagement' },
                   { text: 'Think and act', link: 'tutorials/agent_think_act.md' },
                 ],
@@ -77,7 +77,7 @@ export default defineConfig({
                         text: 'Photographer: generate images with prompts',
                       },
                       {
-                        text: 'Invoice Assistant: extract structured info from invoices',
+                        text: 'Receipt Assistant: extract structured info from Receipts',
                       },
                       {
                         text: 'Creative',
@@ -217,7 +217,14 @@ export default defineConfig({
                 items: [
                   {
                     text: '单智能体',
-                    items: [],
+                    items: [
+                      { text: '调研员：通过网页搜索撰写调研报告', },
+                      { text: '机器学习工程师：数据分析、可视化、建模', },
+                      { text: '文库助手：检索增强生成（RAG）', },
+                      { text: '摄影师：以文生图', },
+                      { text: '票据助手：从票据抽取结构化信息', },
+                      { text: '创意角色', },
+                    ],
                   },
                   {
                     text: '多智能体',
