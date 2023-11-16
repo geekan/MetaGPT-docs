@@ -16,22 +16,21 @@ def get_memories(self, k=0) -> list[Message]:
     return self._rc.memory.get(k=k)
 ```
 
-For example, in [MultiAgent101](multi_agent_101), we call this function to provide the debators with the full debate history. In this way, they are aware of what they and their opponents had said in previous rounds, thus increasing response relevancy and reducing repetition. The snippet is as follows
+For example, in [MultiAgent101](multi_agent_101), we call this function to provide the tester with the full history. In this way, if the reviewer provides feedback, the tester can modify test cases with reference to their previous version. The snippet is as follows
 
 ```python
 async def _act(self) -> Message:
-    ...
+        logger.info(f"{self._setting}: ready to {self._rc.todo}")
+        todo = self._rc.todo
 
-    memories = self.get_memories()
-    context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
+        # context = self.get_memories(k=1)[0].content # use the most recent memory as context
+        context = self.get_memories() # use all memories as context
 
-    rsp = await todo.run(context=context, name=self.name, opponent_name=self.opponent_name)
+        code_text = await todo.run(context, k=5) # specify arguments
 
-    msg = Message(...)
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
-    self._rc.memory.add(msg)
-
-    return msg
+        return msg
 ```
 
 ## Add memory
