@@ -39,4 +39,4 @@ For adding memories, one can use ```self._rc.memory.add(msg)``` where `msg` must
 It is recommended to add `Message`s of action output to the `Role`'s memory when defining the `_act` logic. `Role` normally needs to remember what it said or did previously in order to take a next step.
 
 ## Next step
-Memory is a huge topic in agents. To be precise, the memory this tutorial talks about corresponds to the concept of "short-term memory". The retrieval is also based on simple recency. However, there are multiple branches of memories as well as a wide range of memory generation and retrieval techniques. Please consult [Memory](/guide/in_depth_guides/memories) for using memory to really raise agent's performance.
+Memory is a huge topic in agents. To be precise, the memory this tutorial talks about corresponds to the concept of "short-term memory". The retrieval is also based on simple recency. However, there are multiple branches of memories as well as a wide range of memory generation and retrieval techniques. Please consult [Memory](/guide/in_depth_guides/memories) for using memory to really boost your agent's performance.
