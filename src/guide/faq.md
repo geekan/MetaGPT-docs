@@ -2,13 +2,7 @@
 
 Our vision is to [extend human life](https://github.com/geekan/HowToLiveLonger) and [reduce working hours](https://github.com/geekan/MetaGPT/).
 
-## Convenient Link for Sharing this Document:
-
-```
-- MetaGPT-Index/FAQ https://deepwisdom.feishu.cn/wiki/MsGnwQBjiif9c3koSJNcYaoSnu4
-```
-
-## Link
+## Resources
 
 <!---->
 

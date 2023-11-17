@@ -8,6 +8,7 @@ export default defineConfig({
   title: 'MetaGPT',
   description: 'The Multi-Agent Framework',
   srcDir: './src',
+  ignoreDeadLinks: true,
   locales: {
     root: {
       label: 'English',
@@ -50,7 +51,11 @@ export default defineConfig({
                     text: 'MultiAgent 101',
                     link: 'tutorials/multi_agent_101.md',
                   },
-                  { text: 'Use memories' },
+                  { text: 'Use memories', link: 'tutorials/use_memories.md' },
+                  {
+                    text: 'Human engagement',
+                    link: 'tutorials/human_engagement.md',
+                  },
                   {
                     text: 'Think and act',
                     link: 'tutorials/agent_think_act.md',
@@ -72,18 +77,58 @@ export default defineConfig({
                         text: 'Researcher: search web and write reports',
                         link: 'use_cases/agent/researcher.md',
                       },
+                      {
+                        text: 'Machine Learning Engineer',
+                        link: 'use_cases/agent/ml_engineer.md',
+                      },
+                      {
+                        text: 'Document Assistant',
+                      },
+                      {
+                        text: 'Photographer',
+                      },
+                      {
+                        text: 'Receipt Assistant',
+                      },
+                      {
+                        text: 'Creative',
+                        link: 'use_cases/agent/creative.md',
+                      },
                     ],
                   },
                   {
                     text: 'MultiAgent',
                     items: [
                       {
-                        text: 'Software company: develop softwares in a line',
+                        text: 'Software Company',
                         link: 'use_cases/multi_agent/software_company.md',
+                        items: [
+                          {
+                            text: 'Gallery',
+                          },
+                        ],
                       },
                       {
-                        text: 'Werewolf game: agents playing strategy games',
+                        text: 'Public Square',
+                        items: [
+                          {
+                            text: 'Gallery',
+                          },
+                        ],
+                      },
+                      {
+                        text: 'Debate',
+                        link: 'use_cases/multi_agent/debate.md',
+                      },
+                      {
+                        text: 'Werewolf Game',
                         link: 'use_cases/multi_agent/werewolf_game.md',
+                      },
+                      {
+                        text: 'Minecraft',
+                      },
+                      {
+                        text: 'Virtual Town',
                       },
                     ],
                   },
@@ -117,6 +162,10 @@ export default defineConfig({
               {
                 text: 'API',
                 collapsed: false,
+              },
+              {
+                text: 'FAQ',
+                link: 'faq',
               },
             ],
           },
@@ -188,19 +237,59 @@ export default defineConfig({
                 collapsed: false,
                 items: [
                   {
-                    text: '单智能体',
-                    items: [],
+                    text: '智能体',
+                    items: [
+                      { text: '调研员' },
+                      { text: '机器学习工程师' },
+                      { text: '文库助手' },
+                      { text: '摄影师' },
+                      { text: '票据助手' },
+                      { text: '创意角色' },
+                    ],
                   },
                   {
                     text: '多智能体',
-                    items: [],
+                    items: [
+                      {
+                        text: '软件公司',
+                        items: [
+                          {
+                            text: '成果集',
+                          },
+                        ],
+                      },
+                      {
+                        text: '论坛广场',
+                        items: [
+                          {
+                            text: '成果集',
+                          },
+                        ],
+                      },
+                      {
+                        text: '辩论',
+                      },
+                      {
+                        text: '狼人杀',
+                      },
+                      {
+                        text: 'Minecraft',
+                      },
+                      {
+                        text: '虚拟小镇',
+                      },
+                    ],
                   },
                 ],
               },
               {
                 text: '进阶指南',
                 collapsed: false,
-                items: [],
+                items: [
+                  { text: '多智能体间通信' },
+                  { text: '记忆' },
+                  { text: '使用本地LLM' },
+                ],
               },
               {
                 text: '贡献',
@@ -210,6 +299,10 @@ export default defineConfig({
               {
                 text: 'API',
                 collapsed: false,
+              },
+              {
+                text: '常见问题解答',
+                link: 'faq',
               },
             ],
           },

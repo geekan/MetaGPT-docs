@@ -2,8 +2,8 @@
 Using MetaGPT involves connecting with model providers. We will walk through the setup in this page.
 ## Setup for LLM API
 We will take OpenAI API as an example. You can finish the setup in either way:
-1. Use environment variables. This is recommended for a quick start.
-2. Use a config or key file. This is recommend for continuous and full-feature usage and development.
+1. Use environment variables. This can be used temporarily for a quick start or trying out a demo.
+2. Use a config or key file. This is the recommended way, best for continuous and full-feature usage and development.
 ### 1. Use environment variables
 Run in command line:
 ```shell
