@@ -19,12 +19,15 @@ team.hire(
     ]
 )
 ```
-We are a human `SimpleReviewer` interacting with the two LLM-based agents `SimpleCoder` and `SimpleTester` now. The switch is complete agnostic to the original SOP and `Role` definition, meaning applicability to general scenarios.
+We are a human `SimpleReviewer` interacting with the two LLM-based agents `SimpleCoder` and `SimpleTester` now. We can comment on the unit tests from `SimpleTester`, requesting more coverage or edge cases. The feedback is then sent back to the tester for writing a new version. The switch is complete agnostic to the original SOP and `Role` definition, meaning applicability to general scenarios.
 
 Each time when it's our turn to respond, the running process will pause to wait for our input. Just type in what we want, we are sending our messages to the agents!
 
 >Constraint:  
 >For develops who customize `Role`'s `_act` function, the `Action`s called in `_act` must be among the `self._actions` initialized with `_init_actions` for the human engagement to take effect.
+
+>LIMITATION:  
+>Currently the interaction is through terminal input, which is inconvenient for multi-line or structured writeup. Meanwhile, users must adhere to the prompt in content or format like what we require of an LLM, in order for the logic after human input works as usual. We will provide solutions to these issues in following update.
 
 ## Complete script of this tutorial
 https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agents.py
