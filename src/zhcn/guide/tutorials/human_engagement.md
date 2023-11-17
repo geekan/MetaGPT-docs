@@ -19,12 +19,15 @@ team.hire(
     ]
 )
 ```
-我们作为人类充当 `SimpleReviewer`，现在与两个基于LLM的智能体 `SimpleCoder` 和 `SimpleTester` 进行交互。这个切换对于原始的SOP和 `Role` 定义是完全不可见的（无影响），这意味着可以应用于任何场景。
+我们作为人类充当 `SimpleReviewer`，现在与两个基于LLM的智能体 `SimpleCoder` 和 `SimpleTester` 进行交互。我们可以对`SimpleTester`写的单元测试进行评论，比如要求测试更多边界情况，让`SimpleTester`进行改写。这个切换对于原始的SOP和 `Role` 定义是完全不可见的（无影响），这意味着可以应用于任何场景。
 
 每次轮到我们回应时，运行过程将暂停并等待我们的输入。只需输入我们想要输入的内容，然后就将消息发送给其他智能体了！
 
 > 约束：
 > 对于自定义 `Role` 的 `_act` 函数的开发人员，`_act` 中调用的 `Action` 必须是在 `self._init_actions` 初始化时与 `self._actions` 中的动作之一，以便人类参与生效。
+
+> <b>局限性</b>：
+> 当前人类交互通过命令行终端进行，对人类提供多行或结构化的内容较为不便。同时，人类需要像LLM一样在格式或内容上遵循提示词，以使获得人类输入后的后续流程正常运行。我们会在后续更新中改善这两类问题。
 
 ## 本教程的完整脚本
 https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agents.py
