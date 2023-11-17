@@ -51,9 +51,15 @@ export default defineConfig({
                     text: 'MultiAgent 101',
                     link: 'tutorials/multi_agent_101.md',
                   },
-                  { text: 'Use memories', link: 'tutorials/use_memories.md', },
-                  { text: 'Human engagement', link: 'tutorials/human_engagement.md',},
-                  { text: 'Think and act', link: 'tutorials/agent_think_act.md' },
+                  { text: 'Use memories', link: 'tutorials/use_memories.md' },
+                  {
+                    text: 'Human engagement',
+                    link: 'tutorials/human_engagement.md',
+                  },
+                  {
+                    text: 'Think and act',
+                    link: 'tutorials/agent_think_act.md',
+                  },
                 ],
               },
               {
@@ -64,7 +70,11 @@ export default defineConfig({
                     text: 'Agent',
                     items: [
                       {
-                        text: 'Researcher',
+                        text: 'Data analyst: analyze and visualize datasets',
+                        link: 'use_cases/agent/data_analyst.md',
+                      },
+                      {
+                        text: 'Researcher: search web and write reports',
                         link: 'use_cases/agent/researcher.md',
                       },
                       {
@@ -214,7 +224,13 @@ export default defineConfig({
               {
                 text: '教程',
                 collapsed: false,
-                items: [],
+                items: [
+                  { text: '概念', link: 'tutorials/Concepts' },
+                  { text: '智能体 101', link: 'tutorials/agent_101' },
+                  { text: '多智能体 101', link: 'tutorials/multi_agent_101' },
+                  { text: '记忆' },
+                  { text: '思考和动作', link: 'tutorials/agent_think_act' },
+                ],
               },
               {
                 text: '示例',
@@ -240,7 +256,7 @@ export default defineConfig({
                           {
                             text: '成果集',
                           },
-                        ]
+                        ],
                       },
                       {
                         text: '论坛广场',
@@ -248,7 +264,7 @@ export default defineConfig({
                           {
                             text: '成果集',
                           },
-                        ]
+                        ],
                       },
                       {
                         text: '辩论',
@@ -270,9 +286,9 @@ export default defineConfig({
                 text: '进阶指南',
                 collapsed: false,
                 items: [
-                  { text: '多智能体间通信', },
-                  { text: '记忆', },
-                  { text: '使用本地LLM', },
+                  { text: '多智能体间通信' },
+                  { text: '记忆' },
+                  { text: '使用本地LLM' },
                 ],
               },
               {
