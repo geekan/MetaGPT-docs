@@ -70,7 +70,11 @@ export default defineConfig({
                     text: 'Agent',
                     items: [
                       {
-                        text: 'Researcher',
+                        text: 'Data analyst: analyze and visualize datasets',
+                        link: 'use_cases/agent/data_analyst.md',
+                      },
+                      {
+                        text: 'Researcher: search web and write reports',
                         link: 'use_cases/agent/researcher.md',
                       },
                       {
@@ -162,7 +166,6 @@ export default defineConfig({
               },
               {
                 text: 'API',
-                collapsed: false,
               },
               {
                 text: 'FAQ',
@@ -225,7 +228,14 @@ export default defineConfig({
               {
                 text: '教程',
                 collapsed: false,
-                items: [],
+                items: [
+                  { text: '概念简述', link: 'tutorials/concepts' },
+                  { text: '智能体入门', link: 'tutorials/agent_101' },
+                  { text: '多智能体入门', link: 'tutorials/multi_agent_101' },
+                  { text: '使用记忆', link: 'tutorials/use_memories' },
+                  { text: '人类介入', link: 'tutorials/human_engagement' },
+                  { text: '思考与行动', link: 'tutorials/agent_think_act' },
+                ],
               },
               {
                 text: '示例',
@@ -318,7 +328,6 @@ export default defineConfig({
               },
               {
                 text: 'API',
-                collapsed: false,
               },
               {
                 text: '常见问题解答',

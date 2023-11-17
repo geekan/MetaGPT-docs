@@ -121,7 +121,3 @@ Comparison
 | Generates svg | ✔ | ✔ | ✔ | ✔ |
 | Generates pdf | ✔ | ✔ | ✔ | ✘ |
 | Offline Running | ✔ | ✔ | ✔ | ✘ |
-
----
-
-To provide this translation in a markdown file, I would typically create the markdown content with appropriate formatting and then save it to a `.md` file. If you would like to proceed with this, please let me know how you'd like to receive the markdown file, as direct file transfer is not possible here, but I can guide you on how to create one yourself.
