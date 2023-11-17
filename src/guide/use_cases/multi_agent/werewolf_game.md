@@ -1,0 +1,1 @@
+# Werewolf: Agents Playing Strategy Games

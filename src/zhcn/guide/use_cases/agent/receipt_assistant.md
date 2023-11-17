@@ -1,0 +1,1 @@
+# Recepit Assistant: Extract Structural Info from Receipts
