@@ -1,11 +1,11 @@
 # 多智能体入门
 在上一章中，我们简要讨论了单智能体的创建。虽然对许多情况来说，单智能体可能已经足够，但更复杂的任务通常需要协作和团队合作，这也就是多智能体为什么必不可少的原因。MetaGPT的核心优势也在于轻松灵活地开发一个智能体团队。在MetaGPT框架下，用户可以通过少量代码实现智能体之间的交互。
 
-在完成本教程后，你将能够：
+完成本节，你将能够：
 1. 理解智能体之间如何进行交互
 2. 开发你的第一个智能体团队
 
-## 运行软件创业示例
+## 运行“软件公司”示例
 ```shell
 python startup.py --idea "write a function that calculates the product of a list",
 ```
@@ -208,7 +208,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agen
 python examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
 ```
 
-或在Colab上尝试
+或在Colab上运行
 
 [![在Colab中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
 

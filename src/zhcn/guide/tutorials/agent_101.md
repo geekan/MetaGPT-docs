@@ -1,5 +1,5 @@
 # 智能体入门
-在学完本教程之后，你将能够：
+完成本节，你将能够：
 1. 使用现成的智能体
 2. 开发你的第一个能够执行一个或多个动作的智能体
 
@@ -27,12 +27,12 @@ if __name__ == '__main__':
 ### 一个智能体运行周期的流程图
 ![flowchart](/public/image/guide/tutorials/agent_run_flowchart.png)
 
-### 具有单一动作的智能体
+## 具有单一动作的智能体
 假设我们想用自然语言编写代码，并想让一个智能体为我们做这件事。让我们称这个智能体为 SimpleCoder，我们需要两个步骤来让它工作：
 1. 定义一个编写代码的动作
 2. 为智能体配备这个动作
 
-#### 定义动作
+### 定义动作
 在 MetaGPT 中，类 `Action` 是动作的逻辑抽象。用户可以通过简单地调用 self._aask 函数令 LLM 赋予这个动作能力，即这个函数将在底层调用 LLM api。
 
 在我们的场景中，我们定义了一个 `SimpleWriteCode` 子类 `Action`。虽然它主要是一个围绕提示和 LLM 调用的包装器，但我们认为这个 `Action` 抽象更直观。在下游和高级任务中，使用它作为一个整体感觉更自然，而不是分别制作提示和调用 LLM，尤其是在智能体的框架内。
@@ -119,7 +119,7 @@ async def main():
 asyncio.run(main)
 ```
 
-## 拥有多个动作的智能体
+## 具有多个动作的智能体
 我们注意到一个智能体能够执行一个动作，但如果只有这些，实际上我们并不需要一个智能体。通过直接运行动作本身，我们可以得到相同的结果。智能体的力量，或者说`Role`抽象的惊人之处，在于动作的组合（以及其他组件，比如记忆，但我们将把它们留到后面的部分）。通过连接动作，我们可以构建一个工作流程，使智能体能够完成更复杂的任务。
 
 假设现在我们不仅希望用自然语言编写代码，而且还希望生成的代码立即执行。一个拥有多个动作的智能体可以满足我们的需求。让我们称之为`RunnableCoder`，一个既写代码又立即运行的`Role`。我们需要两个`Action`：`SimpleWriteCode` 和 `SimpleRunCode`
@@ -195,3 +195,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_agent.py
 ```shell
 python examples/build_customized_agent.py --msg "write a function that calculates the sum of a list"
 ```
+
+或在Colab上运行
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1SF3bJiDjKw6Xwnz2Rf0j8Hc0U4KsSB2L?usp=sharing)

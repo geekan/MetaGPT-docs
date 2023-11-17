@@ -7,6 +7,8 @@ The goal is to provide an intuitive and <b>simplified</b> explanation of the con
 
 You may also jump to [Agent101](agent_101) if you want hands-on coding first.
 
+Check out our [paper](https://arxiv.org/abs/2308.00352) if you want more rigorous explanation.
+
 ## Agent
 Academia and industry have proposed various definitions for the term "agent". Roughly speaking, an agent should be able to think or plan like human, possesses memories or even emotions, is equipped with a certain skill set to interact with the environment, other agents, and human. An agent, in a comprehensive examination, is a sophisticated system by itself.
 

@@ -83,12 +83,15 @@ export default defineConfig({
                       },
                       {
                         text: 'Document Assistant',
+                        link: 'use_cases/agent/document_assistant.md',
                       },
                       {
                         text: 'Photographer',
+                        link: 'use_cases/agent/photographer.md',
                       },
                       {
                         text: 'Receipt Assistant',
+                        link: 'use_cases/agent/receipt_assistant.md',
                       },
                       {
                         text: 'Creative',
@@ -105,14 +108,7 @@ export default defineConfig({
                         items: [
                           {
                             text: 'Gallery',
-                          },
-                        ],
-                      },
-                      {
-                        text: 'Public Square',
-                        items: [
-                          {
-                            text: 'Gallery',
+                            link: 'use_cases/multi_agent/software_gallery.md',
                           },
                         ],
                       },
@@ -126,9 +122,15 @@ export default defineConfig({
                       },
                       {
                         text: 'Minecraft',
+                        link: 'use_cases/multi_agent/minecraft.md',
                       },
                       {
                         text: 'Virtual Town',
+                        link: 'use_cases/multi_agent/virtual_town.md',
+                      },
+                      {
+                        text: 'Creative',
+                        link: 'use_cases/multi_agent/creative.md',
                       },
                     ],
                   },
@@ -142,10 +144,13 @@ export default defineConfig({
                     text: 'Agent communication',
                     link: 'in_depth_guides/agent_communication.md',
                   },
-                  { text: 'Memory', link: 'in_depth_guides/memory.md' },
                   {
-                    text: 'Use your local LLM',
-                    link: 'in_depth_guides/use_local_llm.md',
+                    text: 'Memory',
+                    link: 'in_depth_guides/memory.md',
+                  },
+                  {
+                    text: 'Use your own LLM',
+                    link: 'in_depth_guides/use_own_llm.md',
                   },
                 ],
               },
@@ -161,7 +166,7 @@ export default defineConfig({
               },
               {
                 text: 'API',
-                collapsed: false,
+                link: 'api',
               },
               {
                 text: 'FAQ',
@@ -225,11 +230,12 @@ export default defineConfig({
                 text: '教程',
                 collapsed: false,
                 items: [
-                  { text: '概念', link: 'tutorials/Concepts' },
-                  { text: '智能体 101', link: 'tutorials/agent_101' },
-                  { text: '多智能体 101', link: 'tutorials/multi_agent_101' },
-                  { text: '记忆' },
-                  { text: '思考和动作', link: 'tutorials/agent_think_act' },
+                  { text: '概念简述', link: 'tutorials/concepts' },
+                  { text: '智能体入门', link: 'tutorials/agent_101' },
+                  { text: '多智能体入门', link: 'tutorials/multi_agent_101' },
+                  { text: '使用记忆', link: 'tutorials/use_memories' },
+                  { text: '人类介入', link: 'tutorials/human_engagement' },
+                  { text: '思考与行动', link: 'tutorials/agent_think_act' },
                 ],
               },
               {
@@ -239,12 +245,24 @@ export default defineConfig({
                   {
                     text: '智能体',
                     items: [
-                      { text: '调研员' },
-                      { text: '机器学习工程师' },
-                      { text: '文库助手' },
-                      { text: '摄影师' },
-                      { text: '票据助手' },
-                      { text: '创意角色' },
+                      { text: '调研员', link: 'use_cases/agent/researcher.md' },
+                      {
+                        text: '机器学习工程师',
+                        link: 'use_cases/agent/ml_engineer.md',
+                      },
+                      {
+                        text: '文库助手',
+                        link: 'use_cases/agent/document_assistant.md',
+                      },
+                      {
+                        text: '摄影师',
+                        link: 'use_cases/agent/photographer.md',
+                      },
+                      {
+                        text: '票据助手',
+                        link: 'use_cases/agent/receipt_assistant.md',
+                      },
+                      { text: '创意角色', link: 'use_cases/agent/creative.md' },
                     ],
                   },
                   {
@@ -252,31 +270,33 @@ export default defineConfig({
                     items: [
                       {
                         text: '软件公司',
+                        link: 'use_cases/multi_agent/software_company.md',
                         items: [
                           {
-                            text: '成果集',
-                          },
-                        ],
-                      },
-                      {
-                        text: '论坛广场',
-                        items: [
-                          {
-                            text: '成果集',
+                            text: '作品集',
+                            link: 'use_cases/multi_agent/software_gallery.md',
                           },
                         ],
                       },
                       {
                         text: '辩论',
+                        link: 'use_cases/multi_agent/debate.md',
                       },
                       {
                         text: '狼人杀',
+                        link: 'use_cases/multi_agent/werewolf_game.md',
                       },
                       {
                         text: 'Minecraft',
+                        link: 'use_cases/multi_agent/minecraft.md',
                       },
                       {
                         text: '虚拟小镇',
+                        link: 'use_cases/multi_agent/virtual_town.md',
+                      },
+                      {
+                        text: '创意小组',
+                        link: 'use_cases/multi_agent/creative.md',
                       },
                     ],
                   },
@@ -286,19 +306,30 @@ export default defineConfig({
                 text: '进阶指南',
                 collapsed: false,
                 items: [
-                  { text: '多智能体间通信' },
-                  { text: '记忆' },
-                  { text: '使用本地LLM' },
+                  {
+                    text: '多智能体间通信',
+                    link: 'in_depth_guides/agent_communication.md',
+                  },
+                  { text: '记忆', link: 'in_depth_guides/memory.md' },
+                  {
+                    text: '使用自定义LLM',
+                    link: 'in_depth_guides/use_own_llm.md',
+                  },
                 ],
               },
               {
                 text: '贡献',
                 collapsed: false,
-                items: [],
+                items: [
+                  {
+                    text: '贡献指南',
+                    link: 'contribute/contribute_guide.md',
+                  },
+                ],
               },
               {
                 text: 'API',
-                collapsed: false,
+                link: 'api',
               },
               {
                 text: '常见问题解答',

@@ -19,7 +19,7 @@ team.hire(
     ]
 )
 ```
-We are a human `SimpleReviewer` interacting with the two LLM-based agents `SimpleCoder` and `SimpleTester` now. The switch is complete agnostic to the original SOP and `Role` definition, meaning application to any scenarios.
+We are a human `SimpleReviewer` interacting with the two LLM-based agents `SimpleCoder` and `SimpleTester` now. The switch is complete agnostic to the original SOP and `Role` definition, meaning applicability to general scenarios.
 
 Each time when it's our turn to respond, the running process will pause to wait for our input. Just type in what we want, we are sending our messages to the agents!
 
