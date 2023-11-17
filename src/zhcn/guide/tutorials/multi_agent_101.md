@@ -208,7 +208,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agen
 python examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
 ```
 
-或在Colab上尝试
+或在Colab上运行
 
 [![在Colab中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
 

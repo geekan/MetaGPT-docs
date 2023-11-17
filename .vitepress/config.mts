@@ -166,6 +166,7 @@ export default defineConfig({
               },
               {
                 text: 'API',
+                link: 'api',
               },
               {
                 text: 'FAQ',
@@ -328,6 +329,7 @@ export default defineConfig({
               },
               {
                 text: 'API',
+                link: 'api',
               },
               {
                 text: '常见问题解答',

@@ -5,7 +5,7 @@ After this tutorial, you will be able to:
 1. Understand what memories are like in MetaGPT
 2. How to add or retrieve memories
 
-## What memories are like
+## What are memories like
 Class `Memory` is the abstraction for an agent's memory in MetaGPT. When initialized, `Role` acquire its `Memory` as `self._rc.memory`, which will store every `Message` it later `_observe` in a list for future retrieval. The initialization and storage are handled by the framework. In short, memories of a `Role` are a list of `Message`s.
 
 ## Retrieve memory

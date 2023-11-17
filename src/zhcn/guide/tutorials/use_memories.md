@@ -6,7 +6,7 @@
 2. 如何添加或检索记忆
 
 ## 什么是记忆
-在MetaGPT中，`Memory`类是智能体的记忆的抽象。本框架会在初始化时处理记忆的获取和存储。 当初始化时，`Role`获取其`Memory`作为`self._rc.memory`，它将在之后的`_observe`中存储每个`Message`，以便后续的检索。简而言之，`Role`的记忆即含有`Message`的列表。
+在MetaGPT中，`Memory`类是智能体的记忆的抽象。当初始化时，`Role`初始化一个`Memory`对象作为`self._rc.memory`属性，它将在之后的`_observe`中存储每个`Message`，以便后续的检索。简而言之，`Role`的记忆是一个含有`Message`的列表。
 
 ## 检索记忆
 当需要获取记忆时（获取LLM输入的上下文），你可以使用`self.get_memories`。函数定义如下：

@@ -195,3 +195,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_agent.py
 ```shell
 python examples/build_customized_agent.py --msg "write a function that calculates the sum of a list"
 ```
+
+或在Colab上运行
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1SF3bJiDjKw6Xwnz2Rf0j8Hc0U4KsSB2L?usp=sharing)
