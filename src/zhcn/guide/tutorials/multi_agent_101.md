@@ -1,185 +1,227 @@
-# 多智能体 101
-在[智能体101](agent_101)中，我们简要讨论了单个智能体的创建。虽然对于许多情况来说，单个智能体可能足够了，但更复杂的任务通常需要协作和团队合作。这就是多个智能体变得必要的地方。MetaGPT的核心优势也在于轻松灵活地开发一个智能体团队。在MetaGPT框架下，用户可以使用极少的代码实现智能体之间的交互。
+# 多智能体入门
+在上一章中，我们简要讨论了单智能体的创建。虽然对许多情况来说，单智能体可能已经足够，但更复杂的任务通常需要协作和团队合作，这也就是多智能体为什么必不可少的原因。MetaGPT的核心优势也在于轻松灵活地开发一个智能体团队。在MetaGPT框架下，用户可以通过少量代码实现智能体之间的交互。
 
-完成本教程后，你将能够：
-1. 运行软件启动示例
+在完成本教程后，你将能够：
+1. 理解智能体之间如何进行交互
 2. 开发你的第一个智能体团队
 
-## 运行软件启动示例
+## 运行软件创业示例
 ```shell
-python startup.py --idea "write a cli blackjack game"
+python startup.py --idea "write a function that calculates the product of a list",
 ```
 
 ## 开发你的第一个智能体团队
-希望你能找到软件启动示例很有启发。也许现在你已经受到启发，想要开发一个适应你独特需求的智能体团队。在这一部分，我们将使用一个有趣的例子来说明开发过程。
+希望你会发现软件创业示例很有启发。也许现在你已经有了灵感，想要开发一个根据你的独特需求而定制的智能体团队。在本节中，我们将继续在[智能体入门](agent_101)中的简单代码示例中添加更多角色，并引入智能体之间的交互协作。
 
-想象一下，如果我们模拟代表拜登和特朗普的智能体共同工作。这是一个有趣的实验，不是吗？鉴于他们众所周知的分歧，这样的组合可能导致一些生动的交流。这是一个理想的例子，展示了如何设计多个智能体并促使它们之间进行交互。我们将称我们的实验为“拜登-特朗普辩论”。
+让我们还雇佣一名测试人员和一名审阅人员携手与编码人员一起工作。这开始看起来像一个开发团队了，不是吗？总的来说，我们需要三个步骤来建立团队并使其运作：
+1. 定义每个角色能够执行的预期动作
+2. 基于标准作业程序（SOP）确保每个角色遵守它。通过使每个角色观察上游的相应输出结果，并为下游发布自己的输出结果，可以实现这一点。
+3. 初始化所有角色，创建一个带有环境的智能体团队，并使它们之间能够进行交互。
 
-总体上，我们需要两个步骤来设置他们之间的辩论：
-1. 定义一个能够进行言论动作的 Debator 角色，我们建议参考[智能体101](agent_101)
-2. 处理 Debator 之间的通信，即让拜登听特朗普说话，特朗普听拜登说话
-3. 初始化两个 Debator 实例，拜登和特朗普，创建一个放置它们的环境的团队，并使它们能够相互交互
+完整的代码在本教程的末尾可用
 
-完整的代码在本节末尾可用
+### 定义动作和角色
+与[智能体入门](agent_101)相同的过程，我们可以定义三个具有各自动作的`Role`：
+- `SimpleCoder` 具有 `SimpleWriteCode` 动作，接收用户的指令并编写主要代码
+- `SimpleTester` 具有 `SimpleWriteTest` 动作，从 `SimpleWriteCode` 的输出中获取主代码并为其提供测试套件
+- `SimpleReviewer` 具有 `SimpleWriteReview` 动作，审查来自 `SimpleWriteTest` 输出的测试用例，并检查其覆盖范围和质量
 
-### 定义动作
-首先，我们需要定义我们的 `Action`。这是一个辩论场景，所以让我们将其命名为 `SpeakAloud`
+通过上述概述，我们使得 SOP（标准作业程序）变得更加清晰明了。接下来，我们将详细讨论如何根据 SOP 来定义`Role`。
+
+#### 定义动作
+我们列举了三个 `Action`。
+
 ```python
-class SpeakAloud(Action):
-    """动作：在辩论中大声说话（争吵）"""
+class SimpleWriteCode(Action):
 
     PROMPT_TEMPLATE = """
-    ## BACKGROUND
-    Suppose you are {name}, you are in a debate with {opponent_name}.
-    ## DEBATE HISTORY
-    Previous rounds:
-    {context}
-    ## YOUR TURN
-    Now it's your turn, you should closely respond to your opponent's latest argument, state your position, defend your arguments, and attack your opponent's arguments,
-    craft a strong and emotional response in 80 words, in {name}'s rhetoric and viewpoints, your will argue:
+    Write a python function that can {instruction} and provide two runnnable test cases.
+    Return ```python your_code_here ``` with NO other texts,
+    your code:
     """
 
-    def __init__(self, name="SpeakAloud", context=None, llm=None):
+    def __init__(self, name="SimpleWriteCode", context=None, llm=None):
         super().__init__(name, context, llm)
 
-    async def run(self, context: str, name: str, opponent_name: str):
+    async def run(self, instruction: str):
 
-        prompt = self.PROMPT_TEMPLATE.format(context=context, name=name, opponent_name=opponent_name)
+        prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
 
-        rsp = await self._ask(prompt)
+        rsp = await self._aask(prompt)
+
+        code_text = parse_code(rsp)
+
+        return code_text
+```
+
+```python
+class SimpleWriteTest(Action):
+
+    PROMPT_TEMPLATE = """
+    Context: {context}
+    Write {k} unit tests using pytest for the given function, assuming you have imported it.
+    Return ```python your_code_here ``` with NO other texts,
+    your code:
+    """
+
+    def __init__(self, name="SimpleWriteTest", context=None, llm=None):
+        super().__init__(name, context, llm)
+
+    async def run(self, context: str, k: int = 3):
+
+        prompt = self.PROMPT_TEMPLATE.format(context=context, k=k)
+
+        rsp = await self._aask(prompt)
+
+        code_text = parse_code(rsp)
+
+        return code_text
+```
+
+```python
+class SimpleWriteReview(Action):
+
+    PROMPT_TEMPLATE = """
+    Context: {context}
+    Review the test cases and provide one critical comments:
+    """
+
+    def __init__(self, name="SimpleWriteReview", context=None, llm=None):
+        super().__init__(name, context, llm)
+
+    async def run(self, context: str):
+
+        prompt = self.PROMPT_TEMPLATE.format(context=context)
+
+        rsp = await self._aask(prompt)
 
         return rsp
 ```
-### 定义角色
-我们将定义一个通用的 `Role`，称为 `Debator`。
 
-在这里，`_init_actions` 使我们的 `Role` 拥有我们刚刚定义的 `SpeakAloud` 动作。我们还使用 `_watch` 监视了 `SpeakAloud` 和 `BossRequirement`，因为我们希望每个辩手关注来自对手的 `SpeakAloud` 消息，以及来自用户的 `BossRequirement`（人类指令）。
+#### 定义角色
+在许多多智能体场景中，定义`Role`可能只需几行代码。对于`SimpleCoder`，我们做了两件事：
+1. 使用 `_init_actions` 为`Role`配备适当的 `Action`，这与设置单智能体相同
+2. 多智能体操作逻辑：我们使`Role` `_watch` 来自用户或其他智能体的重要上游消息。回想我们的SOP，`SimpleCoder`接收用户指令，这是由MetaGPT中的`BossRequirement`引起的`Message`。因此，我们添加了 `self._watch([BossRequirement])`。
+
+这就是用户需要做的全部。对于那些对底层机制感兴趣的人，请参见本教程的本章中的[机制解释](#机制解释)。
+
 ```python
-class Debator(Role):
+class SimpleCoder(Role):
     def __init__(
         self,
-        name: str,
-        profile: str,
-        opponent_name: str,
+        name: str = "Alice",
+        profile: str = "SimpleCoder",
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
-        self.name = name
-        self.opponent_name = opponent_name
-```
-接下来，我们使每个辩手听取对手的论点。这通过重写 `_observe` 函数完成。这是一个重要的点，因为在环境中将会有来自特朗普和拜登的 "SpeakAloud 消息"（由 `SpeakAloud` 触发的 `Message`）。
-我们不希望特朗普处理自己上一轮的 "SpeakAloud 消息"，而是处理来自拜登的消息，反之亦然。（在即将到来的更新中，我们将使用一般的消息路由机制来处理这个过程。在更新后，你将不再需要执行此步骤）
-```python
-async def _observe(self) -> int:
-        await super()._observe()
-        # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
-```
-最后，我们使每个辩手能够向对手发送反驳的论点。在这里，我们从消息历史中构建一个上下文，使 `Debator` 运行他拥有的 `SpeakAloud` 动作，并使用反驳论点内容创建一个新的 `Message`。请注意，我们定义每个 `Debator` 将把 `Message` 发送给他的对手。
-```python
-async def _act(self) -> Message:
-    logger.info(f"{self._setting}: ready to {self._rc.todo}")
-    todo = self._rc.todo # 一个 SpeakAloud 的实例
+        self._watch([BossRequirement])
+        self._
 
-    memories = self.get_memories()
-    context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
-
-    rsp = await todo.run(context=context, name=self.name, opponent_name=self.opponent_name)
-
-    msg = Message(
-        content=rsp,
-        role=self.profile,
-        cause_by=type(todo),
-        sent_from=self.name,
-        send_to=self.opponent_name,
-    )
-
-    return msg
+init_actions([SimpleWriteCode])
 ```
 
-<b>完整的 Debator 代码</b>
+---
+与上述相似，对于 `SimpleTester`，我们：
+1. 使用 `_init_actions` 为`SimpleTester`配备 `SimpleWriteTest` 动作
+2. 使`Role` `_watch` 来自其他智能体的重要上游消息。回想我们的SOP，`SimpleTester`从 `SimpleCoder` 中获取主代码，这是由 `SimpleWriteCode` 引起的 `Message`。因此，我们添加了 `self._watch([SimpleWriteCode])`。
+> 一个扩展的问题：想一想如果我们使用 `self._watch([SimpleWriteCode, SimpleWriteReview])` 会意味着什么，可以尝试这样做
+
+此外，你可以为智能体定义自己的操作逻辑。这适用于`Action`需要多个输入的情况，你希望修改输入，使用特定记忆，或进行任何其他更改以反映特定逻辑的情况。因此，我们：
+
+3. 重写 `_act` 函数，就像我们在[智能体入门](agent_101)中的单智能体设置中所做的那样。在这里，我们希望`SimpleTester`将所有记忆用作编写测试用例的上下文，并希望有5个测试用例。
 
 ```python
-class Debator(Role):
+class SimpleTester(Role):
     def __init__(
         self,
-        name: str,
-        profile: str,
-        opponent_name: str,
+        name: str = "Bob",
+        profile: str = "SimpleTester",
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
-        self.name = name
-        self.opponent_name = opponent_name
-
-    async def _observe(self) -> int:
-        await super()._observe()
-        # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
+        self._init_actions([SimpleWriteTest])
+        self._watch([SimpleWriteCode])
+        # self._watch([SimpleWriteCode, SimpleWriteReview]) # 可以尝试这样做
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo # 一个 SpeakAloud 的实例
+        todo = self._rc.todo
 
-        memories = self.get_memories()
-        context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
+        # context = self.get_memories(k=1)[0].content # 使用最近的记忆作为上下文
+        context = self.get_memories() # 使用所有记忆作为上下文
 
-        rsp = await todo.run(context=context, name=self.name, opponent_name=self.opponent_name)
+        code_text = await todo.run(context, k=5) # 指定参数
 
-        msg = Message(
-            content=rsp,
-            role=self.profile,
-            cause_by=type(todo),
-            sent_from=self.name,
-            send_to=self.opponent_name,
-        )
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
 ```
-### 创建团队并添加角色
-现在我们已经定义了我们的 `Debator`，让我们将它们组合起来看看会发生什么。我们建立一个 `Team` 并“雇佣”了拜登和特朗普。在这个例子中，我们将通过将我们的指令（作为 `BossRequirement`）发送给拜登，让他先开始。如果你想让特朗普先说话，将 `send_to` 设置为 "Trump"。
-
-运行这个 `Team`，我们应该看到他们之间友好的对话！
+---
+按照相同的过程定义 `SimpleReviewer`：
 ```python
-async def debate(idea: str, investment: float = 3.0, n_round: int = 5):
-    """运行拜登-特朗普辩论，观看他们之间的友好对话 :) """
-    Biden = Debator(name="Biden", profile="Democrat", opponent_name="Trump")
-    Trump = Debator(name="Trump", profile="Republican", opponent_name="Biden")
-    team = Team()
-    team.hire([Biden, Trump])
-    team.invest(investment)
-    team.start_project(idea, send_to="Biden")  # 将辩论主题发送给拜登，让他先说话
-    await team.run(n_round=n_round)
+class SimpleReviewer(Role):
+    def __init__(
+        self,
+        name: str = "Charlie",
+        profile: str = "SimpleReviewer",
+        **kwargs,
+    ):
+        super().__init__(name, profile, **kwargs)
+        self._init_actions([SimpleWriteReview])
+        self._watch([SimpleWriteTest])
+```
 
-def main(idea: str, investment: float = 3.0, n_round: int = 10):
-    """
-    :param idea: Debate topic, such as "Topic: The U.S. should commit more in climate change fighting" 
-                 or "Trump: Climate change is a hoax"
-    :param investment: contribute a certain dollar amount to watch the debate
-    :param n_round: maximum rounds of the debate
-    :return:
-    """
-    if platform.system() == "Windows":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(debate(idea, investment, n_round))
+### 创建一个团队并添加角色
+现在我们已经定义了三个 `Role`，是时候将它们放在一起了。我们初始化所有角色，设置一个 `Team`，并`hire` 它们。
+
+运行 `Team`，我们应该会看到它们之间的协作！
+```python
+async def main(
+    idea: str = "write a function that calculates the product of a list",
+    investment: float = 3.0,
+    n_round: int = 5,
+):
+    logger.info(idea)
+
+    team = Team()
+    team.hire(
+        [
+            SimpleCoder(),
+            SimpleTester(),
+            SimpleReviewer(),
+        ]
+    )
+
+    team.invest(investment=investment)
+    team.start_project(idea)
+    await team.run(n_round=n_round)
 
 if __name__ == '__main__':
     fire.Fire(main)
 ```
-### 本节的完整脚本
+## 本教程的完整脚本
 
-https://github.com/geekan/MetaGPT/blob/main/examples/debate.py
+https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agents.py
 
-运行以下命令：
+使用以下命令运行：
 ```sh
-python examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
+python examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
 ```
-运行结果如下：
 
-![img](/public/image/guide/tutorials/debate_log.png)
+或在Colab上尝试
+
+[![在Colab中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
+
+
+## 机制解释
+虽然用户可以编写几行代码来设置运行的`Role`，但描述内部机制是有益的，这样用户就能理解设置代码的含义，并对框架有一个整体的了解。
+
+![img](/image/guide/tutorials/multi_agents_flowchart.png)
+
+如图的右侧部分所示，`Role`将从`Environment`中`_observe` `Message`。如果有一个`Role` `_watch` 的特定 `Action` 引起的 `Message`，那么这是一个有效的观察，触发`Role`的后续思考和操作。在 `_think` 中，`Role`将选择其能力范围内的一个 `Action` 并将其设置为要做的事情。在 `_act` 中，`Role`执行要做的事情，即运行 `Action` 并获取输出。将输出封装在 `Message` 中，最终 `_publish` 到 `Environment`，完成了一个完整的智能体运行。
+
+在每个步骤中，无论是 `_observe`、`_think` 还是 `_act`，`Role`都将与其 `Memory` 交互，通过添加或检索来实现。此外，MetaGPT提供了 `react` 过程的不同模式。这些部分的详细内容，请参阅[使用记忆](use_memories) 和 [思考与行动](agent_think_act)。
+
+当每个 `Role` 被适当设置时，我们可以看到与本教程中前面示例相应的SOP，如图的左侧部分所示。虚线框表明如果我们使 `SimpleTester` 同时 `_watch` `SimpleWriteCode` 和 `SimpleWriteReview`，则可以扩展 SOP。
+
+我们鼓励对此感兴趣的开发人员查看 `Role` 的[代码](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/role.py)，因为它相当易读。可以 `run`、`_observe`、`react`、`_think`、`_act`、`_publish`的内容，应该能够让你对其有一个相当不错的理解。

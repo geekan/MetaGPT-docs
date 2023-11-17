@@ -113,10 +113,10 @@ playwright install --with-deps chromium
 **ink**
 Mermaid.ink 项目提供了将 Mermaid 文本在线转换为图表的功能，请参阅 [Mermaid.ink](https://mermaid.ink/)。因此，任何连接到互联网的设备都可以使用ink方法，而无需本地浏览器或其他依赖关系。然而，此方法仅支持生成 PNG 和 SVG，不支持 PDF，并且在操作过程中需要访问 [Mermaid.ink](https://mermaid.ink/)，可能会受到网络和其他因素的影响，可能导致稳定性受到影响。
 
-### 对比
+对比
 | Mermaid引擎 | nodejs | pyppeteer | playwright | ink |
 | -------------- | ------ | --------- | ---------- | --- |
-| 安装复杂度 | ★★★★★ | ★★ | ★★★ | ★ |
+| 安装简易度 | ★ | ★★★ | ★★ | ★★★★★ |
 | 平台兼容性 | ★★★★★ | ★★★★ | ★★★ | ★★★★★ |
 | 生成png | ✔ | ✔ | ✔ | ✔ |
 | 生成svg | ✔ | ✔ | ✔ | ✔ |

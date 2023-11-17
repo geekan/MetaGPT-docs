@@ -112,7 +112,7 @@ playwright install --with-deps chromium
 **ink**
 The mermaid.ink project provides the function to convert Mermaid text into diagrams online, refer to https://mermaid.ink/. Thus, any internet-connected device can use ink method without the need for a local browser or other dependencies. However, this method only supports generating png and svg, not pdf, and requires access to https://mermaid.ink/ during operation, so it may be affected by the network and other factors, possibly impacting stability.
 
-### Comparison
+Comparison
 | Mermaid Engine | nodejs | pyppeteer | playwright | ink |
 | -------------- | ------ | --------- | ---------- | --- |
 | Installation Simplicity | ★ | ★★★ | ★★ | ★★★★★ |
