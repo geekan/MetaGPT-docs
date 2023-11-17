@@ -121,7 +121,7 @@ Now we can put our agent to work, just initialize it and run it with a starting 
 import asyncio
 
 async def main():
-    msg = "write a function that calculates the sum of a list"
+    msg = "write a function that calculates the product of a list"
     role = SimpleCoder()
     logger.info(msg)
     result = await role.run(msg)
@@ -196,7 +196,7 @@ Now you can put your agent to work, just initialize it and run it with a startin
 import asyncio
 
 async def main():
-    msg = "write a function that calculates the sum of a list"
+    msg = "write a function that calculates the product of a list"
     role = RunnableCoder()
     logger.info(msg)
     result = await role.run(msg)
@@ -212,5 +212,9 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_agent.py
 Run it with
 
 ```shell
-python examples/build_customized_agent.py --msg "write a function that calculates the sum of a list"
+python examples/build_customized_agent.py --msg "write a function that calculates the product of a list"
 ```
+
+Or try it on Colab
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1SF3bJiDjKw6Xwnz2Rf0j8Hc0U4KsSB2L?usp=sharing)

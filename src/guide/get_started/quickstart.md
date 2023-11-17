@@ -38,22 +38,24 @@ from metagpt.team import Team
 ```
 Next, initiate the team, equip it with agents, set their budget, and provide our requirement of writing a small game
 ```python
-company = Team()
-company.hire(
-    [
-        ProductManager(),
-        Architect(),
-        ProjectManager(),
-        Engineer()
-    ]
-)
+async def startup(idea: str):
+    company = Team()
+    company.hire(
+        [
+            ProductManager(),
+            Architect(),
+            ProjectManager(),
+            Engineer(),
+        ]
+    )
+    company.invest(investment=3.0)
+    company.start_project(idea=idea)
 
-company.invest(investment=3.0)
-company.start_project(idea="write a cli blackjack game")
+    await company.run(n_round=5)
 ```
 Finally, run it and get the code!
 ```python
-await company.run(n_round=5)
+await startup(idea="write a cli blackjack game")
 ```
 
 You may expect similar outputs below:

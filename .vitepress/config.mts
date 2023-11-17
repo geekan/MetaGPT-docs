@@ -238,7 +238,7 @@ export default defineConfig({
                         text: '软件公司',
                         items: [
                           {
-                            text: '成果集',
+                            text: '作品集',
                           },
                         ]
                       },
@@ -246,7 +246,7 @@ export default defineConfig({
                         text: '论坛广场',
                         items: [
                           {
-                            text: '成果集',
+                            text: '作品集',
                           },
                         ]
                       },
