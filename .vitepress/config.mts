@@ -366,7 +366,7 @@ export default defineConfig({
       dark: '/logo-light.svg',
     },
     editLink: {
-      pattern: 'https://github.com/vuejs/vitepress/edit/main/src/:path',
+      pattern: 'https://github.com/geekan/MetaGPT-docs/blob/main/src/:path',
       text: 'Edit this page on GitHub',
     },
     outline: {
