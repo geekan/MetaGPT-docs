@@ -30,7 +30,6 @@ const imageModel = ref<HTMLImageElement>();
 
 useEventListener('click', async (e) => {
   const path = Array.from(e.composedPath());
-  console.log(path);
   const first = path[0];
   if (!(first instanceof HTMLElement)) return;
   if (first.tagName !== 'IMG') return;
