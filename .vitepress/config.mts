@@ -20,7 +20,11 @@ export default defineConfig({
             link: '/guide/get_started/introduction',
             activeMatch: '/guide/',
           },
-          { text: 'Blog', link: '/blog/agents', activeMatch: '/blog/' },
+          {
+            text: 'Blog',
+            link: '/blog/agents',
+            activeMatch: '/blog/'
+          },
           {
             text: 'RFCs',
             link: '/rfcs/RFC-116-MetaGPT优化方案',
@@ -56,10 +60,6 @@ export default defineConfig({
                     text: 'Human engagement',
                     link: 'tutorials/human_engagement.md',
                   },
-                  {
-                    text: 'Think and act',
-                    link: 'tutorials/agent_think_act.md',
-                  },
                 ],
               },
               {
@@ -70,10 +70,6 @@ export default defineConfig({
                     text: 'Agent',
                     items: [
                       {
-                        text: 'Data analyst: analyze and visualize datasets',
-                        link: 'use_cases/agent/data_analyst.md',
-                      },
-                      {
                         text: 'Researcher: search web and write reports',
                         link: 'use_cases/agent/researcher.md',
                       },
@@ -82,8 +78,8 @@ export default defineConfig({
                         link: 'use_cases/agent/ml_engineer.md',
                       },
                       {
-                        text: 'Document Assistant',
-                        link: 'use_cases/agent/document_assistant.md',
+                        text: 'Tutorial Assistant',
+                        link: 'use_cases/agent/tutorial_assistant.md',
                       },
                       {
                         text: 'Photographer',
@@ -93,25 +89,11 @@ export default defineConfig({
                         text: 'Receipt Assistant',
                         link: 'use_cases/agent/receipt_assistant.md',
                       },
-                      {
-                        text: 'Creative',
-                        link: 'use_cases/agent/creative.md',
-                      },
                     ],
                   },
                   {
                     text: 'MultiAgent',
                     items: [
-                      {
-                        text: 'Software Company',
-                        link: 'use_cases/multi_agent/software_company.md',
-                        items: [
-                          {
-                            text: 'Gallery',
-                            link: 'use_cases/multi_agent/software_gallery.md',
-                          },
-                        ],
-                      },
                       {
                         text: 'Debate',
                         link: 'use_cases/multi_agent/debate.md',
@@ -128,10 +110,6 @@ export default defineConfig({
                         text: 'Virtual Town',
                         link: 'use_cases/multi_agent/virtual_town.md',
                       },
-                      {
-                        text: 'Creative',
-                        link: 'use_cases/multi_agent/creative.md',
-                      },
                     ],
                   },
                 ],
@@ -143,14 +121,6 @@ export default defineConfig({
                   {
                     text: 'Agent communication',
                     link: 'in_depth_guides/agent_communication.md',
-                  },
-                  {
-                    text: 'Memory',
-                    link: 'in_depth_guides/memory.md',
-                  },
-                  {
-                    text: 'Use your own LLM',
-                    link: 'in_depth_guides/use_own_llm.md',
                   },
                 ],
               },
@@ -176,7 +146,12 @@ export default defineConfig({
           },
           '/blog/': {
             base: '/blog/',
-            items: [{ text: 'Agents', link: 'agents' }],
+            items: [
+              {
+                text: 'Agents',
+                link: 'agents'
+              }
+            ],
           },
           '/rfcs/': {
             base: '/rfcs/',
@@ -203,13 +178,13 @@ export default defineConfig({
           },
           {
             text: '博客',
-            link: '/zhcn/blog/agents',
-            activeMatch: '/zhcn/blog/',
+            link: '/blog/agents',
+            activeMatch: '/blog/',
           },
           {
             text: 'RFCs',
-            link: '/zhcn/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/zhcn/rfcs/',
+            link: '/rfcs/RFC-116-MetaGPT优化方案',
+            activeMatch: '/rfcs/',
           },
         ],
         sidebar: {
@@ -220,22 +195,48 @@ export default defineConfig({
                 text: '开始',
                 collapsed: false,
                 items: [
-                  { text: '介绍', link: 'get_started/introduction' },
-                  { text: '快速开始', link: 'get_started/quickstart' },
-                  { text: '安装', link: 'get_started/installation' },
-                  { text: '配置', link: 'get_started/setup' },
+                  {
+                    text: '介绍',
+                    link: 'get_started/introduction'
+                  },
+                  {
+                    text: '快速开始',
+                    link: 'get_started/quickstart'
+                  },
+                  {
+                    text: '安装',
+                    link: 'get_started/installation'
+                  },
+                  {
+                    text: '配置',
+                    link: 'get_started/setup'
+                  },
                 ],
               },
               {
                 text: '教程',
                 collapsed: false,
                 items: [
-                  { text: '概念简述', link: 'tutorials/concepts' },
-                  { text: '智能体入门', link: 'tutorials/agent_101' },
-                  { text: '多智能体入门', link: 'tutorials/multi_agent_101' },
-                  { text: '使用记忆', link: 'tutorials/use_memories' },
-                  { text: '人类介入', link: 'tutorials/human_engagement' },
-                  { text: '思考与行动', link: 'tutorials/agent_think_act' },
+                  {
+                    text: '概念简述',
+                    link: 'tutorials/concepts'
+                  },
+                  {
+                    text: '智能体入门',
+                    link: 'tutorials/agent_101'
+                  },
+                  {
+                    text: '多智能体入门',
+                    link: 'tutorials/multi_agent_101'
+                  },
+                  {
+                    text: '使用记忆',
+                    link: 'tutorials/use_memories'
+                  },
+                  {
+                    text: '人类介入',
+                    link: 'tutorials/human_engagement'
+                  },
                 ],
               },
               {
@@ -245,14 +246,17 @@ export default defineConfig({
                   {
                     text: '智能体',
                     items: [
-                      { text: '调研员', link: 'use_cases/agent/researcher.md' },
+                      {
+                        text: '调研员',
+                        link: 'use_cases/agent/researcher.md',
+                      },
                       {
                         text: '机器学习工程师',
                         link: 'use_cases/agent/ml_engineer.md',
                       },
                       {
-                        text: '文库助手',
-                        link: 'use_cases/agent/document_assistant.md',
+                        text: '教程文案助手',
+                        link: 'use_cases/agent/tutorial_assistant.md',
                       },
                       {
                         text: '摄影师',
@@ -262,22 +266,11 @@ export default defineConfig({
                         text: '票据助手',
                         link: 'use_cases/agent/receipt_assistant.md',
                       },
-                      { text: '创意角色', link: 'use_cases/agent/creative.md' },
                     ],
                   },
                   {
                     text: '多智能体',
                     items: [
-                      {
-                        text: '软件公司',
-                        link: 'use_cases/multi_agent/software_company.md',
-                        items: [
-                          {
-                            text: '作品集',
-                            link: 'use_cases/multi_agent/software_gallery.md',
-                          },
-                        ],
-                      },
                       {
                         text: '辩论',
                         link: 'use_cases/multi_agent/debate.md',
@@ -294,10 +287,6 @@ export default defineConfig({
                         text: '虚拟小镇',
                         link: 'use_cases/multi_agent/virtual_town.md',
                       },
-                      {
-                        text: '创意小组',
-                        link: 'use_cases/multi_agent/creative.md',
-                      },
                     ],
                   },
                 ],
@@ -309,11 +298,6 @@ export default defineConfig({
                   {
                     text: '多智能体间通信',
                     link: 'in_depth_guides/agent_communication.md',
-                  },
-                  { text: '记忆', link: 'in_depth_guides/memory.md' },
-                  {
-                    text: '使用自定义LLM',
-                    link: 'in_depth_guides/use_own_llm.md',
                   },
                 ],
               },

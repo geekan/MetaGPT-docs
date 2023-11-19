@@ -1,1 +1,2 @@
-# Photographer: Generate Images with Prompts
+# 摄影师：根据提示词生成图像
+即将更新，保持关注。
