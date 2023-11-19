@@ -178,13 +178,13 @@ export default defineConfig({
           },
           {
             text: '博客',
-            link: '/blog/agents',
-            activeMatch: '/blog/',
+            link: 'src/blog/agents',
+            activeMatch: 'src/blog/',
           },
           {
             text: 'RFCs',
-            link: '/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/rfcs/',
+            link: 'src/rfcs/RFC-116-MetaGPT优化方案',
+            activeMatch: 'src/rfcs/',
           },
         ],
         sidebar: {

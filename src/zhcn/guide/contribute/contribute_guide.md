@@ -1,1 +1,2 @@
-# Contribute Guide
+# 贡献指南
+即将更新，保持关注。
