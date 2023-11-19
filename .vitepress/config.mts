@@ -23,7 +23,7 @@ export default defineConfig({
           {
             text: 'Blog',
             link: '/blog/agents',
-            activeMatch: '/blog/'
+            activeMatch: '/blog/',
           },
           {
             text: 'RFCs',
@@ -149,8 +149,8 @@ export default defineConfig({
             items: [
               {
                 text: 'Agents',
-                link: 'agents'
-              }
+                link: 'agents',
+              },
             ],
           },
           '/rfcs/': {
@@ -178,8 +178,8 @@ export default defineConfig({
           },
           {
             text: '博客',
-            link: 'src/blog/agents',
-            activeMatch: 'src/blog/',
+            link: '/blog/agents',
+            activeMatch: '/blog/',
           },
           {
             text: 'RFCs',
@@ -197,19 +197,19 @@ export default defineConfig({
                 items: [
                   {
                     text: '介绍',
-                    link: 'get_started/introduction'
+                    link: 'get_started/introduction',
                   },
                   {
                     text: '快速开始',
-                    link: 'get_started/quickstart'
+                    link: 'get_started/quickstart',
                   },
                   {
                     text: '安装',
-                    link: 'get_started/installation'
+                    link: 'get_started/installation',
                   },
                   {
                     text: '配置',
-                    link: 'get_started/setup'
+                    link: 'get_started/setup',
                   },
                 ],
               },
@@ -219,23 +219,23 @@ export default defineConfig({
                 items: [
                   {
                     text: '概念简述',
-                    link: 'tutorials/concepts'
+                    link: 'tutorials/concepts',
                   },
                   {
                     text: '智能体入门',
-                    link: 'tutorials/agent_101'
+                    link: 'tutorials/agent_101',
                   },
                   {
                     text: '多智能体入门',
-                    link: 'tutorials/multi_agent_101'
+                    link: 'tutorials/multi_agent_101',
                   },
                   {
                     text: '使用记忆',
-                    link: 'tutorials/use_memories'
+                    link: 'tutorials/use_memories',
                   },
                   {
                     text: '人类介入',
-                    link: 'tutorials/human_engagement'
+                    link: 'tutorials/human_engagement',
                   },
                 ],
               },
@@ -326,8 +326,8 @@ export default defineConfig({
             items: [
               {
                 text: 'Agents',
-                link: 'agents'
-              }
+                link: 'agents',
+              },
             ],
           },
           '/rfcs/': {
