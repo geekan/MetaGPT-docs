@@ -183,8 +183,8 @@ export default defineConfig({
           },
           {
             text: 'RFCs',
-            link: 'src/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: 'src/rfcs/',
+            link: 'rfcs/RFC-116-MetaGPT优化方案',
+            activeMatch: 'rfcs/',
           },
         ],
         sidebar: {
@@ -318,6 +318,24 @@ export default defineConfig({
               {
                 text: '常见问题解答',
                 link: 'faq',
+              },
+            ],
+          },
+          '/blog/': {
+            base: '/blog/',
+            items: [
+              {
+                text: 'Agents',
+                link: 'agents'
+              }
+            ],
+          },
+          '/rfcs/': {
+            base: '/rfcs/',
+            items: [
+              {
+                text: 'RFC-116-MetaGPT优化方案',
+                link: 'RFC-116-MetaGPT优化方案',
               },
             ],
           },
