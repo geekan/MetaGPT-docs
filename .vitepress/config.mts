@@ -183,8 +183,8 @@ export default defineConfig({
           },
           {
             text: 'RFCs',
-            link: 'rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: 'rfcs/',
+            link: '/rfcs/RFC-116-MetaGPT优化方案',
+            activeMatch: '/rfcs/',
           },
         ],
         sidebar: {
