@@ -27,6 +27,7 @@ export default {
         nextTick(() => {
           router.go(to.replace(matchs[1], '/'));
         });
+        return false;
       }
     };
     if (import.meta.env.PROD) {
