@@ -10,7 +10,7 @@
 
 ![A software company consists of LLM-based roles](/image/software_company_cd.jpg)
 
-<p align="center">Software Company Multi-Role Schematic (Gradually Implementing)</p>
+<p align="center">Software Company Multi-Role Schematic</p>
 
 ## MetaGPT's Abilities
 

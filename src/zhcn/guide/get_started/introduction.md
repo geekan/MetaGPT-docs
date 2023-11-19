@@ -10,7 +10,7 @@
 
 ![A software company consists of LLM-based roles](/image/software_company_cd.jpg)
 
-<p align="center">软件公司多角色示意图（正在逐步实现）</p>
+<p align="center">软件公司多角色示意图</p>
 
 ## MetaGPT的能力
 
