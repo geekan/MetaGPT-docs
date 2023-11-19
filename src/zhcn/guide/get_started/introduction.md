@@ -18,6 +18,8 @@
   <source src="https://github.com/geekan/MetaGPT/assets/34952977/34345016-5d13-489d-b9f9-b82ace413419" type="video/mp4">
 </video>
 
+MetaGPT从软件公司开始，但它的能力并不局限于此。你可以在自己的场景里使用这个多智能体框架来搭建属于自己的应用，具体的，你可以参考**示例**下的[调研员](../use_cases/agent/researcher)。让我们开始吧。
+
 ## 样例（由GPT-4生成）
 
 例如，如果你执行`python startup.py "Design a RecSys like Toutiao"`，将会得到包括数据类型&API设计在内的输出

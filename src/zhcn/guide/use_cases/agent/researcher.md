@@ -39,7 +39,7 @@
 
 以下是流程图：
 
-![Researcher Role设计架构图](/image/guide/use_cases/researcher-role-architecture-diagram-zh.png)
+![Researcher Role设计架构图](/image/guide/use_cases/researcher/researcher-role-architecture-diagram-zh.png)
 
 针对以上的流程，我们可以抽象出3个Action，定义一个Role，如下：
 

@@ -37,7 +37,7 @@ Consolidate all summarized content and track their sources.
 Finally, instruct GPT to generate the final research report based on the consolidated content.
 The following is a flowchart illustrating the Researcher role architecture:
 
-![Researcher Role Architecture Diagram](/image/guide/use_cases/researcher-role-architecture-diagram-en.png)
+![Researcher Role Architecture Diagram](/image/guide/use_cases/researcher/researcher-role-architecture-diagram-en.png)
 
 
 Based on this process, we can abstract three Actions and define a Role as follows:
