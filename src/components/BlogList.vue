@@ -2,7 +2,7 @@
   <div p22px>
     <div text-16px font-600>Articles</div>
     <div
-      v-for="Article of list"
+      v-for="Article of listSortByTime"
       py-16px
       flex="~ gap-16px"
       border="0 solid #E5E6EB b"
@@ -76,6 +76,12 @@ const { lang } = useData();
 const props = defineProps<{ list: Article[] }>();
 
 const list = toRef(props, 'list');
+
+const listSortByTime = computed<Article[]>(() => {
+  return [...list.value].sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+});
 
 const go = (url: string) => {
   if (url.startsWith('http')) {

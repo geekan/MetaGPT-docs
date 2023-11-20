@@ -151,3 +151,11 @@
     max-width: 1300px !important;
   }
 }
+
+html[lang='zhcn'] .VPHome .text {
+  line-height: 128px;
+}
+
+html[lang='zhcn'] .VPHome .tagline {
+  line-height: 72px;
+}
