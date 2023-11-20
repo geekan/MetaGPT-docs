@@ -5,7 +5,7 @@ layout: home
 hero:
   name: 'MetaGPT'
   text: '多智能体框架'
-  tagline: 使 GPTs 组成软件公司，协作处理更复杂的任务
+  tagline: 为了处理复杂任务，将不同的角色分配给GPT模型，形成一个协作性软件公司。
   image:
     light: /logo-dark.svg
     dark: /logo-light.svg
