@@ -112,6 +112,10 @@ export default defineConfig({
                     text: 'MultiAgent',
                     items: [
                       {
+                        text: 'Software Company',
+                        link: 'use_cases/multi_agent/software_company.md',
+                      },
+                      {
                         text: 'Debate',
                         link: 'use_cases/multi_agent/debate.md',
                       },
@@ -288,6 +292,10 @@ export default defineConfig({
                   {
                     text: '多智能体',
                     items: [
+                      {
+                        text: '软件公司',
+                        link: 'use_cases/multi_agent/software_company.md',
+                      },
                       {
                         text: '辩论',
                         link: 'use_cases/multi_agent/debate.md',
