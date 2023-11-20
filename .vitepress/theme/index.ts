@@ -20,16 +20,6 @@ export default {
     ];
   },
   enhanceApp({ app, router, siteData }) {
-    router.onBeforeRouteChange = (to) => {
-      const prefix = /(\/.*\/)(blog|rfcs)\//;
-      const matchs = prefix.exec(to);
-      if (matchs) {
-        nextTick(() => {
-          router.go(to.replace(matchs[1], '/'));
-        });
-        return false;
-      }
-    };
     if (import.meta.env.PROD) {
       app.use(VueGtag, {
         config: {

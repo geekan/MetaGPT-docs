@@ -10,3 +10,6 @@ cachegit
 cache
 temp
 node_modules
+
+src/*/blog
+src/*/rfcs

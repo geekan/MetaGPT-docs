@@ -1,7 +1,24 @@
 import { defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
-import { basename, dirname, resolve } from 'node:path';
+import { resolve } from 'node:path';
+import { existsSync, cpSync } from 'node:fs';
+
+const sources = ['blog', 'rfcs'];
+const dests = ['zhcn'];
+
+// route based on fs, so copy files when deploy
+if (process.env.NODE_ENV === 'production') {
+  for (const source of sources) {
+    for (const dest of dests) {
+      const sourceDir = resolve(__dirname, `../src/${source}`);
+      const destDir = resolve(__dirname, `../src/${dest}/${source}`);
+      if (!existsSync(destDir)) {
+        cpSync(sourceDir, destDir, { recursive: true });
+      }
+    }
+  }
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -178,13 +195,13 @@ export default defineConfig({
           },
           {
             text: '博客',
-            link: '/blog/agents',
-            activeMatch: '/blog/',
+            link: '/zhcn/blog/agents',
+            activeMatch: '/zhcn/blog/',
           },
           {
             text: 'RFCs',
-            link: '/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/rfcs/',
+            link: '/zhcn/rfcs/RFC-116-MetaGPT优化方案',
+            activeMatch: '/zhcn/rfcs/',
           },
         ],
         sidebar: {
@@ -321,8 +338,8 @@ export default defineConfig({
               },
             ],
           },
-          '/blog/': {
-            base: '/blog/',
+          '/zhcn/blog/': {
+            base: '/zhcn/blog/',
             items: [
               {
                 text: 'Agents',
@@ -330,8 +347,8 @@ export default defineConfig({
               },
             ],
           },
-          '/rfcs/': {
-            base: '/rfcs/',
+          '/zhcn/rfcs/': {
+            base: '/zhcn/rfcs/',
             items: [
               {
                 text: 'RFC-116-MetaGPT优化方案',
