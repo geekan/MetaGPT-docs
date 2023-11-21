@@ -178,7 +178,7 @@ curl -X POST http://localhost:11434/api/generate -d '{
 如 LLaMA-Factory、FastChat、vllm部署的openai兼容接口  
 
 **config/key.yaml**
-```
+```yaml
 OPENAI_API_BASE: "http://0.0.0.0:8000/v1"
 OPENAI_API_KEY: "sk-xxx"
 OPENAI_API_MODEL: "llama2-13b"
@@ -205,7 +205,7 @@ MetaGPT的prompt对输出有较强的结构要求，开源模型输出时，往�
 
 针对上述情况，我们增加了修复开源LLM输出的功能，具体的  
 **config/key.yaml**  
-```
+```yaml
 REPAIR_LLM_OUTPUT: true
 ```
 

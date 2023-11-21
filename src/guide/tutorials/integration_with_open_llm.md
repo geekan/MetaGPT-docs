@@ -178,7 +178,7 @@ Since the above deployment is an API interface, it takes effect by modifying the
 Such as LLaMA-Factory, FastChat, vllm openai compatible interface  
 
 **config/key.yaml**
-```
+```yaml
 OPENAI_API_BASE: "http://0.0.0.0:8000/v1"
 OPENAI_API_KEY: "sk-xxx"
 OPENAI_API_MODEL: "llama2-13b"
@@ -204,7 +204,7 @@ MetaGPT's prompt has strong structural requirements for output. It is often diff
 
 In response to the above situation, we have added the feature of repairing open source LLM output, specifically    
 **config/key.yaml**  
-```
+```yaml
 REPAIR_LLM_OUTPUT: true
 ```
 
