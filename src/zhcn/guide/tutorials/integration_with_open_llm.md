@@ -24,7 +24,7 @@
 仓库：https://github.com/hiyouga/LLaMA-Factory
 
 ##### 安装
-```
+```shell
 git clone https://github.com/hiyouga/LLaMA-Factory.git
 conda create -n llama_factory python=3.10
 conda activate llama_factory
@@ -39,14 +39,14 @@ pip install -r requirements.txt
 
 ##### 部署启动
 源模型启动
-```
+```shell
 python3 src/api_demo.py \
     --model_name_or_path meta-llama/Llama-2-13b-chat-hf \
     --template llama2 \
 ```
 
 加载合并lora产出启动
-```
+```shell
 python3 src/api_demo.py \
     --model_name_or_path path_to_llama2_model \
     --template llama2 \
@@ -61,7 +61,7 @@ python3 src/api_demo.py \
 具体的，可以看[API部署](https://github.com/hiyouga/LLaMA-Factory#api-demo)
 
 ##### 请求示例
-```
+```shell
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "gpt-3.5-turbo",
@@ -75,7 +75,7 @@ curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:applicatio
 仓库：https://github.com/lm-sys/FastChat
 
 ##### 安装
-```
+```shell
 pip3 install "fschat[model_worker,webui]"
 ```
 
@@ -96,7 +96,7 @@ pip3 install "fschat[model_worker,webui]"
 具体的，可以看[API部署](https://github.com/lm-sys/FastChat/blob/main/docs/openai_api.md)
 
 ##### 请求示例
-```
+```shell
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "gpt-3.5-turbo",
@@ -110,7 +110,7 @@ curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:applicatio
 仓库：https://github.com/vllm-project/vllm
 
 ##### 安装
-```
+```shell
 pip3 install vllm
 ```
 
@@ -120,7 +120,7 @@ pip3 install vllm
 常见的LLaMA、Llama2和中国的多数开源模型都支持，具体可看[模型列表](https://docs.vllm.ai/en/latest/models/supported_models.html)
 
 ##### 部署启动
-```
+```shell
 python3 -m vllm.entrypoints.openai.api_server \
     --model meta-llama/Llama-2-13b-hf \
     --served-model-name llama2-13b
@@ -129,7 +129,7 @@ python3 -m vllm.entrypoints.openai.api_server \
 具体的，可以看[API部署](https://docs.vllm.ai/en/latest/getting_started/quickstart.html#openai-compatible-server)
 
 ##### 请求示例
-```
+```shell
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "llama2-13b",
@@ -145,7 +145,7 @@ curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:applicatio
 该仓库不支持兼容openai api接口，后续MetaGPT会支持其本身提供的接口方式。
 
 ##### 安装
-```
+```shell
 curl https://ollama.ai/install.sh | sh
 ```
 
@@ -155,7 +155,7 @@ curl https://ollama.ai/install.sh | sh
 主要支持Llama2及其衍生系列，具体可看[模型列表](https://github.com/jmorganca/ollama#model-library)
 
 ##### 部署启动
-```
+```shell
 ollama run llama2
 ```
 
@@ -164,7 +164,7 @@ llama2[使用文档](https://ollama.ai/library/llama2)
 具体的，可以看[API部署](https://github.com/jmorganca/ollama/blob/main/docs/api.md)
 
 ##### 请求示例
-```
+```shell
 curl -X POST http://localhost:11434/api/generate -d '{
   "model": "llama2",
   "prompt":"Why is the sky blue?"
@@ -178,7 +178,7 @@ curl -X POST http://localhost:11434/api/generate -d '{
 如 LLaMA-Factory、FastChat、vllm部署的openai兼容接口  
 
 **config/key.yaml**
-```config/key.yaml
+```
 OPENAI_API_BASE: "http://0.0.0.0:8000/v1"
 OPENAI_API_KEY: "sk-xxx"
 OPENAI_API_MODEL: "llama2-13b"

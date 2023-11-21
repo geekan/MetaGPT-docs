@@ -24,7 +24,7 @@ Note that by default you have graphics card resources for deployment, otherwise 
 Repo: https://github.com/hiyouga/LLaMA-Factory
 
 ##### Installation
-```
+```shell
 git clone https://github.com/hiyouga/LLaMA-Factory.git
 conda create -n llama_factory python=3.10
 conda activate llama_factory
@@ -39,14 +39,14 @@ The common LLaMA, Llama2 and most open source models in China are supported. For
 
 ##### Deployment
 Source model launching
-```
+```shell
 python3 src/api_demo.py \
     --model_name_or_path meta-llama/Llama-2-13b-chat-hf \
-    --template llama2 \
+    --template llama2
 ```
 
 Loading and merging lora output launching
-```
+```shell
 python3 src/api_demo.py \
     --model_name_or_path path_to_llama2_model \
     --template llama2 \
@@ -61,7 +61,7 @@ Different models support different `template` value, which can be found from `sr
 For details, please see [API Deployment](https://github.com/hiyouga/LLaMA-Factory#api-demo)
 
 ##### Request example
-```
+```shell
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "gpt-3.5-turbo",
@@ -75,7 +75,7 @@ By default, the requested `model` parameter value is `gpt-3.5-turbo`, if necessa
 Repo: https://github.com/lm-sys/FastChat
 
 ##### Installation
-```
+```shell
 pip3 install "fschat[model_worker,webui]"
 ```
 
@@ -96,7 +96,7 @@ If you need to start the lora fine-tuned model, you need to do [model merge](htt
 For details, please see [API Deployment](https://github.com/lm-sys/FastChat/blob/main/docs/openai_api.md)
 
 ##### Request example
-```
+```shell
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "gpt-3.5-turbo",
@@ -110,7 +110,7 @@ By default, the requested `model` parameter value is `vicuna`, which corresponds
 Repo: https://github.com/vllm-project/vllm
 
 ##### Installation
-```
+```shell
 pip3 install vllm
 ```
 
@@ -120,7 +120,7 @@ For details, please see [Installation](https://docs.vllm.ai/en/latest/getting_st
 The common LLaMA, Llama2 and most open source models in China are supported. For details, please see [Model List](https://docs.vllm.ai/en/latest/models/supported_models.html)
 
 ##### Deployment
-```
+```shell
 python3 -m vllm.entrypoints.openai.api_server \
     --model meta-llama/Llama-2-13b-hf \
     --served-model-name llama2-13b
@@ -129,7 +129,7 @@ python3 -m vllm.entrypoints.openai.api_server \
 For details, please see [API Deployment](https://docs.vllm.ai/en/latest/getting_started/quickstart.html#openai-compatible-server)
 
 ##### Request example
-```
+```shell
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "llama2-13b",
@@ -145,7 +145,7 @@ Repo: https://github.com/jmorganca/ollama
 This repo is not compatible with the openai api interface. MetaGPT will support the interface provided by itself in the future.
 
 ##### Installation
-```
+```shell
 curl https://ollama.ai/install.sh | sh
 ```
 
@@ -155,7 +155,7 @@ For details, please see [Installation](https://github.com/jmorganca/ollama/blob/
 Mainly supports Llama2 and its derivative series, please see [Model List](https://github.com/jmorganca/ollama#model-library) for details
 
 ##### Deployment
-```
+```shell
 ollama run llama2
 ```
 
@@ -164,7 +164,7 @@ llama2[Usage documentation](https://ollama.ai/library/llama2)
 For details, please see [API deployment](https://github.com/jmorganca/ollama/blob/main/docs/api.md)
 
 ##### Request example
-```
+```shell
 curl -X POST http://localhost:11434/api/generate -d '{
   "model": "llama2",
   "prompt":"Why is the sky blue?"
@@ -178,7 +178,7 @@ Since the above deployment is an API interface, it takes effect by modifying the
 Such as LLaMA-Factory, FastChat, vllm openai compatible interface  
 
 **config/key.yaml**
-```config/key.yaml
+```
 OPENAI_API_BASE: "http://0.0.0.0:8000/v1"
 OPENAI_API_KEY: "sk-xxx"
 OPENAI_API_MODEL: "llama2-13b"
