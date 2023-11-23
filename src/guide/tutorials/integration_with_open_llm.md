@@ -179,12 +179,11 @@ Such as LLaMA-Factory, FastChat, vllm openai compatible interface
 
 **config/key.yaml**
 ```yaml
-OPENAI_API_BASE: "http://0.0.0.0:8000/v1"
-OPENAI_API_KEY: "sk-xxx"
-OPENAI_API_MODEL: "llama2-13b"
+OPEN_LLM_API_BASE: "http://106.75.10.65:8001/v1"
+OPEN_LLM_API_MODEL: "llama2-13b"
 ```
 
-The complete routing of the openapi interface `http://0.0.0.0:8000/v1/chat/completions`, `OPENAI_API_BASE` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `OPENAI_API_KEY` needs to be set to any value starting with `sk-`. `OPENAI_API_MODEL` is the actual value of the request interface parameter `model`.
+The complete routing of the openapi interface `http://0.0.0.0:8000/v1/chat/completions`, `OPEN_LLM_API_BASE` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `OPEN_LLM_API_MODEL` is the actual value of the request interface parameter `model`.
 
 #### ollama api interface
 

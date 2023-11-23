@@ -179,12 +179,11 @@ curl -X POST http://localhost:11434/api/generate -d '{
 
 **config/key.yaml**
 ```yaml
-OPENAI_API_BASE: "http://0.0.0.0:8000/v1"
-OPENAI_API_KEY: "sk-xxx"
-OPENAI_API_MODEL: "llama2-13b"
+OPEN_LLM_API_BASE: "http://106.75.10.65:8001/v1"
+OPEN_LLM_API_MODEL: "llama2-13b"
 ```
 
-openapi接口的完整路由`http://0.0.0.0:8000/v1/chat/completions`，`OPENAI_API_BASE`只需要配置到`http://0.0.0.0:8000/v1` ，剩余部分openai sdk会补齐。`OPENAI_API_KEY`需要设置为以`sk-`开头的任意值。`OPENAI_API_MODEL`为请求接口参数`model`的实际值。
+openapi接口的完整路由`http://0.0.0.0:8000/v1/chat/completions`，`OPEN_LLM_API_BASE`只需要配置到`http://0.0.0.0:8000/v1` ，剩余部分openai sdk会补齐。`OPEN_LLM_API_MODEL`为请求接口参数`model`的实际值。
 
 
 #### ollama api接口
