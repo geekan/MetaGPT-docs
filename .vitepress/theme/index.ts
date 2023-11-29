@@ -1,19 +1,19 @@
 // https://vitepress.dev/guide/custom-theme
 import { h } from 'vue';
 import type { Theme } from 'vitepress';
-import DefaultTheme from 'vitepress/theme';
+// import DefaultTheme from 'vitepress/theme';
 import { useData } from 'vitepress';
 import ImageModel from '../../src/components/imgmodel.vue';
 import './style.css';
 import 'uno.css';
 import VueGtag, { pageview } from 'vue-gtag';
+import DefaultTheme from './Layout.vue';
 
 export default {
-  extends: DefaultTheme,
   Layout: () => {
     const { lang } = useData();
     return [
-      h(DefaultTheme.Layout, null, {
+      h(DefaultTheme, null, {
         // https://vitepress.dev/guide/extending-default-theme#layout-slots
       }),
       h(ImageModel),

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@iconify/json": "^2.2.137",
+    "@types/dom-view-transitions": "^1.0.4",
     "@types/node": "^20.8.10",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vueuse/core": "^10.6.1",
