@@ -191,25 +191,25 @@ assert m.send_to == any_to_str_set({"b", Action})
 
 1. `r1`发消息给所有`Werewolf`类对象：
 ```Python
-env.publish_message(Message(content="...", msg_to=Werewolf))
+env.publish_message(Message(content="...", send_to=Werewolf))
 ```
   这里的`Werewolf`用的就是`Role`类的类名做标签。这个消息的接收者是所有的`Werewolf`类对象。
 
 2. `r1`发消息给`c`和所有`Villager`类对象：
 ```Python
-env.publish_message(Message(content="...", msg_to={Villager, "c"}))
+env.publish_message(Message(content="...", send_to={Villager, "c"}))
 ```
 这里的`Villager`是`Role`类的类名标签，`c`是`Role`对象`r3`的`name`属性。这个消息的接收者是所有`Villager`类对象，以及`name`属性为`c`的`Role`对象`r3`。
 
 3. `r1`发消息给所有对象: 
 ```Python
-env.publish_message(Message(content="...", msg_to="<all>"))
+env.publish_message(Message(content="...", send_to="<all>"))
 ```
   这个消息的接收者为所有群成员。
 
 6. `r1`发消息给`c`, `d`, `e`: 
 ```Python
-env.publish_message(Message(content="...", msg_to={"c", "d", "e"}))
+env.publish_message(Message(content="...", send_to={"c", "d", "e"}))
 ```
 这个消息的接收者为`r3`、`r4`、`r5`。
 </td></tr>
