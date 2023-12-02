@@ -18,7 +18,7 @@
 
 ## 角色定义
 
-1. 定义角色类，继承 `Role` 基类，重写 `__init__` 初始化方法。`__init__` 方法必须包含`name`、`profile`、`goal`、`constraints` 参数。第一行代码使用`super().__init__(name, profile, goal, constraints)` 调用父类的构造函数，实现 `Role` 的初始化。使用 `self._init_actions([WriteDirectory(language=language)])` 添加初始的 `action` 和 `states`，这里先添加写目录的 `action`。同时，也可以自定义参数，这里加了 `language` 参数支持自定义语言。
+1. 定义角色类，继承 `Role` 基类，重写 `__init__` 初始化方法。`__init__` 方法必须包含`name`、`profile`、`goal`、`constraints` 参数。第一行代码使用`super().__init__(name, profile, goal, constraints)` 调用父类的构造函数，实现 `Role` 的初始化。使用 `self._init_actions([WriteDirectory(language=language)])` 添加初始的 `action` 和 `states`，这里先添加写目录的 `action`。同时，也可以自定义参数，这里加了 `language` 参数支持自定义语言。使用`self._set_react_mode(react_mode="by_order")` 将 `_init_actions` 的 `action` 执行顺序设置为顺序。
 
    ```python
    class TutorialAssistant(Role):
@@ -46,43 +46,20 @@
            self.main_title = ""
            self.total_content = ""
            self.language = language
+           self._set_react_mode(react_mode="by_order")
    ```
 
-2. 重写 `_react` 方法。`_react` 方法循环执行 `think` 和 `action` 操作，当没有下一步 `action` 去 `todo` 时就结束循环。执行完所有的 `action` 后可以做最后的操作，这里是把拼接完的教程内容写成markdown文件。
+2. 重写 `react` 方法。使用 `await super().react()` 调用 `Role` 基类的 `react` 方法，根据 `__init__` 初始化方法设置的 `react_mode="by_order"` 按顺序执行 `states` 的每一个 `action` 。这里重写的目的是为了执行完所有的 `action` 后可以做最后的操作，即把拼接完的教程内容写成 `markdown` 文件。
 
    ```python
-   async def _react(self) -> Message:
-       """Execute the assistant's think and actions.
-       
-       Returns:
-       	A message containing the final result of the assistant's actions.
-       """
-       while True:
-           await self._think()
-           if self._rc.todo is None:
-               break
-       	msg = await self._act()
+   async def react(self) -> Message:
+       msg = await super().react()
        root_path = TUTORIAL_PATH / datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
        await File.write(root_path, f"{self.main_title}.md", self.total_content.encode('utf-8'))
        return msg
    ```
 
-3. 重写 `_think `方法，`_think` 方法是思考下一步的执行。如果 `todo` 为空，即没有下一步操作要执行，则设置 `state` 为 `0` 。如果执行下一步后 `state` 会超出了初始化的 `states` 长度，说明目前已经是最后一步了，将 `todo` 设为空使得在 `_react` 方法会跳出循环，不再执行 `think` 和 `action`，否则 `state` 加 `1` 记录。
-
-   ```python
-   async def _think(self) -> None:
-       """Determine the next action to be taken by the role."""
-       if self._rc.todo is None:
-           self._set_state(0)
-           return
-   
-       if self._rc.state + 1 < len(self._states):
-           self._set_state(self._rc.state + 1)
-       else:
-           self._rc.todo = None
-   ```
-
-4. 重写 `_act` 方法，`_act` 方法是执行 `action`。使用 `todo = self._rc.todo` 从上下文获取下一步要执行的 `action`，再执行 `action` 的 `run` 方法。这里是先通过 `WriteDirectory` 获取教程的目录结构，再分块目录，每块生成一个 `WriteContent` 的 `action`，再初始化新添加的 `action`。每个 action 执行完的结果生成消息 `Message(content=resp, role=self.profile)`，可以将其放入上下文内存 `self._rc.memory`，该角色不需要存入。
+3. 重写 `_act` 方法，`_act` 方法是执行 `action`。使用 `todo = self._rc.todo` 从上下文获取下一步要执行的 `action`，再执行 `action` 的 `run` 方法。这里是先通过 `WriteDirectory` 获取教程的目录结构，再分块目录，每块生成一个 `WriteContent` 的 `action`，再初始化新添加的 `action`。这里再次调用 `await super().react()` 是为了从头执行新添加的所有 `WriteContent` `action`。每个 action 执行完的结果生成消息 `Message(content=resp, role=self.profile)`，可以将其放入上下文内存 `self._rc.memory`，该角色不需要存入。
 
    ```python
    async def _act(self) -> Message:
@@ -97,7 +74,8 @@
            self.topic = msg.content
            resp = await todo.run(topic=self.topic)
            logger.info(resp)
-           return await self._handle_directory(resp)
+           await self._handle_directory(resp)
+           return await super().react()
        resp = await todo.run(topic=self.topic)
        logger.info(resp)
        if self.total_content != "":
@@ -126,10 +104,7 @@
            for second_dir in first_dir[key]:
                directory += f"  - {second_dir}\n"
        self._init_actions(actions)
-       self._rc.todo = None
-       return Message(content=directory)
    ```
-
 
 
 ## Action定义
