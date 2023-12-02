@@ -1,24 +1,23 @@
 # Tutorial Assistant: Generate technology tutorial
 
-### Role Introduction
+## Role Introduction
 
-#### Function Description
+### Function Description
 
 Generate a technical tutorial document based on a single sentence input, with support for custom languages.
 
-#### Design Concept
+### Design Concept
 
 The design approach involves using the `LLM` (Large Language Model) to initially generate the tutorial's outline. Then, the outline is divided into sections based on secondary headings. For each section, detailed content is generated according to the headings. Finally, the titles and content are concatenated. The use of sections addresses the limitation of long text in the `LLM` model.
 
-#### Source Code
+### Source Code
 
 [GitHub Source Code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/tutorial_assistant.py)
 
 
+## Role Definition
 
-### Role Definition
-
-1. Define a role class, inherit from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include `name`, `profile`, `goal`, `constraints` parameters. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, initializing the `Role`. Use `self._init_actions([WriteDirectory(language=language)])` to add initial `action` and `states`, here adding the action to write the directory. Custom parameters can also be added; here, the `language` parameter is added to support custom languages.
+1. Define the role class, inheriting from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include the parameters `name`, `profile`, `goal`, and `constraints`. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, initializing the `Role`. Use `self._init_actions([WriteDirectory(language=language)])` to add initial `action` and `states`. Here, the write directory action is added initially. Additionally, custom parameters can be defined; here, the `language` parameter is added to support custom languages. Use `self._set_react_mode(react_mode="by_order")` to set the execution order of actions in `_init_actions` to sequential.
 
    ```python
    class TutorialAssistant(Role):
@@ -46,58 +45,31 @@ The design approach involves using the `LLM` (Large Language Model) to initially
            self.main_title = ""
            self.total_content = ""
            self.language = language
+           self._set_react_mode(react_mode="by_order")
    ```
 
-2. Override the `_react` method. The `_react` method loops through think and action operations. When there is no next action to be done (`todo` is None), the loop ends. After executing all actions, the final operation can be performed, here writing the concatenated tutorial content into a markdown file.
+2. Override the `react` method. Use `await super().react()` to call the `react` method of the `Role` base class. According to the `react_mode="by_order"` set in the `__init__` method, execute each `action` in `states` in order. The purpose of overriding here is to perform final operations after completing all actions, i.e., writing the concatenated tutorial content into a `markdown` file.
 
    ```python
-   async def _react(self) -> Message:
-       """Execute the assistant's think and actions.
-       
-       Returns:
-           A message containing the final result of the assistant's actions.
-       """
-       while True:
-           await self._think()
-           if self._rc.todo is None:
-               break
-           msg = await self._act()
+   async def react(self) -> Message:
+       msg = await super().react()
        root_path = TUTORIAL_PATH / datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
        await File.write(root_path, f"{self.main_title}.md", self.total_content.encode('utf-8'))
        return msg
    ```
 
-3. Override the `_think `method. The `_think` method is used to consider the next execution step. If `todo` is empty, indicating no next operation to be executed, set `state` to `0`. If executing the next step would exceed the length of the initialized `states`, indicating that it is currently the last step, set `todo` to None to exit the loop in the `_react` method and stop executing think and action; otherwise, increment `state` by `1`.
-
-   ```python
-   async def _think(self) -> None:
-       """Determine the next action to be taken by the role."""
-       if self._rc.todo is None:
-           self._set_state(0)
-           return
-       
-       if self._rc.state + 1 < len(self._states):
-           self._set_state(self._rc.state + 1)
-       else:
-           self._rc.todo = None
-   ```
-
-4. Override the `_act` method. The `_act` method is the execution of an `action`. Use `todo = self._rc.todo` to get the next `action` to be executed from the context, then execute the `run` method of the `action`. Here, first get the directory structure of the tutorial through `WriteDirectory`, then chunk the directory. For each chunk, generate a `WriteContent` action, then initialize the newly added `action`. The result of each `action` is used to generate a message `Message(content=resp, role=self.profile)`, which can be placed in the context memory `self._rc.memory`. This role does not need to be stored.
+3. Override the `_act` method. The `_act` method is responsible for executing the `action`. Use `todo = self._rc.todo` to get the next `action` to be executed from the context, and then execute the `run` method of the `action`. Here, it first obtains the tutorial directory structure through `WriteDirectory`, then chunks the directory, generates a `WriteContent` action for each chunk, and initializes the newly added action. Here, calling `await super().react()` again is to execute all the newly added `WriteContent` actions from the beginning. The result of each action is used to generate a message `Message(content=resp, role=self.profile)`, which can be placed in the context memory `self._rc.memory`. This role does not need to be stored.
 
    ```python
    async def _act(self) -> Message:
-       """Perform an action as determined by the role.
-   
-       Returns:
-           A message containing the result of the action.
-       """
        todo = self._rc.todo
        if type(todo) is WriteDirectory:
            msg = self._rc.memory.get(k=1)[0]
            self.topic = msg.content
            resp = await todo.run(topic=self.topic)
            logger.info(resp)
-           return await self._handle_directory(resp)
+           await self._handle_directory(resp)
+           return await super().react()
        resp = await todo.run(topic=self.topic)
        logger.info(resp)
        if self.total_content != "":
@@ -111,7 +83,7 @@ The design approach involves using the `LLM` (Large Language Model) to initially
        Args:
            titles: A dictionary containing the titles and directory structure,
                    such as {"title": "xxx", "directory": [{"dir 1": ["sub dir 1", "sub dir 2"]}]}
-   
+       
        Returns:
            A message containing information about the directory.
        """
@@ -126,13 +98,10 @@ The design approach involves using the `LLM` (Large Language Model) to initially
            for second_dir in first_dir[key]:
                directory += f"  - {second_dir}\n"
        self._init_actions(actions)
-       self._rc.todo = None
-       return Message(content=directory)
    ```
 
 
-
-### Action Definition
+## Action Definition
 
 1. Define an `action`, where each `action` corresponds to a `class` object. Inherit from the `Action` base class and override the `__init__` initialization method. The `__init__` method includes the `name` parameter. The first line of code uses `super().__init__(name, *args, **kwargs)` to call the constructor of the parent class, initializing the `action`. Here, use `args` and `kwargs` to pass other parameters to the parent class constructor, such as `context` and `llm`.
 
@@ -215,19 +184,19 @@ The design approach involves using the `LLM` (Large Language Model) to initially
 
 
 
-### Role Execution Results
+## Role Execution Results
 
-#### Input Examples
+### Input Examples
 
 - `MySQL` Tutorial
 - `Redis` Tutorial
 - `Hive` Tutorial
 
-#### Execution Command Examples
+### Execution Command Examples
 
 Provide corresponding execution command examples.
 
-#### Execution Results
+### Execution Results
 
 The generated tutorial documents are located in the project's `/data/tutorial_docx` directory. Screenshots are provided below:
 
@@ -237,7 +206,7 @@ The generated tutorial documents are located in the project's `/data/tutorial_do
 
 
 
-### Note
+## Note
 
 This role currently does not support internet search capabilities. Content generation relies on data trained by the `LLM` large model.
 
