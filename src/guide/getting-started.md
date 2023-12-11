@@ -218,21 +218,6 @@ metagpt "Write a cli snake game based on pygame"
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-### Code walkthrough
-
-```python
-from metagpt.software_company import SoftwareCompany
-from metagpt.roles import ProjectManager, ProductManager, Architect, Engineer
-
-async def startup(idea: str, investment: float = 3.0, n_round: int = 5):
-    """Run a startup. Be a boss."""
-    company = SoftwareCompany()
-    company.hire([ProductManager(), Architect(), ProjectManager(), Engineer()])
-    company.invest(investment)
-    company.start_project(idea)
-    await company.run(n_round=n_round)
-```
-
 You can check `examples` for more details on single role (with knowledge base) and LLM only examples.
 
 ## QuickStart
@@ -247,7 +232,7 @@ Try it on Huggingface Space
 
 ## Citation
 
-For now, cite the [Arxiv paper](https://arxiv.org/abs/2308.00352):
+For now, cite the [arXiv paper](https://arxiv.org/abs/2308.00352):
 
 ```bibtex
 @misc{hong2023metagpt,
