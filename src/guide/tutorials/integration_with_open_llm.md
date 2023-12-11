@@ -213,7 +213,7 @@ If you enable this function, it means that the LLM output (ProductManager and Ar
 
 ## Run
 After following the above process, you can start using it officially.    
-`python3 startup.py "write a snake game"`
+`metagpt "write a snake game"`
 
 ### Extension
 MetaGPT itself is a multi-agent framework and is not limited to software project generation. You can also combine the integrated open source model to build the corresponding agent for use in your own application scenarios.  

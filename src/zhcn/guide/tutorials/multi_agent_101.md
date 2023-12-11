@@ -7,7 +7,7 @@
 
 ## 运行“软件公司”示例
 ```shell
-python startup.py --idea "write a function that calculates the product of a list",
+metagpt --idea "write a function that calculates the product of a list"
 ```
 
 ## 开发你的第一个智能体团队

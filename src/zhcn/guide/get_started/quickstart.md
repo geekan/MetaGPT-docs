@@ -17,9 +17,9 @@ os.environ["OPENAI_API_MODEL"] = "gpt-4"
 ## 一句话需求的软件开发
 >注意：
 >
->下面为 [software startup example](https://github.com/geekan/MetaGPT/blob/main/startup.py) 的节选。如果你使用`git clone`方法进行安装，只需简单执行
+>下面为 [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py) 的节选。如果你使用`git clone`方法进行安装，只需简单执行
 >```
->python startup.py --idea "write a cli blackjack game"
+>metagpt --idea "write a cli blackjack game"
 >```
 现在，让我们开始吧！我们将创建一个多智能体团队，根据我们的一句话需求编写软件。
 

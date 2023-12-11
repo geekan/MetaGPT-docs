@@ -47,7 +47,7 @@ docker run --rm \
     -v /opt/metagpt/config/key.yaml:/app/metagpt/config/key.yaml \
     -v /opt/metagpt/workspace:/app/metagpt/workspace \
     metagpt/metagpt:latest \
-    python3 startup.py "Write a cli snake game"
+    metagpt "Write a cli snake game"
 
 # You can also start a container and execute commands in it
 docker run --name metagpt -d \
@@ -57,7 +57,7 @@ docker run --name metagpt -d \
     metagpt/metagpt:latest
 
 docker exec -it metagpt /bin/bash
-$ python3 startup.py "Write a cli snake game"
+$ metagpt "Write a cli snake game"
 ```
 
 The command `docker run ...` do the following things:
@@ -65,7 +65,7 @@ The command `docker run ...` do the following things:
 - Run in privileged mode to have permission to run the browser
 - Map host configure file `/opt/metagpt/config/key.yaml` to container `/app/metagpt/config/key.yaml`
 - Map host directory `/opt/metagpt/workspace` to container `/app/metagpt/workspace`
-- Execute the demo command `python3 startup.py "Write a cli snake game"`
+- Execute the demo command `metagpt "Write a cli snake game"`
 
 ### Build image by yourself
 
@@ -77,7 +77,7 @@ cd MetaGPT && docker build -t metagpt:custom .
 
 
 ## Installation for full features
-This is relevant if you want to generate diagrams such as quadrant chart, system designs, sequence flow, etc. They are provided as intermediate results if you run the [software startup example](https://github.com/geekan/MetaGPT/blob/main/startup.py).
+This is relevant if you want to generate diagrams such as quadrant chart, system designs, sequence flow, etc. They are provided as intermediate results if you run the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py).
 ### Mermaid
 Mermaid is a language that uses text to generate flowcharts, pie charts, Gantt charts, and other diagrams. MetaGPT uses Mermaid to create flowcharts, sequence diagrams, Gantt charts, etc. Mermaid is implemented in Node.js, and direct installation can be somewhat costly. MetaGPT provides the following Mermaid Engines to convert Mermaid text into diagrams:
 

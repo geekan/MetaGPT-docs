@@ -1,7 +1,10 @@
 
 # 安装
+
 我们提供了几种安装MetaGPT的方式，请选择最适合你的方式。
+
 ## 支持的系统和版本
+
 | 系统版本 | Python版本  |  是否支持  |
 |      ----      |     ----        |   -----   |
 |   macOS 13.x   |    python 3.9   |    是    |
@@ -12,19 +15,23 @@
 ```
 python3 --version
 ```
+
 ## 安装稳定版本
+
 推荐大多数用户使用。你可以像使用任何python包一样导入MetaGPT，使用各种内置角色或团队，并构建自己的智能体来服务各种应用。
 ```
 pip install metagpt
 ```
 
 ## 安装最新的开发版本
+
 最适合体验最新功能的用户。
 ```
 pip install git+https://github.com/geekan/MetaGPT
 ```
 
 ## 以开发模式安装
+
 推荐给那些想要根据自己的独特需求定制框架、尝试新的想法或者利用框架创建复杂功能（如新颖的记忆机制）的开发者和研究者。
 ```
 git clone https://github.com/geekan/MetaGPT.git
@@ -33,6 +40,7 @@ pip install -e .
 ```
 
 ## 使用Docker安装
+
 ### 使用默认的MetaGPT镜像
 
 ```bash
@@ -48,7 +56,7 @@ docker run --rm \
     -v /opt/metagpt/config/key.yaml:/app/metagpt/config/key.yaml \
     -v /opt/metagpt/workspace:/app/metagpt/workspace \
     metagpt/metagpt:latest \
-    python3 startup.py "Write a cli snake game"
+    metagpt "Write a cli snake game"
 
 # 你也可以启动一个容器并在其中执行命令
 docker run --name metagpt -d \
@@ -58,7 +66,7 @@ docker run --name metagpt -d \
     metagpt/metagpt:latest
 
 docker exec -it metagpt /bin/bash
-$ python3 startup.py "Write a cli snake game"
+$ metagpt "Write a cli snake game"
 ```
 
 `docker run ...`命令做了以下事情：
@@ -66,7 +74,7 @@ $ python3 startup.py "Write a cli snake game"
 - 以特权模式运行，以获得运行浏览器的权限
 - 将主机配置文件`/opt/metagpt/config/key.yaml`映射到容器`/app/metagpt/config/key.yaml`
 - 将主机目录`/opt/metagpt/workspace`映射到容器`/app/metagpt/workspace`
-- 执行demo命令`python3 startup.py "Write a cli snake game"`
+- 执行demo命令`metagpt "Write a cli snake game"`
 
 ### 自行构建镜像
 
@@ -78,8 +86,11 @@ cd MetaGPT && docker build -t metagpt:custom .
 
 
 ## 安装全部功能
-如果你想生成一些图表，比如象限图，系统设计图，顺序流程图等，这非常有用。如果你运行[软件启动示例](https://github.com/geekan/MetaGPT/blob/main/startup.py)，它们将作为中间结果提供给你。
+
+如果你想生成一些图表，比如象限图，系统设计图，顺序流程图等，这非常有用。如果你运行[软件启动示例](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py)，它们将作为中间结果提供给你。
+
 ### Mermaid
+
 Mermaid是一种使用文本生成流程图、饼图、甘特图和其他图表的语言。MetaGPT使用Mermaid创建流程图、序列图和甘特图等图表。Mermaid是在Node.js中实现的，直接安装可能有些昂贵。MetaGPT提供以下Mermaid引擎将Mermaid文本转换为图表：
 
 **nodejs**

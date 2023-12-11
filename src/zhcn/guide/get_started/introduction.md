@@ -22,7 +22,7 @@ MetaGPT从软件公司开始，但它的能力并不局限于此。你可以在�
 
 ## 样例（由GPT-4生成）
 
-例如，如果你执行`python startup.py "Design a RecSys like Toutiao"`，将会得到包括数据类型&API设计在内的输出
+例如，如果你执行`metagpt "Design a RecSys like Toutiao"`，将会得到包括数据类型&API设计在内的输出
 
 ![Jinri Toutiao Recsys Data & API Design](/image/data_api_design.png)
 

@@ -214,7 +214,7 @@ REPAIR_LLM_OUTPUT: true
 
 ## 运行使用
 按上述流程执行后，你就可以开始正式使用了。  
-`python3 startup.py "write a snake game"`
+`metagpt "write a snake game"`
 
 ### 延伸
 MetaGPT本身是一个多智能体框架，不局限于软件项目生成。你也可以结合集成的开源模型在自己的应用场景中构建对应的智能体进行使用。  

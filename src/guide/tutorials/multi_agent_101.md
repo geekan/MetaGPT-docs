@@ -7,7 +7,7 @@ After this tutorial, you will be able to:
 
 ## Run the software startup example
 ```shell
-python startup.py --idea "write a cli flappy bird game"
+metagpt --idea "write a cli flappy bird game"
 ```
 
 ## Develop your first team of agents

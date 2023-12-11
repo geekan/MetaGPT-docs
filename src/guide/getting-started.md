@@ -125,7 +125,7 @@ docker run --rm \
     -v /opt/metagpt/config/key.yaml:/app/metagpt/config/key.yaml \
     -v /opt/metagpt/workspace:/app/metagpt/workspace \
     metagpt/metagpt:latest \
-    python startup.py "Write a cli snake game"
+    metagpt "Write a cli snake game"
 
 # You can also start a container and execute commands in it
 docker run --name metagpt -d \
@@ -135,7 +135,7 @@ docker run --name metagpt -d \
     metagpt/metagpt:latest
 
 docker exec -it metagpt /bin/bash
-$ python startup.py "Write a cli snake game"
+$ metagpt "Write a cli snake game"
 ```
 
 The command `docker run ...` do the following things:
@@ -143,7 +143,7 @@ The command `docker run ...` do the following things:
 - Run in privileged mode to have permission to run the browser
 - Map host configure file `/opt/metagpt/config/key.yaml` to container `/app/metagpt/config/key.yaml`
 - Map host directory `/opt/metagpt/workspace` to container `/app/metagpt/workspace`
-- Execute the demo command `python startup.py "Write a cli snake game"`
+- Execute the demo command `metagpt "Write a cli snake game"`
 
 ### Build image by yourself
 
@@ -172,11 +172,11 @@ cp config/config.yaml config/key.yaml
 
 ```shell
 # Run the script
-python startup.py "Write a cli snake game"
+metagpt "Write a cli snake game"
 # Do not hire an engineer to implement the project
-python startup.py "Write a cli snake game" --implement False
+metagpt "Write a cli snake game" --no-implement
 # Hire an engineer and perform code reviews
-python startup.py "Write a cli snake game" --code_review True
+metagpt "Write a cli snake game" --code_review
 ```
 
 After running the script, you can find your new project in the `workspace/` directory.
@@ -186,37 +186,36 @@ After running the script, you can find your new project in the `workspace/` dire
 You can tell which platform or tool you want to use when stating your requirements.
 
 ```shell
-python startup.py "Write a cli snake game based on pygame"
+metagpt "Write a cli snake game based on pygame"
 ```
 
 ### Usage
 
 ```
-NAME
-    startup.py - We are a software startup comprised of AI. By investing in us, you are empowering a future filled with limitless possibilities.
-
-SYNOPSIS
-    startup.py IDEA <flags>
-
-DESCRIPTION
-    We are a software startup comprised of AI. By investing in us, you are empowering a future filled with limitless possibilities.
-
-POSITIONAL ARGUMENTS
-    IDEA
-        Type: str
-        Your innovative idea, such as "Creating a snake game."
-
-FLAGS
-    --investment=INVESTMENT
-        Type: float
-        Default: 3.0
-        As an investor, you have the opportunity to contribute a certain dollar amount to this AI company.
-    --n_round=N_ROUND
-        Type: int
-        Default: 5
-
-NOTES
-    You can also use flags syntax for POSITIONAL ARGUMENTS
+ Usage: metagpt [OPTIONS] IDEA                                                                                                                                                                                            
+                                                                                                                                                                                                                          
+ Run a startup. Be a boss.                                                                                                                                                                                                
+                                                                                                                                                                                                                          
+╭─ Arguments ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ *    idea      TEXT  Your innovative idea, such as 'Create a 2048 game.' [default: None] [required]                                                                                                                    │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --investment                                     FLOAT                            Dollar amount to invest in the AI company. [default: 3.0]                                                                            │
+│ --n-round                                        INTEGER                          Number of rounds for the simulation. [default: 5]                                                                                    │
+│ --code-review                --no-code-review                                     Whether to use code review. [default: code-review]                                                                                   │
+│ --run-tests                  --no-run-tests                                       Whether to enable QA for adding & running tests. [default: no-run-tests]                                                             │
+│ --implement                  --no-implement                                       Enable or disable code implementation. [default: implement]                                                                          │
+│ --project-name                                   TEXT                             Unique project name, such as 'game_2048'.                                                                                            │
+│ --inc                        --no-inc                                             Incremental mode. Use it to coop with existing repo. [default: no-inc]                                                               │
+│ --project-path                                   TEXT                             Specify the directory path of the old version project to fulfill the incremental requirements.                                       │
+│ --reqa-file                                      TEXT                             Specify the source file name for rewriting the quality test code.                                                                    │
+│ --max-auto-summarize-code                        INTEGER                          The maximum number of times the 'SummarizeCode' action is automatically invoked, with -1 indicating unlimited. This parameter is     │
+│                                                                                   used for debugging the workflow.                                                                                                     │
+│                                                                                   [default: -1]                                                                                                                        │
+│ --install-completion                             [bash|zsh|fish|powershell|pwsh]  Install completion for the specified shell. [default: None]                                                                          │
+│ --show-completion                                [bash|zsh|fish|powershell|pwsh]  Show completion for the specified shell, to copy it or customize the installation. [default: None]                                   │
+│ --help                                                                            Show this message and exit.                                                                                                          │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ### Code walkthrough
