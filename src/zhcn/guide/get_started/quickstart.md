@@ -47,7 +47,7 @@ async def startup(idea: str):
         ]
     )
     company.invest(investment=3.0)
-    company.start_project(idea=idea)
+    company.run_project(idea=idea)
 
     await company.run(n_round=5)
 ```

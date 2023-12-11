@@ -28,7 +28,7 @@ async def _act(self) -> Message:
 
         code_text = await todo.run(context, k=5) # specify arguments
 
-        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
+        msg = Message(content=code_text, role=self.profile, cause_by=todo)
 
         return msg
 ```

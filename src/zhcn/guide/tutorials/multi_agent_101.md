@@ -101,7 +101,7 @@ class SimpleWriteReview(Action):
 #### 定义角色
 在许多多智能体场景中，定义`Role`可能只需几行代码。对于`SimpleCoder`，我们做了两件事：
 1. 使用 `_init_actions` 为`Role`配备适当的 `Action`，这与设置单智能体相同
-2. 多智能体操作逻辑：我们使`Role` `_watch` 来自用户或其他智能体的重要上游消息。回想我们的SOP，`SimpleCoder`接收用户指令，这是由MetaGPT中的`BossRequirement`引起的`Message`。因此，我们添加了 `self._watch([BossRequirement])`。
+2. 多智能体操作逻辑：我们使`Role` `_watch` 来自用户或其他智能体的重要上游消息。回想我们的SOP，`SimpleCoder`接收用户指令，这是由MetaGPT中的`UserRequirement`引起的`Message`。因此，我们添加了 `self._watch([UserRequirement])`。
 
 这就是用户需要做的全部。对于那些对底层机制感兴趣的人，请参见本教程的本章中的[机制解释](#机制解释)。
 
@@ -114,7 +114,7 @@ class SimpleCoder(Role):
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._watch([BossRequirement])
+        self._watch([UserRequirement])
         self._
 
 init_actions([SimpleWriteCode])
@@ -152,7 +152,7 @@ class SimpleTester(Role):
 
         code_text = await todo.run(context, k=5) # 指定参数
 
-        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
+        msg = Message(content=code_text, role=self.profile, cause_by=todo)
 
         return msg
 ```
@@ -176,10 +176,17 @@ class SimpleReviewer(Role):
 
 运行 `Team`，我们应该会看到它们之间的协作！
 ```python
-async def main(
-    idea: str = "write a function that calculates the product of a list",
-    investment: float = 3.0,
-    n_round: int = 5,
+import asyncio
+import typer
+from metagpt.logs import logger
+from metagpt.team import Team
+app = typer.Typer()
+
+@app.command()
+def main(
+    idea: str = typer.Argument(..., help="write a function that calculates the product of a list"),
+    investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
+    n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
 ):
     logger.info(idea)
 
@@ -193,11 +200,11 @@ async def main(
     )
 
     team.invest(investment=investment)
-    team.start_project(idea)
+    team.run_project(idea)
     await team.run(n_round=n_round)
 
 if __name__ == '__main__':
-    fire.Fire(main)
+    app()
 ```
 ## 本教程的完整脚本
 
@@ -218,10 +225,10 @@ python3 examples/build_customized_multi_agents.py --idea "write a function that 
 
 ![img](/image/guide/tutorials/multi_agents_flowchart.png)
 
-如图的右侧部分所示，`Role`将从`Environment`中`_observe` `Message`。如果有一个`Role` `_watch` 的特定 `Action` 引起的 `Message`，那么这是一个有效的观察，触发`Role`的后续思考和操作。在 `_think` 中，`Role`将选择其能力范围内的一个 `Action` 并将其设置为要做的事情。在 `_act` 中，`Role`执行要做的事情，即运行 `Action` 并获取输出。将输出封装在 `Message` 中，最终 `_publish` 到 `Environment`，完成了一个完整的智能体运行。
+如图的右侧部分所示，`Role`将从`Environment`中`_observe` `Message`。如果有一个`Role` `_watch` 的特定 `Action` 引起的 `Message`，那么这是一个有效的观察，触发`Role`的后续思考和操作。在 `_think` 中，`Role`将选择其能力范围内的一个 `Action` 并将其设置为要做的事情。在 `_act` 中，`Role`执行要做的事情，即运行 `Action` 并获取输出。将输出封装在 `Message` 中，最终 `publish_message` 到 `Environment`，完成了一个完整的智能体运行。
 
 在每个步骤中，无论是 `_observe`、`_think` 还是 `_act`，`Role`都将与其 `Memory` 交互，通过添加或检索来实现。此外，MetaGPT提供了 `react` 过程的不同模式。这些部分的详细内容，请参阅[使用记忆](use_memories) 和 [思考与行动](agent_think_act)。
 
 当每个 `Role` 被适当设置时，我们可以看到与本教程中前面示例相应的SOP，如图的左侧部分所示。虚线框表明如果我们使 `SimpleTester` 同时 `_watch` `SimpleWriteCode` 和 `SimpleWriteReview`，则可以扩展 SOP。
 
-我们鼓励对此感兴趣的开发人员查看 `Role` 的[代码](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/role.py)，因为它相当易读。可以 `run`、`_observe`、`react`、`_think`、`_act`、`_publish`的内容，应该能够让你对其有一个相当不错的理解。
+我们鼓励对此感兴趣的开发人员查看 `Role` 的[代码](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/role.py)，因为它相当易读。可以 `run`、`_observe`、`react`、`_think`、`_act`、`publish_message`的内容，应该能够让你对其有一个相当不错的理解。

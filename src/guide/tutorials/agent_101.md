@@ -107,7 +107,7 @@ class SimpleCoder(Role):
         msg = self.get_memories(k=1)[0] # find the most recent k messages
 
         code_text = await todo.run(msg.content)
-        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
+        msg = Message(content=code_text, role=self.profile, cause_by=todo)
 
         return msg
 ```
@@ -184,7 +184,7 @@ class RunnableCoder(Role):
         msg = self.get_memories(k=1)[0] # find the most k recent messages
         result = await todo.run(msg.content)
 
-        msg = Message(content=result, role=self.profile, cause_by=type(todo))
+        msg = Message(content=result, role=self.profile, cause_by=todo)
         self._rc.memory.add(msg)
         return msg
 ```

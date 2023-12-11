@@ -168,7 +168,7 @@ class RunnableCoder(Role):
         msg = self.get_memories(k=1)[0] # 得到最相似的 k 条消息
         result = await todo.run(msg.content)
 
-        msg = Message(content=result, role=self.profile, cause_by=type(todo))
+        msg = Message(content=result, role=self.profile, cause_by=todo)
         self._rc.memory.add(msg)
         return msg
 ```

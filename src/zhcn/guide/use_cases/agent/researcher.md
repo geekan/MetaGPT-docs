@@ -242,14 +242,14 @@ class Researcher(Role):
         # 从搜索引擎进行搜索，并获取Url地址列表
         if isinstance(todo, CollectLinks):
             links = await todo.run(topic, 4, 4)
-            ret = Message("", Report(topic=topic, links=links), role=self.profile, cause_by=type(todo))
+            ret = Message("", Report(topic=topic, links=links), role=self.profile, cause_by=todo)
         # 浏览网页并总结网页内容
         elif isinstance(todo, WebBrowseAndSummarize):
             links = instruct_content.links
             todos = (todo.run(*url, query=query, system_text=research_system_text) for (query, url) in links.items())
             summaries = await asyncio.gather(*todos)
             summaries = list((url, summary) for i in summaries for (url, summary) in i.items() if summary)
-            ret = Message("", Report(topic=topic, summaries=summaries), role=self.profile, cause_by=type(todo))
+            ret = Message("", Report(topic=topic, summaries=summaries), role=self.profile, cause_by=todo)
         # 生成调研报告
         else:
             summaries = instruct_content.summaries

@@ -42,7 +42,7 @@ class SpeakAloud(Action):
 ### 定义角色
 我们将定义一个通用的 `Role`，称为 `Debator`。
 
-在这里，`_init_actions` 使我们的 `Role` 拥有我们刚刚定义的 `SpeakAloud` 动作。我们还使用 `_watch` 监视了 `SpeakAloud` 和 `BossRequirement`，因为我们希望每个辩手关注来自对手的 `SpeakAloud` 消息，以及来自用户的 `BossRequirement`（人类指令）。
+在这里，`_init_actions` 使我们的 `Role` 拥有我们刚刚定义的 `SpeakAloud` 动作。我们还使用 `_watch` 监视了 `SpeakAloud` 和 `UserRequirement`，因为我们希望每个辩手关注来自对手的 `SpeakAloud` 消息，以及来自用户的 `UserRequirement`（人类指令）。
 ```python
 class Debator(Role):
     def __init__(
@@ -54,7 +54,7 @@ class Debator(Role):
     ):
         super().__init__(name, profile, **kwargs)
         self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
+        self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name
 ```
@@ -81,7 +81,7 @@ async def _act(self) -> Message:
     msg = Message(
         content=rsp,
         role=self.profile,
-        cause_by=type(todo),
+        cause_by=todo,
         sent_from=self.name,
         send_to=self.opponent_name,
     )
@@ -102,7 +102,7 @@ class Debator(Role):
     ):
         super().__init__(name, profile, **kwargs)
         self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
+        self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name
 
@@ -124,7 +124,7 @@ class Debator(Role):
         msg = Message(
             content=rsp,
             role=self.profile,
-            cause_by=type(todo),
+            cause_by=todo,
             sent_from=self.name,
             send_to=self.opponent_name,
         )
@@ -132,7 +132,7 @@ class Debator(Role):
         return msg
 ```
 ### 创建团队并添加角色
-现在我们已经定义了我们的 `Debator`，让我们将它们组合起来看看会发生什么。我们建立一个 `Team` 并“雇佣”了拜登和特朗普。在这个例子中，我们将通过将我们的指令（作为 `BossRequirement`）发送给拜登，让他先开始。如果你想让特朗普先说话，将 `send_to` 设置为 "Trump"。
+现在我们已经定义了我们的 `Debator`，让我们将它们组合起来看看会发生什么。我们建立一个 `Team` 并“雇佣”了拜登和特朗普。在这个例子中，我们将通过将我们的指令（作为 `UserRequirement`）发送给拜登，让他先开始。如果你想让特朗普先说话，将 `send_to` 设置为 "Trump"。
 
 运行这个 `Team`，我们应该看到他们之间友好的对话！
 ```python
@@ -143,10 +143,22 @@ async def debate(idea: str, investment: float = 3.0, n_round: int = 5):
     team = Team()
     team.hire([Biden, Trump])
     team.invest(investment)
-    team.start_project(idea, send_to="Biden")  # 将辩论主题发送给拜登，让他先说话
+    team.run_project(idea, send_to="Biden")  # 将辩论主题发送给拜登，让他先说话
     await team.run(n_round=n_round)
 
-def main(idea: str, investment: float = 3.0, n_round: int = 10):
+
+import asyncio
+import platform
+import typer
+from metagpt.team import Team
+app = typer.Typer()
+
+@app.command()
+def main(
+    idea: str = typer.Argument(..., help="Economic Policy: Discuss strategies and plans related to taxation, employment, fiscal budgeting, and economic growth."),
+    investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
+    n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
+):
     """
     :param idea: Debate topic, such as "Topic: The U.S. should commit more in climate change fighting" 
                  or "Trump: Climate change is a hoax"
@@ -159,7 +171,7 @@ def main(idea: str, investment: float = 3.0, n_round: int = 10):
     asyncio.run(debate(idea, investment, n_round))
 
 if __name__ == '__main__':
-    fire.Fire(main)
+    app()
 ```
 ### 本节的完整脚本
 

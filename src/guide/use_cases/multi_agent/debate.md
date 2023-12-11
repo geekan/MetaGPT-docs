@@ -42,7 +42,7 @@ class SpeakAloud(Action):
 ### Define Role
 We will define a common `Role` called `Debator`. 
 
-Here `_init_actions` make our `Role` possess the `SpeakAloud` action we just define. We also `_watch` both `SpeakAloud` and `BossRequirement`, because we want each debator to pay attention to messages of `SpeakAloud` from his opponent, as well as `BossRequirement` (human instruction) from users.
+Here `_init_actions` make our `Role` possess the `SpeakAloud` action we just define. We also `_watch` both `SpeakAloud` and `UserRequirement`, because we want each debator to pay attention to messages of `SpeakAloud` from his opponent, as well as `UserRequirement` (human instruction) from users.
 ```python
 class Debator(Role):
     def __init__(
@@ -54,7 +54,7 @@ class Debator(Role):
     ):
         super().__init__(name, profile, **kwargs)
         self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
+        self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name
 ```
@@ -81,7 +81,7 @@ async def _act(self) -> Message:
     msg = Message(
         content=rsp,
         role=self.profile,
-        cause_by=type(todo),
+        cause_by=todo,
         sent_from=self.name,
         send_to=self.opponent_name,
     )
@@ -102,7 +102,7 @@ class Debator(Role):
     ):
         super().__init__(name, profile, **kwargs)
         self._init_actions([SpeakAloud])
-        self._watch([BossRequirement, SpeakAloud])
+        self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name
 
@@ -124,7 +124,7 @@ class Debator(Role):
         msg = Message(
             content=rsp,
             role=self.profile,
-            cause_by=type(todo),
+            cause_by=todo,
             sent_from=self.name,
             send_to=self.opponent_name,
         )
@@ -134,7 +134,7 @@ class Debator(Role):
         return msg
 ```
 ### Create a team and add roles
-Now that we have defined our `Debator`s, let's put them together to see what will come up. We set up a `Team` and "hire" Biden and Trump. In this example, we will send our instruction (as a `BossRequirement` under the hood) to Biden to have him start first. If you want Trump to speak first, set send_to as "Trump".
+Now that we have defined our `Debator`s, let's put them together to see what will come up. We set up a `Team` and "hire" Biden and Trump. In this example, we will send our instruction (as a `UserRequirement` under the hood) to Biden to have him start first. If you want Trump to speak first, set send_to as "Trump".
 
 Run the `Team`, we should see the friendly conversation between them!
 ```python
@@ -145,10 +145,21 @@ async def debate(idea: str, investment: float = 3.0, n_round: int = 5):
     team = Team()
     team.hire([Biden, Trump])
     team.invest(investment)
-    team.start_project(idea, send_to="Biden") # send debate topic to Biden and let him speak first
+    team.run_project(idea, send_to="Biden") # send debate topic to Biden and let him speak first
     await team.run(n_round=n_round)
 
-def main(idea: str, investment: float = 3.0, n_round: int = 10):
+import asyncio
+import platform
+import typer
+from metagpt.team import Team
+app = typer.Typer()
+
+@app.command()
+def main(
+    idea: str = typer.Argument(..., help="Economic Policy: Discuss strategies and plans related to taxation, employment, fiscal budgeting, and economic growth."),
+    investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
+    n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
+):
     """
     :param idea: Debate topic, such as "Topic: The U.S. should commit more in climate change fighting" 
                  or "Trump: Climate change is a hoax"
@@ -161,7 +172,7 @@ def main(idea: str, investment: float = 3.0, n_round: int = 10):
     asyncio.run(debate(idea, investment, n_round))
 
 if __name__ == '__main__':
-    fire.Fire(main)
+    app()
 ```
 ## Complete script of this section
 

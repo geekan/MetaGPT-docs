@@ -32,6 +32,8 @@ By giving the outline above, we actually make our SOP clear. We will talk about 
 We list the three `Action`s.
 
 ```python
+from metagpt.actions import Action
+
 class SimpleWriteCode(Action):
 
     PROMPT_TEMPLATE = """
@@ -44,13 +46,9 @@ class SimpleWriteCode(Action):
         super().__init__(name, context, llm)
 
     async def run(self, instruction: str):
-
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
-
         rsp = await self._aask(prompt)
-
         code_text = parse_code(rsp)
-
         return code_text
 ```
 
@@ -68,13 +66,9 @@ class SimpleWriteTest(Action):
         super().__init__(name, context, llm)
 
     async def run(self, context: str, k: int = 3):
-
         prompt = self.PROMPT_TEMPLATE.format(context=context, k=k)
-
         rsp = await self._aask(prompt)
-
         code_text = parse_code(rsp)
-
         return code_text
 ```
 ```python
@@ -89,17 +83,14 @@ class SimpleWriteReview(Action):
         super().__init__(name, context, llm)
 
     async def run(self, context: str):
-
         prompt = self.PROMPT_TEMPLATE.format(context=context)
-
         rsp = await self._aask(prompt)
-
         return rsp
 ```
 #### Define Role
 In many multi-agent scenarios, defining a `Role` can be as simple as 10 lines of codes. For `SimpleCoder`, we do two things:
 1. Equip the `Role` with the appropriate `Action`s with `_init_actions`, this is identical to setting up a single agent
-2. A multi-agent operation: we make the `Role` `_watch` important upstream messages from users or other agents. Recall our SOP, `SimpleCoder` takes user instruction, which is a `Message` caused by `BossRequirement` in MetaGPT. Therefore, we add `self._watch([BossRequirement])`.
+2. A multi-agent operation: we make the `Role` `_watch` important upstream messages from users or other agents. Recall our SOP, `SimpleCoder` takes user instruction, which is a `Message` caused by `UserRequirement` in MetaGPT. Therefore, we add `self._watch([UserRequirement])`.
 
 That's all users have to do. For those who are interested in the mechanism under the hood, see [Mechanism Explained](#mechanism-explained) of this chapter.
 
@@ -112,7 +103,7 @@ class SimpleCoder(Role):
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._watch([BossRequirement])
+        self._watch([UserRequirement])
         self._init_actions([SimpleWriteCode])
 ```
 
@@ -148,7 +139,7 @@ class SimpleTester(Role):
 
         code_text = await todo.run(context, k=5) # specify arguments
 
-        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
+        msg = Message(content=code_text, role=self.profile, cause_by=todo)
 
         return msg
 ```
@@ -172,10 +163,17 @@ Now that we have defined our three `Role`s, it's time to put them together. We i
 
 Run the `Team`, we should see the collaboration between them!
 ```python
-async def main(
-    idea: str = "write a function that calculates the product of a list",
-    investment: float = 3.0,
-    n_round: int = 5,
+import asyncio
+import typer
+from metagpt.logs import logger
+from metagpt.team import Team
+app = typer.Typer()
+
+@app.command()
+def main(
+    idea: str = typer.Argument(..., help="write a function that calculates the product of a list"),
+    investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
+    n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
 ):
     logger.info(idea)
 
@@ -189,11 +187,11 @@ async def main(
     )
 
     team.invest(investment=investment)
-    team.start_project(idea)
-    await team.run(n_round=n_round)
+    team.run_project(idea)
+    asyncio.run(team.run(n_round=n_round))
 
 if __name__ == '__main__':
-    fire.Fire(main)
+    app()
 ```
 ## Complete script of this tutorial
 
@@ -213,10 +211,10 @@ While users can write a few lines of code to set up a running `Role`, it's benef
 
 ![img](/image/guide/tutorials/multi_agents_flowchart.png)
 
-Internally, as shown in the right part of the diagram, the `Role` will `_observe` `Message` from the `Environment`. If there is a `Message` caused by the particular `Action`s the `Role` `_watch`, then it is a valid observation, triggering the `Role`'s subsequent thoughts and actions. In `_think`, the `Role` will choose one of its capable `Action`s and set it as todo. During `_act`, `Role` executes the todo, i.e., runs the `Action` and obtains the output. The output is encapsulated in a `Message` to be finally `_publish` to the `Environment`, finishing a complete agent run.
+Internally, as shown in the right part of the diagram, the `Role` will `_observe` `Message` from the `Environment`. If there is a `Message` caused by the particular `Action`s the `Role` `_watch`, then it is a valid observation, triggering the `Role`'s subsequent thoughts and actions. In `_think`, the `Role` will choose one of its capable `Action`s and set it as todo. During `_act`, `Role` executes the todo, i.e., runs the `Action` and obtains the output. The output is encapsulated in a `Message` to be finally `publish_message` to the `Environment`, finishing a complete agent run.
 
 In each step, either `_observe`, `_think`, or `_act`, the `Role` will interact with its `Memory`, through adding or retrieval. Moreover, MetaGPT provides different modes of the `react` process. For these parts, please see [Use Memories](use_memories) and [Think and act](agent_think_act)
 
 When each `Role` is set up appropriately, we may see the corresponding SOP to the example earlier in this tutorial, demonstrated by the left half of the diagram. The dotted box suggests the SOP can be extended if we make `SimpleTester` `_watch` both `SimpleWriteCode` and `SimpleWriteReview`.
 
-We encourage developers with interest to see the [code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/role.py) of `Role`, as we believe it is quite readable. Checking out `run`, `_observe`, `react`, `_think`, `_act`, `_publish` should provide one with a decent understanding.
+We encourage developers with interest to see the [code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/role.py) of `Role`, as we believe it is quite readable. Checking out `run`, `_observe`, `react`, `_think`, `_act`, `publish_message` should provide one with a decent understanding.
