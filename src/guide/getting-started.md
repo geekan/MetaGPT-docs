@@ -14,7 +14,7 @@ npm --version
 sudo npm install -g @mermaid-js/mermaid-cli
 
 # Step 2: Ensure that Python 3.9+ is installed on your system. You can check this by using:
-python --version
+python3 --version
 
 # Step 3: Clone the repository to your local machine, and install it.
 git clone https://github.com/geekan/metagpt

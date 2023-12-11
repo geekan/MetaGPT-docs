@@ -196,11 +196,11 @@ In another example, the true Seer solidified its intention of standing out again
 ## Code Running Guide
 
 ```shell
-python examples/werewolf_game/start_game.py # use default arguments
+python3 examples/werewolf_game/start_game.py # use default arguments
 ```
 
 ```shell
-python examples/werewolf_game/start_game.py \\
+python3 examples/werewolf_game/start_game.py \\
 --use_reflection True \\
 --use_experience False \\
 --use_memory_selection False \\

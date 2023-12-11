@@ -201,7 +201,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agen
 
 Run it with
 ```sh
-python examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
+python3 examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
 ```
 
 Or try it on Colab

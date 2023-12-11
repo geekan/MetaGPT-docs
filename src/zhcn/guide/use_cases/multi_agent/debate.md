@@ -167,7 +167,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/debate.py
 
 运行以下命令：
 ```sh
-python examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
+python3 examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
 ```
 运行结果如下：
 

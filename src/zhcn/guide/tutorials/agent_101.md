@@ -193,7 +193,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_agent.py
 
 通过以下命令运行：
 ```shell
-python examples/build_customized_agent.py --msg "write a function that calculates the sum of a list"
+python3 examples/build_customized_agent.py --msg "write a function that calculates the sum of a list"
 ```
 
 或在Colab上运行

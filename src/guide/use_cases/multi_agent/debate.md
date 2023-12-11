@@ -169,7 +169,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/debate.py
 
 Run it with
 ```sh
-python examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
+python3 examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
 ```
 A sample run
 

@@ -137,7 +137,7 @@ MetaGPT Community - The position of Chief Evangelist rotates on a monthly basis.
   Configuration instructions for SD Skills: The SD interface is currently deployed based on *https://github.com/AUTOMATIC1111/stable-diffusion-webui* \*\*For environmental configurations and model downloads, please refer to the aforementioned GitHub repository. To initiate the SD service that supports API calls, run the command specified in cmd with the parameter nowebui, i.e.,
 
   1. ```shell
-     python webui.py --enable-insecure-extension-access --port xxx --no-gradio-queue --nowebui
+     python3 webui.py --enable-insecure-extension-access --port xxx --no-gradio-queue --nowebui
      ```
 
   2. Once it runs without errors, the interface will be accessible after approximately 1 minute when the model finishes loading.

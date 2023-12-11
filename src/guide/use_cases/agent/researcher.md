@@ -331,7 +331,7 @@ Additionally, the Researcher provides the following configurations:
 The `metagpt.roles.researcher` module provides a command-line interface for executing the functionalities of the Researcher. An example is as follows:
 
 ```bash
-python -m metagpt.roles.researcher "dataiku vs. datarobot"
+python3 -m metagpt.roles.researcher "dataiku vs. datarobot"
 ```
 Log output: [log.txt](https://github.com/geekan/MetaGPT/files/12302886/log.txt)
 Report output: [dataiku vs. datarobot.md](https://github.com/geekan/MetaGPT/files/12302882/dataiku.vs.datarobot.md)

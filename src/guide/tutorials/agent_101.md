@@ -45,6 +45,7 @@ In MetaGPT, class `Action` is the logical abstraction for an action. Users may u
 In our scenario, we define a `SimpleWriteCode` subclassed `Action`. Although it primarily acts as a wrapper around a prompt and the LLM call, we believe that this `Action` abstraction is more intuitive. In downstream and higher-level tasks, using it as a whole feels more natural than crafting a prompt and invoking the LLM separately, especially when viewed within the framework of an agent.
 
 ````python
+import re
 from metagpt.actions import Action
 
 class SimpleWriteCode(Action):
@@ -212,7 +213,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_agent.py
 Run it with
 
 ```shell
-python examples/build_customized_agent.py --msg "write a function that calculates the product of a list"
+python3 examples/build_customized_agent.py --msg "write a function that calculates the product of a list"
 ```
 
 Or try it on Colab

@@ -34,7 +34,7 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agen
 
 使用以下命令运行
 ```sh
-python examples/build_customized_multi_agents.py --add_human True
+python3 examples/build_customized_multi_agents.py --add_human True
 ```
 
 一个交互示例

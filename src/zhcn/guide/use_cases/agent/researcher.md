@@ -325,7 +325,7 @@ class Researcher(Role):
 `metagpt.roles.researcher`提供了命令行用于执行Researcher的功能，示例如下：
 
 ```bash
-python -m metagpt.roles.researcher "dataiku vs. datarobot"
+python3 -m metagpt.roles.researcher "dataiku vs. datarobot"
 ```
 
 输出日志：[log.txt](https://github.com/geekan/MetaGPT/files/12302886/log.txt)
