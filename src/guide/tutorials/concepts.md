@@ -46,3 +46,5 @@ This is a simple example showing how agents work
 - Charlie informs Bob of its action outcome by publishing it to the environment. Bob responds with a compliment after receiving it.
 
 Now you have a first glance of the concepts. Feel free to proceed to the next step and see how MetaGPT provides a framework for you to create agents and their dynamics.
+
+![img](../../public/image/test.jpeg)
