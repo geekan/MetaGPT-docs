@@ -1,6 +1,24 @@
 ---
 layout: page
 list:
+  - title: '框架精读: langchain精读'
+    description: '在今年3月到5月，我陆续读完了市面上稍有热度的论文全文、框架代码，输出了总计53篇笔记，这些笔记在公司内是全员透明的，有长有短。大部分的论文对应代码只有5-10行，对应阅读笔记也往往很短；而LangChain这个库代码接近10万行，引起了我的兴趣。以我的第一感受，LLM中间层还没有这个量级的代码需求。在体验了LangChain的一些例子以后，我心里泛起了浓浓的疑惑 —— 真的有必要使用LangChain吗？'
+    author: DeepWisdom
+    tag:
+      - Research
+    date: 2023-05-08T00:00:00.000+00:00
+    link: https://deepwisdom.feishu.cn/wiki/wikcnhYysy7aaewetJ2sUlZMbeh
+    banner: /blog-banners/langchain.jpeg
+
+  - title: '框架速读：SuperAGI'
+    description: '框架速读：SuperAGI'
+    author: DeepWisdom
+    tag:
+      - Research
+    date: 2023-06-05T00:00:00.000+00:00
+    link: https://deepwisdom.feishu.cn/wiki/RlcCwJENIiC0YNkiu6Dcc9Ornlb
+    banner: /blog-banners/superagi.png
+
   - title: Implementing Werewolf Game in MetaGPT
     description: 'In their paper, "Exploring Large Language Models for Communication Games: An Empirical Study on Werewolf," Xu et al. explore the potential of large language models (LLM) in the popular game Werewolf, using MetaGPT as a multi-agent framework. Their challenge: Can MetaGPT recreate vibrant gameplay? Today, they share their exciting affirmative answer!'
     author: DeepWisdom
