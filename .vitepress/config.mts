@@ -21,6 +21,11 @@ const dests = ['zhcn', 'enus'];
 
 // route based on fs, so copy files when deploy
 if (process.env.NODE_ENV === 'production') {
+  /** for deploy */
+  cpSync(
+    resolve(__dirname, '../src/enus/index.md'),
+    resolve(__dirname, '../src/index.md')
+  );
   for (const source of sources) {
     for (const dest of dests) {
       const sourceDir = resolve(__dirname, `../src/${source}`);
