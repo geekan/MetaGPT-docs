@@ -37,7 +37,7 @@ const branchInfo = await simpleGit('.', {}).pull().branch({});
 const { current, branches } = branchInfo;
 const isMain = current === 'main';
 const base = isMain ? '/' : `/${current}/`;
-const domian = '//docs.deepwisdom.ai';
+const domain = 'https://docs.deepwisdom.ai';
 const versions = Object.keys(branches).reduce((vs, branchname) => {
   const regex = /^remotes\/origin\/(v.*)$/;
   const [, remotebn] = regex.exec(branchname) || [];
@@ -56,11 +56,11 @@ const getVersions = () => {
       text: current,
       items: [
         ...(!isMain
-          ? [{ text: 'latest', link: `${domian}`, target: '_blank' }]
+          ? [{ text: 'latest', link: `${domain}`, target: '_blank' }]
           : []),
         ...versions.map((v) => ({
           text: v,
-          link: `${domian}/${v}/`,
+          link: `${domain}/${v}/`,
           target: '_blank',
         })),
       ],
