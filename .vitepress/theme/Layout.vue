@@ -42,7 +42,12 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 useEventListener('click', (event) => {
   const target = event.target as HTMLAnchorElement;
 
-  if (target.tagName.toLowerCase() === 'a' && /v[^\/]*\/$/.test(target.href)) {
+  if (
+    target.tagName.toLowerCase() === 'a' &&
+    (/v[^\/]*\/$/.test(target.href) ||
+      (target.href === 'https://docs.deepwisdom.ai/' &&
+        target.target === '_blank'))
+  ) {
     event.preventDefault();
     const link = `${target.href}${location.pathname
       .replace(/^\/v[^\/]*\//, '/')
