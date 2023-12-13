@@ -81,11 +81,11 @@ MetaGPT Community - The position of Chief Evangelist rotates on a monthly basis.
 
   The official OPENAI_API_BASE address is `https://api.openai.com/v1`
 
-  If the official OPENAI_API_BASE address is inaccessible in your environment (this can be verified with curl), it's recommended to configure using the reverse proxy OPENAI_API_BASE provided by libraries such as openai-forward. For instance, ` OPENAI_API_BASE: "``https://api.openai-forward.com/v1``" `
+  If the official OPENAI_API_BASE address is inaccessible in your environment (this can be verified with curl), it's recommended to configure using the reverse proxy OPENAI_API_BASE provided by libraries such as openai-forward. For instance, `OPENAI_API_BASE: "``https://api.openai-forward.com/v1``"`
 
   If the official OPENAI_API_BASE address is inaccessible in your environment (again, verifiable via curl), another option is to configure the OPENAI_PROXY parameter. This way, you can access the official OPENAI_API_BASE via a local proxy. If you don't need to access via a proxy, please do not enable this configuration; if accessing through a proxy is required, modify it to the correct proxy address. Note that when OPENAI_PROXY is enabled, don't set OPENAI_API_BASE.
 
-  Note: OpenAI's default API design ends with a v1. An example of the correct configuration is: ` OPENAI_API_BASE: "``https://api.openai.com/v1``" `
+  Note: OpenAI's default API design ends with a v1. An example of the correct configuration is: `OPENAI_API_BASE: "``https://api.openai.com/v1``"`
 
 - **Absolutely! How can I assist you today?**
 

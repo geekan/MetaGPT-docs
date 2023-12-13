@@ -27,7 +27,6 @@
 3. 点击需要进一步浏览的网页，判断网页内容对待研究的问题是否有帮助，提取有关的信息并记录
 4. 聚合所有的记录下来的相关资料，针对待研究的问题撰写报告
 
-
 因此，我们尝试让GPT模拟以上的调研流程，整体步骤如下：
 
 1. 用户输入待调研问题
@@ -86,7 +85,7 @@ class CollectLinks(Action):
         except Exception as e:
             logger.exception(f"fail to get keywords related to the research topic \"{topic}\" for {e}")
             keywords = [topic]
-    
+
         # 用搜索引擎对对子问题进行搜索
         results = await asyncio.gather(*(self.search_engine.run(i, as_string=False) for i in keywords))
 
@@ -218,7 +217,7 @@ class Researcher(Role):
         **kwargs,
     ):
         super().__init__(name, profile, goal, constraints, **kwargs)
-        
+
         # 添加`CollectLinks`、`WebBrowseAndSummarize`、`ConductResearch`三个Action
         self._init_actions([CollectLinks(name), WebBrowseAndSummarize(name), ConductResearch(name)])
 
@@ -288,9 +287,9 @@ class Researcher(Role):
   - SEARCH_ENGINE: 设置为serpapi
   - SERPAPI_API_KEY: 从https://serpapi.com/获取
 - google
- - SEARCH_ENGINE: 设置为google
- - GOOGLE_API_KEY: 从https://console.cloud.google.com/apis/credentials获取
- - GOOGLE_CSE_ID: 从https://programmablesearchengine.google.com/controlpanel/create获取
+- SEARCH_ENGINE: 设置为google
+- GOOGLE_API_KEY: 从https://console.cloud.google.com/apis/credentials获取
+- GOOGLE_CSE_ID: 从https://programmablesearchengine.google.com/controlpanel/create获取
 - serper
   - SEARCH_ENGINE: 设置为serper
   - SERPER_API_KEY: 从https://serper.dev/获取
@@ -298,8 +297,6 @@ class Researcher(Role):
   - SEARCH_ENGINE: 设置为ddg
 
 `WebBrowserEngine`支持playwright/selenium引擎，要使用它们都需要安装额外的依赖，它们区别如下：
-
-
 
 | 名称                                         | 默认引擎 | 额外依赖包                                | 安装                              | 异步方式 | 支持的平台                                                            |
 | -------------------------------------------- | -------- | ----------------------------------------- | --------------------------------- | -------- | --------------------------------------------------------------------- |

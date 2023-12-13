@@ -6,6 +6,7 @@ After this tutorial, you will be able to:
 2. Develop your first agent capable of one or more actions
 
 ## Use off-the-shelf agents
+
 Import any role, initialize it, run it with a starting message, done!
 
 ```python
@@ -25,6 +26,7 @@ if __name__ == '__main__':
 ```
 
 ## Develop your first agent
+
 Consider agent from a practical usage viewpoint, what are the bare essentials for an agent to be of any utility to us? From MetaGPT's standpoint, if an agent can execute certain actions (whether powered by LLM or otherwise), it holds some degree of usefulness. Put it simply, we define what actions our agent is expected to possess, equip the agent with these capabilities, and we have a basic useful agent! MetaGPT provides high flexibility to define your own action and your own agent. We will walk you through this in the rest of this section.
 
 ### Flowchart of one agent run cycle

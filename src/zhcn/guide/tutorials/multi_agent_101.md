@@ -1,19 +1,24 @@
 # 多智能体入门
+
 在上一章中，我们简要讨论了单智能体的创建。虽然对许多情况来说，单智能体可能已经足够，但更复杂的任务通常需要协作和团队合作，这也就是多智能体为什么必不可少的原因。MetaGPT的核心优势也在于轻松灵活地开发一个智能体团队。在MetaGPT框架下，用户可以通过少量代码实现智能体之间的交互。
 
 完成本节，你将能够：
+
 1. 理解智能体之间如何进行交互
 2. 开发你的第一个智能体团队
 
 ## 运行“软件公司”示例
+
 ```shell
 metagpt --idea "write a function that calculates the product of a list"
 ```
 
 ## 开发你的第一个智能体团队
+
 希望你会发现软件创业示例很有启发。也许现在你已经有了灵感，想要开发一个根据你的独特需求而定制的智能体团队。在本节中，我们将继续在[智能体入门](agent_101)中的简单代码示例中添加更多角色，并引入智能体之间的交互协作。
 
 让我们还雇佣一名测试人员和一名审阅人员携手与编码人员一起工作。这开始看起来像一个开发团队了，不是吗？总的来说，我们需要三个步骤来建立团队并使其运作：
+
 1. 定义每个角色能够执行的预期动作
 2. 基于标准作业程序（SOP）确保每个角色遵守它。通过使每个角色观察上游的相应输出结果，并为下游发布自己的输出结果，可以实现这一点。
 3. 初始化所有角色，创建一个带有环境的智能体团队，并使它们之间能够进行交互。
@@ -21,7 +26,9 @@ metagpt --idea "write a function that calculates the product of a list"
 完整的代码在本教程的末尾可用
 
 ### 定义动作和角色
+
 与[智能体入门](agent_101)相同的过程，我们可以定义三个具有各自动作的`Role`：
+
 - `SimpleCoder` 具有 `SimpleWriteCode` 动作，接收用户的指令并编写主要代码
 - `SimpleTester` 具有 `SimpleWriteTest` 动作，从 `SimpleWriteCode` 的输出中获取主代码并为其提供测试套件
 - `SimpleReviewer` 具有 `SimpleWriteReview` 动作，审查来自 `SimpleWriteTest` 输出的测试用例，并检查其覆盖范围和质量
@@ -29,9 +36,10 @@ metagpt --idea "write a function that calculates the product of a list"
 通过上述概述，我们使得 SOP（标准作业程序）变得更加清晰明了。接下来，我们将详细讨论如何根据 SOP 来定义`Role`。
 
 #### 定义动作
+
 我们列举了三个 `Action`。
 
-```python
+````python
 class SimpleWriteCode(Action):
 
     PROMPT_TEMPLATE = """
@@ -52,9 +60,9 @@ class SimpleWriteCode(Action):
         code_text = parse_code(rsp)
 
         return code_text
-```
+````
 
-```python
+````python
 class SimpleWriteTest(Action):
 
     PROMPT_TEMPLATE = """
@@ -76,7 +84,7 @@ class SimpleWriteTest(Action):
         code_text = parse_code(rsp)
 
         return code_text
-```
+````
 
 ```python
 class SimpleWriteReview(Action):
@@ -99,7 +107,9 @@ class SimpleWriteReview(Action):
 ```
 
 #### 定义角色
+
 在许多多智能体场景中，定义`Role`可能只需几行代码。对于`SimpleCoder`，我们做了两件事：
+
 1. 使用 `_init_actions` 为`Role`配备适当的 `Action`，这与设置单智能体相同
 2. 多智能体操作逻辑：我们使`Role` `_watch` 来自用户或其他智能体的重要上游消息。回想我们的SOP，`SimpleCoder`接收用户指令，这是由MetaGPT中的`UserRequirement`引起的`Message`。因此，我们添加了 `self._watch([UserRequirement])`。
 
@@ -121,10 +131,12 @@ init_actions([SimpleWriteCode])
 ```
 
 ---
+
 与上述相似，对于 `SimpleTester`，我们：
+
 1. 使用 `_init_actions` 为`SimpleTester`配备 `SimpleWriteTest` 动作
 2. 使`Role` `_watch` 来自其他智能体的重要上游消息。回想我们的SOP，`SimpleTester`从 `SimpleCoder` 中获取主代码，这是由 `SimpleWriteCode` 引起的 `Message`。因此，我们添加了 `self._watch([SimpleWriteCode])`。
-> 一个扩展的问题：想一想如果我们使用 `self._watch([SimpleWriteCode, SimpleWriteReview])` 会意味着什么，可以尝试这样做
+   > 一个扩展的问题：想一想如果我们使用 `self._watch([SimpleWriteCode, SimpleWriteReview])` 会意味着什么，可以尝试这样做
 
 此外，你可以为智能体定义自己的操作逻辑。这适用于`Action`需要多个输入的情况，你希望修改输入，使用特定记忆，或进行任何其他更改以反映特定逻辑的情况。因此，我们：
 
@@ -156,8 +168,11 @@ class SimpleTester(Role):
 
         return msg
 ```
+
 ---
+
 按照相同的过程定义 `SimpleReviewer`：
+
 ```python
 class SimpleReviewer(Role):
     def __init__(
@@ -172,9 +187,11 @@ class SimpleReviewer(Role):
 ```
 
 ### 创建一个团队并添加角色
+
 现在我们已经定义了三个 `Role`，是时候将它们放在一起了。我们初始化所有角色，设置一个 `Team`，并`hire` 它们。
 
 运行 `Team`，我们应该会看到它们之间的协作！
+
 ```python
 import asyncio
 import typer
@@ -206,11 +223,13 @@ def main(
 if __name__ == '__main__':
     app()
 ```
+
 ## 本教程的完整脚本
 
 https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agents.py
 
 使用以下命令运行：
+
 ```sh
 python3 examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
 ```
@@ -219,8 +238,8 @@ python3 examples/build_customized_multi_agents.py --idea "write a function that 
 
 [![在Colab中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
 
-
 ## 机制解释
+
 虽然用户可以编写几行代码来设置运行的`Role`，但描述内部机制是有益的，这样用户就能理解设置代码的含义，并对框架有一个整体的了解。
 
 ![img](/image/guide/tutorials/multi_agents_flowchart.png)

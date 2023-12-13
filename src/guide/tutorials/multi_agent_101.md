@@ -1,19 +1,24 @@
 # MultiAgent 101
+
 We briefly discussed the creation of a single agent in last chapter. While a single agent may suffice for many situations, more complex tasks often demand collaboration and teamwork. This is where multiple agents become necessary. The core advantage of MetaGPT also lies in the easy and flexible development of a team of agents. Under MetaGPT framework, users can enable interactions between agents with a minimal amount of codes.
 
 After this tutorial, you will be able to:
+
 1. Understand how agents interact with each other
 2. Develop your first team of agents
 
 ## Run the software startup example
+
 ```shell
 metagpt --idea "write a cli flappy bird game"
 ```
 
 ## Develop your first team of agents
+
 Hope you find the software startup example enlightenning. Perhaps now you're inspired to develop a team of agents tailored to your unique needs. In this section, we continue with the simple coding example in [Agent101](agent_101) but add more roles to introduce a very basic collaboration.
 
 Together with the coder, let's also hire a tester and a reviewer. This starts to look like a development team, doesn't it? In general, we need three steps to set up the team and make it function:
+
 1. Define each role capable of intended actions
 2. Think about the Standard Operating Procedure (SOP), and ensure each role adhere to it. This is made possible by making each role observe the corresponding output from upstream, and publish its own for the downstream.
 3. Initialize all roles, create a team with an environment to put them in, and enable them to interact with each other
@@ -21,7 +26,9 @@ Together with the coder, let's also hire a tester and a reviewer. This starts to
 Complete code is available at the end of this tutorial
 
 ### Define Action and Role
+
 Following the same process as [Agent101](agent_101), we can define three `Role`s with their respective `Action`s:
+
 - A `SimpleCoder` with a `SimpleWriteCode` action, taking instruction from the user and writing the main code
 - A `SimpleTester` with a `SimpleWriteTest` action, taking the main code from `SimpleWriteCode` output and providing a test suite for it
 - A `SimpleReviewer` with a `SimpleWriteReview` action, reviewing the test cases from `SimpleWriteTest` output and check their coverage and quality
@@ -29,9 +36,10 @@ Following the same process as [Agent101](agent_101), we can define three `Role`s
 By giving the outline above, we actually make our SOP clear. We will talk about how to set up the `Role` according to it shortly.
 
 #### Define Action
+
 We list the three `Action`s.
 
-```python
+````python
 from metagpt.actions import Action
 
 class SimpleWriteCode(Action):
@@ -50,9 +58,9 @@ class SimpleWriteCode(Action):
         rsp = await self._aask(prompt)
         code_text = parse_code(rsp)
         return code_text
-```
+````
 
-```python
+````python
 class SimpleWriteTest(Action):
 
     PROMPT_TEMPLATE = """
@@ -70,7 +78,8 @@ class SimpleWriteTest(Action):
         rsp = await self._aask(prompt)
         code_text = parse_code(rsp)
         return code_text
-```
+````
+
 ```python
 class SimpleWriteReview(Action):
 
@@ -87,8 +96,11 @@ class SimpleWriteReview(Action):
         rsp = await self._aask(prompt)
         return rsp
 ```
+
 #### Define Role
+
 In many multi-agent scenarios, defining a `Role` can be as simple as 10 lines of codes. For `SimpleCoder`, we do two things:
+
 1. Equip the `Role` with the appropriate `Action`s with `_init_actions`, this is identical to setting up a single agent
 2. A multi-agent operation: we make the `Role` `_watch` important upstream messages from users or other agents. Recall our SOP, `SimpleCoder` takes user instruction, which is a `Message` caused by `UserRequirement` in MetaGPT. Therefore, we add `self._watch([UserRequirement])`.
 
@@ -108,10 +120,12 @@ class SimpleCoder(Role):
 ```
 
 ---
+
 Similar to above, for `SimpleTester`, we:
+
 1. Equip the `SimpleTester` with `SimpleWriteTest` action using `_init_actions`
 2. Make the `Role` `_watch` important upstream messages from other agents. Recall our SOP, `SimpleTester` takes main code from `SimpleCoder`, which is a `Message` caused by `SimpleWriteCode`. Therefore, we add `self._watch([SimpleWriteCode])`.
->An extended question: Think about what it means if we use `self._watch([SimpleWriteCode, SimpleWriteReview])` instead, feel free to try this too 
+   > An extended question: Think about what it means if we use `self._watch([SimpleWriteCode, SimpleWriteReview])` instead, feel free to try this too
 
 Additionally, we want to show that you can define your own acting logic for the agent. This applies to situation where the `Action` takes more than one input, you want to modify the input, to use particular memories, or to make any other changes to reflect specific logic. Hence, we:
 
@@ -143,8 +157,11 @@ class SimpleTester(Role):
 
         return msg
 ```
+
 ---
+
 Define `SimpleReviewer` following the same procedure:
+
 ```python
 class SimpleReviewer(Role):
     def __init__(
@@ -159,9 +176,11 @@ class SimpleReviewer(Role):
 ```
 
 ### Create a team and add roles
-Now that we have defined our three `Role`s, it's time to put them together. We initialize all of them, set up a `Team`, and `hire` them. 
+
+Now that we have defined our three `Role`s, it's time to put them together. We initialize all of them, set up a `Team`, and `hire` them.
 
 Run the `Team`, we should see the collaboration between them!
+
 ```python
 import asyncio
 import typer
@@ -193,11 +212,13 @@ def main(
 if __name__ == '__main__':
     app()
 ```
+
 ## Complete script of this tutorial
 
 https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agents.py
 
 Run it with
+
 ```sh
 python3 examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
 ```
@@ -207,6 +228,7 @@ Or try it on Colab
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
 
 ## Mechanism Explained
+
 While users can write a few lines of code to set up a running `Role`, it's beneficial to describe the inner mechanism so that users understands the implication of the setup code and have a whole picture of the framework.
 
 ![img](/image/guide/tutorials/multi_agents_flowchart.png)

@@ -14,7 +14,6 @@ The design approach involves using the `LLM` (Large Language Model) to initially
 
 [GitHub Source Code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/tutorial_assistant.py)
 
-
 ## Role Definition
 
 1. Define the role class, inheriting from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include the parameters `name`, `profile`, `goal`, and `constraints`. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, initializing the `Role`. Use `self._init_actions([WriteDirectory(language=language)])` to add initial `action` and `states`. Here, the write directory action is added initially. Additionally, custom parameters can be defined; here, the `language` parameter is added to support custom languages. Use `self._set_react_mode(react_mode="by_order")` to set the execution order of actions in `_init_actions` to sequential.
@@ -22,7 +21,7 @@ The design approach involves using the `LLM` (Large Language Model) to initially
    ```python
    class TutorialAssistant(Role):
        """Tutorial assistant, input one sentence to generate a tutorial document in markup format.
-   
+
        Args:
            name: The name of the role.
            profile: The role profile description.
@@ -30,7 +29,7 @@ The design approach involves using the `LLM` (Large Language Model) to initially
            constraints: Constraints or requirements for the role.
            language: The language in which the tutorial documents will be generated.
        """
-   
+
        def __init__(
            self,
            name: str = "Stitch",
@@ -76,14 +75,14 @@ The design approach involves using the `LLM` (Large Language Model) to initially
            self.total_content += "\n\n\n"
        self.total_content += resp
        return Message(content=resp, role=self.profile)
-   
+
    async def _handle_directory(self, titles: Dict) -> Message:
        """Handle the directories for the tutorial document.
-   
+
        Args:
            titles: A dictionary containing the titles and directory structure,
                    such as {"title": "xxx", "directory": [{"dir 1": ["sub dir 1", "sub dir 2"]}]}
-       
+
        Returns:
            A message containing information about the directory.
        """
@@ -100,7 +99,6 @@ The design approach involves using the `LLM` (Large Language Model) to initially
        self._init_actions(actions)
    ```
 
-
 ## Action Definition
 
 1. Define an `action`, where each `action` corresponds to a `class` object. Inherit from the `Action` base class and override the `__init__` initialization method. The `__init__` method includes the `name` parameter. The first line of code uses `super().__init__(name, *args, **kwargs)` to call the constructor of the parent class, initializing the `action`. Here, use `args` and `kwargs` to pass other parameters to the parent class constructor, such as `context` and `llm`.
@@ -114,22 +112,22 @@ The design approach involves using the `LLM` (Large Language Model) to initially
    @File    : tutorial_assistant.py
    @Describe : Actions of the tutorial assistant, including writing directories and document content.
    """
-      
+
    from typing import Dict
-      
+
    from metagpt.actions import Action
    from metagpt.prompts.tutorial_assistant import DIRECTORY_PROMPT, CONTENT_PROMPT
    from metagpt.utils.common import OutputParser
-   
-   
+
+
    class WriteDirectory(Action):
        """Action class for writing tutorial directories.
-      
+
        Args:
            name: The name of the action.
            language: The language to output, default is "Chinese".
        """
-      
+
        def __init__(self, name: str = "", language: str = "Chinese", *args, **kwargs):
            super().__init__(name, *args, **kwargs)
            self.language = language
@@ -140,10 +138,10 @@ The design approach involves using the `LLM` (Large Language Model) to initially
    ```python
    async def run(self, topic: str, *args, **kwargs) -> Dict:
        """Execute the action to generate a tutorial directory according to the topic.
-      
+
        Args:
            topic: The tutorial topic.
-      
+
        Returns:
            The tutorial directory information, including {"title": "xxx", "directory": [{"dir 1": ["sub dir 1", "sub dir 2"]}]}.
        """
@@ -157,32 +155,30 @@ The design approach involves using the `LLM` (Large Language Model) to initially
    ```python
    class WriteContent(Action):
        """Action class for writing tutorial content.
-      
+
        Args:
            name: The name of the action.
            directory: The content to write.
            language: The language to output, default is "Chinese".
        """
-      
+
        def __init__(self, name: str = "", directory: str = "", language: str = "Chinese", *args, **kwargs):
            super().__init__(name, *args, **kwargs)
            self.language = language
            self.directory = directory
-      
+
        async def run(self, topic: str, *args, **kwargs) -> str:
            """Execute the action to write document content according to the directory and topic.
-      
+
            Args:
                topic: The tutorial topic.
-      
+
            Returns:
                The written tutorial content.
            """
            prompt = CONTENT_PROMPT.format(topic=topic, language=self.language, directory=self.directory)
            return await self._aask(prompt=prompt)
    ```
-
-
 
 ## Role Execution Results
 
@@ -204,9 +200,6 @@ The generated tutorial documents are located in the project's `/data/tutorial_do
 
 ![image](/image/guide/use_cases/tutorial_assistant/output_en_2.png)
 
-
-
 ## Note
 
 This role currently does not support internet search capabilities. Content generation relies on data trained by the `LLM` large model.
-

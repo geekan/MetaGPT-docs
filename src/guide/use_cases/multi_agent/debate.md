@@ -5,6 +5,7 @@ In this use case, we will illustrate the development process of a playful exampl
 Imagine, just for a moment, if we were to simulate agents representing Biden and Trump working together. It's a fun experiment, isn't it? Given their known disagreements, such a combination could lead to some lively exchanges. This serves as an ideal example to showcase how to design multiple agents and facilitate interactions between them. We will deb our experiment the "Biden-Trump Debate".
 
 In general, we need two steps to set up a debate between them:
+
 1. Define a role Debator capable of a speaking action, which we suggest taking reference from Agent101
 2. Take care of the communication between Debator, that is, have Biden listen to Trump and Trump to Biden
 3. Initialize two Debator instances, Biden and Trump, create a team with an environment to put them in, and enable them to interact with each other
@@ -12,7 +13,9 @@ In general, we need two steps to set up a debate between them:
 Complete code is available at the end of this section
 
 ### Define Action
+
 First, we need to define our `Action`. It's a debate setting, so let's name it as `SpeakAloud`
+
 ```python
 class SpeakAloud(Action):
     """Action: Speak out aloud in a debate (quarrel)"""
@@ -39,10 +42,13 @@ class SpeakAloud(Action):
 
         return rsp
 ```
+
 ### Define Role
-We will define a common `Role` called `Debator`. 
+
+We will define a common `Role` called `Debator`.
 
 Here `_init_actions` make our `Role` possess the `SpeakAloud` action we just define. We also `_watch` both `SpeakAloud` and `UserRequirement`, because we want each debator to pay attention to messages of `SpeakAloud` from his opponent, as well as `UserRequirement` (human instruction) from users.
+
 ```python
 class Debator(Role):
     def __init__(
@@ -58,7 +64,9 @@ class Debator(Role):
         self.name = name
         self.opponent_name = opponent_name
 ```
+
 Next, we make each debator listen to his opponent's argument. This is done by overwriting the `_observe` function. This is an important point because there will be "SpeakAloud messages" (`Message` triggered by `SpeakAloud`) from both Trump and Biden in the environment. We don't want Trump to process his own "SpeakAloud message" from the last round, but instead those from Biden, and vice versa. (We will take care of this process with a general message routing mechanism in updates shortly to come. You won't need this step after the updates)
+
 ```python
 async def _observe(self) -> int:
         await super()._observe()
@@ -66,7 +74,9 @@ async def _observe(self) -> int:
         self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
         return len(self._rc.news)
 ```
+
 Finally, we enable each debator to send counter arguments back to his opponent. Here we construct a context from message history, make the `Debator` run his possessed `SpeakAloud` action, and craft a new `Message` with the counter argument content. Notice we define that each `Debator` will send the `Message` to his opponent.
+
 ```python
 async def _act(self) -> Message:
     logger.info(f"{self._setting}: ready to {self._rc.todo}")
@@ -133,10 +143,13 @@ class Debator(Role):
 
         return msg
 ```
+
 ### Create a team and add roles
+
 Now that we have defined our `Debator`s, let's put them together to see what will come up. We set up a `Team` and "hire" Biden and Trump. In this example, we will send our instruction (as a `UserRequirement` under the hood) to Biden to have him start first. If you want Trump to speak first, set send_to as "Trump".
 
 Run the `Team`, we should see the friendly conversation between them!
+
 ```python
 async def debate(idea: str, investment: float = 3.0, n_round: int = 5):
     """Run a team of presidents and watch they quarrel. :) """
@@ -161,7 +174,7 @@ def main(
     n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
 ):
     """
-    :param idea: Debate topic, such as "Topic: The U.S. should commit more in climate change fighting" 
+    :param idea: Debate topic, such as "Topic: The U.S. should commit more in climate change fighting"
                  or "Trump: Climate change is a hoax"
     :param investment: contribute a certain dollar amount to watch the debate
     :param n_round: maximum rounds of the debate
@@ -174,14 +187,17 @@ def main(
 if __name__ == '__main__':
     app()
 ```
+
 ## Complete script of this section
 
 https://github.com/geekan/MetaGPT/blob/main/examples/debate.py
 
 Run it with
+
 ```sh
 python3 examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
 ```
+
 A sample run
 
 ![img](/image/guide/use_cases/debate_log.png)

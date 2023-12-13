@@ -16,7 +16,6 @@ Through this document, you can learn how to use the MetaGPT researcher role to s
 - [Researcher Actions](https://github.com/geekan/MetaGPT/blob/main/metagpt/actions/research.py)
 - [Researcher Example](https://github.com/geekan/MetaGPT/blob/main/examples/research.py)
 
-
 ## Design Overview
 
 ### Design Philosophy
@@ -39,9 +38,7 @@ The following is a flowchart illustrating the Researcher role architecture:
 
 ![Researcher Role Architecture Diagram](/image/guide/use_cases/researcher/researcher-role-architecture-diagram-en.png)
 
-
 Based on this process, we can abstract three Actions and define a Role as follows:
-
 
 | Name                  | Class  | Description                                                    |
 | --------------------- | ------ | -------------------------------------------------------------- |
@@ -55,7 +52,6 @@ Based on this process, we can abstract three Actions and define a Role as follow
 #### CollectLinks
 
 The CollectLinks Action is used to search the internet for relevant questions and retrieve a list of URL addresses. Since user-input questions may not be directly suitable for search engine queries, the CollectLinks Action first breaks down the user's question into multiple sub-questions suitable for search. It then uses a search engine for this purpose. The implementation utilizes the SearchEngine in the tools module, supporting searches through serpapi/google/serper/ddg. The implementation details can be found in [metagpt/actions/research.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/actions/research.py), and the following provides a basic explanation of the CollectLinks.run method:
-
 
 ```python
 class CollectLinks(Action):
@@ -87,7 +83,7 @@ class CollectLinks(Action):
         except Exception as e:
             logger.exception(f"fail to get keywords related to the research topic \"{topic}\" for {e}")
             keywords = [topic]
-    
+
         # Search the sub-problems using the search engine
         results = await asyncio.gather(*(self.search_engine.run(i, as_string=False) for i in keywords))
 
@@ -121,7 +117,6 @@ class CollectLinks(Action):
 #### WebBrowseAndSummarize
 
 The WebBrowseAndSummarize Action is responsible for browsing web pages and summarizing their content. MetaGPT provides the `WebBrowserEngine` in the `tools` module, which supports web browsing through playwright/selenium. The WebBrowseAndSummarize Action uses the `WebBrowserEngine` for web browsing. The implementation details can be found in [metagpt/actions/research.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/actions/research.py), and the following provides a basic explanation of the `WebBrowseAndSummarize.run` method:
-
 
 ```python
 class WebBrowseAndSummarize(Action):
@@ -180,7 +175,6 @@ class WebBrowseAndSummarize(Action):
 
 The ConductResearch Action is responsible for writing a research report. It is implemented by using the summarized data from the WebBrowseAndSummarize Action as context and then generating the research report. The implementation details can be found in [metagpt/actions/research.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/actions/research.py), and the following provides a basic explanation of the `ConductResearch.run` method:
 
-
 ```python
 class ConductResearch(Action):
     async def run(
@@ -222,7 +216,7 @@ class Researcher(Role):
         **kwargs,
     ):
         super().__init__(name, profile, goal, constraints, **kwargs)
-        
+
         # Add the `CollectLinks`, `WebBrowseAndSummarize`, and `ConductResearch` actions
         self._init_actions([CollectLinks(name), WebBrowseAndSummarize(name), ConductResearch(name)])
 
@@ -333,5 +327,6 @@ The `metagpt.roles.researcher` module provides a command-line interface for exec
 ```bash
 python3 -m metagpt.roles.researcher "dataiku vs. datarobot"
 ```
+
 Log output: [log.txt](https://github.com/geekan/MetaGPT/files/12302886/log.txt)
 Report output: [dataiku vs. datarobot.md](https://github.com/geekan/MetaGPT/files/12302882/dataiku.vs.datarobot.md)

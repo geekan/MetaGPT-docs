@@ -15,8 +15,6 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
 
 [GitHub Source Code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/invoice_ocr_assistant.py)
 
-
-
 ## Role Definition
 
 1. Define the role class, inherit from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include the `name`, `profile`, `goal`, and `constraints` parameters. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, implementing the initialization of the `Role`. Use `self._init_actions([InvoiceOCR])` to add initial actions and states. Here, the initial action is to add an action for OCR recognition of invoices. Custom parameters can also be added; here, the `language` parameter is added to support custom languages. Variables such as `filename`, `origin_query`, and `orc_data` are used to temporarily store the invoice file name, the original query, and the OCR recognition result, respectively. Use `self._set_react_mode(react_mode="by_order")` to set the execution order of actions to be sequential in the `_init_actions`.
@@ -26,7 +24,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
        """Invoice OCR assistant, support OCR text recognition of invoice PDF, png, jpg, and zip files,
        generate a table for the payee, city, total amount, and invoicing date of the invoice,
        and ask questions for a single file based on the OCR recognition results of the invoice.
-   
+
        Args:
            name: The name of the role.
            profile: The role profile description.
@@ -34,7 +32,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
            constraints: Constraints or requirements for the role.
            language: The language in which the invoice table will be generated.
        """
-   
+
        def __init__(
            self,
            name: str = "Stitch",
@@ -57,7 +55,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
    ```python
    async def _act(self) -> Message:
        """Perform an action as determined by the role.
-   
+
        Returns:
            A message containing the result of the action.
        """
@@ -69,7 +67,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
            self.filename = file_path.name
            if not file_path:
                raise Exception("Invoice file not uploaded")
-   
+
            resp = await todo.run(file_path)
            if len(resp) == 1:
                # Single file support for questioning based on OCR recognition results
@@ -77,19 +75,17 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
                self.orc_data = resp[0]
            else:
                self._init_actions([GenerateTable])
-   
+
            self._rc.todo = None
            content = INVOICE_OCR_SUCCESS
        elif isinstance(todo, GenerateTable):
            ocr_results = msg.instruct_content
            resp = await todo.run(ocr_results, self.filename)
-   
+
            # Convert list to Markdown format string
            df = pd.DataFrame(resp)
            markdown_table
    ```
-
-
 
 ## Action Definition
 
@@ -98,13 +94,13 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
    ```python
    class InvoiceOCR(Action):
        """Action class for performing OCR on invoice files, including zip, PDF, png, and jpg files.
-   
+
        Args:
            name: The name of the action. Defaults to an empty string.
            language: The language for OCR output. Defaults to "ch" (Chinese).
-   
+
        """
-   
+
        def __init__(self, name: str = "", *args, **kwargs):
            super().__init__(name, *args, **kwargs)
    ```
@@ -114,15 +110,15 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
    ```python
    async def run(self, file_path: Path, *args, **kwargs) -> list:
        """Execute the action to identify invoice files through OCR.
-   
+
        Args:
            file_path: The path to the input file.
-   
+
        Returns:
            A list of OCR results.
        """
        file_ext = await self._check_file_type(file_path)
-   
+
        if file_ext == ".zip":
            # OCR recognizes zip batch files
            unzip_path = await self._unzip(file_path)
@@ -135,38 +131,38 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
                        ocr_result = await self._ocr(str(invoice_file_path))
                        ocr_list.append(ocr_result)
            return ocr_list
-   
+
        else:
            # OCR identifies single file
            ocr_result = await self._ocr(file_path)
            return [ocr_result]
-   
+
    @staticmethod
    async def _check_file_type(file_path: Path) -> str:
        """Check the file type of the given filename.
-   
+
        Args:
            file_path: The path of the file.
-   
+
        Returns:
            The file type based on FileExtensionType enum.
-   
+
        Raises:
            Exception: If the file format is not zip, pdf, png, or jpg.
        """
        ext = file_path.suffix
        if ext not in [".zip", ".pdf", ".png", ".jpg"]:
            raise Exception("The invoice format is not zip, pdf, png, or jpg")
-   
+
        return ext
-   
+
    @staticmethod
    async def _unzip(file_path: Path) -> Path:
        """Unzip a file and return the path to the unzipped directory.
-   
+
        Args:
            file_path: The path to the zip file.
-   
+
        Returns:
            The path to the unzipped directory.
        """
@@ -178,10 +174,10 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
                if relative_name.suffix:
                    full_filename = file_directory / relative_name
                    await File.write(full_filename.parent, relative_name.name, zip_ref.read(zip_info.filename))
-   
+
        logger.info(f"unzip_path: {file_directory}")
        return file_directory
-   
+
    @staticmethod
    async def _ocr(invoice_file_path: Path):
        ocr = PaddleOCR(use_angle_cls=True, lang="ch", page_num=1)
@@ -194,32 +190,32 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
    ```python
    class GenerateTable(Action):
        """Action class for generating tables from OCR results.
-   
+
        Args:
            name: The name of the action. Defaults to an empty string.
            language: The language used for the generated table. Defaults to "ch" (Chinese).
-   
+
        """
-   
+
        def __init__(self, name: str = "", language: str = "ch", *args, **kwargs):
            super().__init__(name, *args, **kwargs)
            self.language = language
-   
+
        async def run(self, ocr_results: list, filename: str, *args, **kwargs) -> dict[str, str]:
            """Processes OCR results, extracts invoice information, generates a table, and saves it as an Excel file.
-   
+
            Args:
                ocr_results: A list of OCR results obtained from invoice processing.
                filename: The name of the output Excel file.
-   
+
            Returns:
                A dictionary containing the invoice information.
-   
+
            """
            table_data = []
            pathname = INVOICE_OCR_TABLE_PATH
            pathname.mkdir(parents=True, exist_ok=True)
-   
+
            for ocr_result in ocr_results:
                # Extract invoice OCR main information
                prompt = EXTRACT_OCR_MAIN_INFO_PROMPT.format(ocr_result=ocr_result, language=self.language)
@@ -227,35 +223,35 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
                invoice_data = OutputParser.extract_struct(ocr_info, dict)
                if invoice_data:
                    table_data.append(invoice_data)
-   
+
            # Generate Excel file
            filename = f"{filename.split('.')[0]}.xlsx"
            full_filename = f"{pathname}/{filename}"
            df = pd.DataFrame(table_data)
            df.to_excel(full_filename, index=False)
            return table_data
-   
-   
+
+
    class ReplyQuestion(Action):
        """Action class for generating replies to questions based on OCR results.
-   
+
        Args:
            name: The name of the action. Defaults to an empty string.
            language: The language used for generating the reply. Defaults to "ch" (Chinese).
-   
+
        """
-   
+
        def __init__(self, name: str = "", language: str = "ch", *args, **kwargs):
            super().__init__(name, *args, **kwargs)
            self.language = language
-   
+
        async def run(self, query: str, ocr_result: list, *args, **kwargs) -> str:
            """Reply to questions based on ocr results.
-   
+
            Args:
                query: The question for which a reply is generated.
                ocr_result: A list of OCR results.
-   
+
            Returns:
                A reply result of string type.
            """
@@ -263,8 +259,6 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
            resp = await self._aask(prompt=prompt)
            return resp
    ```
-
-
 
 ## Role Execution Results
 
@@ -283,7 +277,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
   await role.run(Message(content="Invoicing date", instruct_content={"file_path": path}))
   ```
 
-#### Example 2 
+#### Example 2
 
 - Invoice Image
 
@@ -305,8 +299,6 @@ In the project's root directory, execute the command `python3 /examples/invoice_
 The generated invoice information is in the xlsx file in the `/data/invoice_ocr` directory at the project's root. Screenshots are as follows:
 
 ![image](/image/guide/use_cases/invoice_ocr_assistant/output.png)
-
-
 
 ## Note
 
