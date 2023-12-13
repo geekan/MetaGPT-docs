@@ -55,8 +55,7 @@ const versions = Object.keys(branches)
   .sort()
   .reverse();
 
-versions[0] += ' (stable)';
-
+const stableBranch = versions[0];
 const getVersions = () => {
   if (!versions.length && isMain) {
     return [];
@@ -72,7 +71,7 @@ const getVersions = () => {
           disabled: true,
         },
         ...versions.map((v) => ({
-          text: v,
+          text: v === stableBranch ? `${v} (stable)` : v,
           link: `${domain}/${v}/`,
           target: '_blank',
         })),
