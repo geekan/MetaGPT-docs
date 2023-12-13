@@ -54,7 +54,3 @@ follow steps below to start the dev server
 3. `npm run docs:dev`
 
 The dev server should be running at http://localhost:5173. Visit the URL in your browser to see your new site in action!
-
-# Online Deploy Status
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/08d5971b-904b-4556-9270-e5c4a4368c5c/deploy-status)](https://app.netlify.com/sites/metagpt-docs/deploys)
