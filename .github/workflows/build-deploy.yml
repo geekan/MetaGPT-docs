@@ -1,0 +1,25 @@
+name: build-deploy
+
+on:
+  push:
+    branches: 
+      - main
+      - v*
+  pull_request:
+    branchs: 
+      - main
+      - v*
+    types:
+      - closed
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: sudo apt update && sudo apt install -y curl
+
+      - name: Trigger CICD
+        run: |
+          curl -X POST "https://docs-ci.deepwisdom.ai/api/cicd" \
+            -d "token=${{ secrets.CICD_TOKEN }}&branch=${GITHUB_REF#refs/heads/}"
