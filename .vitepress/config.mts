@@ -43,14 +43,19 @@ const { current, branches } = branchInfo;
 const isMain = current === 'main';
 const base = isMain ? '/' : `/${current}/`;
 const domain = 'https://docs.deepwisdom.ai';
-const versions = Object.keys(branches).reduce((vs, branchname) => {
-  const regex = /^remotes\/origin\/(v.*)$/;
-  const [, remotebn] = regex.exec(branchname) || [];
-  if (remotebn && remotebn !== current) {
-    vs.push(remotebn);
-  }
-  return vs;
-}, [] as string[]);
+const versions = Object.keys(branches)
+  .reduce((vs, branchname) => {
+    const regex = /^remotes\/origin\/(v.*)$/;
+    const [, remotebn] = regex.exec(branchname) || [];
+    if (remotebn) {
+      vs.push(remotebn);
+    }
+    return vs;
+  }, [] as string[])
+  .sort()
+  .reverse();
+
+versions[0] += ' (stable)';
 
 const getVersions = () => {
   if (!versions.length && isMain) {
@@ -60,9 +65,12 @@ const getVersions = () => {
     {
       text: current,
       items: [
-        ...(!isMain
-          ? [{ text: 'latest', link: `${domain}`, target: '_blank' }]
-          : []),
+        {
+          text: 'main (unstable)',
+          link: `${domain}`,
+          target: '_blank',
+          disabled: true,
+        },
         ...versions.map((v) => ({
           text: v,
           link: `${domain}/${v}/`,
