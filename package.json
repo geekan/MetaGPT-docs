@@ -20,6 +20,7 @@
     "dayjs": "^1.11.10",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
+    "simple-git": "^3.20.0",
     "simple-git-hooks": "^2.9.0",
     "unocss": "^0.57.1",
     "unplugin-auto-import": "^0.16.7",

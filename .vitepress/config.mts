@@ -3,6 +3,7 @@ import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import { resolve } from 'node:path';
 import { existsSync, cpSync } from 'node:fs';
+import { simpleGit } from 'simple-git';
 
 const Logo = `
 <svg  viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +32,50 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
+const branchInfo = await simpleGit('.', {}).pull().branch({});
+
+const { current, branches } = branchInfo;
+const isMain = current === 'main';
+const base = isMain ? '/' : `/${current}/`;
+const domian = '//docs.deepwisdom.ai';
+const versions = Object.keys(branches).reduce((vs, branchname) => {
+  const regex = /^remotes\/origin\/(v.*)$/;
+  const [, remotebn] = regex.exec(branchname) || [];
+  if (remotebn && remotebn !== current) {
+    vs.push(remotebn);
+  }
+  return vs;
+}, [] as string[]);
+
+const getVersions = () => {
+  if (!versions.length && isMain) {
+    return [];
+  }
+  return [
+    {
+      text: current,
+      items: [
+        ...(!isMain
+          ? [{ text: 'latest', link: `${domian}`, target: '_blank' }]
+          : []),
+        ...versions.map((v) => ({
+          text: v,
+          link: `${domian}/${v}/`,
+          target: '_blank',
+        })),
+      ],
+    },
+  ];
+};
+
+const blogAndRfcVisible = isMain;
+const arrVisible = (arr: any[], visible: boolean) => {
+  return visible ? arr : [];
+};
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base,
   title: 'MetaGPT',
   description: 'The Multi-Agent Framework',
   srcDir: './src',
@@ -49,16 +92,22 @@ export default defineConfig({
             link: '/enus/guide/get_started/introduction',
             activeMatch: '/enus/guide/',
           },
-          {
-            text: 'Blog',
-            link: '/enus/blog/agents',
-            activeMatch: '/enus/blog/',
-          },
-          {
-            text: 'RFCs',
-            link: '/enus/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/enus/rfcs/',
-          },
+          ...arrVisible(
+            [
+              {
+                text: 'Blog',
+                link: '/enus/blog/agents',
+                activeMatch: '/blog/',
+              },
+              {
+                text: 'RFCs',
+                link: '/enus/rfcs/RFC-116-MetaGPT优化方案',
+                activeMatch: '/euns/rfcs/',
+              },
+            ],
+            blogAndRfcVisible
+          ),
+          ...getVersions(),
         ],
         sidebar: {
           '/enus/guide/': {
@@ -209,16 +258,22 @@ export default defineConfig({
             link: '/zhcn/guide/get_started/introduction',
             activeMatch: '/zhcn/guide/',
           },
-          {
-            text: '博客',
-            link: '/zhcn/blog/agents',
-            activeMatch: '/zhcn/blog/',
-          },
-          {
-            text: 'RFCs',
-            link: '/zhcn/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/zhcn/rfcs/',
-          },
+          ...arrVisible(
+            [
+              {
+                text: '博客',
+                link: '/zhcn/blog/agents',
+                activeMatch: '/zhcn/blog/',
+              },
+              {
+                text: 'RFCs',
+                link: '/zhcn/rfcs/RFC-116-MetaGPT优化方案',
+                activeMatch: '/zhcn/rfcs/',
+              },
+            ],
+            blogAndRfcVisible
+          ),
+          ...getVersions(),
         ],
         sidebar: {
           '/zhcn/guide/': {
