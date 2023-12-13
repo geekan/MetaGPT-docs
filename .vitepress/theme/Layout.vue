@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useEventListener } from '@vueuse/core';
 import { useData } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import { nextTick, provide } from 'vue';
@@ -36,6 +37,18 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
       pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
     }
   );
+});
+
+useEventListener('click', (event) => {
+  const target = event.target as HTMLAnchorElement;
+
+  if (target.tagName.toLowerCase() === 'a' && /v[^\/]*\/$/.test(target.href)) {
+    event.preventDefault();
+    const link = `${target.href}${location.pathname
+      .replace(/^\/v[^\/]*\//, '/')
+      .slice(1)}`;
+    window.open(link, target.target);
+  }
 });
 </script>
 
