@@ -17,13 +17,13 @@ const Logo = `
 `;
 
 const sources = ['blog', 'rfcs'];
-const dests = ['zhcn', 'enus'];
+const dests = ['zh', 'en'];
 
 // route based on fs, so copy files when deploy
 if (process.env.NODE_ENV === 'production') {
   /** for deploy */
   cpSync(
-    resolve(__dirname, '../src/enus/index.md'),
+    resolve(__dirname, '../src/en/index.md'),
     resolve(__dirname, '../src/index.md')
   );
   for (const source of sources) {
@@ -89,24 +89,24 @@ export default defineConfig({
     root: {
       label: 'English',
       lang: 'en',
-      link: '/enus/',
+      link: '/en/',
       themeConfig: {
         nav: [
           {
             text: 'Docs',
-            link: '/enus/guide/get_started/introduction',
-            activeMatch: '/enus/guide/',
+            link: '/en/guide/get_started/introduction',
+            activeMatch: '/en/guide/',
           },
           ...arrVisible(
             [
               {
                 text: 'Blog',
-                link: '/enus/blog/agents',
+                link: '/en/blog/agents',
                 activeMatch: '/blog/',
               },
               {
                 text: 'RFCs',
-                link: '/enus/rfcs/RFC-116-MetaGPT优化方案',
+                link: '/en/rfcs/RFC-116-MetaGPT优化方案',
                 activeMatch: '/euns/rfcs/',
               },
             ],
@@ -115,8 +115,8 @@ export default defineConfig({
           ...getVersions(),
         ],
         sidebar: {
-          '/enus/guide/': {
-            base: '/enus/guide/',
+          '/en/guide/': {
+            base: '/en/guide/',
             items: [
               {
                 text: 'Get Started',
@@ -231,8 +231,8 @@ export default defineConfig({
               },
             ],
           },
-          '/enus/blog/': {
-            base: '/enus/blog/',
+          '/en/blog/': {
+            base: '/en/blog/',
             items: [
               {
                 text: 'Agents',
@@ -240,8 +240,8 @@ export default defineConfig({
               },
             ],
           },
-          '/enus/rfcs/': {
-            base: '/enus/rfcs/',
+          '/en/rfcs/': {
+            base: '/en/rfcs/',
             items: [
               {
                 text: 'RFC-116-MetaGPT优化方案',
@@ -252,28 +252,28 @@ export default defineConfig({
         },
       },
     },
-    zhcn: {
+    zh: {
       label: '中文',
-      lang: 'zhcn',
-      link: '/zhcn/',
+      lang: 'zh',
+      link: '/zh/',
       themeConfig: {
         nav: [
           {
             text: '文档',
-            link: '/zhcn/guide/get_started/introduction',
-            activeMatch: '/zhcn/guide/',
+            link: '/zh/guide/get_started/introduction',
+            activeMatch: '/zh/guide/',
           },
           ...arrVisible(
             [
               {
                 text: '博客',
-                link: '/zhcn/blog/agents',
-                activeMatch: '/zhcn/blog/',
+                link: '/zh/blog/agents',
+                activeMatch: '/zh/blog/',
               },
               {
                 text: 'RFCs',
-                link: '/zhcn/rfcs/RFC-116-MetaGPT优化方案',
-                activeMatch: '/zhcn/rfcs/',
+                link: '/zh/rfcs/RFC-116-MetaGPT优化方案',
+                activeMatch: '/zh/rfcs/',
               },
             ],
             blogAndRfcVisible
@@ -281,8 +281,8 @@ export default defineConfig({
           ...getVersions(),
         ],
         sidebar: {
-          '/zhcn/guide/': {
-            base: '/zhcn/guide/',
+          '/zh/guide/': {
+            base: '/zh/guide/',
             items: [
               {
                 text: '开始',
@@ -418,8 +418,8 @@ export default defineConfig({
               },
             ],
           },
-          '/zhcn/blog/': {
-            base: '/zhcn/blog/',
+          '/zh/blog/': {
+            base: '/zh/blog/',
             items: [
               {
                 text: 'Agents',
@@ -427,8 +427,8 @@ export default defineConfig({
               },
             ],
           },
-          '/zhcn/rfcs/': {
-            base: '/zhcn/rfcs/',
+          '/zh/rfcs/': {
+            base: '/zh/rfcs/',
             items: [
               {
                 text: 'RFC-116-MetaGPT优化方案',
