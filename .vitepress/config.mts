@@ -16,7 +16,7 @@ const Logo = `
 `;
 
 const sources = ['blog', 'rfcs'];
-const dests = ['zhcn'];
+const dests = ['zhcn', 'enus'];
 
 // route based on fs, so copy files when deploy
 if (process.env.NODE_ENV === 'production') {
@@ -41,27 +41,28 @@ export default defineConfig({
     root: {
       label: 'English',
       lang: 'en',
+      link: '/enus/',
       themeConfig: {
         nav: [
           {
             text: 'Docs',
-            link: '/guide/get_started/introduction',
-            activeMatch: '/guide/',
+            link: '/enus/guide/get_started/introduction',
+            activeMatch: '/enus/guide/',
           },
           {
             text: 'Blog',
-            link: '/blog/agents',
-            activeMatch: '/blog/',
+            link: '/enus/blog/agents',
+            activeMatch: '/enus/blog/',
           },
           {
             text: 'RFCs',
-            link: '/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/rfcs/',
+            link: '/enus/rfcs/RFC-116-MetaGPT优化方案',
+            activeMatch: '/enus/rfcs/',
           },
         ],
         sidebar: {
-          '/guide/': {
-            base: '/guide/',
+          '/enus/guide/': {
+            base: '/enus/guide/',
             items: [
               {
                 text: 'Get Started',
@@ -176,8 +177,8 @@ export default defineConfig({
               },
             ],
           },
-          '/blog/': {
-            base: '/blog/',
+          '/enus/blog/': {
+            base: '/enus/blog/',
             items: [
               {
                 text: 'Agents',
@@ -185,8 +186,8 @@ export default defineConfig({
               },
             ],
           },
-          '/rfcs/': {
-            base: '/rfcs/',
+          '/enus/rfcs/': {
+            base: '/enus/rfcs/',
             items: [
               {
                 text: 'RFC-116-MetaGPT优化方案',
