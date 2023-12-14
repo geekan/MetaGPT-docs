@@ -41,7 +41,7 @@ const branchInfo = await simpleGit('.', {}).pull().branch({});
 
 const { current, branches } = branchInfo;
 const isMain = current === 'main';
-const base = isMain ? '/' : `/${current}/`;
+const base = isMain ? '/main/' : `/${current}/`;
 const domain = 'https://docs.deepwisdom.ai';
 const versions = Object.keys(branches)
   .reduce((vs, branchname) => {
@@ -66,7 +66,7 @@ const getVersions = () => {
       items: [
         {
           text: 'main (unstable)',
-          link: `${domain}`,
+          link: `${domain}/main/`,
           target: '_blank',
           disabled: true,
         },
