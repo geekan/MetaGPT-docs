@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useEventListener } from '@vueuse/core';
-import { useData } from 'vitepress';
+import { useData, useRoute, useRouter, withBase } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import { nextTick, provide } from 'vue';
 
-const { isDark } = useData();
+const { isDark, theme, site } = useData();
 
 const enableTransitions = () =>
   'startViewTransition' in document &&
@@ -50,9 +50,35 @@ useEventListener('click', (event) => {
   ) {
     event.preventDefault();
     const link = `${target.href}${location.pathname
-      .replace(/^\/v[^\/]*\//, '/')
+      .replace(site.value.base, '/')
       .slice(1)}`;
     window.open(link, target.target);
+  }
+});
+
+const router = useRouter();
+const route = useRoute();
+
+onMounted(() => {
+  if (!import.meta.env.DEV) {
+    if (location.pathname === '/') {
+      try {
+        const navlist = site.value.themeConfig.nav;
+        const stableVersion = navlist[navlist.length - 1].items.find((_: any) =>
+          _.text.includes('(stable)')
+        );
+
+        location.href = stableVersion.link;
+
+        return;
+      } catch {}
+    }
+  }
+
+  const baseWithoutLastSlash = site.value.base.replace(/\/$/, '');
+
+  if (location.pathname.replace(/\/$/, '') === baseWithoutLastSlash) {
+    router.go(withBase('/en/'));
   }
 });
 </script>

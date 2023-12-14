@@ -9,7 +9,12 @@
       dark:border="0 solid #444 b"
     >
       <div w216px h144px flex-shrink-0 class="font-family: PingFang SC;">
-        <img :src="Article.banner" object-cover alt="" class="h100% w100%" />
+        <img
+          :src="withBase(Article.banner)"
+          object-cover
+          alt=""
+          class="h100% w100%"
+        />
       </div>
       <div flex="~ col gap" flex-grow-1>
         <div flex-grow-1>
@@ -59,7 +64,7 @@
 </template>
 <script setup lang="ts">
 import { formateDate } from '@/utils/tool';
-import { useRouter, useData } from 'vitepress';
+import { useRouter, useData, withBase } from 'vitepress';
 type Article = {
   title: string;
   description: string;
@@ -87,8 +92,8 @@ const go = (url: string) => {
   if (url.startsWith('http')) {
     window.open(url, '_blank');
   } else {
-    const prefix = lang.value === 'en' ? '' : `/${lang.value}`;
-    router.go(`${prefix}${url}`);
+    const prefix = `/${lang.value}`;
+    router.go(withBase(`${prefix}${url}`));
   }
 };
 </script>
