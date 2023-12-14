@@ -2,7 +2,9 @@
 
 Using MetaGPT involves connecting with model providers. We will walk through the setup in this page.
 
-## Fast Setup for LLM API
+After your [Installation](./installation.md) is complete, follow the instructions in this document to complete the configuration before use.
+At the moment, the example of this project only needs to configure OpenAi API.
+## OpenAI API
 
 We will take OpenAI API as an example. You can finish the setup in either way:
 
@@ -45,10 +47,13 @@ Remember: If you follow the `git clone` approach in [Installation](./installatio
 Here you are good to go! See [Quickstart](./quickstart) or our [Tutorials](/guide/tutorials/agent_101) for your first run!
 
 
-## Detail Setting
-Some future projects may require other API models, so you should configure the keys of other Apis according to your needs.
-
-#### If you are using iFlytek's large model Spark API :
+MetaGPT also supports various LLM models, configure the keys of model APIs according to your needs.
+## Zhipu API
+```yaml
+#### if zhipuai from `https://open.bigmodel.cn`. You can set here or export API_KEY="YOUR_API_KEY"
+# ZHIPUAI_API_KEY: "YOUR_API_KEY"
+```
+## iFlytek's large model Spark API :
 ``` yaml
 #### if Spark
 ### Nomally YOU only need to modify SPARK_APPID SPARK_API_SECRET SPARK_API_KEY
@@ -58,19 +63,18 @@ SPARK_API_KEY : "YOUR_APIKey"
 DOMAIN : "generalv2"
 SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
 ```
-#### If you are using Baidu's large model  Ernie  API
+## Baidu's large model  Ernie  API
 ``` yaml
 #### if Ernie
 ERNIE_API_KEY : "YOUR_APIKey"
 ERNIE_SECRET_KEY : "YOUR_APISecret"
 ```
-#### If you are using Anthropic API
-
+## Anthropic API
 ``` yaml
 #### if Anthropic
 Anthropic_API_KEY: "YOUR_API_KEY"
 ```
-#### If you are using Microsoft Azure
+## Microsoft Azure Based Openai
 ``` yaml
 #### if AZURE, check https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb
 #### You can use ENGINE or DEPLOYMENT mode
@@ -82,7 +86,7 @@ DEPLOYMENT_NAME: "YOUR_DEPLOYMENT_NAME"
 DEPLOYMENT_ID: "YOUR_DEPLOYMENT_ID"
 ```
 
-#### If you need to use the search function
+## Web Searching API
 ``` yaml
 #### for Search
 
@@ -101,7 +105,7 @@ GOOGLE_CSE_ID: "YOUR_CSE_ID"
 SERPER_API_KEY: "YOUR_API_KEY"
 ```
 
-#### If it involves accessing website functions
+## Website Access For Agent
 ``` yaml
 #### for web access
 
@@ -115,25 +119,25 @@ PLAYWRIGHT_BROWSER_TYPE: chromium
 SELENIUM_BROWSER_TYPE: chrome
 ```
 
-#### If you are using Auzre TTS
+## Auzre TTS
 ```` yaml
 #### for TTS
 
 AZURE_TTS_SUBSCRIPTION_KEY: "YOUR_API_KEY"
 AZURE_TTS_REGION: "eastus"
 ````
-#### If you are using Stable diffusion local deployment
+## Stable Diffusion Local Deployment
 ````yaml
 #### for Stable Diffusion
 ## Use SD service, based on https://github.com/AUTOMATIC1111/stable-diffusion-webui
 SD_URL: "YOUR_SD_URL"
 SD_T2I_API: "/sdapi/v1/txt2img"
-Other settings
+
+````
+## Other Abilities
+````yaml 
 #### for Execution
 LONG_TERM_MEMORY: false
-````
-#### For other ability
-````yaml 
 #### for Mermaid CLI
 ## If you installed mmdc (Mermaid CLI) only for metagpt then enable the following configuration.
 PUPPETEER_CONFIG: "./config/puppeteer-config.json"
