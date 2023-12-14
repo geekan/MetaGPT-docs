@@ -5,7 +5,7 @@ We provide several ways for installing MetaGPT, please take the one most conveni
 ## Support system and version
 
 | System Version | Python Version | Supported |
-| -------------- | -------------- | --------- |
+|----------------|----------------|-----------|
 | macOS 13.x     | python 3.9     | Yes       |
 | Windows 11     | python 3.9     | Yes       |
 | Ubuntu 22.04   | python 3.9     | Yes       |
@@ -18,7 +18,8 @@ python3 --version
 
 ## Install stable version
 
-Recommended for most users. You can import MetaGPT like any python package, employ teams of diverse built-in roles, and build your own agents to serve all kinds of application.
+Recommended for most users. You can import MetaGPT like any python package, employ teams of diverse built-in roles, and
+build your own agents to serve all kinds of application.
 
 ```
 pip install metagpt
@@ -34,7 +35,8 @@ pip install git+https://github.com/geekan/MetaGPT
 
 ## Install in development mode
 
-Recommended for developers and researchers looking to customize the framework for their unique requirements, experiment on new ideas, or create sophisticated functionalities like a novel memory mechanism using the framework.
+Recommended for developers and researchers looking to customize the framework for their unique requirements, experiment
+on new ideas, or create sophisticated functionalities like a novel memory mechanism using the framework.
 
 ```
 git clone https://github.com/geekan/MetaGPT.git
@@ -89,29 +91,41 @@ cd MetaGPT && docker build -t metagpt:custom .
 
 ## Installation for full features
 
-This is relevant if you want to generate diagrams such as quadrant chart, system designs, sequence flow, etc. They are provided as intermediate results if you run the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py).
+This is relevant if you want to generate diagrams such as quadrant chart, system designs, sequence flow, etc. They are
+provided as intermediate results if you run
+the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py).
 
 ### Mermaid
 
-Mermaid is a language that uses text to generate flowcharts, pie charts, Gantt charts, and other diagrams. MetaGPT uses Mermaid to create flowcharts, sequence diagrams, Gantt charts, etc. Mermaid is implemented in Node.js, and direct installation can be somewhat costly. MetaGPT provides the following Mermaid Engines to convert Mermaid text into diagrams:
+Mermaid is a language that uses text to generate flowcharts, pie charts, Gantt charts, and other diagrams. MetaGPT uses
+Mermaid to create flowcharts, sequence diagrams, Gantt charts, etc. Mermaid is implemented in Node.js, and direct
+installation can be somewhat costly. MetaGPT provides the following Mermaid Engines to convert Mermaid text into
+diagrams:
 
 **nodejs**
-Install mermaid-cli directly through nodejs. MetaGPT calls the command line to turn Mermaid text into diagrams. You need to install nodejs first, then use npm to install:
+Install mermaid-cli directly through nodejs. MetaGPT calls the command line to turn Mermaid text into diagrams. You need
+to install nodejs first, then use npm to install:
 
 ```
 npm install -g @mermaid-js/mermaid-cli
 ```
 
-The official method provided by mermaid, installed via nodejs, thus it basically supports all platforms and also supports output in png/svg/pdf formats. However, it requires the installation of nodejs and mermaid-cli, which comes with certain costs for installation and use, and also requires a browser environment at runtime.
+The official method provided by mermaid, installed via nodejs, thus it basically supports all platforms and also
+supports output in png/svg/pdf formats. However, it requires the installation of nodejs and mermaid-cli, which comes
+with certain costs for installation and use, and also requires a browser environment at runtime.
 
 **pyppeteer**
-Mermaid can also be called via JavaScript, and pyppeteer is a web automation testing tool implemented in Python that can execute JavaScript scripts. Therefore, using pyppeteer + mermaidjs can convert Mermaid text into diagrams. You can install pyppeteer with pip:
+Mermaid can also be called via JavaScript, and pyppeteer is a web automation testing tool implemented in Python that can
+execute JavaScript scripts. Therefore, using pyppeteer + mermaidjs can convert Mermaid text into diagrams. You can
+install pyppeteer with pip:
 
 ```
 pip install pyppeteer
 ```
 
-This method is relatively simple to install, has no platform restrictions, and supports output in png/svg/pdf formats. However, it requires a dependency on a browser, so you need to install a browser first and set the browser path when running:
+This method is relatively simple to install, has no platform restrictions, and supports output in png/svg/pdf formats.
+However, it requires a dependency on a browser, so you need to install a browser first and set the browser path when
+running:
 
 ```
 export PUPPETEER_EXECUTABLE_PATH=/path/to/your/chromium  # or edge or chrome
@@ -120,7 +134,9 @@ export PUPPETEER_EXECUTABLE_PATH=/path/to/your/chromium  # or edge or chrome
 (Note: pyppeteer is no longer maintained)
 
 **playwright**
-As pyppeteer is no longer maintained, it recommends using playwright-python as a replacement. The principle of running mermaid with playwright is the same as with pyppeteer. However, playwright-python requires the installation of its own provided browser and cannot use an already installed browser. The official only supports the following platforms:
+As pyppeteer is no longer maintained, it recommends using playwright-python as a replacement. The principle of running
+mermaid with playwright is the same as with pyppeteer. However, playwright-python requires the installation of its own
+provided browser and cannot use an already installed browser. The official only supports the following platforms:
 
 - Windows 10+, Windows Server 2016+ or Windows Subsystem for Linux (WSL).
 - MacOS 12 Monterey or MacOS 13 Ventura.
@@ -132,7 +148,11 @@ playwright install --with-deps chromium
 ```
 
 **ink**
-The mermaid.ink project provides the function to convert Mermaid text into diagrams online, refer to https://mermaid.ink/. Thus, any internet-connected device can use ink method without the need for a local browser or other dependencies. However, this method only supports generating png and svg, not pdf, and requires access to https://mermaid.ink/ during operation, so it may be affected by the network and other factors, possibly impacting stability.
+The mermaid.ink project provides the function to convert Mermaid text into diagrams online, refer
+to https://mermaid.ink/. Thus, any internet-connected device can use ink method without the need for a local browser or
+other dependencies. However, this method only supports generating png and svg, not pdf, and requires access
+to https://mermaid.ink/ during operation, so it may be affected by the network and other factors, possibly impacting
+stability.
 
 Comparison
 | Mermaid Engine | nodejs | pyppeteer | playwright | ink |

@@ -4,6 +4,7 @@
 
 在[安装](./installation.md)完成后，请按照本文档中的说明完成配置，然后开始使用。
 目前，该项目的示例只需要配置OpenAI API。
+
 ## OpenAI API
 
 我们以OpenAI API为例。您可以通过以下两种方式完成设置：
@@ -24,8 +25,9 @@ export OPENAI_API_MODEL="intended model" # gpt-4, gpt-3.5-turbo, 等等
 
 ```python
 import os
+
 os.environ["OPENAI_API_KEY"] = "sk-..."  # YOUR_API_KEY
-os.environ["OPENAI_API_MODEL"] = "intended model" # gpt-4, gpt-3.5-turbo, 等等
+os.environ["OPENAI_API_MODEL"] = "intended model"  # gpt-4, gpt-3.5-turbo, 等等
 ```
 
 ### 2. 使用key.config
@@ -39,7 +41,8 @@ OPENAI_API_KEY: 'sk-...' # YOUR_API_KEY
 OPENAI_API_MODEL: 'intended model' # gpt-4, gpt-3.5-turbo, 等等
 ```
 
-请记住：如果您按照[安装](./installation)中的`git clone`方法，`config/config.yaml`文件已经存在。只需编辑它或创建一个名为`config/key.yaml`的副本进行编辑。这样您就不会意外地使用git提交和共享您的API密钥。
+请记住：如果您按照[安装](./installation)中的`git clone`方法，`config/config.yaml`
+文件已经存在。只需编辑它或创建一个名为`config/key.yaml`的副本进行编辑。这样您就不会意外地使用git提交和共享您的API密钥。
 
 > 注意：
 > MetaGPT将按照以下优先顺序读取您的设置：`config/key.yaml > config/config.yaml > 环境变量`
@@ -47,12 +50,16 @@ OPENAI_API_MODEL: 'intended model' # gpt-4, gpt-3.5-turbo, 等等
 现在您可以开始使用了！请参阅[快速入门](./quickstart)或我们的[教程](/guide/tutorials/agent_101)以进行第一次运行！
 
 MetaGPT还支持各种LLM模型，根据您的需求配置模型API的密钥。
+
 ## 智谱 API
+
 ```yaml
 #### 关于智谱，搜索`https://open.bigmodel.cn`。您可以在此设置，或export API_KEY="YOUR_API_KEY"
-# ZHIPUAI_API_KEY: "YOUR_API_KEY"
+ZHIPUAI_API_KEY: "YOUR_API_KEY"
 ```
+
 ## 科大讯飞的大模型 Spark API：
+
 ``` yaml
 #### 如果是Spark
 ### 通常您只需要修改 SPARK_APPID、SPARK_API_SECRET和SPARK_API_KEY
@@ -62,18 +69,24 @@ SPARK_API_KEY : "YOUR_APIKey"
 DOMAIN : "generalv2"
 SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
 ```
+
 ## 百度的大模型 Ernie API
+
 ``` yaml
 #### 如果是Ernie
 ERNIE_API_KEY : "YOUR_APIKey"
 ERNIE_SECRET_KEY : "YOUR_APISecret"
 ```
+
 ## Anthropic API
+
 ``` yaml
 #### 如果是Anthropic
 Anthropic_API_KEY: "YOUR_API_KEY"
 ```
+
 ## 基于Microsoft Azure的Openai
+
 ``` yaml
 #### 如果是AZURE，请参考https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb
 #### 您可以使用ENGINE或DEPLOYMENT模式
@@ -86,6 +99,7 @@ DEPLOYMENT_ID: "YOUR_DEPLOYMENT_ID"
 ```
 
 ## 网页搜索 API
+
 ``` yaml
 #### 用于搜索
 
@@ -105,6 +119,7 @@ SERPER_API_KEY: "YOUR_API_KEY"
 ```
 
 ## 代理访问网站
+
 ``` yaml
 #### 用于访问网站
 
@@ -119,13 +134,16 @@ SELENIUM_BROWSER_TYPE: chrome
 ```
 
 ## Azure TTS
+
 ```` yaml
 #### 用于TTS
 
 AZURE_TTS_SUBSCRIPTION_KEY: "YOUR_API_KEY"
 AZURE_TTS_REGION: "eastus"
 ````
+
 ## Stable Diffusion 本地部署
+
 ````yaml
 #### 用于Stable Diffusion
 ## 使用SD服务，基于 https://github.com/AUTOMATIC1111/stable-diffusion-webui
@@ -133,7 +151,9 @@ SD_URL: "YOUR_SD_URL"
 SD_T2I_API: "/sdapi/v1/txt2img"
 
 ````
+
 ## 其他功能
+
 ````yaml 
 #### 用于执行
 LONG_TERM_MEMORY: false

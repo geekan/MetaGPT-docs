@@ -51,7 +51,7 @@ MetaGPT also supports various LLM models, configure the keys of model APIs accor
 ## Zhipu API
 ```yaml
 #### if zhipuai from `https://open.bigmodel.cn`. You can set here or export API_KEY="YOUR_API_KEY"
-# ZHIPUAI_API_KEY: "YOUR_API_KEY"
+ZHIPUAI_API_KEY: "YOUR_API_KEY"
 ```
 ## iFlytek's large model Spark API :
 ``` yaml
