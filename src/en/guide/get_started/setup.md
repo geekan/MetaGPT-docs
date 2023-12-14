@@ -2,7 +2,7 @@
 
 Using MetaGPT involves connecting with model providers. We will walk through the setup in this page.
 
-## Setup for LLM API
+## Fast Setup for LLM API
 
 We will take OpenAI API as an example. You can finish the setup in either way:
 
@@ -44,12 +44,115 @@ Remember: If you follow the `git clone` approach in [Installation](./installatio
 
 Here you are good to go! See [Quickstart](./quickstart) or our [Tutorials](/guide/tutorials/agent_101) for your first run!
 
-## Setup for different model providers
 
-### OpenAI
+## Detail Setting
+Some future projects may require other API models, so you should configure the keys of other Apis according to your needs.
 
-### Azure
+#### If you are using iFlytek's large model Spark API :
+``` yaml
+#### if Spark
+### Nomally YOU only need to modify SPARK_APPID SPARK_API_SECRET SPARK_API_KEY
+SPARK_APPID : "YOUR_APPID"
+SPARK_API_SECRET : "YOUR_APISecret"
+SPARK_API_KEY : "YOUR_APIKey"
+DOMAIN : "generalv2"
+SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
+```
+#### If you are using Baidu's large model  Ernie  API
+``` yaml
+#### if Ernie
+ERNIE_API_KEY : "YOUR_APIKey"
+ERNIE_SECRET_KEY : "YOUR_APISecret"
+```
+#### If you are using Anthropic API
 
-### Anthropic
+``` yaml
+#### if Anthropic
+Anthropic_API_KEY: "YOUR_API_KEY"
+```
+#### If you are using Microsoft Azure
+``` yaml
+#### if AZURE, check https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb
+#### You can use ENGINE or DEPLOYMENT mode
+OPENAI_API_TYPE: "azure"
+OPENAI_API_BASE: "YOUR_AZURE_ENDPOINT"
+OPENAI_API_KEY: "YOUR_AZURE_API_KEY"
+OPENAI_API_VERSION: "YOUR_AZURE_API_VERSION"
+DEPLOYMENT_NAME: "YOUR_DEPLOYMENT_NAME"
+DEPLOYMENT_ID: "YOUR_DEPLOYMENT_ID"
+```
 
-## Setup for other APIs
+#### If you need to use the search function
+``` yaml
+#### for Search
+
+## Supported values: serpapi/google/serper/ddg
+SEARCH_ENGINE: serpapi
+
+## Visit https://serpapi.com/ to get key.
+SERPAPI_API_KEY: "YOUR_API_KEY"
+
+## Visit https://console.cloud.google.com/apis/credentials to get key.
+GOOGLE_API_KEY: "YOUR_API_KEY"
+## Visit https://programmablesearchengine.google.com/controlpanel/create to get id.
+GOOGLE_CSE_ID: "YOUR_CSE_ID"
+
+## Visit https://serper.dev/ to get key.
+SERPER_API_KEY: "YOUR_API_KEY"
+```
+
+#### If it involves accessing website functions
+``` yaml
+#### for web access
+
+## Supported values: playwright/selenium
+WEB_BROWSER_ENGINE: playwright
+
+## Supported values: chromium/firefox/webkit, visit https://playwright.dev/python/docs/api/class-browsertype
+PLAYWRIGHT_BROWSER_TYPE: chromium
+
+## Supported values: chrome/firefox/edge/ie, visit https://www.selenium.dev/documentation/webdriver/browsers/
+SELENIUM_BROWSER_TYPE: chrome
+```
+
+#### If you are using Auzre TTS
+```` yaml
+#### for TTS
+
+AZURE_TTS_SUBSCRIPTION_KEY: "YOUR_API_KEY"
+AZURE_TTS_REGION: "eastus"
+````
+#### If you are using Stable diffusion local deployment
+````yaml
+#### for Stable Diffusion
+## Use SD service, based on https://github.com/AUTOMATIC1111/stable-diffusion-webui
+SD_URL: "YOUR_SD_URL"
+SD_T2I_API: "/sdapi/v1/txt2img"
+Other settings
+#### for Execution
+LONG_TERM_MEMORY: false
+````
+#### For other ability
+````yaml 
+#### for Mermaid CLI
+## If you installed mmdc (Mermaid CLI) only for metagpt then enable the following configuration.
+PUPPETEER_CONFIG: "./config/puppeteer-config.json"
+MMDC: "./node_modules/.bin/mmdc"
+
+
+### for calc_usage
+CALC_USAGE: false
+
+### for Research
+MODEL_FOR_RESEARCHER_SUMMARY: gpt-3.5-turbo
+MODEL_FOR_RESEARCHER_REPORT: gpt-3.5-turbo-16k
+
+### choose the engine for mermaid conversion, 
+# default is nodejs, you can change it to playwright,pyppeteer or ink
+MERMAID_ENGINE: nodejs
+
+### browser path for pyppeteer engine, support Chrome, Chromium,MS Edge
+PYPPETEER_EXECUTABLE_PATH: "/usr/bin/google-chrome-stable"
+
+PROMPT_FORMAT: json #json or markdown
+````
