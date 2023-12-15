@@ -27,7 +27,7 @@ We use environment variables for a quick demo. For formal usage of MetaGPT, we r
 > Below is a breakdown of the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py). If you install MetaGPT with the git clone approach, simply run
 >
 > ```
-> metagpt --idea "write a cli blackjack game"
+> metagpt "write a cli blackjack game"
 > ```
 >
 > Now, let's get started! We will create a team of agents to write software based on one line of our instruction.
