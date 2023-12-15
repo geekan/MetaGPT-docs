@@ -2,8 +2,10 @@
 
 Using MetaGPT involves connecting with model providers. We will walk through the setup in this page.
 
-After your [Installation](./installation.md) is complete, follow the instructions in this document to complete the configuration before use.
+After your [Installation](./installation.md) is complete, follow the instructions in this document to complete the
+configuration before use.
 At the moment, the example of this project only needs to configure OpenAi API.
+
 ## OpenAI API
 
 We will take OpenAI API as an example. You can finish the setup in either way:
@@ -24,14 +26,17 @@ Or in python:
 
 ```python
 import os
+
 os.environ["OPENAI_API_KEY"] = "sk-..."  # YOUR_API_KEY
-os.environ["OPENAI_API_MODEL"] = "intended model" # gpt-4, gpt-3.5-turbo, etc.
+os.environ["OPENAI_API_MODEL"] = "intended model"  # gpt-4, gpt-3.5-turbo, etc.
 ```
 
 ### 2. Use a config or key file
 
-1. In your current working directory, create a folder `config` and add a new file named `config.yaml` or `key.yaml` under it.
-2. Copy the content from the example [config.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config.yaml) file into your new files
+1. In your current working directory, create a folder `config` and add a new file named `config.yaml` or `key.yaml`
+   under it.
+2. Copy the content from the example [config.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config.yaml) file
+   into your new files
 3. Fill in your own values to the file:
 
 ```yaml
@@ -39,42 +44,54 @@ OPENAI_API_KEY: 'sk-...' # YOUR_API_KEY
 OPENAI_API_MODEL: 'intended model' # gpt-4, gpt-3.5-turbo, etc.
 ```
 
-Remember: If you follow the `git clone` approach in [Installation](./installation), `config/config.yaml` will already be there. Just edit it or make a copy named `config/key.yaml` for editting. This way you don't accidentally commit and share your API key using git.
+Remember: If you follow the `git clone` approach in [Installation](./installation), `config/config.yaml` will already be
+there. Just edit it or make a copy named `config/key.yaml` for editting. This way you don't accidentally commit and
+share your API key using git.
 
 > Note:
 > MetaGPT will read your setup in this priority order: `config/key.yaml > config/config.yaml > environment variable`
 
-Here you are good to go! See [Quickstart](./quickstart) or our [Tutorials](/guide/tutorials/agent_101) for your first run!
-
+Here you are good to go! See [Quickstart](./quickstart) or our [Tutorials](/guide/tutorials/agent_101) for your first
+run!
 
 MetaGPT also supports various LLM models, configure the keys of model APIs according to your needs.
+
 ## Zhipu API
+
 ```yaml
 #### if zhipuai from `https://open.bigmodel.cn`. You can set here or export API_KEY="YOUR_API_KEY"
 ZHIPUAI_API_KEY: "YOUR_API_KEY"
 ```
+
 ## iFlytek's large model Spark API :
+
 ``` yaml
 #### if Spark
 ### Nomally YOU only need to modify SPARK_APPID SPARK_API_SECRET SPARK_API_KEY
 SPARK_APPID : "YOUR_APPID"
-SPARK_API_SECRET : "YOUR_APISecret"
-SPARK_API_KEY : "YOUR_APIKey"
+SPARK_API_SECRET : "YOUR_API_SECRET"
+SPARK_API_KEY : "YOUR_API_KEY"
 DOMAIN : "generalv2"
 SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
 ```
+
 ## Baidu's large model  Ernie  API
+
 ``` yaml
 #### if Ernie
-ERNIE_API_KEY : "YOUR_APIKey"
-ERNIE_SECRET_KEY : "YOUR_APISecret"
+ERNIE_API_KEY : "YOUR_API_KEY"
+ERNIE_SECRET_KEY : "YOUR_API_SECRET"
 ```
+
 ## Anthropic API
+
 ``` yaml
 #### if Anthropic
 Anthropic_API_KEY: "YOUR_API_KEY"
 ```
+
 ## Microsoft Azure Based Openai
+
 ``` yaml
 #### if AZURE, check https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb
 #### You can use ENGINE or DEPLOYMENT mode
@@ -87,6 +104,7 @@ DEPLOYMENT_ID: "YOUR_DEPLOYMENT_ID"
 ```
 
 ## Web Searching API
+
 ``` yaml
 #### for Search
 
@@ -106,6 +124,7 @@ SERPER_API_KEY: "YOUR_API_KEY"
 ```
 
 ## Website Access For Agent
+
 ``` yaml
 #### for web access
 
@@ -120,13 +139,16 @@ SELENIUM_BROWSER_TYPE: chrome
 ```
 
 ## Auzre TTS
+
 ```` yaml
 #### for TTS
 
 AZURE_TTS_SUBSCRIPTION_KEY: "YOUR_API_KEY"
 AZURE_TTS_REGION: "eastus"
 ````
+
 ## Stable Diffusion Local Deployment
+
 ````yaml
 #### for Stable Diffusion
 ## Use SD service, based on https://github.com/AUTOMATIC1111/stable-diffusion-webui
@@ -134,7 +156,9 @@ SD_URL: "YOUR_SD_URL"
 SD_T2I_API: "/sdapi/v1/txt2img"
 
 ````
+
 ## Other Abilities
+
 ````yaml 
 #### for Execution
 LONG_TERM_MEMORY: false

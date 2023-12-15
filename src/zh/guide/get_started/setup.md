@@ -30,7 +30,7 @@ os.environ["OPENAI_API_KEY"] = "sk-..."  # YOUR_API_KEY
 os.environ["OPENAI_API_MODEL"] = "intended model"  # gpt-4, gpt-3.5-turbo, 等等
 ```
 
-### 2. 使用key.config
+### 2.使用一个`config.yaml`或者`key.yaml`文件
 
 1. 在当前工作目录中创建一个名为`config`的文件夹，并在其中添加一个名为`key.yaml`的新文件。
 2. 将示例[config.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config.yaml)文件的内容复制到您的新文件中。
@@ -64,8 +64,8 @@ ZHIPUAI_API_KEY: "YOUR_API_KEY"
 #### 如果是Spark
 ### 通常您只需要修改 SPARK_APPID、SPARK_API_SECRET和SPARK_API_KEY
 SPARK_APPID : "YOUR_APPID"
-SPARK_API_SECRET : "YOUR_APISecret"
-SPARK_API_KEY : "YOUR_APIKey"
+SPARK_API_SECRET : "YOUR_API_SECRET"
+SPARK_API_KEY : "YOUR_API_KEY"
 DOMAIN : "generalv2"
 SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
 ```
@@ -74,8 +74,8 @@ SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
 
 ``` yaml
 #### 如果是Ernie
-ERNIE_API_KEY : "YOUR_APIKey"
-ERNIE_SECRET_KEY : "YOUR_APISecret"
+ERNIE_API_KEY : "YOUR_API_KEY"
+ERNIE_SECRET_KEY : "YOUR_API_SECRET"
 ```
 
 ## Anthropic API
