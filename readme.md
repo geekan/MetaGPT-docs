@@ -46,11 +46,14 @@ This section is relevant if you want to precheck how your changes will be render
 ## Up and Running
 
 follow steps below to start the dev server
+if you dont have pnpm install aready you can check using `pnpm -v`
 
-1. `corepack enable pnpm` to use pnpm
+run `npm install -g pnpm` to install 
 
-2. `pnpm i` to install dependency
 
-3. `npm run docs:dev`
+
+1. `pnpm i` to install dependency
+
+2. `npm run docs:dev`
 
 The dev server should be running at http://localhost:5173. Visit the URL in your browser to see your new site in action!
