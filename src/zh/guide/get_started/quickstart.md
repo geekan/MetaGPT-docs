@@ -12,8 +12,9 @@ pip install metagpt
 
 ```
 import os
+os.environ["WORKSPACE_PATH"] = "workspace"
 os.environ["OPENAI_API_KEY"] = "sk-..."
-os.environ["OPENAI_API_MODEL"] = "gpt-4"
+os.environ["OPENAI_API_MODEL"] = "gpt-4-1106-preview"
 ```
 
 完整配置不同LLM API（比如OpenAI、Azure、Anthropic等）的方法可在 [配置](./setup) 部分找到。
@@ -76,4 +77,4 @@ await startup(idea="write a cli blackjack game") # blackjack: 二十一点
 
 <b>直接使用Colab运行</b>
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1X8XSn8AN1WFv_PwtTres62OoVUNfHRAH?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1xlReN7EIpKzgZO1If29-zsw7QNUUfEbx?usp=sharing)
