@@ -216,6 +216,10 @@ export default defineConfig({
                     text: 'Agent communication',
                     link: 'in_depth_guides/agent_communication.md',
                   },
+                  {
+                    text: 'Incremental devlopment',
+                    link: 'in_depth_guides/incremental_development.md',
+                  },
                 ],
               },
               {
@@ -402,6 +406,10 @@ export default defineConfig({
                   {
                     text: '多智能体间通信',
                     link: 'in_depth_guides/agent_communication.md',
+                  },
+                  {
+                    text: '增量开发',
+                    link: 'in_depth_guides/incremental_development.md',
                   },
                 ],
               },
