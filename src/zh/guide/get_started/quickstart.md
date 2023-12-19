@@ -12,7 +12,6 @@ pip install metagpt
 
 ```
 import os
-os.environ["WORKSPACE_PATH"] = "workspace"
 os.environ["OPENAI_API_KEY"] = "sk-..."
 os.environ["OPENAI_API_MODEL"] = "gpt-4-1106-preview"
 ```
