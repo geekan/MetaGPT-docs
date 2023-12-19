@@ -25,7 +25,6 @@
     team
       team_info.json          # 团队需求、预算等信息
       environment             # 环境
-        memory.json           # 环境记忆
         roles.json            # 团队内的角色基础信息
         history.json          # 历史信息
         roles                 # 团队内角色
@@ -58,13 +57,6 @@
                     "role_name": "RoleB"
                 }
             ]
-        memory.json
-            {
-                "storage": [
-                ],
-                "index": {
-                }
-            }
         history.json
             {
                 "content": "\nHuman: write a snake game\nRole A: ActionPass run passed\nHuman: write a snake game"
@@ -93,9 +85,28 @@
                         "0. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass'>"
                     ],
                     "_actions": [
+                        {
+                            "name": "",
+                            "builtin_class_name": "ActionPass",
+                            "context": "",
+                            "prefix": "You are a Role A, named RoleA, your goal is RoleA's goal, and the constraint is RoleA's constraints. ",
+                            "profile": "Role A",
+                            "desc": "",
+                            "nodes": []
+                        }
                     ],
                     "_rc": {
+                        "state": -1,
+                        "watch": [
+                            "metagpt.actions.add_requirement.UserRequirement"
+                        ],
+                        "react_mode": "react",
+                        "max_react_loop": 1
                     },
+                    "_subscription": [
+                        "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                        "RoleA"
+                    ],
                     "role_class": "RoleA",
                     "module_name": "tests.metagpt.serialize_deserialize.test_serdeser_base"
                 }
@@ -123,7 +134,7 @@
 ## 结果
 
 ### 断点恢复入口
-`python3 starup.py "xxx" --recover_path "./workspace/storage/team"` # 默认序列化到`./workspace/storage/team`中。  
+`metagpt "xxx" --recover_path "./workspace/storage/team"` # 默认序列化到`./workspace/storage/team`中。  
 
 ### 恢复后继续执行结果
 `python3 -s tests/metagpt/serialize_deserialize/test_team.py`的`test_team_recover_multi_roles_save`的执行case  
