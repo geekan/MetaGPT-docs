@@ -29,7 +29,6 @@
     team
       team_info.json          # 团队需求、预算等信息
       environment             # 环境
-        memory.json           # 环境记忆
         roles.json            # 团队内的角色基础信息
         history.json          # 历史信息
         roles                 # 团队内角色
@@ -63,13 +62,6 @@
                     "role_name": "RoleB"
                 }
             ]
-        memory.json
-            {
-                "storage": [
-                ],
-                "index": {
-                }
-            }
         history.json
             {
                 "content": "\nHuman: write a snake game\nRole A: ActionPass run passed\nHuman: write a snake game"
@@ -98,9 +90,28 @@
                         "0. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass'>"
                     ],
                     "_actions": [
+                        {
+                            "name": "",
+                            "builtin_class_name": "ActionPass",
+                            "context": "",
+                            "prefix": "You are a Role A, named RoleA, your goal is RoleA's goal, and the constraint is RoleA's constraints. ",
+                            "profile": "Role A",
+                            "desc": "",
+                            "nodes": []
+                        }
                     ],
                     "_rc": {
+                        "state": -1,
+                        "watch": [
+                            "metagpt.actions.add_requirement.UserRequirement"
+                        ],
+                        "react_mode": "react",
+                        "max_react_loop": 1
                     },
+                    "_subscription": [
+                        "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                        "RoleA"
+                    ],
                     "role_class": "RoleA",
                     "module_name": "tests.metagpt.serialize_deserialize.test_serdeser_base"
                 }
@@ -133,8 +144,7 @@
 ## 结果
 
 ### 断点恢复入口
-
-`python3 starup.py "xxx" --recover_path "./workspace/storage/team"` # 默认序列化到`./workspace/storage/team`中。
+`metagpt "xxx" --recover_path "./workspace/storage/team"` # 默认序列化到`./workspace/storage/team`中。
 
 ### 恢复后继续执行结果
 
@@ -143,43 +153,56 @@
 `RoleB`的`ActionRaise`模拟Action异常，执行到该Action时发生异常，序列化项目后退出。 重新启动后，`RoleA`已经执行过，不继续执行。`RoleB`的`ActionOK`已经执行过，不继续执行。继续从`ActionRaise`执行，仍异常。
 
 ```bash
-2023-11-30 20:41:22.313 | DEBUG    | metagpt.team:run:92 - n_round=3
-2023-11-30 20:41:22.314 | DEBUG    | metagpt.roles.role:_observe:389 - RoleA(Role A) observed: ['Human: write a snake game...']
-2023-11-30 20:41:22.314 | DEBUG    | metagpt.roles.role:_set_state:316 - [ActionPass]
-2023-11-30 20:41:22.314 | DEBUG    | metagpt.roles.role:_react:412 - RoleA(Role A): self._rc.state=0, will do ActionPass
-2023-11-30 20:41:22.314 | INFO     | metagpt.roles.role:_act:361 - RoleA(Role A): ready to ActionPass
-2023-11-30 20:41:22.315 | DEBUG    | metagpt.roles.role:run:472 - RoleB(Role B): no news. waiting.
-2023-11-30 20:41:27.322 | DEBUG    | metagpt.roles.role:_set_state:316 - [ActionPass]
-2023-11-30 20:41:27.322 | DEBUG    | metagpt.team:run:92 - n_round=2
-2023-11-30 20:41:27.323 | DEBUG    | metagpt.roles.role:run:472 - RoleA(Role A): no news. waiting.
-2023-11-30 20:41:27.324 | DEBUG    | metagpt.roles.role:_observe:389 - RoleB(Role B) observed: ['Role A: ActionPass run passe...']
-2023-11-30 20:41:27.325 | DEBUG    | metagpt.roles.role:_set_state:316 - [ActionOK, ActionRaise]
-2023-11-30 20:41:27.325 | INFO     | metagpt.roles.role:_act:361 - RoleB(Role B): ready to ActionOK
-2023-11-30 20:41:32.327 | DEBUG    | metagpt.roles.role:_set_state:316 - [ActionOK, ActionRaise]
-2023-11-30 20:41:32.328 | INFO     | metagpt.roles.role:_act:361 - RoleB(Role B): ready to ActionRaise
-2023-11-30 20:41:32.329 | WARNING  | metagpt.utils.utils:wrapper:82 - There is a exception in role's execution, in order to resume, we delete the newest role communication message in the role's memory.
-2023-11-30 20:41:32.331 | ERROR    | metagpt.utils.utils:wrapper:61 - Exception occurs, start to serialize the project, exp:
+2023-12-19 10:26:01.380 | DEBUG    | metagpt.config:__init__:50 - Config loading done.
+2023-12-19 10:26:01.381 | DEBUG    | metagpt.config:_ensure_workspace_exists:125 - WORKSPACE_PATH set to /Users/xxxx/work/MetaGPT/workspace
+2023-12-19 10:26:02.476 | DEBUG    | metagpt.environment:publish_message:117 - publish_message: {"id": "771137834c34447981f5c66c94eb2657", "content": "write a snake game", "role": "Human", "cause_by": "metagpt.actions.add_requirement.UserRequirement", "sent_from": "", "send_to": ["<all>"]}
+2023-12-19 10:26:02.477 | DEBUG    | metagpt.team:run:101 - max n_round=3 left.
+2023-12-19 10:26:02.477 | DEBUG    | metagpt.roles.role:_observe:421 - RoleA(Role A) observed: ['Human: write a snake game...']
+2023-12-19 10:26:02.477 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionPass], state=0
+2023-12-19 10:26:02.477 | DEBUG    | metagpt.roles.role:_react:452 - RoleA(Role A): self._rc.state=0, will do ActionPass
+2023-12-19 10:26:02.477 | INFO     | metagpt.roles.role:_act:373 - RoleA(Role A): ready to ActionPass
+2023-12-19 10:26:02.478 | DEBUG    | metagpt.roles.role:run:517 - RoleB(Role B): no news. waiting.
+2023-12-19 10:26:07.484 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionPass], state=-1
+2023-12-19 10:26:07.485 | DEBUG    | metagpt.environment:publish_message:117 - publish_message: {"id": "00f068c2570c4435897ef126ee736258", "content": "ActionPass run passed", "instruct_content": {"result": "pass result"}, "role": "Role A", "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass", "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA", "send_to": ["<all>"]}
+2023-12-19 10:26:07.486 | DEBUG    | metagpt.environment:run:141 - is idle: False
+2023-12-19 10:26:07.486 | DEBUG    | metagpt.team:run:101 - max n_round=2 left.
+2023-12-19 10:26:07.487 | DEBUG    | metagpt.roles.role:run:517 - RoleA(Role A): no news. waiting.
+2023-12-19 10:26:07.488 | DEBUG    | metagpt.roles.role:_observe:421 - RoleB(Role B) observed: ['Role A: ActionPass run passe...']
+2023-12-19 10:26:07.488 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionOK, ActionRaise], state=0
+2023-12-19 10:26:07.489 | INFO     | metagpt.roles.role:_act:373 - RoleB(Role B): ready to ActionOK
+2023-12-19 10:26:12.492 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionOK, ActionRaise], state=1
+2023-12-19 10:26:12.492 | INFO     | metagpt.roles.role:_act:373 - RoleB(Role B): ready to ActionRaise
+2023-12-19 10:26:12.493 | WARNING  | metagpt.utils.utils:wrapper:96 - There is a exception in role's execution, in order to resume, we delete the newest role communication message in the role's memory.
+2023-12-19 10:26:12.499 | ERROR    | metagpt.utils.utils:wrapper:79 - Exception occurs, start to serialize the project, exp:
 Traceback (most recent call last):
-...
-  File "/Users/xxxx/work/code/MetaGPT/metagpt/roles/role.py", line 362, in _act
+  File "/Users/xxxx/work/MetaGPT/metagpt/utils/utils.py", line 88, in wrapper
+....
+    rsp = await self._act_by_order()
+  File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 462, in _act_by_order
+    rsp = await self._act()
+  File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 374, in _act
     response = await self._rc.todo.run(self._rc.important_memory)
-  File "/Users/xxxx/work/code/MetaGPT/tests/metagpt/serialize_deserialize/test_serdeser_base.py", line 50, in run
+  File "/Users/xxxx/work/MetaGPT/tests/metagpt/serialize_deserialize/test_serdeser_base.py", line 50, in run
     raise RuntimeError("parse error in ActionRaise")
 RuntimeError: parse error in ActionRaise
 
 ############################# ---------  此处开始重新执行 ----------- ############################
-2023-11-30 20:41:32.351 | DEBUG    | metagpt.team:run:92 - n_round=3
-2023-11-30 20:41:32.351 | DEBUG    | metagpt.roles.role:run:472 - RoleA(Role A): no news. waiting.
-2023-11-30 20:41:32.352 | DEBUG    | metagpt.roles.role:_observe:389 - RoleB(Role B) observed: ['Role A: ActionPass run passe...']
-2023-11-30 20:41:32.352 | DEBUG    | metagpt.roles.role:_set_state:316 - [ActionOK, ActionRaise]
-2023-11-30 20:41:32.352 | INFO     | metagpt.roles.role:_act:361 - RoleB(Role B): ready to ActionRaise
-2023-11-30 20:41:32.353 | WARNING  | metagpt.utils.utils:wrapper:82 - There is a exception in role's execution, in order to resume, we delete the newest role communication message in the role's memory.
-2023-11-30 20:41:32.353 | ERROR    | metagpt.utils.utils:wrapper:61 - Exception occurs, start to serialize the project, exp:
+2023-12-19 10:26:12.515 | DEBUG    | metagpt.environment:publish_message:117 - publish_message: {"id": "0bfdde08d4294f07923201d51b2b0068", "content": "write a snake game", "role": "Human", "cause_by": "metagpt.actions.add_requirement.UserRequirement", "sent_from": "", "send_to": ["<all>"]}
+2023-12-19 10:26:12.516 | DEBUG    | metagpt.team:run:101 - max n_round=3 left.
+2023-12-19 10:26:12.517 | DEBUG    | metagpt.roles.role:run:517 - RoleA(Role A): no news. waiting.
+2023-12-19 10:26:12.517 | DEBUG    | metagpt.roles.role:_observe:421 - RoleB(Role B) observed: ['Role A: ActionPass run passe...']
+2023-12-19 10:26:12.517 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionOK, ActionRaise], state=1         # 从失败Action处继续执行
+2023-12-19 10:26:12.518 | INFO     | metagpt.roles.role:_act:373 - RoleB(Role B): ready to ActionRaise
+2023-12-19 10:26:12.518 | WARNING  | metagpt.utils.utils:wrapper:96 - There is a exception in role's execution, in order to resume, we delete the newest role communication message in the role's memory.
+2023-12-19 10:26:12.519 | ERROR    | metagpt.utils.utils:wrapper:79 - Exception occurs, start to serialize the project, exp:
 Traceback (most recent call last):
-...
-  File "/Users/xxxx/work/code/MetaGPT/metagpt/roles/role.py", line 362, in _act
+....
+    rsp = await self._act_by_order()
+  File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 462, in _act_by_order
+    rsp = await self._act()
+  File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 374, in _act
     response = await self._rc.todo.run(self._rc.important_memory)
-  File "/Users/xxxx/work/code/MetaGPT/tests/metagpt/serialize_deserialize/test_serdeser_base.py", line 50, in run
+  File "/Users/xxxx/work/MetaGPT/tests/metagpt/serialize_deserialize/test_serdeser_base.py", line 50, in run
     raise RuntimeError("parse error in ActionRaise")
 RuntimeError: parse error in ActionRaise
 ```
