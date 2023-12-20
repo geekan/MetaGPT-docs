@@ -30,6 +30,8 @@ We use environment variables for a quick demo. For formal usage of MetaGPT, we r
 > python startup.py --idea "write a cli blackjack game"
 > ```
 >
+> (Starting [v0.5](https://docs.deepwisdom.ai/v0.5/en/guide/get_started/quickstart.html), use `metagpt "write a cli blackjack game"` instead)
+>
 > Now, let's get started! We will create a team of agents to write software based on one line of our instruction.
 
 First, import off-the-shelf roles
