@@ -28,6 +28,8 @@ os.environ["OPENAI_API_MODEL"] = "gpt-4"
 > python startup.py --idea "write a cli blackjack game"
 > ```
 >
+> (从[v0.5](https://docs.deepwisdom.ai/v0.5/zh/guide/get_started/quickstart.html)开始，请使用 `metagpt "write a cli blackjack game"` )
+>
 > 现在，让我们开始吧！我们将创建一个多智能体团队，根据我们的一句话需求编写软件。
 
 首先，导入已实现的角色
