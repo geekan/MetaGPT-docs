@@ -97,7 +97,7 @@ One of the essential elements of implementing the Werewolf game lies in facilita
 2. A private message from a werewolf, signaling the werewolf partner and the Moderator about a chosen kill (one-to-multiple).
 3. A public message from the Moderator instructing all players to awaken (one-to-all).
 
-MetaGPT supports all three communication thanks to the key abstractions `Environment` and `Message`, as well as the agent's (`Role`'s) method of message handling via the `\_publish` and `\_observe` functions. Every time an agent sends a `Message`, it `\_publish` the `Message` to the `Environment`. In turn, receiving agents `\_observe` the `Message` from the `Environment`. All we need to do is to populate the `Message` attributes, such as `send_to` and `restricted_to`, with the intended recipients. MetaGPT handles everything else.
+MetaGPT supports all three communication thanks to the key abstractions `Environment` and `Message`, as well as the agent's (`Role`'s) method of message handling via the `\publish_message` and `\_observe` functions. Every time an agent sends a `Message`, it `\publish_message` the `Message` to the `Environment`. In turn, receiving agents `\_observe` the `Message` from the `Environment`. All we need to do is to populate the `Message` attributes, such as `send_to` and `restricted_to`, with the intended recipients. MetaGPT handles everything else.
 
 All combined, we vitalize a sophisticated communication topology between agents. For detailed implementation, please feel free to check our code. We are actively working on refining this mechanism and will release a comprehensive guide soon.
 
@@ -196,11 +196,11 @@ In another example, the true Seer solidified its intention of standing out again
 ## Code Running Guide
 
 ```shell
-python examples/werewolf_game/start_game.py # use default arguments
+python3 examples/werewolf_game/start_game.py # use default arguments
 ```
 
 ```shell
-python examples/werewolf_game/start_game.py \\
+python3 examples/werewolf_game/start_game.py \\
 --use_reflection True \\
 --use_experience False \\
 --use_memory_selection False \\

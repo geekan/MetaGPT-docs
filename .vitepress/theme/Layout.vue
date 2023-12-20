@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useData } from 'vitepress';
+import { useEventListener } from '@vueuse/core';
+import { useData, useRoute, useRouter, withBase } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import { nextTick, provide } from 'vue';
 
-const { isDark } = useData();
+const { isDark, theme, site } = useData();
 
 const enableTransitions = () =>
   'startViewTransition' in document &&
@@ -36,6 +37,49 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
       pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
     }
   );
+});
+
+useEventListener('click', (event) => {
+  const target = event.target as HTMLAnchorElement;
+
+  if (
+    target.tagName.toLowerCase() === 'a' &&
+    (/v[^\/]*\/$/.test(target.href) ||
+      (target.href === 'https://docs.deepwisdom.ai/' &&
+        target.target === '_blank'))
+  ) {
+    event.preventDefault();
+    const link = `${target.href}${location.pathname
+      .replace(site.value.base, '/')
+      .slice(1)}`;
+    window.open(link, target.target);
+  }
+});
+
+const router = useRouter();
+const route = useRoute();
+
+onMounted(() => {
+  if (!import.meta.env.DEV) {
+    if (location.pathname === '/') {
+      try {
+        const navlist = site.value.themeConfig.nav;
+        const stableVersion = navlist[navlist.length - 1].items.find((_: any) =>
+          _.text.includes('(stable)')
+        );
+
+        location.href = stableVersion.link;
+
+        return;
+      } catch {}
+    }
+  }
+
+  const baseWithoutLastSlash = site.value.base.replace(/\/$/, '');
+
+  if (location.pathname.replace(/\/$/, '') === baseWithoutLastSlash) {
+    router.go(withBase('/en/'));
+  }
 });
 </script>
 

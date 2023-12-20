@@ -102,7 +102,7 @@
           await super()._observe()
           # accept the very first human instruction (the debate topic) or messages sent (from opponent) to self,
           # disregard own messages from the last round
-          self._rc.news = [msg for msg in self._rc.news if msg.cause_by == BossRequirement or msg.send_to == self.name]
+          self._rc.news = [msg for msg in self._rc.news if msg.cause_by == UserRequirement or msg.send_to == self.name]
           return len(self._rc.news)
       ```
 5. `sent_from`被用作展示时显示的发言者信息。本质是meta信息的一部分。

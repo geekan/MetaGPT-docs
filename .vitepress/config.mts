@@ -3,6 +3,7 @@ import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import { resolve } from 'node:path';
 import { existsSync, cpSync } from 'node:fs';
+import { simpleGit } from 'simple-git';
 
 const Logo = `
 <svg  viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,10 +17,15 @@ const Logo = `
 `;
 
 const sources = ['blog', 'rfcs'];
-const dests = ['zhcn'];
+const dests = ['zh', 'en'];
 
 // route based on fs, so copy files when deploy
 if (process.env.NODE_ENV === 'production') {
+  /** for deploy */
+  cpSync(
+    resolve(__dirname, '../src/en/index.md'),
+    resolve(__dirname, '../src/index.md')
+  );
   for (const source of sources) {
     for (const dest of dests) {
       const sourceDir = resolve(__dirname, `../src/${source}`);
@@ -31,8 +37,57 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
+const branchInfo = await simpleGit('.', {}).pull().branch({});
+
+const { current, branches } = branchInfo;
+const isMain = current === 'main';
+const base = isMain ? '/main/' : `/${current}/`;
+const domain = 'https://docs.deepwisdom.ai';
+const versions = Object.keys(branches)
+  .reduce((vs, branchname) => {
+    const regex = /^remotes\/origin\/(v.*)$/;
+    const [, remotebn] = regex.exec(branchname) || [];
+    if (remotebn) {
+      vs.push(remotebn);
+    }
+    return vs;
+  }, [] as string[])
+  .sort()
+  .reverse();
+
+const stableBranch = versions[0];
+const getVersions = () => {
+  if (!versions.length && isMain) {
+    return [];
+  }
+  return [
+    {
+      text: current,
+      items: [
+        {
+          text: 'main (unstable)',
+          link: `${domain}/main/`,
+          target: '_blank',
+          disabled: true,
+        },
+        ...versions.map((v) => ({
+          text: v === stableBranch ? `${v} (stable)` : v,
+          link: `${domain}/${v}/`,
+          target: '_blank',
+        })),
+      ],
+    },
+  ];
+};
+
+const blogAndRfcVisible = isMain;
+const arrVisible = (arr: any[], visible: boolean) => {
+  return visible ? arr : [];
+};
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base,
   title: 'MetaGPT',
   description: 'The Multi-Agent Framework',
   srcDir: './src',
@@ -41,27 +96,34 @@ export default defineConfig({
     root: {
       label: 'English',
       lang: 'en',
+      link: '/en/',
       themeConfig: {
         nav: [
           {
             text: 'Docs',
-            link: '/guide/get_started/introduction',
-            activeMatch: '/guide/',
+            link: '/en/guide/get_started/introduction',
+            activeMatch: '/en/guide/',
           },
-          {
-            text: 'Blog',
-            link: '/blog/agents',
-            activeMatch: '/blog/',
-          },
-          {
-            text: 'RFCs',
-            link: '/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/rfcs/',
-          },
+          ...arrVisible(
+            [
+              {
+                text: 'Blog',
+                link: '/en/blog/agents',
+                activeMatch: '/blog/',
+              },
+              {
+                text: 'RFCs',
+                link: '/en/rfcs/RFC-116-MetaGPT优化方案',
+                activeMatch: '/euns/rfcs/',
+              },
+            ],
+            blogAndRfcVisible
+          ),
+          ...getVersions(),
         ],
         sidebar: {
-          '/guide/': {
-            base: '/guide/',
+          '/en/guide/': {
+            base: '/en/guide/',
             items: [
               {
                 text: 'Get Started',
@@ -176,8 +238,8 @@ export default defineConfig({
               },
             ],
           },
-          '/blog/': {
-            base: '/blog/',
+          '/en/blog/': {
+            base: '/en/blog/',
             items: [
               {
                 text: 'Agents',
@@ -185,8 +247,8 @@ export default defineConfig({
               },
             ],
           },
-          '/rfcs/': {
-            base: '/rfcs/',
+          '/en/rfcs/': {
+            base: '/en/rfcs/',
             items: [
               {
                 text: 'RFC-116-MetaGPT优化方案',
@@ -197,31 +259,37 @@ export default defineConfig({
         },
       },
     },
-    zhcn: {
+    zh: {
       label: '中文',
-      lang: 'zhcn',
-      link: '/zhcn/',
+      lang: 'zh',
+      link: '/zh/',
       themeConfig: {
         nav: [
           {
             text: '文档',
-            link: '/zhcn/guide/get_started/introduction',
-            activeMatch: '/zhcn/guide/',
+            link: '/zh/guide/get_started/introduction',
+            activeMatch: '/zh/guide/',
           },
-          {
-            text: '博客',
-            link: '/zhcn/blog/agents',
-            activeMatch: '/zhcn/blog/',
-          },
-          {
-            text: 'RFCs',
-            link: '/zhcn/rfcs/RFC-116-MetaGPT优化方案',
-            activeMatch: '/zhcn/rfcs/',
-          },
+          ...arrVisible(
+            [
+              {
+                text: '博客',
+                link: '/zh/blog/agents',
+                activeMatch: '/zh/blog/',
+              },
+              {
+                text: 'RFCs',
+                link: '/zh/rfcs/RFC-116-MetaGPT优化方案',
+                activeMatch: '/zh/rfcs/',
+              },
+            ],
+            blogAndRfcVisible
+          ),
+          ...getVersions(),
         ],
         sidebar: {
-          '/zhcn/guide/': {
-            base: '/zhcn/guide/',
+          '/zh/guide/': {
+            base: '/zh/guide/',
             items: [
               {
                 text: '开始',
@@ -357,8 +425,8 @@ export default defineConfig({
               },
             ],
           },
-          '/zhcn/blog/': {
-            base: '/zhcn/blog/',
+          '/zh/blog/': {
+            base: '/zh/blog/',
             items: [
               {
                 text: 'Agents',
@@ -366,8 +434,8 @@ export default defineConfig({
               },
             ],
           },
-          '/zhcn/rfcs/': {
-            base: '/zhcn/rfcs/',
+          '/zh/rfcs/': {
+            base: '/zh/rfcs/',
             items: [
               {
                 text: 'RFC-116-MetaGPT优化方案',
