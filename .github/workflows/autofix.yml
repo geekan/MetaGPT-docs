@@ -5,7 +5,7 @@ on:
   push:
     branches: ['*']
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   autofix:
