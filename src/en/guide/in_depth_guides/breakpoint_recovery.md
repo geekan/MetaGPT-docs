@@ -6,8 +6,7 @@ Breakpoint recovery refers to recording different increments of the program modu
 
 ## Serialization and deserialization
 
-In order to support breakpoint recovery operations, the output of different modules in the program needs to be structured and stored, that is, serialized, to save the scene for subsequent recovery operations. Serialization operations are differentiated according to the functions of different modules. For example, basic character information can be serialized after initialization and will not change during the process. Memory information needs to be serialized in real time during execution to ensure integrity (serialization time-consuming accounts for a very low proportion of the entire program execution). Here, we uniformly perform serialization when an exception occurs or the run ends normally.  
-
+In order to support breakpoint recovery operations, the output of different modules in the program needs to be structured and stored, that is, serialized, to save the scene for subsequent recovery operations. Serialization operations are differentiated according to the functions of different modules. For example, basic character information can be serialized after initialization and will not change during the process. Memory information needs to be serialized in real time during execution to ensure integrity (serialization time-consuming accounts for a very low proportion of the entire program execution). Here, we uniformly perform serialization when an exception occurs or the run ends normally.
 
 ## Implement logic
 
@@ -18,11 +17,12 @@ In order to support breakpoint recovery operations, the output of different modu
 - `Ctrl-C` interrupts the program
 
 ### Serialized storage structure
-In order to clarify the structural information of the overall serialized project, a hierarchical approach is used to serialize and store the content.  
 
-When the program is interrupted, the file structure corresponding to different modules in the storage directory is as follows:  
+In order to clarify the structural information of the overall serialized project, a hierarchical approach is used to serialize and store the content.
 
-Structure summary  
+When the program is interrupted, the file structure corresponding to different modules in the storage directory is as follows:
+
+Structure summary
 
 ```bash
 ./workspace
@@ -38,7 +38,7 @@ Structure summary
             role_info.json    # 包括角色身份、执行动作、监听动作等信息
 ```
 
-Under each `xxx.json` is a data summary example of the corresponding content.  
+Under each `xxx.json` is a data summary example of the corresponding content.
 
 ```bash
 ./workspace
@@ -160,27 +160,27 @@ Under each `xxx.json` is a data summary example of the corresponding content.
 
 ### Execution order during recovery
 
-Since MetaGPT is an asynchronous execution framework, there are several typical interception points and recovery sequences as follows.  
+Since MetaGPT is an asynchronous execution framework, there are several typical interception points and recovery sequences as follows.
 
 1. Role A (1 action) -> Role B (2 actions). Role A exits abnormally when selecting an action.
 2. Role A (1 action) -> Role B (2 actions). The first action of role B executes normally, but an abnormal exit occurs when the second action is executed.
 
 #### Situation 1
 
-After the execution entry is re-executed, each module is deserialized. Role A did not observe the message that it processed and re-executed the corresponding action. After role B recovers, it observes a Message that has not been processed before, and then re-executes the corresponding `react` operation after `_observe`, and executes the corresponding 2 actions according to the react strategy.  
+After the execution entry is re-executed, each module is deserialized. Role A did not observe the message that it processed and re-executed the corresponding action. After role B recovers, it observes a Message that has not been processed before, and then re-executes the corresponding `react` operation after `_observe`, and executes the corresponding 2 actions according to the react strategy.
 
 #### Situation 2
 
-After the execution entry is re-executed, each module is deserialized. Role A did not observe the Message that it processed and did not process it. After role B is restored, `_observe` receives a Message that has not been completely processed before. In `react`, if it knows that it failed to execute the second action, it will start execution directly from the second action.  
+After the execution entry is re-executed, each module is deserialized. Role A did not observe the Message that it processed and did not process it. After role B is restored, `_observe` receives a Message that has not been completely processed before. In `react`, if it knows that it failed to execute the second action, it will start execution directly from the second action.
 
 ### Re-execute from the Message before the interruption
 
-Generally speaking, Message is a bridge for communication and collaboration between different roles. When an interruption occurs during the execution of Message, the Message has been stored in the Role's Memory(in RoleContext) by the role. During recovery, if all the memory of the character is loaded directly, the `_observe` of the character will not observe the interruption and trigger the execution of `Message` at that time, so the continued execution of the Message cannot be restored.    
-Therefore, in order to ensure that the Message can continue to be executed during recovery, the corresponding Message needs to be deleted from the character memory based on the latest information obtained by `_observe` after an interruption occurs.   
+Generally speaking, Message is a bridge for communication and collaboration between different roles. When an interruption occurs during the execution of Message, the Message has been stored in the Role's Memory(in RoleContext) by the role. During recovery, if all the memory of the character is loaded directly, the `_observe` of the character will not observe the interruption and trigger the execution of `Message` at that time, so the continued execution of the Message cannot be restored.  
+Therefore, in order to ensure that the Message can continue to be executed during recovery, the corresponding Message needs to be deleted from the character memory based on the latest information obtained by `_observe` after an interruption occurs.
 
 ### Re-execute from the action before the interruption
 
-Generally speaking, Action is a relatively small execution module granularity. When an interruption occurs during the execution of Action, you need to know the execution order of multiple Actions and which Action(`_rc.state`) is currently executed. When resuming, locate the action where it was interrupted and re-execute the action.  
+Generally speaking, Action is a relatively small execution module granularity. When an interruption occurs during the execution of Action, you need to know the execution order of multiple Actions and which Action(`_rc.state`) is currently executed. When resuming, locate the action where it was interrupted and re-execute the action.
 
 ## Result
 
@@ -190,11 +190,11 @@ Generally speaking, Action is a relatively small execution module granularity. W
 
 ### Continuing execution results after recovery
 
-A single test case is provided here to illustrate breakpoint recovery execution:  
+A single test case is provided here to illustrate breakpoint recovery execution:
 
-Execution case of `test_team_recover_multi_roles_save` of `python3 -s tests/metagpt/serialize_deserialize/test_team.py`  
+Execution case of `test_team_recover_multi_roles_save` of `python3 -s tests/metagpt/serialize_deserialize/test_team.py`
 
-`ActionRaise` of `RoleB` simulates Action exceptions. An exception occurred when executing the Action, and exited after serializing the project. After recovering, `RoleA` and `ActionOK` of `RoleB` have already been executed and will not continue to be executed. `RoleB` continues to execute from `ActionRaise` and continues to exit when an exception is encountered.  
+`ActionRaise` of `RoleB` simulates Action exceptions. An exception occurred when executing the Action, and exited after serializing the project. After recovering, `RoleA` and `ActionOK` of `RoleB` have already been executed and will not continue to be executed. `RoleB` continues to execute from `ActionRaise` and continues to exit when an exception is encountered.
 
 ```bash
 2023-12-19 10:26:01.380 | DEBUG    | metagpt.config:__init__:50 - Config loading done.

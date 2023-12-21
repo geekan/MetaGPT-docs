@@ -352,7 +352,7 @@ export default defineConfig({
                   {
                     text: '集成开源LLM',
                     link: 'tutorials/integration_with_open_llm',
-                  }
+                  },
                 ],
               },
               {
