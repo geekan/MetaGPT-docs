@@ -137,7 +137,7 @@
 1. 设置`cause_by`属性：
 
 ```Python
-m = Message("a", cause_by=Action)
+m = Message(content="a", cause_by=Action)
 assert m.cause_by == get_class_name(Action)
 assert m.cause_by == any_to_str(Action)
 ```
@@ -145,7 +145,7 @@ assert m.cause_by == any_to_str(Action)
 2. 设置`sent_from`属性：
 
 ```Python
-m = Message("a", sent_from=Action)
+m = Message(content="a", sent_from=Action)
 assert m.sent_from == get_class_name(Action)
 assert m.sent_from == any_to_str(Action)
 ```
@@ -153,7 +153,7 @@ assert m.sent_from == any_to_str(Action)
 3. 设置`sent_to`属性：
 
 ```Python
-m = Message("a"， sent_to={"b", Action})
+m = Message(content="a"， sent_to={"b", Action})
 assert m.send_to == {"b", get_class_name(Action)}
 assert m.send_to == any_to_str_set({"b", Action})
 ```
