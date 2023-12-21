@@ -163,25 +163,6 @@ curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:applicatio
 
 默认的，请求的`model`参数值为`llama2-13b`，对应启动时的`served-model-name`。
 
-返回结果   
-```json
-{
-    "model":"llama2",
-    "created_at":"2023-12-21T14:40:31.635304023Z",
-    "message":{
-        "role":"assistant",
-        "content":"The sky appears blue ...."
-    },
-    "done":true,
-    "total_duration":30355794101,
-    "load_duration":1156507,
-    "prompt_eval_count":26,
-    "prompt_eval_duration":1037945000,
-    "eval_count":288,
-    "eval_duration":29311846000
-}
-```
-
 ### ollama
 
 仓库：https://github.com/jmorganca/ollama
@@ -233,6 +214,25 @@ curl -X POST http://localhost:11434/api/chat -d '{
     }
   ]
  }'
+```
+
+返回结果   
+```json
+{
+    "model":"llama2",
+    "created_at":"2023-12-21T14:40:31.635304023Z",
+    "message":{
+        "role":"assistant",
+        "content":"The sky appears blue ...."
+    },
+    "done":true,
+    "total_duration":30355794101,
+    "load_duration":1156507,
+    "prompt_eval_count":26,
+    "prompt_eval_duration":1037945000,
+    "eval_count":288,
+    "eval_duration":29311846000
+}
 ```
 
 ## LLM配置

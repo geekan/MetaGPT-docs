@@ -161,26 +161,7 @@ curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:applicatio
 }'
 ```
 
-By default, the requested `model` parameter value is `llama2-13b`, which corresponds to the `served-model-name` at startup.  
-
-response result     
-```json
-{
-    "model":"llama2",
-    "created_at":"2023-12-21T14:40:31.635304023Z",
-    "message":{
-        "role":"assistant",
-        "content":"The sky appears blue ...."
-    },
-    "done":true,
-    "total_duration":30355794101,
-    "load_duration":1156507,
-    "prompt_eval_count":26,
-    "prompt_eval_duration":1037945000,
-    "eval_count":288,
-    "eval_duration":29311846000
-}
-```
+By default, the requested `model` parameter value is `llama2-13b`, which corresponds to the `served-model-name` at startup.
 
 ### ollama
 
@@ -233,6 +214,25 @@ curl -X POST http://localhost:11434/api/chat -d '{
     }
   ]
  }'
+```
+
+response result     
+```json
+{
+    "model":"llama2",
+    "created_at":"2023-12-21T14:40:31.635304023Z",
+    "message":{
+        "role":"assistant",
+        "content":"The sky appears blue ...."
+    },
+    "done":true,
+    "total_duration":30355794101,
+    "load_duration":1156507,
+    "prompt_eval_count":26,
+    "prompt_eval_duration":1037945000,
+    "eval_count":288,
+    "eval_duration":29311846000
+}
 ```
 
 ## LLM Configuration
