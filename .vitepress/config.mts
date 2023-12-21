@@ -6,12 +6,11 @@ import {
   existsSync,
   cpSync,
   readdirSync,
-  stat,
   statSync,
-  copyFile,
   copyFileSync,
   readFileSync,
   writeFileSync,
+  mkdirSync,
 } from 'node:fs';
 import { simpleGit } from 'simple-git';
 
@@ -30,6 +29,11 @@ const sources = ['blog', 'rfcs'];
 const dests = ['zh', 'en'];
 
 const copyDir = (source: string, dest: string) => {
+  if (!existsSync(dest)) {
+    mkdirSync(dest, {
+      recursive: true,
+    });
+  }
   const files = readdirSync(source);
   for (const filename of files) {
     const file = statSync(join(source, filename));
@@ -47,7 +51,10 @@ const copyDir = (source: string, dest: string) => {
 
     const filesource = readFileSync(join(source, filename), 'utf-8');
     const newfile = filesource.replaceAll('(../public', '(../../public');
-    writeFileSync(join(dest, filename), newfile, 'utf-8');
+
+    writeFileSync(join(dest, filename), newfile, {
+      encoding: 'utf-8',
+    });
   }
 };
 
