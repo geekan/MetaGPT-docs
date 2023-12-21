@@ -184,11 +184,12 @@
 ## 结果
 
 ### 断点恢复入口
+
 `metagpt "xxx" --recover_path "./workspace/storage/team"` # 默认序列化到`./workspace/storage/team`中。
 
 ### 恢复后继续执行结果
 
-这里提供了一个单测用例用于说明断点恢复执行：  
+这里提供了一个单测用例用于说明断点恢复执行：
 
 `python3 -s tests/metagpt/serialize_deserialize/test_team.py`的`test_team_recover_multi_roles_save`的执行case
 
