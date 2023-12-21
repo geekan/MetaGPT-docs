@@ -49,7 +49,7 @@ pip install -r requirements.txt
 ```shell
 python3 src/api_demo.py \
     --model_name_or_path meta-llama/Llama-2-13b-chat-hf \
-    --template llama2 \
+    --template llama2
 ```
 
 加载合并lora产出启动
@@ -151,6 +151,8 @@ python3 -m vllm.entrypoints.openai.api_server \
 ##### 请求示例
 
 ```shell
+# 默认是`stream: true`的非流式输出
+
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "llama2-13b",
@@ -160,6 +162,25 @@ curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:applicatio
 ```
 
 默认的，请求的`model`参数值为`llama2-13b`，对应启动时的`served-model-name`。
+
+返回结果   
+```json
+{
+    "model":"llama2",
+    "created_at":"2023-12-21T14:40:31.635304023Z",
+    "message":{
+        "role":"assistant",
+        "content":"The sky appears blue ...."
+    },
+    "done":true,
+    "total_duration":30355794101,
+    "load_duration":1156507,
+    "prompt_eval_count":26,
+    "prompt_eval_duration":1037945000,
+    "eval_count":288,
+    "eval_duration":29311846000
+}
+```
 
 ### ollama
 
@@ -182,7 +203,18 @@ curl https://ollama.ai/install.sh | sh
 ##### 部署启动
 
 ```shell
-ollama run llama2
+ollama run llama2  # 下载速度还可以 (10+MB/s)
+```
+
+##### 非本地访问
+默认情况下启动的ollama服务只能本地访问，即`http://localhost:11434/api/chat` 或 `http://127.0.0.1:11434/api/chat` ，如果想要支持 `http://ip:11434/api/chat` ，可以按下述操作：   
+
+```bash
+service ollama stop
+
+OLLAMA_HOST=0.0.0.0 OLLAMA_ORIGINS=* ollama serve  # 一个terminal窗口
+
+ollama run llama2                                  # 另一个terminal窗口
 ```
 
 llama2[使用文档](https://ollama.ai/library/llama2)
@@ -192,9 +224,14 @@ llama2[使用文档](https://ollama.ai/library/llama2)
 ##### 请求示例
 
 ```shell
-curl -X POST http://localhost:11434/api/generate -d '{
+curl -X POST http://localhost:11434/api/chat -d '{
   "model": "llama2",
-  "prompt":"Why is the sky blue?"
+  "messages": [
+    {
+      "role": "user",
+      "content": "why is the sky blue?"
+    }
+  ]
  }'
 ```
 
@@ -213,11 +250,20 @@ OPEN_LLM_API_BASE: 'http://106.75.10.65:8001/v1'
 OPEN_LLM_API_MODEL: 'llama2-13b'
 ```
 
-openapi接口的完整路由`http://0.0.0.0:8000/v1/chat/completions`，`OPEN_LLM_API_BASE`只需要配置到`http://0.0.0.0:8000/v1` ，剩余部分openai sdk会补齐。`OPEN_LLM_API_MODEL`为请求接口参数`model`的实际值。
+openapi chat接口的完整路由`http://0.0.0.0:8000/v1/chat/completions`，`OPEN_LLM_API_BASE` 只需要配置到`http://0.0.0.0:8000/v1` ，剩余部分openai sdk会补齐。`OPEN_LLM_API_MODEL`为请求接口参数`model`的实际值。
 
 #### ollama api接口
 
-**待更新**
+如通过ollama部署的模型服务  
+
+**config/key.yaml**
+
+```yaml
+OLLAMA_API_BASE: 'http://127.0.0.1:11434/api'
+OLLAMA_API_MODEL: 'llama2'
+```
+
+ollama chat接口的完整路由`http://127.0.0.1:11434/api/chat` ，`OLLAMA_API_BASE` 只需要配置到`http://127.0.0.1:11434/api` ，剩余部分由`OllamaGPTAPI` 补齐。`OLLAMA_API_MODEL` 为请求接口参数`model` 的实际值。
 
 ## 可选的，修复LLM输出结果
 

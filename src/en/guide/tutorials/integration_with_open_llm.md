@@ -151,6 +151,8 @@ For details, please see [API Deployment](https://docs.vllm.ai/en/latest/getting_
 ##### Request example
 
 ```shell
+# it's non-streaming with `stream: true` by default
+
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "llama2-13b",
@@ -159,7 +161,26 @@ curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:applicatio
 }'
 ```
 
-By default, the requested `model` parameter value is `llama2-13b`, which corresponds to the `served-model-name` at startup.
+By default, the requested `model` parameter value is `llama2-13b`, which corresponds to the `served-model-name` at startup.  
+
+response result     
+```json
+{
+    "model":"llama2",
+    "created_at":"2023-12-21T14:40:31.635304023Z",
+    "message":{
+        "role":"assistant",
+        "content":"The sky appears blue ...."
+    },
+    "done":true,
+    "total_duration":30355794101,
+    "load_duration":1156507,
+    "prompt_eval_count":26,
+    "prompt_eval_duration":1037945000,
+    "eval_count":288,
+    "eval_duration":29311846000
+}
+```
 
 ### ollama
 
@@ -182,7 +203,18 @@ Mainly supports Llama2 and its derivative series, please see [Model List](https:
 ##### Deployment
 
 ```shell
-ollama run llama2
+ollama run llama2  # download speed looks pretty good (10+MB/s)
+```
+
+##### Non-local access
+The ollama service started by default can only be accessed locally, that is, `http://localhost:11434/api/chat` or `http://127.0.0.1:11434/api/chat`. If you want to support `http: //ip:11434/api/chat`, you can do as follows:   
+
+```bash
+service ollama stop
+
+OLLAMA_HOST=0.0.0.0 OLLAMA_ORIGINS=* ollama serve  # one terminal
+
+ollama run llama2                                  # other terminal
 ```
 
 llama2[Usage documentation](https://ollama.ai/library/llama2)
@@ -192,9 +224,14 @@ For details, please see [API deployment](https://github.com/jmorganca/ollama/blo
 ##### Request example
 
 ```shell
-curl -X POST http://localhost:11434/api/generate -d '{
+curl -X POST http://localhost:11434/api/chat -d '{
   "model": "llama2",
-  "prompt":"Why is the sky blue?"
+  "messages": [
+    {
+      "role": "user",
+      "content": "why is the sky blue?"
+    }
+  ]
  }'
 ```
 
@@ -213,11 +250,20 @@ OPEN_LLM_API_BASE: 'http://106.75.10.65:8001/v1'
 OPEN_LLM_API_MODEL: 'llama2-13b'
 ```
 
-The complete routing of the openapi interface `http://0.0.0.0:8000/v1/chat/completions`, `OPEN_LLM_API_BASE` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `OPEN_LLM_API_MODEL` is the actual value of the request interface parameter `model`.
+The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/completions`, `OPEN_LLM_API_BASE` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `OPEN_LLM_API_MODEL` is the actual value of the request interface parameter `model`.
 
 #### ollama api interface
 
-**pending upgrade**
+Such as model services deployed through ollama   
+
+**config/key.yaml**
+
+```yaml
+OLLAMA_API_BASE: 'http://127.0.0.1:11434/api'
+OLLAMA_API_MODEL: 'llama2'
+```
+
+The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `OLLAMA_API_BASE` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaGPTAPI`. `OLLAMA_API_MODEL` is the actual value of the request parameter `model`.  
 
 ## Optional, repair LLM output
 
