@@ -1,8 +1,18 @@
 import { defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
-import { resolve } from 'node:path';
-import { existsSync, cpSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+import {
+  existsSync,
+  cpSync,
+  readdirSync,
+  stat,
+  statSync,
+  copyFile,
+  copyFileSync,
+  readFileSync,
+  writeFileSync,
+} from 'node:fs';
 import { simpleGit } from 'simple-git';
 
 const Logo = `
@@ -19,6 +29,28 @@ const Logo = `
 const sources = ['blog', 'rfcs'];
 const dests = ['zh', 'en'];
 
+const copyDir = (source: string, dest: string) => {
+  const files = readdirSync(source);
+  for (const filename of files) {
+    const file = statSync(join(source, filename));
+
+    if (file.isDirectory()) {
+      copyDir(join(source, filename), join(dest, filename));
+      continue;
+    }
+
+    const ismd = filename.endsWith('.md');
+    if (!ismd) {
+      copyFileSync(join(source, filename), join(dest, filename));
+      continue;
+    }
+
+    const filesource = readFileSync(join(source, filename), 'utf-8');
+    const newfile = filesource.replaceAll('(../public', '(../../public');
+    writeFileSync(join(dest, filename), newfile, 'utf-8');
+  }
+};
+
 // route based on fs, so copy files when deploy
 if (process.env.NODE_ENV === 'production') {
   /** for deploy */
@@ -30,9 +62,8 @@ if (process.env.NODE_ENV === 'production') {
     for (const dest of dests) {
       const sourceDir = resolve(__dirname, `../src/${source}`);
       const destDir = resolve(__dirname, `../src/${dest}/${source}`);
-      if (!existsSync(destDir)) {
-        cpSync(sourceDir, destDir, { recursive: true });
-      }
+
+      copyDir(sourceDir, destDir);
     }
   }
 }
