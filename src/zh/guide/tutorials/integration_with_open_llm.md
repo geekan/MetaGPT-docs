@@ -151,7 +151,6 @@ python3 -m vllm.entrypoints.openai.api_server \
 ##### 请求示例
 
 ```shell
-# 默认是`stream: true`的非流式输出
 
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
@@ -205,6 +204,8 @@ llama2[使用文档](https://ollama.ai/library/llama2)
 ##### 请求示例
 
 ```shell
+# 默认是`stream: true`的非流式输出
+
 curl -X POST http://localhost:11434/api/chat -d '{
   "model": "llama2",
   "messages": [

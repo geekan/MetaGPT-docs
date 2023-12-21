@@ -151,8 +151,6 @@ For details, please see [API Deployment](https://docs.vllm.ai/en/latest/getting_
 ##### Request example
 
 ```shell
-# it's non-streaming with `stream: true` by default
-
 curl -X POST http://0.0.0.0:8000/v1/chat/completions -H "content-type:application/json" -d '{
   "messages":[{"role":"user","content":"who are you"}],
   "model": "llama2-13b",
@@ -205,6 +203,8 @@ For details, please see [API deployment](https://github.com/jmorganca/ollama/blo
 ##### Request example
 
 ```shell
+# it's non-streaming with `stream: true` by default
+
 curl -X POST http://localhost:11434/api/chat -d '{
   "model": "llama2",
   "messages": [
