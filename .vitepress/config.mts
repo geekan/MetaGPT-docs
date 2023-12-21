@@ -150,6 +150,10 @@ export default defineConfig({
                     text: 'Human engagement',
                     link: 'tutorials/human_engagement.md',
                   },
+                  {
+                    text: 'Integration with open LLM',
+                    link: 'tutorials/integration_with_open_llm.md',
+                  },
                 ],
               },
               {
@@ -219,6 +223,10 @@ export default defineConfig({
                   {
                     text: 'Incremental devlopment',
                     link: 'in_depth_guides/incremental_development.md',
+                  },
+                  {
+                    text: 'Serialization & Breakpoint Recovery',
+                    link: 'in_depth_guides/breakpoint_recovery.md',
                   },
                 ],
               },
@@ -341,6 +349,10 @@ export default defineConfig({
                     text: '人类介入',
                     link: 'tutorials/human_engagement',
                   },
+                  {
+                    text: '集成开源LLM',
+                    link: 'tutorials/integration_with_open_llm',
+                  }
                 ],
               },
               {
@@ -410,6 +422,10 @@ export default defineConfig({
                   {
                     text: '增量开发',
                     link: 'in_depth_guides/incremental_development.md',
+                  },
+                  {
+                    text: '序列化&断点恢复',
+                    link: 'in_depth_guides/breakpoint_recovery.md',
                   },
                 ],
               },

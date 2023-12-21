@@ -1,12 +1,12 @@
-# 断点恢复
+# 序列化&断点恢复
 
 ## 定义
 
-断点恢复指在程序运行过程中，记录程序不同模块的产出并落盘，当程序碰到外部如`Ctrl-C`或内部执行异常如LLM Api网络异常导致退出等情况时。再次执行程序，能够从中断前的结果中恢复继续执行，而无需从0到1开始执行，降低开发者的时间和费用成本。
+断点恢复指在程序运行过程中，记录程序不同模块的产出并落盘。当程序碰到外部如`Ctrl-C`或内部执行异常如LLM Api网络异常导致退出等情况时。再次执行程序，能够从中断前的结果中恢复继续执行，而无需从0到1开始执行，降低开发者的时间和费用成本。
 
 ## 序列化与反序列化
 
-为了能支持断点恢复操作，需要对程序中的不同模块产出进行结构化存储即序列化的过程，保存后续用于恢复操作的现场。序列化的操作根据不同模块的功能有所区分，比如角色信息，初始化后即可以进行序列化，过程中不会发生改变。记忆信息，需要执行过程中，实时进行序列化保证完整性（序列化耗时在整个程序执行中的占比很低）。
+为了能支持断点恢复操作，需要对程序中的不同模块产出进行结构化存储即序列化的过程，保存后续用于恢复操作的现场。序列化的操作根据不同模块的功能有所区分，比如角色基本信息，初始化后即可以进行序列化，过程中不会发生改变。记忆信息，需要执行过程中，实时进行序列化保证完整性（序列化耗时在整个程序执行中的占比很低）。这里，我们统一在发生异常或正常结束运行时进行序列化。
 
 ## 实现逻辑
 
@@ -71,8 +71,48 @@
             memory.json
                 {
                     "storage": [
+                        {
+                            "id": "70a3450d0d5c4900afefe7e8d60f3c65",
+                            "content": "ActionPass run passed",
+                            "instruct_content": {
+                                "class": "pass",
+                                "mapping": {
+                                    "result": "(<class 'str'>, Ellipsis)"
+                                },
+                                "value": {
+                                    "result": "pass result"
+                                }
+                            },
+                            "role": "Role A",
+                            "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
+                            "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                            "send_to": [
+                                "<all>"
+                            ]
+                        }
                     ],
                     "index": {
+                        "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass": [
+                            {
+                                "id": "70a3450d0d5c4900afefe7e8d60f3c65",
+                                "content": "ActionPass run passed",
+                                "instruct_content": {
+                                    "class": "pass",
+                                    "mapping": {
+                                        "result": "(<class 'str'>, Ellipsis)"
+                                    },
+                                    "value": {
+                                        "result": "pass result"
+                                    }
+                                },
+                                "role": "Role A",
+                                "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
+                                "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            }
+                        ]
                     }
                 }
             role_info.json       # RoleSetting _actions _states
@@ -121,12 +161,12 @@
 
 由于MetaGPT是异步执行框架，对于下述几种典型的中断截点和恢复顺序。
 
-1. 角色A（一个action）-> 角色B（2个action），角色A进行action选择时出现异常退出。
-2. 角色A（一个action）-> 角色B（2个action），角色B第1个action执行正常，第2个action执行时出现异常退出。
+1. 角色A（1个action）-> 角色B（2个action），角色A进行action选择时出现异常退出。
+2. 角色A（1个action）-> 角色B（2个action），角色B第1个action执行正常，第2个action执行时出现异常退出。
 
 #### 情况1
 
-执行入口重新执行后，各模块进行反序列化。角色A未观察到属于自己处理的Message，不处理。角色B恢复后，观察到一条之前未处理完毕的Message，则在`_observe`后重新执行对应的`react`操作，按react策略执行对应2个动作。
+执行入口重新执行后，各模块进行反序列化。角色A未观察到属于自己处理的Message，重新执行对应的action。角色B恢复后，观察到一条之前未处理完毕的Message，则在`_observe`后重新执行对应的`react`操作，按react策略执行对应2个动作。
 
 #### 情况2
 
@@ -134,12 +174,12 @@
 
 ### 从中断前的Message开始重新执行
 
-一般来说，Message是不同角色间沟通协作的桥梁，当在Message的执行过程中发生中断后，由于该Message已经被该角色存入环境（Environment）记忆（Memory）中。在进行恢复中，如果直接加载环境内的全部Memory，该角色的`_observe`将不会观察到中断时引发当时执行`Message`，从而不能恢复该Message的继续执行。  
-因此，为了保证该Message在恢复时能够继续执行，需要在发生中断后，从角色记忆中删除对应的该条Message。
+一般来说，Message是不同角色间沟通协作的桥梁，当在Message的执行过程中发生中断后，由于该Message已经被该角色存入环境（Environment）记忆（Memory）中。在进行恢复中，如果直接加载角色全部Memory，该角色的`_observe`将不会观察到中断时引发当时执行`Message`，从而不能恢复该Message的继续执行。  
+因此，为了保证该Message在恢复时能够继续执行，需要在发生中断后，根据`_observe`到的最新信息，从角色记忆中删除对应的该条Message。
 
 ### 从中断前的Action开始重新执行
 
-一般来说，Action是一个相对较小的执行模块粒度，当在Action的执行过程中发生中断后，需要知道多个Actions的执行顺序以及当前执行到哪个Action。当进行恢复时，定位到中断时的Action位置并重新执行该Action。
+一般来说，Action是一个相对较小的执行模块粒度，当在Action的执行过程中发生中断后，需要知道多个Actions的执行顺序以及当前执行到哪个Action（`_rc.state`）。当进行恢复时，定位到中断时的Action位置并重新执行该Action。
 
 ## 结果
 
@@ -148,9 +188,11 @@
 
 ### 恢复后继续执行结果
 
+这里提供了一个单测用例用于说明断点恢复执行：  
+
 `python3 -s tests/metagpt/serialize_deserialize/test_team.py`的`test_team_recover_multi_roles_save`的执行case
 
-`RoleB`的`ActionRaise`模拟Action异常，执行到该Action时发生异常，序列化项目后退出。 重新启动后，`RoleA`已经执行过，不继续执行。`RoleB`的`ActionOK`已经执行过，不继续执行。继续从`ActionRaise`执行，仍异常。
+`RoleB`的`ActionRaise`模拟Action异常。执行到该Action时发生异常，序列化项目后退出。 重新启动后，`RoleA`和`RoleB`的`ActionOK`已经执行过，不继续执行。`RoleB`继续从`ActionRaise`执行，碰到异常继续退出。
 
 ```bash
 2023-12-19 10:26:01.380 | DEBUG    | metagpt.config:__init__:50 - Config loading done.

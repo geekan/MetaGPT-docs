@@ -1,12 +1,13 @@
-# Breakpoint Recovery
+# Serialization & Breakpoint Recovery
 
 ## Definition
 
-Breakpoint recovery refers to recording the waveforms of different modules of the program and downloading them to disk during the running of the program. When the program opens an external device such as `Ctrl-C` or an internal execution abnormality such as an LLM Api network exception causes the program to exit. , can resume execution from the results before the interruption, and start execution from 0 to 1, reducing the developer's time and cost.
+Breakpoint recovery refers to recording different increments of the program module and storing into files during program running. When the program encounters external situations such as `Ctrl-C` or internal execution exceptions such as LLM Api network abnormality leading to exit. When the program is executed again, it can resume execution from the results before the interruption without starting execution from 0 to 1, reducing the developer's time and cost.
 
 ## Serialization and deserialization
 
-In order to support breakpoint recovery operations, the output of different modules in the program needs to be structured and stored, that is, serialized, to save the scene for subsequent recovery operations. Serialization operations are differentiated according to the functions of different modules. For example, role information can be serialized after initialization and will not change during the process. Memory information needs to be serialized in real time during execution to ensure integrity (serialization time-consuming accounts for a very low proportion of the entire program execution).
+In order to support breakpoint recovery operations, the output of different modules in the program needs to be structured and stored, that is, serialized, to save the scene for subsequent recovery operations. Serialization operations are differentiated according to the functions of different modules. For example, basic character information can be serialized after initialization and will not change during the process. Memory information needs to be serialized in real time during execution to ensure integrity (serialization time-consuming accounts for a very low proportion of the entire program execution). Here, we uniformly perform serialization when an exception occurs or the run ends normally.  
+
 
 ## Implement logic
 
@@ -17,7 +18,7 @@ In order to support breakpoint recovery operations, the output of different modu
 - `Ctrl-C` interrupts the program
 
 ### Serialized storage structure
-In order to clarify the structural information of the overall project, a hierarchical approach is used to serialize and store the content.  
+In order to clarify the structural information of the overall serialized project, a hierarchical approach is used to serialize and store the content.  
 
 When the program is interrupted, the file structure corresponding to different modules in the storage directory is as follows:  
 
@@ -71,8 +72,48 @@ Under each `xxx.json` is a data summary example of the corresponding content.
             memory.json
                 {
                     "storage": [
+                        {
+                            "id": "70a3450d0d5c4900afefe7e8d60f3c65",
+                            "content": "ActionPass run passed",
+                            "instruct_content": {
+                                "class": "pass",
+                                "mapping": {
+                                    "result": "(<class 'str'>, Ellipsis)"
+                                },
+                                "value": {
+                                    "result": "pass result"
+                                }
+                            },
+                            "role": "Role A",
+                            "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
+                            "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                            "send_to": [
+                                "<all>"
+                            ]
+                        }
                     ],
                     "index": {
+                        "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass": [
+                            {
+                                "id": "70a3450d0d5c4900afefe7e8d60f3c65",
+                                "content": "ActionPass run passed",
+                                "instruct_content": {
+                                    "class": "pass",
+                                    "mapping": {
+                                        "result": "(<class 'str'>, Ellipsis)"
+                                    },
+                                    "value": {
+                                        "result": "pass result"
+                                    }
+                                },
+                                "role": "Role A",
+                                "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
+                                "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                                "send_to": [
+                                    "<all>"
+                                ]
+                            }
+                        ]
                     }
                 }
             role_info.json       # RoleSetting _actions _states
@@ -119,14 +160,14 @@ Under each `xxx.json` is a data summary example of the corresponding content.
 
 ### Execution order during recovery
 
-Since MetaGPT is an asynchronous execution framework, there are several typical interruption interception points and recovery sequences as follows.  
+Since MetaGPT is an asynchronous execution framework, there are several typical interception points and recovery sequences as follows.  
 
-1. Role A (one action) -> Role B (2 actions). Role A exits abnormally when selecting an action.
-2. Role A (one action) -> Role B (2 actions). The first action of role B executes normally, but an abnormal exit occurs when the second action is executed.
+1. Role A (1 action) -> Role B (2 actions). Role A exits abnormally when selecting an action.
+2. Role A (1 action) -> Role B (2 actions). The first action of role B executes normally, but an abnormal exit occurs when the second action is executed.
 
 #### Situation 1
 
-After the execution entry is re-executed, each module is deserialized. Role A did not observe the Message that it processed and did not process it. After role B recovers, it observes a Message that has not been processed before, and then re-executes the corresponding `react` operation after `_observe`, and executes the corresponding 2 actions according to the react strategy.  
+After the execution entry is re-executed, each module is deserialized. Role A did not observe the message that it processed and re-executed the corresponding action. After role B recovers, it observes a Message that has not been processed before, and then re-executes the corresponding `react` operation after `_observe`, and executes the corresponding 2 actions according to the react strategy.  
 
 #### Situation 2
 
@@ -134,12 +175,12 @@ After the execution entry is re-executed, each module is deserialized. Role A di
 
 ### Re-execute from the Message before the interruption
 
-Generally speaking, Message is a bridge for communication and collaboration between different roles. When an interruption occurs during the execution of Message, the Message has been stored in the Environment (Memory) by the role. During recovery, if all the memories in the environment are directly loaded, the role's `_observe` will not observe the interruption and trigger the execution of `Message` at that time, so the continued execution of the Message cannot be restored.  
-Therefore, in order to ensure that the Message can continue to be executed during recovery, the corresponding Message needs to be deleted from the character memory after an interruption occurs.  
+Generally speaking, Message is a bridge for communication and collaboration between different roles. When an interruption occurs during the execution of Message, the Message has been stored in the Role's Memory(in RoleContext) by the role. During recovery, if all the memory of the character is loaded directly, the `_observe` of the character will not observe the interruption and trigger the execution of `Message` at that time, so the continued execution of the Message cannot be restored.    
+Therefore, in order to ensure that the Message can continue to be executed during recovery, the corresponding Message needs to be deleted from the character memory based on the latest information obtained by `_observe` after an interruption occurs.   
 
 ### Re-execute from the action before the interruption
 
-Generally speaking, Action is a relatively small execution module granularity. When an interruption occurs during the execution of Action, you need to know the execution order of multiple Actions and which Action is currently executed. When resuming, locate the action where it was interrupted and re-execute the action.  
+Generally speaking, Action is a relatively small execution module granularity. When an interruption occurs during the execution of Action, you need to know the execution order of multiple Actions and which Action(`_rc.state`) is currently executed. When resuming, locate the action where it was interrupted and re-execute the action.  
 
 ## Result
 
@@ -149,9 +190,11 @@ Generally speaking, Action is a relatively small execution module granularity. W
 
 ### Continuing execution results after recovery
 
+A single test case is provided here to illustrate breakpoint recovery execution:  
+
 Execution case of `test_team_recover_multi_roles_save` of `python3 -s tests/metagpt/serialize_deserialize/test_team.py`  
 
-`ActionRaise` of `RoleB` simulates Action exceptions. An exception occurs when executing the Action and exits after serializing the project. After restarting, `RoleA` has already been executed and will not continue to be executed. `ActionOK` of `RoleB` has already been executed and will not continue to be executed. Continue to execute from `ActionRaise`, still abnormal.  
+`ActionRaise` of `RoleB` simulates Action exceptions. An exception occurred when executing the Action, and exited after serializing the project. After recovering, `RoleA` and `ActionOK` of `RoleB` have already been executed and will not continue to be executed. `RoleB` continues to execute from `ActionRaise` and continues to exit when an exception is encountered.  
 
 ```bash
 2023-12-19 10:26:01.380 | DEBUG    | metagpt.config:__init__:50 - Config loading done.
@@ -187,12 +230,12 @@ Traceback (most recent call last):
     raise RuntimeError("parse error in ActionRaise")
 RuntimeError: parse error in ActionRaise
 
-############################# ---------  此处开始重新执行 ----------- ############################
+############################# ---------  Here re-run the Team ----------- ############################
 2023-12-19 10:26:12.515 | DEBUG    | metagpt.environment:publish_message:117 - publish_message: {"id": "0bfdde08d4294f07923201d51b2b0068", "content": "write a snake game", "role": "Human", "cause_by": "metagpt.actions.add_requirement.UserRequirement", "sent_from": "", "send_to": ["<all>"]}
 2023-12-19 10:26:12.516 | DEBUG    | metagpt.team:run:101 - max n_round=3 left.
 2023-12-19 10:26:12.517 | DEBUG    | metagpt.roles.role:run:517 - RoleA(Role A): no news. waiting.
 2023-12-19 10:26:12.517 | DEBUG    | metagpt.roles.role:_observe:421 - RoleB(Role B) observed: ['Role A: ActionPass run passe...']
-2023-12-19 10:26:12.517 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionOK, ActionRaise], state=1         # 从失败Action处继续执行
+2023-12-19 10:26:12.517 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionOK, ActionRaise], state=1         # run from the failed action `ActionRaise`
 2023-12-19 10:26:12.518 | INFO     | metagpt.roles.role:_act:373 - RoleB(Role B): ready to ActionRaise
 2023-12-19 10:26:12.518 | WARNING  | metagpt.utils.utils:wrapper:96 - There is a exception in role's execution, in order to resume, we delete the newest role communication message in the role's memory.
 2023-12-19 10:26:12.519 | ERROR    | metagpt.utils.utils:wrapper:79 - Exception occurs, start to serialize the project, exp:
