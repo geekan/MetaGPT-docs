@@ -70,21 +70,6 @@ DOMAIN : "generalv2"
 SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
 ```
 
-## 百度的大模型 Ernie API
-
-``` yaml
-#### 如果是Ernie
-ERNIE_API_KEY : "YOUR_API_KEY"
-ERNIE_SECRET_KEY : "YOUR_API_SECRET"
-```
-
-## Anthropic API
-
-``` yaml
-#### 如果是Anthropic
-Anthropic_API_KEY: "YOUR_API_KEY"
-```
-
 ## 基于Microsoft Azure的Openai
 
 ``` yaml

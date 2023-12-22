@@ -75,21 +75,6 @@ DOMAIN : "generalv2"
 SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
 ```
 
-## Baidu's large model  Ernie  API
-
-``` yaml
-#### if Ernie
-ERNIE_API_KEY : "YOUR_API_KEY"
-ERNIE_SECRET_KEY : "YOUR_API_SECRET"
-```
-
-## Anthropic API
-
-``` yaml
-#### if Anthropic
-Anthropic_API_KEY: "YOUR_API_KEY"
-```
-
 ## Microsoft Azure Based Openai
 
 ``` yaml
