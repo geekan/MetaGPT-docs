@@ -49,6 +49,8 @@ follow steps below to start the dev server
 
 1. `corepack enable pnpm` to use pnpm
 
+   or refer to [pnpm Installation](https://pnpm.io/installation)
+
 2. `pnpm i` to install dependency
 
 3. `npm run docs:dev`

@@ -1,8 +1,17 @@
 import { defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
-import { resolve } from 'node:path';
-import { existsSync, cpSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+import {
+  existsSync,
+  cpSync,
+  readdirSync,
+  statSync,
+  copyFileSync,
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+} from 'node:fs';
 import { simpleGit } from 'simple-git';
 
 const Logo = `
@@ -19,6 +28,36 @@ const Logo = `
 const sources = ['blog', 'rfcs'];
 const dests = ['zh', 'en'];
 
+const copyDir = (source: string, dest: string) => {
+  if (!existsSync(dest)) {
+    mkdirSync(dest, {
+      recursive: true,
+    });
+  }
+  const files = readdirSync(source);
+  for (const filename of files) {
+    const file = statSync(join(source, filename));
+
+    if (file.isDirectory()) {
+      copyDir(join(source, filename), join(dest, filename));
+      continue;
+    }
+
+    const ismd = filename.endsWith('.md');
+    if (!ismd) {
+      copyFileSync(join(source, filename), join(dest, filename));
+      continue;
+    }
+
+    const filesource = readFileSync(join(source, filename), 'utf-8');
+    const newfile = filesource.replaceAll('(../public', '(../../public');
+
+    writeFileSync(join(dest, filename), newfile, {
+      encoding: 'utf-8',
+    });
+  }
+};
+
 // route based on fs, so copy files when deploy
 if (process.env.NODE_ENV === 'production') {
   /** for deploy */
@@ -30,9 +69,8 @@ if (process.env.NODE_ENV === 'production') {
     for (const dest of dests) {
       const sourceDir = resolve(__dirname, `../src/${source}`);
       const destDir = resolve(__dirname, `../src/${dest}/${source}`);
-      if (!existsSync(destDir)) {
-        cpSync(sourceDir, destDir, { recursive: true });
-      }
+
+      copyDir(sourceDir, destDir);
     }
   }
 }
@@ -150,6 +188,10 @@ export default defineConfig({
                     text: 'Human engagement',
                     link: 'tutorials/human_engagement.md',
                   },
+                  {
+                    text: 'Integration with open LLM',
+                    link: 'tutorials/integration_with_open_llm.md',
+                  },
                 ],
               },
               {
@@ -215,6 +257,14 @@ export default defineConfig({
                   {
                     text: 'Agent communication',
                     link: 'in_depth_guides/agent_communication.md',
+                  },
+                  {
+                    text: 'Incremental devlopment',
+                    link: 'in_depth_guides/incremental_development.md',
+                  },
+                  {
+                    text: 'Serialization & Breakpoint Recovery',
+                    link: 'in_depth_guides/breakpoint_recovery.md',
                   },
                 ],
               },
@@ -337,6 +387,10 @@ export default defineConfig({
                     text: '人类介入',
                     link: 'tutorials/human_engagement',
                   },
+                  {
+                    text: '集成开源LLM',
+                    link: 'tutorials/integration_with_open_llm',
+                  },
                 ],
               },
               {
@@ -402,6 +456,14 @@ export default defineConfig({
                   {
                     text: '多智能体间通信',
                     link: 'in_depth_guides/agent_communication.md',
+                  },
+                  {
+                    text: '增量开发',
+                    link: 'in_depth_guides/incremental_development.md',
+                  },
+                  {
+                    text: '序列化&断点恢复',
+                    link: 'in_depth_guides/breakpoint_recovery.md',
                   },
                 ],
               },
