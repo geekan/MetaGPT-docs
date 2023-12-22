@@ -184,6 +184,7 @@ Besides, summarization code action also points out issues that were not found th
 Summarization code action can lead to unlimited and continuous refactoring of source code. However, we limit it to 1 round by setting `--max-auto-summarize-code 1` to showcase the capabilities of summarization code action.
 
 The following are available project versions:
+
 ![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/29dcde2670534c8694ec5341fc3141a0.png)
 
 - #### Add New Requirements
@@ -200,5 +201,6 @@ metagpt "Add moving obstacles, move randomly, last for 5 seconds." --project-pat
 [video](../../../public/image/guide/tutorials/inc_req_and_fixbug/20231221-193811.mp4)
 
 Here is the new class view and the sequence view:
+
 ![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/671f926264284392bf81796a645f93d1.png)
 ![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/e1c769d21ad94138baf831a48e741da9.png)
