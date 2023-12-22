@@ -19,7 +19,9 @@ By using the following parameters, it is possible to iterate continuously on the
 For more command options, check `metagpt --help`.
 
 ---
+
 ## Demo
+
 Using the example of Snake, we will demonstrate how to incrementally carry out software iterations.
 
 ### Create a new Snake game project.
