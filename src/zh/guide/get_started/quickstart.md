@@ -25,7 +25,7 @@ os.environ["OPENAI_API_MODEL"] = "gpt-4-1106-preview"
 > 下面为 [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py) 的节选。如果你使用`git clone`方法进行安装，只需简单执行
 >
 > ```
-> metagpt --idea "write a cli blackjack game"
+> metagpt "write a cli blackjack game"
 > ```
 >
 > 现在，让我们开始吧！我们将创建一个多智能体团队，根据我们的一句话需求编写软件。
@@ -76,4 +76,4 @@ await startup(idea="write a cli blackjack game") # blackjack: 二十一点
 
 <b>直接使用Colab运行</b>
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1X8XSn8AN1WFv_PwtTres62OoVUNfHRAH?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1xlReN7EIpKzgZO1If29-zsw7QNUUfEbx?usp=sharing)
