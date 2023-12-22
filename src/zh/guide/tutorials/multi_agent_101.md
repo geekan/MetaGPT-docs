@@ -236,7 +236,7 @@ python3 examples/build_customized_multi_agents.py --idea "write a function that 
 
 或在Colab上运行
 
-[![在Colab中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
+[![在Colab中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1h36AqLl7LqZO9bllpeJHpb4Ar-NW0Kwv?usp=sharing)
 
 ## 机制解释
 
