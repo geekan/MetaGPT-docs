@@ -225,7 +225,7 @@ python3 examples/build_customized_multi_agents.py --idea "write a function that 
 
 Or try it on Colab
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1-BqQ7PezLtv5QTIAvolI1d11_hTMED5q?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1h36AqLl7LqZO9bllpeJHpb4Ar-NW0Kwv?usp=sharing)
 
 ## Mechanism Explained
 

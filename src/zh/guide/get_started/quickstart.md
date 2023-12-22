@@ -13,7 +13,7 @@ pip install metagpt
 ```
 import os
 os.environ["OPENAI_API_KEY"] = "sk-..."
-os.environ["OPENAI_API_MODEL"] = "gpt-4"
+os.environ["OPENAI_API_MODEL"] = "gpt-4-1106-preview"
 ```
 
 完整配置不同LLM API（比如OpenAI、Azure、Anthropic等）的方法可在 [配置](./setup) 部分找到。
