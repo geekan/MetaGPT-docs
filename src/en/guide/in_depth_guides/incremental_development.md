@@ -188,7 +188,7 @@ The following are available project versions:
 ![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/29dcde2670534c8694ec5341fc3141a0.png)
 
 - #### Add New Requirements
-  We'll add obstacles to the game.
+  We'll add obstacles to the game using azure gpt-4.
   Before adding the new requirements:
 
 ![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/6d081360d0c74bb48794b9f8a2b0a23e.png)
