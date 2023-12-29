@@ -74,7 +74,7 @@ DOMAIN: 'generalv2'
 SPARK_URL: 'ws://spark-api.xf-yun.com/v2.1/chat'
 ```
 
-### 基于Azure的Openai
+### Azure OpenAI API
 
 ```yaml
 #### 如果是AZURE，请参考https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb

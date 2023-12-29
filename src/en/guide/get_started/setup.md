@@ -76,7 +76,7 @@ DOMAIN: 'generalv2'
 SPARK_URL: 'ws://spark-api.xf-yun.com/v2.1/chat'
 ```
 
-### Azure-based OpenAI API
+### Azure OpenAI API
 
 ```yaml
 #### if AZURE, check https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb
@@ -93,7 +93,7 @@ DEPLOYMENT_ID: 'YOUR_DEPLOYMENT_ID'
 
 In addition to LLM, we often want agents to use tools. We cover their setup in this section.
 
-## Web searching API
+### Web searching API
 
 ```yaml
 #### for Search
@@ -113,7 +113,7 @@ GOOGLE_CSE_ID: 'YOUR_CSE_ID'
 SERPER_API_KEY: 'YOUR_API_KEY'
 ```
 
-## Web browsing
+### Web browsing
 
 ```yaml
 #### for web access
@@ -128,7 +128,7 @@ PLAYWRIGHT_BROWSER_TYPE: chromium
 SELENIUM_BROWSER_TYPE: chrome
 ```
 
-## Auzre TTS
+### Auzre TTS
 
 ```yaml
 #### for TTS
@@ -137,7 +137,7 @@ AZURE_TTS_SUBSCRIPTION_KEY: 'YOUR_API_KEY'
 AZURE_TTS_REGION: 'eastus'
 ```
 
-## Stable Diffusion local deployment
+### Stable Diffusion local deployment
 
 ```yaml
 #### for Stable Diffusion
