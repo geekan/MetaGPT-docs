@@ -1,6 +1,6 @@
 # Incremental Development
 
-You can improve exits project code through these steps:
+You can improve existing project code through these steps:
 
 - Locate the folder of project created by MetaGPT which you want to improve anywhere on your computer
 - execute `metagpt <new-idea-or-bug-feedback> --project-path <the-path-to-the-folder>`
