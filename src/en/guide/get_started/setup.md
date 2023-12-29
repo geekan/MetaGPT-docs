@@ -1,19 +1,20 @@
 # Setup
 
-Using MetaGPT involves connecting with model providers. We will walk through the setup in this page.
-
-After your [Installation](./installation.md) is complete, follow the instructions in this document to complete the
+Using MetaGPT involves connecting with model providers. After your [Installation](./installation.md) is complete, follow the instructions in this document to complete the
 configuration before use.
-At the moment, the example of this project only needs to configure OpenAi API.
 
-## OpenAI API
+## Setup for LLM API
 
-We will take OpenAI API as an example. You can finish the setup in either way:
+### OpenAI API
+
+We will take OpenAI API as an example to illustrate the full process, which applies identically to other LLM APIs.
+
+You can finish the setup in either way:
 
 1. Use environment variables. This can be used temporarily for a quick start or trying out a demo.
 2. Use a config or key file. This is the recommended way, best for continuous and full-feature usage and development.
 
-### 1. Use environment variables
+#### 1. Use environment variables
 
 Run in command line:
 
@@ -31,7 +32,7 @@ os.environ["OPENAI_API_KEY"] = "sk-..."  # YOUR_API_KEY
 os.environ["OPENAI_API_MODEL"] = "intended model"  # gpt-4, gpt-3.5-turbo, etc.
 ```
 
-### 2. Use a config or key file
+#### 2. Use a config or key file
 
 1. In your current working directory, create a folder `config` and add a new file named `config.yaml` or `key.yaml`
    under it.
@@ -56,61 +57,65 @@ run!
 
 MetaGPT also supports various LLM models, configure the keys of model APIs according to your needs.
 
-## Zhipu API
+### Zhipu API
 
 ```yaml
 #### if zhipuai from `https://open.bigmodel.cn`. You can set here or export API_KEY="YOUR_API_KEY"
-ZHIPUAI_API_KEY: "YOUR_API_KEY"
+ZHIPUAI_API_KEY: 'YOUR_API_KEY'
 ```
 
-## iFlytek's large model Spark API :
+### iFlytek's large model Spark API :
 
-``` yaml
+```yaml
 #### if Spark
 ### Nomally YOU only need to modify SPARK_APPID SPARK_API_SECRET SPARK_API_KEY
-SPARK_APPID : "YOUR_APPID"
-SPARK_API_SECRET : "YOUR_API_SECRET"
-SPARK_API_KEY : "YOUR_API_KEY"
-DOMAIN : "generalv2"
-SPARK_URL : "ws://spark-api.xf-yun.com/v2.1/chat"
+SPARK_APPID: 'YOUR_APPID'
+SPARK_API_SECRET: 'YOUR_API_SECRET'
+SPARK_API_KEY: 'YOUR_API_KEY'
+DOMAIN: 'generalv2'
+SPARK_URL: 'ws://spark-api.xf-yun.com/v2.1/chat'
 ```
 
-## Microsoft Azure Based Openai
+### Azure-based OpenAI API
 
-``` yaml
+```yaml
 #### if AZURE, check https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb
 #### You can use ENGINE or DEPLOYMENT mode
-OPENAI_API_TYPE: "azure"
-OPENAI_API_BASE: "YOUR_AZURE_ENDPOINT"
-OPENAI_API_KEY: "YOUR_AZURE_API_KEY"
-OPENAI_API_VERSION: "YOUR_AZURE_API_VERSION"
-DEPLOYMENT_NAME: "YOUR_DEPLOYMENT_NAME"
-DEPLOYMENT_ID: "YOUR_DEPLOYMENT_ID"
+OPENAI_API_TYPE: 'azure'
+OPENAI_API_BASE: 'YOUR_AZURE_ENDPOINT'
+OPENAI_API_KEY: 'YOUR_AZURE_API_KEY'
+OPENAI_API_VERSION: 'YOUR_AZURE_API_VERSION'
+DEPLOYMENT_NAME: 'YOUR_DEPLOYMENT_NAME'
+DEPLOYMENT_ID: 'YOUR_DEPLOYMENT_ID'
 ```
 
-## Web Searching API
+## Setup for tools (Optional)
 
-``` yaml
+In addition to LLM, we often want agents to use tools. We cover their setup in this section.
+
+## Web searching API
+
+```yaml
 #### for Search
 
 ## Supported values: serpapi/google/serper/ddg
 SEARCH_ENGINE: serpapi
 
 ## Visit https://serpapi.com/ to get key.
-SERPAPI_API_KEY: "YOUR_API_KEY"
+SERPAPI_API_KEY: 'YOUR_API_KEY'
 
 ## Visit https://console.cloud.google.com/apis/credentials to get key.
-GOOGLE_API_KEY: "YOUR_API_KEY"
+GOOGLE_API_KEY: 'YOUR_API_KEY'
 ## Visit https://programmablesearchengine.google.com/controlpanel/create to get id.
-GOOGLE_CSE_ID: "YOUR_CSE_ID"
+GOOGLE_CSE_ID: 'YOUR_CSE_ID'
 
 ## Visit https://serper.dev/ to get key.
-SERPER_API_KEY: "YOUR_API_KEY"
+SERPER_API_KEY: 'YOUR_API_KEY'
 ```
 
-## Website Access For Agent
+## Web browsing
 
-``` yaml
+```yaml
 #### for web access
 
 ## Supported values: playwright/selenium
@@ -125,33 +130,31 @@ SELENIUM_BROWSER_TYPE: chrome
 
 ## Auzre TTS
 
-```` yaml
+```yaml
 #### for TTS
 
-AZURE_TTS_SUBSCRIPTION_KEY: "YOUR_API_KEY"
-AZURE_TTS_REGION: "eastus"
-````
+AZURE_TTS_SUBSCRIPTION_KEY: 'YOUR_API_KEY'
+AZURE_TTS_REGION: 'eastus'
+```
 
-## Stable Diffusion Local Deployment
+## Stable Diffusion local deployment
 
-````yaml
+```yaml
 #### for Stable Diffusion
 ## Use SD service, based on https://github.com/AUTOMATIC1111/stable-diffusion-webui
-SD_URL: "YOUR_SD_URL"
-SD_T2I_API: "/sdapi/v1/txt2img"
+SD_URL: 'YOUR_SD_URL'
+SD_T2I_API: '/sdapi/v1/txt2img'
+```
 
-````
+## Others (Optional)
 
-## Other Abilities
-
-````yaml 
+```yaml
 #### for Execution
 LONG_TERM_MEMORY: false
 #### for Mermaid CLI
 ## If you installed mmdc (Mermaid CLI) only for metagpt then enable the following configuration.
-PUPPETEER_CONFIG: "./config/puppeteer-config.json"
-MMDC: "./node_modules/.bin/mmdc"
-
+PUPPETEER_CONFIG: './config/puppeteer-config.json'
+MMDC: './node_modules/.bin/mmdc'
 
 ### for calc_usage
 CALC_USAGE: false
@@ -160,12 +163,12 @@ CALC_USAGE: false
 MODEL_FOR_RESEARCHER_SUMMARY: gpt-3.5-turbo
 MODEL_FOR_RESEARCHER_REPORT: gpt-3.5-turbo-16k
 
-### choose the engine for mermaid conversion, 
+### choose the engine for mermaid conversion,
 # default is nodejs, you can change it to playwright,pyppeteer or ink
 MERMAID_ENGINE: nodejs
 
 ### browser path for pyppeteer engine, support Chrome, Chromium,MS Edge
-PYPPETEER_EXECUTABLE_PATH: "/usr/bin/google-chrome-stable"
+PYPPETEER_EXECUTABLE_PATH: '/usr/bin/google-chrome-stable'
 
 PROMPT_FORMAT: json #json or markdown
-````
+```
