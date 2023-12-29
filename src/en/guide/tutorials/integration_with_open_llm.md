@@ -186,7 +186,8 @@ ollama run llama2  # download speed looks pretty good (10+MB/s)
 ```
 
 ##### Non-local access
-The ollama service started by default can only be accessed locally, that is, `http://localhost:11434/api/chat` or `http://127.0.0.1:11434/api/chat`. If you want to support `http: //ip:11434/api/chat`, you can do as follows:   
+
+The ollama service started by default can only be accessed locally, that is, `http://localhost:11434/api/chat` or `http://127.0.0.1:11434/api/chat`. If you want to support `http: //ip:11434/api/chat`, you can do as follows:
 
 ```bash
 service ollama stop
@@ -216,22 +217,23 @@ curl -X POST http://localhost:11434/api/chat -d '{
  }'
 ```
 
-response result     
+response result
+
 ```json
 {
-    "model":"llama2",
-    "created_at":"2023-12-21T14:40:31.635304023Z",
-    "message":{
-        "role":"assistant",
-        "content":"The sky appears blue ...."
-    },
-    "done":true,
-    "total_duration":30355794101,
-    "load_duration":1156507,
-    "prompt_eval_count":26,
-    "prompt_eval_duration":1037945000,
-    "eval_count":288,
-    "eval_duration":29311846000
+  "model": "llama2",
+  "created_at": "2023-12-21T14:40:31.635304023Z",
+  "message": {
+    "role": "assistant",
+    "content": "The sky appears blue ...."
+  },
+  "done": true,
+  "total_duration": 30355794101,
+  "load_duration": 1156507,
+  "prompt_eval_count": 26,
+  "prompt_eval_duration": 1037945000,
+  "eval_count": 288,
+  "eval_duration": 29311846000
 }
 ```
 
@@ -254,7 +256,7 @@ The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/
 
 #### ollama api interface
 
-Such as model services deployed through ollama   
+Such as model services deployed through ollama
 
 **config/key.yaml**
 
@@ -263,7 +265,7 @@ OLLAMA_API_BASE: 'http://127.0.0.1:11434/api'
 OLLAMA_API_MODEL: 'llama2'
 ```
 
-The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `OLLAMA_API_BASE` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaGPTAPI`. `OLLAMA_API_MODEL` is the actual value of the request parameter `model`.  
+The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `OLLAMA_API_BASE` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaGPTAPI`. `OLLAMA_API_MODEL` is the actual value of the request parameter `model`.
 
 ## Optional, repair LLM output
 

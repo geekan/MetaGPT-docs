@@ -187,7 +187,8 @@ ollama run llama2  # 下载速度还可以 (10+MB/s)
 ```
 
 ##### 非本地访问
-默认情况下启动的ollama服务只能本地访问，即`http://localhost:11434/api/chat` 或 `http://127.0.0.1:11434/api/chat` ，如果想要支持 `http://ip:11434/api/chat` ，可以按下述操作：   
+
+默认情况下启动的ollama服务只能本地访问，即`http://localhost:11434/api/chat` 或 `http://127.0.0.1:11434/api/chat` ，如果想要支持 `http://ip:11434/api/chat` ，可以按下述操作：
 
 ```bash
 service ollama stop
@@ -217,22 +218,23 @@ curl -X POST http://localhost:11434/api/chat -d '{
  }'
 ```
 
-返回结果   
+返回结果
+
 ```json
 {
-    "model":"llama2",
-    "created_at":"2023-12-21T14:40:31.635304023Z",
-    "message":{
-        "role":"assistant",
-        "content":"The sky appears blue ...."
-    },
-    "done":true,
-    "total_duration":30355794101,
-    "load_duration":1156507,
-    "prompt_eval_count":26,
-    "prompt_eval_duration":1037945000,
-    "eval_count":288,
-    "eval_duration":29311846000
+  "model": "llama2",
+  "created_at": "2023-12-21T14:40:31.635304023Z",
+  "message": {
+    "role": "assistant",
+    "content": "The sky appears blue ...."
+  },
+  "done": true,
+  "total_duration": 30355794101,
+  "load_duration": 1156507,
+  "prompt_eval_count": 26,
+  "prompt_eval_duration": 1037945000,
+  "eval_count": 288,
+  "eval_duration": 29311846000
 }
 ```
 
@@ -255,7 +257,7 @@ openapi chat接口的完整路由`http://0.0.0.0:8000/v1/chat/completions`，`OP
 
 #### ollama api接口
 
-如通过ollama部署的模型服务  
+如通过ollama部署的模型服务
 
 **config/key.yaml**
 
