@@ -50,7 +50,7 @@
            self._set_react_mode(react_mode="by_order")
    ```
 
-2. 重写 `_act` 方法，`_act` 方法是执行 `action`。在 `Role` 类的`_react` 方法会循环执行 `think` 和 `action` 操作，`_think` 方法会根据 `states` 思考下一步执行的 `action`，因此只需重写 `_act` 方法。使用 `msg = self._rc.memory.get(k=1)[0]`获取上下文最新的消息，使用 `todo = self._rc.todo` 从上下文获取下一步要执行的 `action`。这里先通过 `InvoiceOCR` 识别发票文件数据，如果只识别单张发票，则添加 `GenerateTable` ,`ReplyQuestion` 的 `action`，多张发票文件就不需要 `ReplyQuestion` 的 `action`；再通过 `GenerateTable` 的 `action` 将发票识别结果提供给 `llm` 大模型抽取主要信息后下载为表格文件；如果是单张发票文件再将提问和识别结果发给 `llm` 大模型获取答案。每一步 `action` 的结果生成 `message`，再通过 `self._rc.memory.add(msg)` 放到上下文。
+2. 重写 `_act` 方法，`_act` 方法是执行 `action`。在 `Role` 类的`_react` 方法会循环执行 `think` 和 `action` 操作，`_think` 方法会根据 `states` 思考下一步执行的 `action`，因此只需重写 `_act` 方法。使用 `msg = self.rc.memory.get(k=1)[0]`获取上下文最新的消息，使用 `todo = self.rc.todo` 从上下文获取下一步要执行的 `action`。这里先通过 `InvoiceOCR` 识别发票文件数据，如果只识别单张发票，则添加 `GenerateTable` ,`ReplyQuestion` 的 `action`，多张发票文件就不需要 `ReplyQuestion` 的 `action`；再通过 `GenerateTable` 的 `action` 将发票识别结果提供给 `llm` 大模型抽取主要信息后下载为表格文件；如果是单张发票文件再将提问和识别结果发给 `llm` 大模型获取答案。每一步 `action` 的结果生成 `message`，再通过 `self.rc.memory.add(msg)` 放到上下文。
 
    ```python
    async def _act(self) -> Message:
@@ -59,8 +59,8 @@
    	Returns:
        	A message containing the result of the action.
        """
-       msg = self._rc.memory.get(k=1)[0]
-       todo = self._rc.todo
+       msg = self.rc.memory.get(k=1)[0]
+       todo = self.rc.todo
        if isinstance(todo, InvoiceOCR):
            self.origin_query = msg.content
            file_path = msg.instruct_content.get("file_path")
@@ -76,7 +76,7 @@
            else:
                self._init_actions([GenerateTable])
 
-           self._rc.todo = None
+           self.rc.todo = None
            content = INVOICE_OCR_SUCCESS
        elif isinstance(todo, GenerateTable):
            ocr_results = msg.instruct_content
@@ -91,7 +91,7 @@
            content = resp
 
        msg = Message(content=content, instruct_content=resp)
-       self._rc.memory.add(msg)
+       self.rc.memory.add(msg)
        return msg
    ```
 

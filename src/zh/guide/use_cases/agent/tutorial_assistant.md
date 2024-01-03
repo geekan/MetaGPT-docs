@@ -57,7 +57,7 @@
        return msg
    ```
 
-3. 重写 `_act` 方法，`_act` 方法是执行 `action`。使用 `todo = self._rc.todo` 从上下文获取下一步要执行的 `action`，再执行 `action` 的 `run` 方法。这里是先通过 `WriteDirectory` 获取教程的目录结构，再分块目录，每块生成一个 `WriteContent` 的 `action`，再初始化新添加的 `action`。这里再次调用 `await super().react()` 是为了从头执行新添加的所有 `WriteContent` `action`。每个 action 执行完的结果生成消息 `Message(content=resp, role=self.profile)`，可以将其放入上下文内存 `self._rc.memory`，该角色不需要存入。
+3. 重写 `_act` 方法，`_act` 方法是执行 `action`。使用 `todo = self.rc.todo` 从上下文获取下一步要执行的 `action`，再执行 `action` 的 `run` 方法。这里是先通过 `WriteDirectory` 获取教程的目录结构，再分块目录，每块生成一个 `WriteContent` 的 `action`，再初始化新添加的 `action`。这里再次调用 `await super().react()` 是为了从头执行新添加的所有 `WriteContent` `action`。每个 action 执行完的结果生成消息 `Message(content=resp, role=self.profile)`，可以将其放入上下文内存 `self.rc.memory`，该角色不需要存入。
 
    ```python
    async def _act(self) -> Message:
@@ -66,9 +66,9 @@
        Returns:
        	A message containing the result of the action.
        """
-       todo = self._rc.todo
+       todo = self.rc.todo
        if type(todo) is WriteDirectory:
-           msg = self._rc.memory.get(k=1)[0]
+           msg = self.rc.memory.get(k=1)[0]
            self.topic = msg.content
            resp = await todo.run(topic=self.topic)
            logger.info(resp)

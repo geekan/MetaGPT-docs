@@ -49,18 +49,15 @@ if __name__ == '__main__':
 from metagpt.actions import Action
 
 class SimpleWriteCode(Action):
-
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     Write a python function that can {instruction} and provide two runnnable test cases.
     Return ```python your_code_here ``` with NO other texts,
     your code:
     """
 
-    def __init__(self, name="SimpleWriteCode", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleWriteCode"
 
     async def run(self, instruction: str):
-
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
 
         rsp = await self._aask(prompt)
@@ -71,7 +68,7 @@ class SimpleWriteCode(Action):
 
     @staticmethod
     def parse_code(rsp):
-        pattern = r'```python(.*)```'
+        pattern = r"```python(.*)```"
         match = re.search(pattern, rsp, re.DOTALL)
         code_text = match.group(1) if match else rsp
         return code_text
@@ -85,29 +82,26 @@ class SimpleWriteCode(Action):
 
 1. 我们为其指定一个名称和配置文件。
 2. 我们使用 `self._init_action` 函数为其配备期望的动作 `SimpleWriteCode`。
-3. 我们覆盖 `_act` 函数，其中包含智能体具体行动逻辑。我们写入，我们的智能体将从最新的记忆中获取人类指令，运行配备的动作，MetaGPT将其作为待办事项 (`self._rc.todo`) 在幕后处理，最后返回一个完整的消息。
+3. 我们覆盖 `_act` 函数，其中包含智能体具体行动逻辑。我们写入，我们的智能体将从最新的记忆中获取人类指令，运行配备的动作，MetaGPT将其作为待办事项 (`self.rc.todo`) 在幕后处理，最后返回一个完整的消息。
 
 ```python
 from metagpt.roles import Role
 
 class SimpleCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "SimpleCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "SimpleCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteCode])
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: 准备 {self._rc.todo}")
-        todo = self._rc.todo
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
+        todo = self.rc.todo  # todo will be SimpleWriteCode()
 
-        msg = self.get_memories(k=1)[0]  # 找到最相似的 k 条消息
-
-        code_text = await SimpleWriteCode().run(msg.content)
-        msg = Message(content=code_text, role=self.profile, cause_by=todo)
+        msg = self.get_memories(k=1)[0]  # find the most recent messages
+        code_text = await todo.run(msg.content)
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
 ```
@@ -145,8 +139,7 @@ asyncio.run(main)
 
 ```python
 class SimpleRunCode(Action):
-    def __init__(self, name="SimpleRunCode", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleRunCode"
 
     async def run(self, code_text: str):
         result = subprocess.run(["python3", "-c", code_text], capture_output=True, text=True)
@@ -160,32 +153,30 @@ class SimpleRunCode(Action):
 与定义单一动作的智能体没有太大不同！让我们来映射一下：
 
 1. 用 `self._init_actions` 初始化所有 `Action`
-2. 指定每次 `Role` 会选择哪个 `Action`。我们将 `react_mode` 设置为 "by_order"，这意味着 `Role` 将按照 `self._init_actions` 中指定的顺序执行其能够执行的 `Action`（有关更多讨论，请参见 [思考和行动](agent_think_act)）。在这种情况下，当 `Role` 执行 `_act` 时，`self._rc.todo` 将首先是 `SimpleWriteCode`，然后是 `SimpleRunCode`。
-3. 覆盖 `_act` 函数。`Role` 从上一轮的人类输入或动作输出中检索消息，用适当的 `Message` 内容提供当前的 `Action` (`self._rc.todo`)，最后返回由当前 `Action` 输出组成的 `Message`。
+2. 指定每次 `Role` 会选择哪个 `Action`。我们将 `react_mode` 设置为 "by_order"，这意味着 `Role` 将按照 `self._init_actions` 中指定的顺序执行其能够执行的 `Action`（有关更多讨论，请参见 [思考和行动](agent_think_act)）。在这种情况下，当 `Role` 执行 `_act` 时，`self.rc.todo` 将首先是 `SimpleWriteCode`，然后是 `SimpleRunCode`。
+3. 覆盖 `_act` 函数。`Role` 从上一轮的人类输入或动作输出中检索消息，用适当的 `Message` 内容提供当前的 `Action` (`self.rc.todo`)，最后返回由当前 `Action` 输出组成的 `Message`。
 
 ```python
 class RunnableCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "RunnableCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "RunnableCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: 准备 {self._rc.todo}")
-        # 通过在底层按顺序选择动作
-        # todo 首先是 SimpleWriteCode() 然后是 SimpleRunCode()
-        todo = self._rc.todo
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
+        # By choosing the Action by order under the hood
+        # todo will be first SimpleWriteCode() then SimpleRunCode()
+        todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0] # 得到最相似的 k 条消息
+        msg = self.get_memories(k=1)[0]  # find the most k recent messages
         result = await todo.run(msg.content)
 
-        msg = Message(content=result, role=self.profile, cause_by=todo)
-        self._rc.memory.add(msg)
+        msg = Message(content=result, role=self.profile, cause_by=type(todo))
+        self.rc.memory.add(msg)
         return msg
 ```
 

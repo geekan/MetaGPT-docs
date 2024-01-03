@@ -80,7 +80,7 @@ SPARK_URL: 'ws://spark-api.xf-yun.com/v2.1/chat'
 #### 如果是AZURE，请参考https://github.com/openai/openai-cookbook/blob/main/examples/azure/chat.ipynb
 #### 您可以使用ENGINE或DEPLOYMENT模式
 OPENAI_API_TYPE: 'azure'
-OPENAI_API_BASE: 'YOUR_AZURE_ENDPOINT'
+OPENAI_BASE_URL: 'YOUR_AZURE_ENDPOINT'
 OPENAI_API_KEY: 'YOUR_AZURE_API_KEY'
 OPENAI_API_VERSION: 'YOUR_AZURE_API_VERSION'
 DEPLOYMENT_NAME: 'YOUR_DEPLOYMENT_NAME'

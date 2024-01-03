@@ -51,18 +51,15 @@ import re
 from metagpt.actions import Action
 
 class SimpleWriteCode(Action):
-
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     Write a python function that can {instruction} and provide two runnnable test cases.
     Return ```python your_code_here ``` with NO other texts,
     your code:
     """
 
-    def __init__(self, name="SimpleWriteCode", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleWriteCode"
 
     async def run(self, instruction: str):
-
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
 
         rsp = await self._aask(prompt)
@@ -73,7 +70,7 @@ class SimpleWriteCode(Action):
 
     @staticmethod
     def parse_code(rsp):
-        pattern = r'```python(.*)```'
+        pattern = r"```python(.*)```"
         match = re.search(pattern, rsp, re.DOTALL)
         code_text = match.group(1) if match else rsp
         return code_text
@@ -87,29 +84,26 @@ In the example, we create a `SimpleCoder` who can write code based on a human's 
 
 1. We give it a name and profile
 2. We equip it with the expected action `SimpleWriteCode` with the `self._init_action` function
-3. We overwrite the `_act` function, which is where the agent's specific acting logic goes in. We write that our agent will retrieve human instruction from latest memory, run equipped action, which MetaGPT makes it as the todo (`self._rc.todo`) under the hood, and finally return a complete message
+3. We overwrite the `_act` function, which is where the agent's specific acting logic goes in. We write that our agent will retrieve human instruction from latest memory, run equipped action, which MetaGPT makes it as the todo (`self.rc.todo`) under the hood, and finally return a complete message
 
 ```python
 from metagpt.roles import Role
 
 class SimpleCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "SimpleCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "SimpleCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteCode])
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo # todo will be SimpleWriteCode()
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
+        todo = self.rc.todo  # todo will be SimpleWriteCode()
 
-        msg = self.get_memories(k=1)[0] # find the most recent k messages
-
+        msg = self.get_memories(k=1)[0]  # find the most recent messages
         code_text = await todo.run(msg.content)
-        msg = Message(content=code_text, role=self.profile, cause_by=todo)
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
 ```
@@ -147,8 +141,7 @@ Next, define `SimpleRunCode`. As previously mentioned, conceptually, an action c
 
 ```python
 class SimpleRunCode(Action):
-    def __init__(self, name="SimpleRunCode", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleRunCode"
 
     async def run(self, code_text: str):
         result = subprocess.run(["python3", "-c", code_text], capture_output=True, text=True)
@@ -162,32 +155,30 @@ class SimpleRunCode(Action):
 Not that different from defining a single-action agent! Let's map it out:
 
 1. Initiate all `Action` with `self._init_actions`
-2. Specify how `Role` will choose `Action` each time. We set `react_mode` to be "by_order", which means the `Role` will take its capable `Action`s in order specified in `self._init_actions` (more discussion in [Think and act](agent_think_act)). In this case, when the `Role` `_act`s, `self._rc.todo` will be `SimpleWriteCode` first and `SimpleRunCode` next.
-3. Overwrite the `_act` function. The `Role` retrieves messages from human input or action outputs from the last round, feeds the current `Action` (`self._rc.todo`) with the appropriate `Message` content, and finally returns a `Message` composed of the current `Action` output.
+2. Specify how `Role` will choose `Action` each time. We set `react_mode` to be "by_order", which means the `Role` will take its capable `Action`s in order specified in `self._init_actions` (more discussion in [Think and act](agent_think_act)). In this case, when the `Role` `_act`s, `self.rc.todo` will be `SimpleWriteCode` first and `SimpleRunCode` next.
+3. Overwrite the `_act` function. The `Role` retrieves messages from human input or action outputs from the last round, feeds the current `Action` (`self.rc.todo`) with the appropriate `Message` content, and finally returns a `Message` composed of the current `Action` output.
 
 ```python
 class RunnableCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "RunnableCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "RunnableCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
         # By choosing the Action by order under the hood
         # todo will be first SimpleWriteCode() then SimpleRunCode()
-        todo = self._rc.todo
+        todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0] # find the most k recent messages
+        msg = self.get_memories(k=1)[0]  # find the most k recent messages
         result = await todo.run(msg.content)
 
-        msg = Message(content=result, role=self.profile, cause_by=todo)
-        self._rc.memory.add(msg)
+        msg = Message(content=result, role=self.profile, cause_by=type(todo))
+        self.rc.memory.add(msg)
         return msg
 ```
 
