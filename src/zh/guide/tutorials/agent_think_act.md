@@ -35,13 +35,11 @@ self._set_react_mode(react_mode="react", max_react_loop=6)
 
 ```python
 class RunnableCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "RunnableCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "RunnableCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 

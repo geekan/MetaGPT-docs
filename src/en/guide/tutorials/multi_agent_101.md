@@ -43,57 +43,58 @@ We list the three `Action`s.
 from metagpt.actions import Action
 
 class SimpleWriteCode(Action):
-
-    PROMPT_TEMPLATE = """
-    Write a python function that can {instruction} and provide two runnnable test cases.
+    PROMPT_TEMPLATE: str = """
+    Write a python function that can {instruction}.
     Return ```python your_code_here ``` with NO other texts,
     your code:
     """
-
-    def __init__(self, name="SimpleWriteCode", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleWriteCode"
 
     async def run(self, instruction: str):
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
+
         rsp = await self._aask(prompt)
+
         code_text = parse_code(rsp)
+
         return code_text
 ````
 
 ````python
 class SimpleWriteTest(Action):
-
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     Context: {context}
     Write {k} unit tests using pytest for the given function, assuming you have imported it.
     Return ```python your_code_here ``` with NO other texts,
     your code:
     """
 
-    def __init__(self, name="SimpleWriteTest", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleWriteTest"
 
     async def run(self, context: str, k: int = 3):
         prompt = self.PROMPT_TEMPLATE.format(context=context, k=k)
+
         rsp = await self._aask(prompt)
+
         code_text = parse_code(rsp)
+
         return code_text
 ````
 
 ```python
 class SimpleWriteReview(Action):
-
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     Context: {context}
     Review the test cases and provide one critical comments:
     """
 
-    def __init__(self, name="SimpleWriteReview", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleWriteReview"
 
     async def run(self, context: str):
         prompt = self.PROMPT_TEMPLATE.format(context=context)
+
         rsp = await self._aask(prompt)
+
         return rsp
 ```
 
@@ -108,13 +109,11 @@ That's all users have to do. For those who are interested in the mechanism under
 
 ```python
 class SimpleCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "SimpleCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "SimpleCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._watch([UserRequirement])
         self._init_actions([SimpleWriteCode])
 ```
@@ -133,27 +132,24 @@ Additionally, we want to show that you can define your own acting logic for the 
 
 ```python
 class SimpleTester(Role):
-    def __init__(
-        self,
-        name: str = "Bob",
-        profile: str = "SimpleTester",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Bob"
+    profile: str = "SimpleTester"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteTest])
         self._watch([SimpleWriteCode])
-        # self._watch([SimpleWriteCode, SimpleWriteReview]) # feel free to try this too
+        # self._watch([SimpleWriteCode, SimpleWriteReview])  # feel free to try this too
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self.rc.todo}")
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
         todo = self.rc.todo
 
         # context = self.get_memories(k=1)[0].content # use the most recent memory as context
-        context = self.get_memories() # use all memories as context
+        context = self.get_memories()  # use all memories as context
 
-        code_text = await todo.run(context, k=5) # specify arguments
-
-        msg = Message(content=code_text, role=self.profile, cause_by=todo)
+        code_text = await todo.run(context, k=5)  # specify arguments
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
 ```
@@ -164,13 +160,11 @@ Define `SimpleReviewer` following the same procedure:
 
 ```python
 class SimpleReviewer(Role):
-    def __init__(
-        self,
-        name: str = "Charlie",
-        profile: str = "SimpleReviewer",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Charlie"
+    profile: str = "SimpleReviewer"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteReview])
         self._watch([SimpleWriteTest])
 ```

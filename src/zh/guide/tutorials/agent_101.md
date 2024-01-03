@@ -49,18 +49,15 @@ if __name__ == '__main__':
 from metagpt.actions import Action
 
 class SimpleWriteCode(Action):
-
-    PROMPT_TEMPLATE = """
+    PROMPT_TEMPLATE: str = """
     Write a python function that can {instruction} and provide two runnnable test cases.
     Return ```python your_code_here ``` with NO other texts,
     your code:
     """
 
-    def __init__(self, name="SimpleWriteCode", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleWriteCode"
 
     async def run(self, instruction: str):
-
         prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)
 
         rsp = await self._aask(prompt)
@@ -71,7 +68,7 @@ class SimpleWriteCode(Action):
 
     @staticmethod
     def parse_code(rsp):
-        pattern = r'```python(.*)```'
+        pattern = r"```python(.*)```"
         match = re.search(pattern, rsp, re.DOTALL)
         code_text = match.group(1) if match else rsp
         return code_text
@@ -91,23 +88,20 @@ class SimpleWriteCode(Action):
 from metagpt.roles import Role
 
 class SimpleCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "SimpleCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "SimpleCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteCode])
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: 准备 {self.rc.todo}")
-        todo = self.rc.todo
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
+        todo = self.rc.todo  # todo will be SimpleWriteCode()
 
-        msg = self.get_memories(k=1)[0]  # 找到最相似的 k 条消息
-
-        code_text = await SimpleWriteCode().run(msg.content)
-        msg = Message(content=code_text, role=self.profile, cause_by=todo)
+        msg = self.get_memories(k=1)[0]  # find the most recent messages
+        code_text = await todo.run(msg.content)
+        msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
 ```
@@ -145,8 +139,7 @@ asyncio.run(main)
 
 ```python
 class SimpleRunCode(Action):
-    def __init__(self, name="SimpleRunCode", context=None, llm=None):
-        super().__init__(name, context, llm)
+    name: str = "SimpleRunCode"
 
     async def run(self, code_text: str):
         result = subprocess.run(["python3", "-c", code_text], capture_output=True, text=True)
@@ -165,26 +158,24 @@ class SimpleRunCode(Action):
 
 ```python
 class RunnableCoder(Role):
-    def __init__(
-        self,
-        name: str = "Alice",
-        profile: str = "RunnableCoder",
-        **kwargs,
-    ):
-        super().__init__(name, profile, **kwargs)
+    name: str = "Alice"
+    profile: str = "RunnableCoder"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._init_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: 准备 {self.rc.todo}")
-        # 通过在底层按顺序选择动作
-        # todo 首先是 SimpleWriteCode() 然后是 SimpleRunCode()
+        logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
+        # By choosing the Action by order under the hood
+        # todo will be first SimpleWriteCode() then SimpleRunCode()
         todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0] # 得到最相似的 k 条消息
+        msg = self.get_memories(k=1)[0]  # find the most k recent messages
         result = await todo.run(msg.content)
 
-        msg = Message(content=result, role=self.profile, cause_by=todo)
+        msg = Message(content=result, role=self.profile, cause_by=type(todo))
         self.rc.memory.add(msg)
         return msg
 ```
