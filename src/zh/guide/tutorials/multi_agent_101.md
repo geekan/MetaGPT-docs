@@ -156,8 +156,8 @@ class SimpleTester(Role):
         # self._watch([SimpleWriteCode, SimpleWriteReview]) # 可以尝试这样做
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo
+        logger.info(f"{self._setting}: ready to {self.rc.todo}")
+        todo = self.rc.todo
 
         # context = self.get_memories(k=1)[0].content # 使用最近的记忆作为上下文
         context = self.get_memories() # 使用所有记忆作为上下文

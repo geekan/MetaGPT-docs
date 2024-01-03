@@ -203,7 +203,7 @@ Execution case of `test_team_recover_multi_roles_save` of `python3 -s tests/meta
 2023-12-19 10:26:02.477 | DEBUG    | metagpt.team:run:101 - max n_round=3 left.
 2023-12-19 10:26:02.477 | DEBUG    | metagpt.roles.role:_observe:421 - RoleA(Role A) observed: ['Human: write a snake game...']
 2023-12-19 10:26:02.477 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionPass], state=0
-2023-12-19 10:26:02.477 | DEBUG    | metagpt.roles.role:_react:452 - RoleA(Role A): self._rc.state=0, will do ActionPass
+2023-12-19 10:26:02.477 | DEBUG    | metagpt.roles.role:_react:452 - RoleA(Role A): self.rc.state=0, will do ActionPass
 2023-12-19 10:26:02.477 | INFO     | metagpt.roles.role:_act:373 - RoleA(Role A): ready to ActionPass
 2023-12-19 10:26:02.478 | DEBUG    | metagpt.roles.role:run:517 - RoleB(Role B): no news. waiting.
 2023-12-19 10:26:07.484 | DEBUG    | metagpt.roles.role:_set_state:314 - actions=[ActionPass], state=-1
@@ -225,7 +225,7 @@ Traceback (most recent call last):
   File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 462, in _act_by_order
     rsp = await self._act()
   File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 374, in _act
-    response = await self._rc.todo.run(self._rc.important_memory)
+    response = await self.rc.todo.run(self.rc.important_memory)
   File "/Users/xxxx/work/MetaGPT/tests/metagpt/serialize_deserialize/test_serdeser_base.py", line 50, in run
     raise RuntimeError("parse error in ActionRaise")
 RuntimeError: parse error in ActionRaise
@@ -245,7 +245,7 @@ Traceback (most recent call last):
   File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 462, in _act_by_order
     rsp = await self._act()
   File "/Users/xxxx/work/MetaGPT/metagpt/roles/role.py", line 374, in _act
-    response = await self._rc.todo.run(self._rc.important_memory)
+    response = await self.rc.todo.run(self.rc.important_memory)
   File "/Users/xxxx/work/MetaGPT/tests/metagpt/serialize_deserialize/test_serdeser_base.py", line 50, in run
     raise RuntimeError("parse error in ActionRaise")
 RuntimeError: parse error in ActionRaise

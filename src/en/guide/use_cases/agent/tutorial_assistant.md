@@ -57,13 +57,13 @@ The design approach involves using the `LLM` (Large Language Model) to initially
        return msg
    ```
 
-3. Override the `_act` method. The `_act` method is responsible for executing the `action`. Use `todo = self._rc.todo` to get the next `action` to be executed from the context, and then execute the `run` method of the `action`. Here, it first obtains the tutorial directory structure through `WriteDirectory`, then chunks the directory, generates a `WriteContent` action for each chunk, and initializes the newly added action. Here, calling `await super().react()` again is to execute all the newly added `WriteContent` actions from the beginning. The result of each action is used to generate a message `Message(content=resp, role=self.profile)`, which can be placed in the context memory `self._rc.memory`. This role does not need to be stored.
+3. Override the `_act` method. The `_act` method is responsible for executing the `action`. Use `todo = self.rc.todo` to get the next `action` to be executed from the context, and then execute the `run` method of the `action`. Here, it first obtains the tutorial directory structure through `WriteDirectory`, then chunks the directory, generates a `WriteContent` action for each chunk, and initializes the newly added action. Here, calling `await super().react()` again is to execute all the newly added `WriteContent` actions from the beginning. The result of each action is used to generate a message `Message(content=resp, role=self.profile)`, which can be placed in the context memory `self.rc.memory`. This role does not need to be stored.
 
    ```python
    async def _act(self) -> Message:
-       todo = self._rc.todo
+       todo = self.rc.todo
        if type(todo) is WriteDirectory:
-           msg = self._rc.memory.get(k=1)[0]
+           msg = self.rc.memory.get(k=1)[0]
            self.topic = msg.content
            resp = await todo.run(topic=self.topic)
            logger.info(resp)

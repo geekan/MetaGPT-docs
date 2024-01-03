@@ -9,7 +9,7 @@ After this tutorial, you will be able to:
 
 ## What are memories like
 
-Class `Memory` is the abstraction for an agent's memory in MetaGPT. When initialized, `Role` acquire its `Memory` as `self._rc.memory`, which will store every `Message` it later `_observe` in a list for future retrieval. The initialization and storage are handled by the framework. In short, memories of a `Role` are a list of `Message`s.
+Class `Memory` is the abstraction for an agent's memory in MetaGPT. When initialized, `Role` acquire its `Memory` as `self.rc.memory`, which will store every `Message` it later `_observe` in a list for future retrieval. The initialization and storage are handled by the framework. In short, memories of a `Role` are a list of `Message`s.
 
 ## Retrieve memory
 
@@ -18,15 +18,15 @@ When recorded memories are needed, such as serving as context for a LLM call, yo
 ```python
 def get_memories(self, k=0) -> list[Message]:
     """A wrapper to return the most recent k memories of this role, return all when k=0"""
-    return self._rc.memory.get(k=k)
+    return self.rc.memory.get(k=k)
 ```
 
 For example, in [MultiAgent101](multi_agent_101), we call this function to provide the tester with the full history. In this way, if the reviewer provides feedback, the tester can modify test cases with reference to their previous version. The snippet is as follows
 
 ```python
 async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo
+        logger.info(f"{self._setting}: ready to {self.rc.todo}")
+        todo = self.rc.todo
 
         # context = self.get_memories(k=1)[0].content # use the most recent memory as context
         context = self.get_memories() # use all memories as context
@@ -40,7 +40,7 @@ async def _act(self) -> Message:
 
 ## Add memory
 
-For adding memories, one can use `self._rc.memory.add(msg)` where `msg` must be an instance of `Message`. Check the snippet above for an example usage.
+For adding memories, one can use `self.rc.memory.add(msg)` where `msg` must be an instance of `Message`. Check the snippet above for an example usage.
 
 It is recommended to add `Message`s of action output to the `Role`'s memory when defining the `_act` logic. `Role` normally needs to remember what it said or did previously in order to take a next step.
 

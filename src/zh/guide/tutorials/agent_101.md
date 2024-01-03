@@ -85,7 +85,7 @@ class SimpleWriteCode(Action):
 
 1. 我们为其指定一个名称和配置文件。
 2. 我们使用 `self._init_action` 函数为其配备期望的动作 `SimpleWriteCode`。
-3. 我们覆盖 `_act` 函数，其中包含智能体具体行动逻辑。我们写入，我们的智能体将从最新的记忆中获取人类指令，运行配备的动作，MetaGPT将其作为待办事项 (`self._rc.todo`) 在幕后处理，最后返回一个完整的消息。
+3. 我们覆盖 `_act` 函数，其中包含智能体具体行动逻辑。我们写入，我们的智能体将从最新的记忆中获取人类指令，运行配备的动作，MetaGPT将其作为待办事项 (`self.rc.todo`) 在幕后处理，最后返回一个完整的消息。
 
 ```python
 from metagpt.roles import Role
@@ -101,8 +101,8 @@ class SimpleCoder(Role):
         self._init_actions([SimpleWriteCode])
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: 准备 {self._rc.todo}")
-        todo = self._rc.todo
+        logger.info(f"{self._setting}: 准备 {self.rc.todo}")
+        todo = self.rc.todo
 
         msg = self.get_memories(k=1)[0]  # 找到最相似的 k 条消息
 
@@ -160,8 +160,8 @@ class SimpleRunCode(Action):
 与定义单一动作的智能体没有太大不同！让我们来映射一下：
 
 1. 用 `self._init_actions` 初始化所有 `Action`
-2. 指定每次 `Role` 会选择哪个 `Action`。我们将 `react_mode` 设置为 "by_order"，这意味着 `Role` 将按照 `self._init_actions` 中指定的顺序执行其能够执行的 `Action`（有关更多讨论，请参见 [思考和行动](agent_think_act)）。在这种情况下，当 `Role` 执行 `_act` 时，`self._rc.todo` 将首先是 `SimpleWriteCode`，然后是 `SimpleRunCode`。
-3. 覆盖 `_act` 函数。`Role` 从上一轮的人类输入或动作输出中检索消息，用适当的 `Message` 内容提供当前的 `Action` (`self._rc.todo`)，最后返回由当前 `Action` 输出组成的 `Message`。
+2. 指定每次 `Role` 会选择哪个 `Action`。我们将 `react_mode` 设置为 "by_order"，这意味着 `Role` 将按照 `self._init_actions` 中指定的顺序执行其能够执行的 `Action`（有关更多讨论，请参见 [思考和行动](agent_think_act)）。在这种情况下，当 `Role` 执行 `_act` 时，`self.rc.todo` 将首先是 `SimpleWriteCode`，然后是 `SimpleRunCode`。
+3. 覆盖 `_act` 函数。`Role` 从上一轮的人类输入或动作输出中检索消息，用适当的 `Message` 内容提供当前的 `Action` (`self.rc.todo`)，最后返回由当前 `Action` 输出组成的 `Message`。
 
 ```python
 class RunnableCoder(Role):
@@ -176,16 +176,16 @@ class RunnableCoder(Role):
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: 准备 {self._rc.todo}")
+        logger.info(f"{self._setting}: 准备 {self.rc.todo}")
         # 通过在底层按顺序选择动作
         # todo 首先是 SimpleWriteCode() 然后是 SimpleRunCode()
-        todo = self._rc.todo
+        todo = self.rc.todo
 
         msg = self.get_memories(k=1)[0] # 得到最相似的 k 条消息
         result = await todo.run(msg.content)
 
         msg = Message(content=result, role=self.profile, cause_by=todo)
-        self._rc.memory.add(msg)
+        self.rc.memory.add(msg)
         return msg
 ```
 

@@ -50,7 +50,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
            self._set_react_mode(react_mode="by_order")
    ```
 
-2. Override the `_act` method. The `_act` method is responsible for executing actions. The `Role` class's `_react` method cyclically performs `think` and `action` operations. The `_think` method considers the next action to be performed based on the `states`. Therefore, only the `_act` method needs to be overridden. Use `msg = self._rc.memory.get(k=1)[0]` to get the latest message from the context. Use `todo = self._rc.todo` to get the next action to be executed from the context. Here, the invoice data is recognized through `InvoiceOCR`. If only a single invoice is recognized, add `GenerateTable` and `ReplyQuestion` actions. If multiple invoice files are recognized, the `ReplyQuestion` action is not needed. Use the `GenerateTable` action to provide the invoice recognition results to the `LLM` large model for extracting key information and downloading it as a table file. If it is a single invoice file, send the query and recognition results to the `LLM` large model to get the answer. The result of each action is turned into a `message`, and it is added to the context using `self._rc.memory.add(msg)`.
+2. Override the `_act` method. The `_act` method is responsible for executing actions. The `Role` class's `_react` method cyclically performs `think` and `action` operations. The `_think` method considers the next action to be performed based on the `states`. Therefore, only the `_act` method needs to be overridden. Use `msg = self.rc.memory.get(k=1)[0]` to get the latest message from the context. Use `todo = self.rc.todo` to get the next action to be executed from the context. Here, the invoice data is recognized through `InvoiceOCR`. If only a single invoice is recognized, add `GenerateTable` and `ReplyQuestion` actions. If multiple invoice files are recognized, the `ReplyQuestion` action is not needed. Use the `GenerateTable` action to provide the invoice recognition results to the `LLM` large model for extracting key information and downloading it as a table file. If it is a single invoice file, send the query and recognition results to the `LLM` large model to get the answer. The result of each action is turned into a `message`, and it is added to the context using `self.rc.memory.add(msg)`.
 
    ```python
    async def _act(self) -> Message:
@@ -59,8 +59,8 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
        Returns:
            A message containing the result of the action.
        """
-       msg = self._rc.memory.get(k=1)[0]
-       todo = self._rc.todo
+       msg = self.rc.memory.get(k=1)[0]
+       todo = self.rc.todo
        if isinstance(todo, InvoiceOCR):
            self.origin_query = msg.content
            file_path = msg.instruct_content.get("file_path")
@@ -76,7 +76,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
            else:
                self._init_actions([GenerateTable])
 
-           self._rc.todo = None
+           self.rc.todo = None
            content = INVOICE_OCR_SUCCESS
        elif isinstance(todo, GenerateTable):
            ocr_results = msg.instruct_content

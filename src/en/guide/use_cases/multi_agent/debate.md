@@ -71,16 +71,16 @@ Next, we make each debator listen to his opponent's argument. This is done by ov
 async def _observe(self) -> int:
         await super()._observe()
         # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
+        self.rc.news = [msg for msg in self.rc.news if msg.send_to == self.name]
+        return len(self.rc.news)
 ```
 
 Finally, we enable each debator to send counter arguments back to his opponent. Here we construct a context from message history, make the `Debator` run his possessed `SpeakAloud` action, and craft a new `Message` with the counter argument content. Notice we define that each `Debator` will send the `Message` to his opponent.
 
 ```python
 async def _act(self) -> Message:
-    logger.info(f"{self._setting}: ready to {self._rc.todo}")
-    todo = self._rc.todo # An instance of SpeakAloud
+    logger.info(f"{self._setting}: ready to {self.rc.todo}")
+    todo = self.rc.todo # An instance of SpeakAloud
 
     memories = self.get_memories()
     context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
@@ -119,12 +119,12 @@ class Debator(Role):
     async def _observe(self) -> int:
         await super()._observe()
         # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
+        self.rc.news = [msg for msg in self.rc.news if msg.send_to == self.name]
+        return len(self.rc.news)
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo # An instance of SpeakAloud
+        logger.info(f"{self._setting}: ready to {self.rc.todo}")
+        todo = self.rc.todo # An instance of SpeakAloud
 
         memories = self.get_memories()
         context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
@@ -139,7 +139,7 @@ class Debator(Role):
             send_to=self.opponent_name,
         )
 
-        self._rc.memory.add(msg)
+        self.rc.memory.add(msg)
 
         return msg
 ```

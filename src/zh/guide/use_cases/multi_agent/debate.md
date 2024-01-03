@@ -38,7 +38,7 @@ class SpeakAloud(Action):
 
         prompt = self.PROMPT_TEMPLATE.format(context=context, name=name, opponent_name=opponent_name)
 
-        rsp = await self._ask(prompt)
+        rsp = await self._aask(prompt)
 
         return rsp
 ```
@@ -72,16 +72,16 @@ class Debator(Role):
 async def _observe(self) -> int:
         await super()._observe()
         # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
+        self.rc.news = [msg for msg in self.rc.news if msg.send_to == self.name]
+        return len(self.rc.news)
 ```
 
 最后，我们使每个辩手能够向对手发送反驳的论点。在这里，我们从消息历史中构建一个上下文，使 `Debator` 运行他拥有的 `SpeakAloud` 动作，并使用反驳论点内容创建一个新的 `Message`。请注意，我们定义每个 `Debator` 将把 `Message` 发送给他的对手。
 
 ```python
 async def _act(self) -> Message:
-    logger.info(f"{self._setting}: ready to {self._rc.todo}")
-    todo = self._rc.todo # 一个 SpeakAloud 的实例
+    logger.info(f"{self._setting}: ready to {self.rc.todo}")
+    todo = self.rc.todo # 一个 SpeakAloud 的实例
 
     memories = self.get_memories()
     context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
@@ -119,12 +119,12 @@ class Debator(Role):
     async def _observe(self) -> int:
         await super()._observe()
         # accept messages sent (from opponent) to self, disregard own messages from the last round
-        self._rc.news = [msg for msg in self._rc.news if msg.send_to == self.name]
-        return len(self._rc.news)
+        self.rc.news = [msg for msg in self.rc.news if msg.send_to == self.name]
+        return len(self.rc.news)
 
     async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo # 一个 SpeakAloud 的实例
+        logger.info(f"{self._setting}: ready to {self.rc.todo}")
+        todo = self.rc.todo # 一个 SpeakAloud 的实例
 
         memories = self.get_memories()
         context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)

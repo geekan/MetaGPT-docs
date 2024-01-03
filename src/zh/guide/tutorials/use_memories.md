@@ -9,7 +9,7 @@
 
 ## 什么是记忆
 
-在MetaGPT中，`Memory`类是智能体的记忆的抽象。当初始化时，`Role`初始化一个`Memory`对象作为`self._rc.memory`属性，它将在之后的`_observe`中存储每个`Message`，以便后续的检索。简而言之，`Role`的记忆是一个含有`Message`的列表。
+在MetaGPT中，`Memory`类是智能体的记忆的抽象。当初始化时，`Role`初始化一个`Memory`对象作为`self.rc.memory`属性，它将在之后的`_observe`中存储每个`Message`，以便后续的检索。简而言之，`Role`的记忆是一个含有`Message`的列表。
 
 ## 检索记忆
 
@@ -18,15 +18,15 @@
 ```python
 def get_memories(self, k=0) -> list[Message]:
     """A wrapper to return the most recent k memories of this role, return all when k=0"""
-    return self._rc.memory.get(k=k)
+    return self.rc.memory.get(k=k)
 ```
 
 例如，在[多智能体入门](multi_agent_101)中，我们调用此函数为测试人员提供完整的历史记录。通过这种方式，如果审阅人员提供反馈，测试人员可以参考其先前版本修改测试用例。片段如下
 
 ```python
 async def _act(self) -> Message:
-        logger.info(f"{self._setting}: ready to {self._rc.todo}")
-        todo = self._rc.todo
+        logger.info(f"{self._setting}: ready to {self.rc.todo}")
+        todo = self.rc.todo
 
         # context = self.get_memories(k=1)[0].content # use the most recent memory as context
         context = self.get_memories() # use all memories as context
@@ -40,7 +40,7 @@ async def _act(self) -> Message:
 
 ## 添加记忆
 
-可以使用`self._rc.memory.add(msg)`添加记忆，，其中`msg`必须是`Message`的实例。请查看上述的代码片段以获取示例用法。
+可以使用`self.rc.memory.add(msg)`添加记忆，，其中`msg`必须是`Message`的实例。请查看上述的代码片段以获取示例用法。
 
 建议在定义`_act`逻辑时将`Message`的动作输出添加到`Role`的记忆中。通常，`Role`需要记住它先前说过或做过什么，以便采取下一步的行动。
 
