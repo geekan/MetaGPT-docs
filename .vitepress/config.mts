@@ -25,6 +25,12 @@ const Logo = `
 </svg>
 `;
 
+const rfcs = readdirSync(resolve(__dirname, '../src/rfcs'));
+const rfcLinks = rfcs.map((_) => ({
+  text: _.replace(/\.md$/, ''),
+  link: _.replace(/\.md$/, ''),
+}));
+
 const sources = ['blog', 'rfcs'];
 const dests = ['zh', 'en'];
 
@@ -299,12 +305,7 @@ export default defineConfig({
           },
           '/en/rfcs/': {
             base: '/en/rfcs/',
-            items: [
-              {
-                text: 'RFC-116-MetaGPT优化方案',
-                link: 'RFC-116-MetaGPT优化方案',
-              },
-            ],
+            items: [...rfcLinks],
           },
         },
       },
@@ -498,12 +499,7 @@ export default defineConfig({
           },
           '/zh/rfcs/': {
             base: '/zh/rfcs/',
-            items: [
-              {
-                text: 'RFC-116-MetaGPT优化方案',
-                link: 'RFC-116-MetaGPT优化方案',
-              },
-            ],
+            items: [...rfcLinks],
           },
         },
       },
