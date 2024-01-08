@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress';
+import { DefaultTheme, defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import { resolve, join } from 'node:path';
@@ -25,12 +25,30 @@ const Logo = `
 </svg>
 `;
 
-const rfcs = readdirSync(resolve(__dirname, '../src/rfcs'));
-const rfcLinks = rfcs.map((_) => ({
-  text: _.replace(/\.md$/, ''),
-  link: _.replace(/\.md$/, ''),
-}));
-
+const genRfcLinks = (dir: string, prefixPath = '') => {
+  const files = readdirSync(dir);
+  const data: DefaultTheme.SidebarItem[] = [];
+  for (const filename of files) {
+    const file = statSync(join(dir, filename));
+    if (file.isDirectory()) {
+      const childData = genRfcLinks(join(dir, filename), `${filename}/`);
+      data.push({
+        text: filename,
+        items: childData,
+      });
+      continue;
+    }
+    const ismd = filename.endsWith('.md');
+    if (ismd) {
+      data.push({
+        text: filename.replace(/\.md$/, ''),
+        link: `${prefixPath}${filename.replace(/\.md$/, '')}`,
+      });
+    }
+  }
+  return data;
+};
+const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
 const sources = ['blog', 'rfcs'];
 const dests = ['zh', 'en'];
 
@@ -65,21 +83,21 @@ const copyDir = (source: string, dest: string) => {
 };
 
 // route based on fs, so copy files when deploy
-if (process.env.NODE_ENV === 'production') {
-  /** for deploy */
-  cpSync(
-    resolve(__dirname, '../src/en/index.md'),
-    resolve(__dirname, '../src/index.md')
-  );
-  for (const source of sources) {
-    for (const dest of dests) {
-      const sourceDir = resolve(__dirname, `../src/${source}`);
-      const destDir = resolve(__dirname, `../src/${dest}/${source}`);
+// if (process.env.NODE_ENV === 'production') {
+/** for deploy, dev mode also need this to preview */
+cpSync(
+  resolve(__dirname, '../src/en/index.md'),
+  resolve(__dirname, '../src/index.md')
+);
+for (const source of sources) {
+  for (const dest of dests) {
+    const sourceDir = resolve(__dirname, `../src/${source}`);
+    const destDir = resolve(__dirname, `../src/${dest}/${source}`);
 
-      copyDir(sourceDir, destDir);
-    }
+    copyDir(sourceDir, destDir);
   }
 }
+// }
 
 const branchInfo = await simpleGit('.', {}).pull().branch({});
 
