@@ -18,9 +18,9 @@ In order to support breakpoint recovery operations, the output of different modu
 
 ### Serialized storage structure
 
-In order to reduce the impact of subsequent new functions on the storage structure, an "integrated" single json file is used for storage.  
+In order to reduce the impact of subsequent new functions on the storage structure, an "integrated" single json file is used for storage.
 
-When the program is interrupted or terminated, the file structure in the storage directory is as follows:  
+When the program is interrupted or terminated, the file structure in the storage directory is as follows:
 
 ```bash
 ./workspace
@@ -29,121 +29,114 @@ When the program is interrupted or terminated, the file structure in the storage
       team.json          # Contains information such as team, environment, roles, actions, etc.
 ```
 
-Example of data summary corresponding to `team.json`.  
+Example of data summary corresponding to `team.json`.
 
 ```json
 {
-    "env": {
+  "env": {
+    "desc": "",
+    "roles": {
+      "Role A": {},
+      "Role B": {
+        "name": "RoleB",
+        "profile": "Role B",
+        "goal": "RoleB's goal",
+        "constraints": "RoleB's constraints",
         "desc": "",
-        "roles": {
-            "Role A": {
+        "is_human": false,
+        "role_id": "",
+        "states": [
+          "0. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK'>",
+          "1. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionRaise'>"
+        ],
+        "actions": [
+          {
+            "name": "ActionOK",
+            "context": "",
+            "prefix": "You are a Role B, named RoleB, your goal is RoleB's goal. the constraint is RoleB's constraints. ",
+            "desc": "",
+            "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK"
+          },
+          {
+            "name": "ActionRaise",
+            "context": "",
+            "prefix": "You are a Role B, named RoleB, your goal is RoleB's goal. the constraint is RoleB's constraints. ",
+            "desc": "",
+            "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionRaise"
+          }
+        ],
+        "rc": {
+          "memory": {
+            "storage": [
+              {
+                "id": "7cc01798c3324c6c8b676d282ea9e92c",
+                "content": "ActionPass run passed",
+                "instruct_content": {
+                  "class": "pass",
+                  "mapping": {
+                    "result": "(<class 'str'>, Ellipsis)"
+                  },
+                  "value": {
+                    "result": "pass result"
+                  }
+                },
+                "role": "RoleA(Role A)",
+                "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
+                "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                "send_to": ["<all>"]
+              }
+            ],
+            "index": {
+              "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK": [
+                {
+                  "id": "018bde1d4bdb4e9387c1053da0dc0cb3",
+                  "content": "ok",
+                  "instruct_content": null,
+                  "role": "Role B",
+                  "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK",
+                  "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB",
+                  "send_to": ["<all>"]
+                }
+              ]
             },
-            "Role B": {
-                "name": "RoleB",
-                "profile": "Role B",
-                "goal": "RoleB's goal",
-                "constraints": "RoleB's constraints",
-                "desc": "",
-                "is_human": false,
-                "role_id": "",
-                "states": [
-                    "0. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK'>",
-                    "1. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionRaise'>"
-                ],
-                "actions": [
-                    {
-                        "name": "ActionOK",
-                        "context": "",
-                        "prefix": "You are a Role B, named RoleB, your goal is RoleB's goal. the constraint is RoleB's constraints. ",
-                        "desc": "",
-                        "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK"
-                    },
-                    {
-                        "name": "ActionRaise",
-                        "context": "",
-                        "prefix": "You are a Role B, named RoleB, your goal is RoleB's goal. the constraint is RoleB's constraints. ",
-                        "desc": "",
-                        "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionRaise"
-                    }
-                ],
-                "rc": {
-                    "memory": {
-                        "storage": [
-                            {
-                                "id": "7cc01798c3324c6c8b676d282ea9e92c",
-                                "content": "ActionPass run passed",
-                                "instruct_content": {
-                                    "class": "pass",
-                                    "mapping": {
-                                        "result": "(<class 'str'>, Ellipsis)"
-                                    },
-                                    "value": {
-                                        "result": "pass result"
-                                    }
-                                },
-                                "role": "RoleA(Role A)",
-                                "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
-                                "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
-                                "send_to": [
-                                    "<all>"
-                                ]
-                            },
-                        ],
-                        "index": {
-                            "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK": [
-                                {
-                                    "id": "018bde1d4bdb4e9387c1053da0dc0cb3",
-                                    "content": "ok",
-                                    "instruct_content": null,
-                                    "role": "Role B",
-                                    "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK",
-                                    "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB",
-                                    "send_to": [
-                                        "<all>"
-                                    ]
-                                }
-                            ]
-                        },
-                        "ignore_id": false
-                    },
-                    "state": 1,
-                    "watch": [
-                        "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass"
-                    ],
-                    "react_mode": "by_order",
-                    "max_react_loop": 1
-                },
-                "addresses": [
-                    "RoleB",
-                    "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB"
-                ],
-                "recovered": true,
-                "latest_observed_msg": {
-                    "id": "7cc01798c3324c6c8b676d282ea9e92c",
-                    "content": "ActionPass run passed",
-                    "instruct_content": {
-                        "class": "pass",
-                        "mapping": {
-                            "result": "(<class 'str'>, Ellipsis)"
-                        },
-                        "value": {
-                            "result": "pass result"
-                        }
-                    },
-                    "role": "RoleA(Role A)",
-                    "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
-                    "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
-                    "send_to": [
-                        "<all>"
-                    ]
-                },
-                "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB"
-            }
+            "ignore_id": false
+          },
+          "state": 1,
+          "watch": [
+            "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass"
+          ],
+          "react_mode": "by_order",
+          "max_react_loop": 1
         },
-        "history": "\nHuman: write a snake game\nRoleA(Role A): {'result': 'pass result'}\nHuman: write a snake game"
+        "addresses": [
+          "RoleB",
+          "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB"
+        ],
+        "recovered": true,
+        "latest_observed_msg": {
+          "id": "7cc01798c3324c6c8b676d282ea9e92c",
+          "content": "ActionPass run passed",
+          "instruct_content": {
+            "class": "pass",
+            "mapping": {
+              "result": "(<class 'str'>, Ellipsis)"
+            },
+            "value": {
+              "result": "pass result"
+            }
+          },
+          "role": "RoleA(Role A)",
+          "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
+          "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+          "send_to": ["<all>"]
+        },
+        "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB"
+      }
     },
-    "investment": 10.0,
-    "idea": "write a snake game"
+    "history": "\nHuman: write a snake game\nRoleA(Role A): {'result': 'pass result'}\nHuman: write a snake game"
+  },
+  "investment": 10.0,
+  "idea": "write a snake game"
 }
 ```
 
