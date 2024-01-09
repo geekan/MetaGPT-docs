@@ -18,83 +18,59 @@
 
 ### 序列化存储结构
 
-为了清晰化**整体项目的结构信息**，采用层级化的方式进行内容的序列化存储。
+为了减少后续新增功能对存储结构的影响，使用“一体化“的单json文件进行存储。  
 
-当程序发生中断后，对应不同模块在存储目录下的文件结构如下：  
-结构概要
+当程序发生中断或结束后，在存储目录下的文件结构如下：  
 
 ```bash
 ./workspace
   storage
     team
-      team_info.json          # 团队需求、预算等信息
-      environment             # 环境
-        roles.json            # 团队内的角色基础信息
-        history.json          # 历史信息
-        roles                 # 团队内角色
-          RoleA_Alice         # 具体一个角色
-            memory.json       # 角色记忆
-            role_info.json    # 包括角色身份、执行动作、监听动作等信息
+      team.json          # 包含团队、环境、角色、动作等信息
 ```
 
-每个`xxx.json`下的为对应内容的数据概要示例。
+`team.json`对应内容的数据概要示例。  
 
-```bash
-./workspace
-  storage
-    team
-      team_info.json          # investment and so on
-        {
-            "investment": 10.0,
-            "idea": "write a snake game"
-        }
-      environment
-        roles.json            # roles' meta info
-            [
-                {
-                    "role_class": "RoleA",
-                    "module_name": "tests.metagpt.serialize_deserialize.test_serdeser_base",
-                    "role_name": "RoleA"
-                },
-                {
-                    "role_class": "RoleB",
-                    "module_name": "tests.metagpt.serialize_deserialize.test_serdeser_base",
-                    "role_name": "RoleB"
-                }
-            ]
-        history.json
-            {
-                "content": "\nHuman: write a snake game\nRole A: ActionPass run passed\nHuman: write a snake game"
-            }
-        roles
-          ProductManager_Alice
-            memory.json
-                {
-                    "storage": [
-                        {
-                            "id": "70a3450d0d5c4900afefe7e8d60f3c65",
-                            "content": "ActionPass run passed",
-                            "instruct_content": {
-                                "class": "pass",
-                                "mapping": {
-                                    "result": "(<class 'str'>, Ellipsis)"
-                                },
-                                "value": {
-                                    "result": "pass result"
-                                }
-                            },
-                            "role": "Role A",
-                            "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
-                            "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
-                            "send_to": [
-                                "<all>"
-                            ]
-                        }
-                    ],
-                    "index": {
-                        "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass": [
+```json
+{
+    "env": {
+        "desc": "",
+        "roles": {
+            "Role A": {
+            },
+            "Role B": {
+                "name": "RoleB",
+                "profile": "Role B",
+                "goal": "RoleB's goal",
+                "constraints": "RoleB's constraints",
+                "desc": "",
+                "is_human": false,
+                "role_id": "",
+                "states": [
+                    "0. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK'>",
+                    "1. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionRaise'>"
+                ],
+                "actions": [
+                    {
+                        "name": "ActionOK",
+                        "context": "",
+                        "prefix": "You are a Role B, named RoleB, your goal is RoleB's goal. the constraint is RoleB's constraints. ",
+                        "desc": "",
+                        "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK"
+                    },
+                    {
+                        "name": "ActionRaise",
+                        "context": "",
+                        "prefix": "You are a Role B, named RoleB, your goal is RoleB's goal. the constraint is RoleB's constraints. ",
+                        "desc": "",
+                        "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionRaise"
+                    }
+                ],
+                "rc": {
+                    "memory": {
+                        "storage": [
                             {
-                                "id": "70a3450d0d5c4900afefe7e8d60f3c65",
+                                "id": "7cc01798c3324c6c8b676d282ea9e92c",
                                 "content": "ActionPass run passed",
                                 "instruct_content": {
                                     "class": "pass",
@@ -105,56 +81,70 @@
                                         "result": "pass result"
                                     }
                                 },
-                                "role": "Role A",
+                                "role": "RoleA(Role A)",
                                 "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
                                 "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
                                 "send_to": [
                                     "<all>"
                                 ]
-                            }
-                        ]
-                    }
-                }
-            role_info.json       # RoleSetting _actions _states
-                {
-                    "name": "RoleA",
-                    "profile": "Role A",
-                    "goal": "RoleA's goal",
-                    "constraints": "RoleA's constraints",
-                    "desc": "",
-                    "is_human": false,
-                    "recovered": true,
-                    "builtin_class_name": "RoleA",
-                    "_role_id": "RoleA(Role A)",
-                    "_states": [
-                        "0. <class 'tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass'>"
-                    ],
-                    "_actions": [
-                        {
-                            "name": "",
-                            "builtin_class_name": "ActionPass",
-                            "context": "",
-                            "prefix": "You are a Role A, named RoleA, your goal is RoleA's goal, and the constraint is RoleA's constraints. ",
-                            "profile": "Role A",
-                            "desc": "",
-                            "nodes": []
-                        }
-                    ],
-                    "_rc": {
-                        "state": -1,
-                        "watch": [
-                            "metagpt.actions.add_requirement.UserRequirement"
+                            },
                         ],
-                        "react_mode": "react",
-                        "max_react_loop": 1
+                        "index": {
+                            "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK": [
+                                {
+                                    "id": "018bde1d4bdb4e9387c1053da0dc0cb3",
+                                    "content": "ok",
+                                    "instruct_content": null,
+                                    "role": "Role B",
+                                    "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionOK",
+                                    "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB",
+                                    "send_to": [
+                                        "<all>"
+                                    ]
+                                }
+                            ]
+                        },
+                        "ignore_id": false
                     },
-                    "_subscription": [
-                        "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
-                        "RoleA"
+                    "state": 1,
+                    "watch": [
+                        "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass"
                     ],
-                    "role_class": "RoleA",
-                    "module_name": "tests.metagpt.serialize_deserialize.test_serdeser_base"
-                }
+                    "react_mode": "by_order",
+                    "max_react_loop": 1
+                },
+                "addresses": [
+                    "RoleB",
+                    "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB"
+                ],
+                "recovered": true,
+                "latest_observed_msg": {
+                    "id": "7cc01798c3324c6c8b676d282ea9e92c",
+                    "content": "ActionPass run passed",
+                    "instruct_content": {
+                        "class": "pass",
+                        "mapping": {
+                            "result": "(<class 'str'>, Ellipsis)"
+                        },
+                        "value": {
+                            "result": "pass result"
+                        }
+                    },
+                    "role": "RoleA(Role A)",
+                    "cause_by": "tests.metagpt.serialize_deserialize.test_serdeser_base.ActionPass",
+                    "sent_from": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleA",
+                    "send_to": [
+                        "<all>"
+                    ]
+                },
+                "__module_class_name": "tests.metagpt.serialize_deserialize.test_serdeser_base.RoleB"
+            }
+        },
+        "history": "\nHuman: write a snake game\nRoleA(Role A): {'result': 'pass result'}\nHuman: write a snake game"
+    },
+    "investment": 10.0,
+    "idea": "write a snake game"
+}
 ```
 
 ### 恢复时的执行顺序
