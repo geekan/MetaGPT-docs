@@ -1,6 +1,6 @@
 import { simpleGit } from 'simple-git';
 import { resolve, dirname } from 'path';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, rmSync } from 'fs';
 import { fileURLToPath } from 'url';
 import 'zx/globals';
 
@@ -21,11 +21,13 @@ const { current, branches } = branchInfo;
 
 const MGdir = resolve(sourceCodeDir, 'MetaGPT');
 
-if (!existsSync(MGdir)) {
-  await SGit.clone(MGUrl, resolve(sourceCodeDir, 'MetaGPT'));
+if (existsSync(MGdir)) {
+  rmSync(MGdir, { recursive: true });
 }
 
-await simpleGit(MGdir, {}).pull().checkout(current);
-// await $`mv ./pydoc-markdown.yml ${MGdir}`;
-// await $`cd ${MGdir} && pydoc-markdown`;
+await SGit.clone(MGUrl, resolve(sourceCodeDir, 'MetaGPT'), {
+  '--depth': '1',
+  '--branch': current,
+});
+
 await $`pydoc-markdown`;
