@@ -13,6 +13,7 @@ import {
   mkdirSync,
 } from 'node:fs';
 import { simpleGit } from 'simple-git';
+import { tree } from '../utils/tool.mjs';
 
 const Logo = `
 <svg  viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,10 +50,14 @@ const genRfcLinks = (dir: string, prefixPath = '') => {
   return data;
 };
 const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
-const sources = ['blog', 'rfcs'];
+const sources = ['blog', 'rfcs', 'reference'];
 const dests = ['zh', 'en'];
 
 const copyDir = (source: string, dest: string) => {
+  if (!existsSync(source)) {
+    console.warn(`${source} not exist, skip copy`);
+    return;
+  }
   if (!existsSync(dest)) {
     mkdirSync(dest, {
       recursive: true,
@@ -147,6 +152,14 @@ const arrVisible = (arr: any[], visible: boolean) => {
   return visible ? arr : [];
 };
 
+const ApiSidebar = tree(
+  resolve(__dirname, '../src/reference'),
+  resolve(__dirname, '../src/reference')
+);
+const ApiDefaultRoot = ApiSidebar.find(
+  (_: any) => !Object.hasOwn(_, 'items')
+).link;
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base,
@@ -165,6 +178,11 @@ export default defineConfig({
             text: 'Docs',
             link: '/en/guide/get_started/introduction',
             activeMatch: '/en/guide/',
+          },
+          {
+            text: 'API',
+            link: `/en/reference/${ApiDefaultRoot}`,
+            activeMatch: '/en/reference/',
           },
           ...arrVisible(
             [
@@ -325,6 +343,10 @@ export default defineConfig({
             base: '/en/rfcs/',
             items: [...rfcLinks],
           },
+          '/en/reference/': {
+            base: '/en/reference/',
+            items: [...ApiSidebar],
+          },
         },
       },
     },
@@ -338,6 +360,11 @@ export default defineConfig({
             text: '文档',
             link: '/zh/guide/get_started/introduction',
             activeMatch: '/zh/guide/',
+          },
+          {
+            text: 'API',
+            link: `/zh/reference/${ApiDefaultRoot}`,
+            activeMatch: '/zh/reference/',
           },
           ...arrVisible(
             [
@@ -518,6 +545,10 @@ export default defineConfig({
           '/zh/rfcs/': {
             base: '/zh/rfcs/',
             items: [...rfcLinks],
+          },
+          '/zh/reference/': {
+            base: '/zh/reference/',
+            items: [...ApiSidebar],
           },
         },
       },

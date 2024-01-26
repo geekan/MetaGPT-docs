@@ -13,3 +13,6 @@ node_modules
 
 src/*/blog
 src/*/rfcs
+
+sourceCode
+src/**/reference

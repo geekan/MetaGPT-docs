@@ -1,0 +1,27 @@
+loaders:
+  - type: python
+    search_path: [./sourceCode/MetaGPT/metagpt/]
+processors:
+  - type: filter
+    skip_empty_modules: true
+  - type: smart
+  - type: crossref
+renderer:
+  type: docusaurus
+  docs_base_path: src
+  relative_output_path: reference
+  relative_sidebar_path: sidebar.json
+  markdown:
+    use_fixed_header_levels: true
+    source_linker:
+      type: github
+      repo: geekan/MetaGPT
+      root: './sourceCode/MetaGPT'
+      use_branch: true
+    header_level_by_type:
+      Module: 1
+      Class: 2
+      Method: 3
+      Function: 2
+      Variable: 4
+    escape_html_in_docstring: true
