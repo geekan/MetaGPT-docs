@@ -1,6 +1,6 @@
 # Contribution Guide
 
-MetaGPT welcomes developers to actively participate in open source community building, including but not limited to:  
+MetaGPT welcomes developers to actively participate in open source community building, including but not limited to:
 
 - Implement functions and submit PR according to the feature description of `docs/ROADMAP.md`.
 - Additional implementations besides ROADMAP (including new features, bug fixes, agent scenario cases, code annotations, etc.) and PR submissions.
@@ -8,6 +8,7 @@ MetaGPT welcomes developers to actively participate in open source community bui
 - Submit issues such as new features expected to be implemented by MetaGPT, bugs discovered during use, and exchanges on implemented applications.
 
 ## PR
+
 Please use [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) to submit code.
 
 The `dev` branch serves as the development branch for new features. The `main` branch serves as the backbone and is generally used for releases or small-scale bugfixes. If you need to follow the latest progress, please use the `dev` branch.
@@ -15,19 +16,23 @@ Generally, **LGTM** needs to be reviewed by 2 contributors before it is allowed 
 In general, small amounts of code are encouraged to be submitted more often. Large PR submissions often require more context understanding and review time, and it would be better if you could provide more supporting materials.
 
 ### Before submission
+
 Please ensure that all unit tests involved in existing code modifications can pass the self-test (such as executing `pytest tests/metagpt/environment/*`).
 Please ensure that the newly added code file has a single test under the corresponding path and the self-test passes.
 Please ensure that the submitted code has a complete `Google Docstring` description and procedural functional comments.
 
 Before committing, install `pre-commit` and use it to check the code specification to meet the submission conditions. The specific usage is as follows:
+
 ```bash
 pip3 install pre-commit
 pre-commit install
 pre-commit run --all-files # or check individual files pre-commit run --files metagpt/roles/*
 ```
+
 After execution, it will automatically modify the local code according to the specification requirements, and you need to `git add` again.
 
 ### When submitting
+
 We have added the `PULL_REQUEST_TEMPLATE` template by default. Necessary information needs to be added when submitting, including:
 
 - Features, The features added by the current PR. Required.
@@ -39,9 +44,11 @@ We have added the `PULL_REQUEST_TEMPLATE` template by default. Necessary informa
 The above information can facilitate code reviewers to understand the context of the PR and speed up PR review.
 
 ### After submission
+
 After submission, the github-ci workflow will be used by default to check code specifications and unit tests. If it does not pass, it will be sent back for modification until it passes. Therefore, in order to improve efficiency, `pre-commit` inspection and single test result review are done offline.
 
 ## Issue
+
 Issue content can include bug feedback, description of new features expected to be supported, in-depth optimization of supported functions, etc.
 Among them, new features, optimization items, etc. can be described based on your demand scenarios to provide sufficient context for further communication between the two parties. After submission, community staff will contact you and we will update it to ROADMAP after communication and confirmation.
 For bug feedback, in order to have enough problem context for analysis, the `show_me_the_bug` template is added by default. Necessary information needs to be added when submitting, including:
@@ -52,6 +59,7 @@ For bug feedback, in order to have enough problem context for analysis, the `sho
 - Screenshots or logs On-site screenshots or logs corresponding to the bug. Required.
 
 ## Documentation contribution
+
 Documentation site address: https://docs.deepwisdom.ai
 At present, the documentation site mainly includes introductory and basic tutorials, single/multi-agent examples, advanced guides, etc. At the same time, the document site currently mainly supports Chinese and English versions, so it is expected that the documents you submit will also have both Chinese and English versions.
 Submitting documents also follows the [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) method.
