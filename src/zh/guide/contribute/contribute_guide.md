@@ -1,20 +1,21 @@
 # 贡献指南
 
-MetaGPT欢迎开发者积极参与开源社区建设，包括但不限于：
+MetaGPT欢迎开发者积极参与开源社区建设，包括但不局限于：
 
 - 根据`docs/ROADMAP.md`的特性描述进行功能实现和PR提交。
-- 除ROADMAP外的额外实现（包括功能、Bug修复、智能体场景案例、代码注释说明等）和PR提交。
+- 除ROADMAP外的额外实现（包括新增功能、Bug修复、智能体场景案例、代码注释说明等）和PR提交。
 - 文档站上包括教程、使用样例、进阶指南等文档的补充提交。
-- 期望MetaGPT实现的特性、使用过程中发现的问题Bug、落地应用交流等Issue提交。
+- 期望MetaGPT实现的新特性、使用过程中发现的问题Bug、落地应用交流等Issue提交。
 
 ## PR提交
 请使用 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式进行代码提交。  
 
 `dev`分支作为新功能的开发分支。`main`分支作为主干，一般用于发版或小范围的bugfix。如果需要跟进最新进展，请使用`dev`分支。  
 一般的，需要2个已贡献人员评审后的**LGTM**才允许合入。大于10行代码的PR通过后，提交者即可加入`MetaGPT-dev`群。  
+一般的，鼓励少量代码多提交。大的PR提交往往需要更多的上下文理解和评审时间，如果你可以提供更多的辅助资料将会更好。  
 
 ### 提交前
-请确保对已有代码修改涉及到的单测都能自测通过（比如`pytest tests/metagpt/environment/*`）。  
+请确保对已有代码修改涉及到的单测都能自测通过（比如执行`pytest tests/metagpt/environment/*`）。  
 请确保新增加的代码文件有对应路径下的单测且自测通过。  
 请确保提交的代码有完整的`Google Docstring`说明和过程功能注释。
 
