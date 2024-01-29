@@ -11,6 +11,7 @@ import {
   readFileSync,
   writeFileSync,
   mkdirSync,
+  rmSync,
 } from 'node:fs';
 import { simpleGit } from 'simple-git';
 import { tree } from '../utils/tool.mjs';
@@ -99,6 +100,7 @@ for (const source of sources) {
     const sourceDir = resolve(__dirname, `../src/${source}`);
     const destDir = resolve(__dirname, `../src/${dest}/${source}`);
 
+    rmSync(destDir, { recursive: true });
     copyDir(sourceDir, destDir);
   }
 }

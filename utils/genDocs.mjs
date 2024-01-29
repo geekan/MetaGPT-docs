@@ -23,6 +23,7 @@ const MGdir = resolve(sourceCodeDir, 'MetaGPT');
 
 if (existsSync(MGdir)) {
   rmSync(MGdir, { recursive: true });
+  rmSync(resolve(__dirname, '../src/reference'), { recursive: true });
 }
 
 await SGit.clone(MGUrl, resolve(sourceCodeDir, 'MetaGPT'), {
