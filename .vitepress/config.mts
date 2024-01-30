@@ -251,13 +251,13 @@ export default defineConfig({
                         items: [
                           {
                             text: 'Data analysis and visualization',
-                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md'
+                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
                           },
                           {
                             text: 'Machine learning modeling',
-                            link: 'use_cases/agent/code_interpreter/ml_modeling.md'
-                          }
-                        ]
+                            link: 'use_cases/agent/code_interpreter/ml_modeling.md',
+                          },
+                        ],
                       },
                     ],
                   },
@@ -459,13 +459,13 @@ export default defineConfig({
                         items: [
                           {
                             text: '数据分析和可视化',
-                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md'
+                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
                           },
                           {
                             text: '机器学习建模',
-                            link: 'use_cases/agent/code_interpreter/ml_modeling.md'
-                          }
-                        ]
+                            link: 'use_cases/agent/code_interpreter/ml_modeling.md',
+                          },
+                        ],
                       },
                     ],
                   },
