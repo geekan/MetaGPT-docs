@@ -8,26 +8,31 @@ MetaGPT欢迎开发者积极参与开源社区建设，包括但不局限于：
 - 期望MetaGPT实现的新特性、使用过程中发现的问题Bug、落地应用交流等Issue提交。
 
 ## PR提交
-请使用 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式进行代码提交。  
+
+请使用 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式进行代码提交。
 
 一般的，需要2个已贡献人员评审后的**LGTM**才允许合入。大于10行代码的PR通过后，提交者即可加入`MetaGPT-dev`群。  
-一般的，鼓励少量代码多提交。大的PR提交往往需要更多的上下文理解和评审时间，如果你可以提供更多的辅助资料将会更好。  
+一般的，鼓励少量代码多提交。大的PR提交往往需要更多的上下文理解和评审时间，如果你可以提供更多的辅助资料将会更好。
 
 ### 提交前
+
 请确保对已有代码修改涉及到的单测都能自测通过（比如执行`pytest tests/metagpt/environment/*`）。  
 请确保新增加的代码文件有对应路径下的单测且自测通过。  
 请确保提交的代码有完整的`Google Docstring`说明和过程功能注释。
 
-在提交前，安装`pre-commit`，并使用其对代码规范进行检查以符合提交条件。具体使用如下：  
+在提交前，安装`pre-commit`，并使用其对代码规范进行检查以符合提交条件。具体使用如下：
+
 ```bash
 pip3 install pre-commit
 pre-commit install
-pre-commit run --all-files  # 或检查个别文件  pre-commit run --files metagpt/roles/* 
+pre-commit run --all-files  # 或检查个别文件  pre-commit run --files metagpt/roles/*
 ```
+
 执行后，其会根据规范要求进行本地代码自动修改，你需要重新再`git add`。
 
 ### 提交时
-我们默认添加了`PULL_REQUEST_TEMPLATE`模版，提交时需要补充必要的信息，包括：  
+
+我们默认添加了`PULL_REQUEST_TEMPLATE`模版，提交时需要补充必要的信息，包括：
 
 - Features 当前PR添加的功能。必填。
 - Features Docs 功能对应的文档站文档说明。选填。
@@ -38,12 +43,14 @@ pre-commit run --all-files  # 或检查个别文件  pre-commit run --files meta
 上述信息可以方便代码审核人员了解该PR的上下文，加快PR审核速度。
 
 ### 提交后
+
 提交后，默认会走github-ci流程用来检查代码规范和单元测试，如果不通过，将会被打回修改直至通过。因此，为了提升效率，在线下做好`pre-commit`检查和单测结果复核。
 
 ## Issue提交
+
 Issue的内容可以包括Bug反馈、期望支持新特性描述、已支持功能的深度优化等。  
 其中，对于新特性、优化项等，可以针对你的需求场景展开描述，为双方进一步沟通提供足够的上下文。提交后，将会有社区工作人员联系，沟通确认后我们也会更新到ROADMAP中。  
-对于Bug反馈，为了有足够的问题上下文进行分析，默认添加了`show_me_the_bug`模版，提交时需要补充必要的信息，包括：  
+对于Bug反馈，为了有足够的问题上下文进行分析，默认添加了`show_me_the_bug`模版，提交时需要补充必要的信息，包括：
 
 - Bug description Bug描述。必填。
 - Bug solved method Bug解决方式（如果你知道如何解决）。选填。
@@ -51,11 +58,12 @@ Issue的内容可以包括Bug反馈、期望支持新特性描述、已支持功
 - Screenshots or logs Bug对应的现场截图或日志。必填。
 
 ## 文档贡献
-文档站地址：https://docs.deepwisdom.ai   
-目前文档站主要包括入门及基础教程、单/多智能体示例、进阶指南等。同时，文档站目前主要支持中英文版本，因此，期望你提交的文档也同时具备中英文版本。  
-提交文档同样遵循 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式。  
 
-添加文档时，请参考下述内容：  
+文档站地址：https://docs.deepwisdom.ai  
+目前文档站主要包括入门及基础教程、单/多智能体示例、进阶指南等。同时，文档站目前主要支持中英文版本，因此，期望你提交的文档也同时具备中英文版本。  
+提交文档同样遵循 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式。
+
+添加文档时，请参考下述内容：
 
 - 不同类型的文档，请参考对应已有文档的内容结构进行内容补充并保存为markdown文件。
 - 英文文档位于`src/en`目录下，在对应目录下新建。比如，教程文档位于`src/en/guide/tutorials`目录下。
