@@ -34,7 +34,7 @@ pre-commit run --all-files  # 或检查个别文件  pre-commit run --files meta
 
 我们默认添加了`PULL_REQUEST_TEMPLATE`模版，提交时需要补充必要的信息，包括：
 
-- Features 当前PR添加的功能。必填。
+- Features 当前PR添加的功能（说明必要性）或修复的问题。必填。
 - Features Docs 功能对应的文档站文档说明。选填。
 - Influence 该功能可能带来的影响。选填。
 - Result （局部）单测执行结果、样例执行结果文件或日志（如有）等。必填。

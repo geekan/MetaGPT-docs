@@ -34,7 +34,7 @@ After execution, it will automatically modify the local code according to the sp
 
 We have added the `PULL_REQUEST_TEMPLATE` template by default. Necessary information needs to be added when submitting, including:
 
-- Features, The features added by the current PR. Required.
+- Features, Features added by the current PR (explaining necessity) or problems fixed. Required. Required.
 - Features Docs, Document description of the document station corresponding to the function. Optional.
 - Influence, The possible impact of this feature. Optional.
 - Result, (partial) single test execution result, sample execution result file or log (if any), etc. Required.
