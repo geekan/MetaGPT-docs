@@ -10,7 +10,6 @@ MetaGPT欢迎开发者积极参与开源社区建设，包括但不局限于：
 ## PR提交
 请使用 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式进行代码提交。  
 
-`dev`分支作为新功能的开发分支。`main`分支作为主干，一般用于发版或小范围的bugfix。如果需要跟进最新进展，请使用`dev`分支。  
 一般的，需要2个已贡献人员评审后的**LGTM**才允许合入。大于10行代码的PR通过后，提交者即可加入`MetaGPT-dev`群。  
 一般的，鼓励少量代码多提交。大的PR提交往往需要更多的上下文理解和评审时间，如果你可以提供更多的辅助资料将会更好。  
 

@@ -10,7 +10,6 @@ MetaGPT welcomes developers to actively participate in open source community bui
 ## PR
 Please use [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) to submit code.
 
-The `dev` branch serves as the development branch for new features. The `main` branch serves as the backbone and is generally used for releases or small-scale bugfixes. If you need to follow the latest progress, please use the `dev` branch.
 Generally, **LGTM** needs to be reviewed by 2 contributors before it is allowed to be merged. After the PR with more than 10 lines of code is passed, the submitter can join the `MetaGPT-dev` group.
 In general, small amounts of code are encouraged to be submitted more often. Large PR submissions often require more context understanding and review time, and it would be better if you could provide more supporting materials.
 
