@@ -2,15 +2,115 @@
 
 ## Batch Use of Tools
 
+### Task
+
+Use `MLEngineer` to model and predict the [ICR](https://www.kaggle.com/competitions/icr-identify-age-related-conditions/data) dataset, and batch invoke tools during the data preprocessing and feature engineering stages (multiple tools of types data_preprocess and feature_engineering have already been created).
+
+### Code
+
+```python
+import asyncio
+
+from metagpt.roles.ml_engineer import MLEngineer
+
+
+async def main(requirement: str, auto_run: bool = True, use_tools: bool = True):
+    role = MLEngineer(goal=requirement, auto_run=auto_run, use_tools=use_tools)
+    await role.run(requirement)
+
+
+if __name__ == "__main__":
+    data_path = "/data/icr-identify-age-related-conditions"
+    requirement = f"This is a medical dataset with over fifty anonymized health characteristics linked to three age-related conditions. Your goal is to predict whether a subject has or has not been diagnosed with one of these conditions.The target column is Class. Perform data analysis, data preprocessing, feature engineering, and modeling to predict the target. Report f1 score on the eval data. Train data path: {data_path}/split_train.csv, eval data path:{data_path}/split_eval.csv."
+    asyncio.run(main(requirement))
+```
+
+### Running Result
+
+The data preprocessing code (which includes the use of 3 tools: `FillMissingValue`, `MinMaxScale`, and `LabelEncode`) is as follows:
+
+```python
+# Load the evaluation dataset
+import pandas as pd
+
+eval_data_path = '/Users/lidanyang/deepw/code/ml_engineer/dev/data_agents_opt/data/icr-identify-age-related-conditions/split_eval.csv'
+eval_data = pd.read_csv(eval_data_path)
+
+# Make a copy of the datasets
+copy_train_data = train_data.copy()
+copy_eval_data = eval_data.copy()
+
+# Fill missing values for numeric columns
+numeric_features = copy_train_data.select_dtypes(include=[np.number]).columns.tolist()
+fill_missing_numeric = FillMissingValue(features=numeric_features, strategy='mean')
+fill_missing_numeric.fit(copy_train_data)
+copy_train_data = fill_missing_numeric.transform(copy_train_data)
+copy_eval_data = fill_missing_numeric.transform(copy_eval_data)
+
+# Fill missing values for categorical columns
+categorical_features = ['EJ']
+fill_missing_categorical = FillMissingValue(features=categorical_features, strategy='most_frequent')
+fill_missing_categorical.fit(copy_train_data)
+copy_train_data = fill_missing_categorical.transform(copy_train_data)
+copy_eval_data = fill_missing_categorical.transform(copy_eval_data)
+
+# Scale numerical features
+from metagpt.tools.libs.data_preprocess import MinMaxScale
+
+# Exclude the target column 'Class' from scaling
+scaling_features = [feature for feature in numeric_features if feature != 'Class']
+minmax_scale = MinMaxScale(features=scaling_features)
+minmax_scale.fit(copy_train_data)
+copy_train_data = minmax_scale.transform(copy_train_data)
+copy_eval_data = minmax_scale.transform(copy_eval_data)
+
+# Encode categorical variables
+from metagpt.tools.libs.data_preprocess import LabelEncode
+
+# Apply label encoding to the categorical feature 'EJ'
+label_encode = LabelEncode(features=categorical_features)
+label_encode.fit(copy_train_data)
+copy_train_data = label_encode.transform(copy_train_data)
+copy_eval_data = label_encode.transform(copy_eval_data)
+```
+
+The feature engineering code (which includes the use of 2 tools: `PolynomialExpansion` and `CatCount`) is as follows:
+
+```python
+# Step 1: Add polynomial and interaction features
+from metagpt.tools.libs.feature_engineering import PolynomialExpansion
+
+# List of numeric columns for polynomial expansion, excluding the 'Id' and 'Class' columns
+numeric_features_for_poly = [col for col in numeric_features if col not in ['Id', 'Class']]
+polynomial_expansion = PolynomialExpansion(cols=numeric_features_for_poly, label_col='Class')
+polynomial_expansion.fit(copy_train_data)
+copy_train_data = polynomial_expansion.transform(copy_train_data)
+copy_eval_data = polynomial_expansion.transform(copy_eval_data)
+
+# Step 2: Add value counts of a categorical column as new feature
+# Since 'EJ' is the only categorical feature, we will use it for CatCount
+from metagpt.tools.libs.feature_engineering import CatCount
+cat_count = CatCount(col='EJ')
+cat_count.fit(copy_train_data)
+copy_train_data = cat_count.transform(copy_train_data)
+copy_eval_data = cat_count.transform(copy_eval_data)
+```
+
+The complete code can be found in [ml_batch_use_of_tools.ipynb](./code/ml_batch_use_of_tools.ipynb)
+
+## Mechanism Explanation
+
 ### Tool Creation
 
-To empower `MLEngineer` with the ability to use tools, it is essential to start with the creation of the tools. Below, taking data_preprocess tasks as an example, we provide a complete guide for creating a simple tool, including how to define and register the tool.
+In the `metagpt.tools.libs` directory, we have predefined two types of tools: `data_preprocess` and `feature_engineering`. Below, taking data_preprocess tasks as an example, we provide a complete guide for creating a simple tool, including how to define and register the tool.
 
 #### Step 1: Creation and Registration of Tools
+
 - First, create a file named `data_preprocess.py` in the `metagpt.tools.libs` directory.
 - In this file, you will define your data preprocessing tool and complete the registration of the tool using the `@register_tool` decorator. By setting the `tool_type` parameter, you can explicitly specify the category of the tool.
 
 **Code Example**:
+
 ```python
 import pandas as pd
 from sklearn.impute import SimpleImputer
@@ -89,6 +189,7 @@ class FillMissingValue(MLProcess):
         new_df[self.features] = self.si.transform(new_df[self.features])
         return new_df
 ```
+
 In the example above, `MLProcess` defines the base class for data preprocessing tools. The `FillMissingValue` class, inheriting from this base class, specifically implements the functionality for filling missing values and is registered as a data_preprocess tool using the `@register_tool` decorator.
 
 After registering the tool, the system will automatically create a corresponding subdirectory in the `metagpt.tools.schemas` directory for your tool type (in this case, `data_preprocess`).
@@ -96,21 +197,22 @@ After registering the tool, the system will automatically create a corresponding
 In this subdirectory, the system will generate a schema file for each tool (such as `FillMissingValue.yml`), detailing the structure, methods, and parameter types of the tool class, ensuring that the LLM can accurately understand and utilize the tool.
 
 **Schema File Example**:
+
 ```yaml
 FillMissingValue:
   type: class
-  description: "Completing missing values with simple strategies"
+  description: 'Completing missing values with simple strategies'
   methods:
     __init__:
-      description: "Initialize self."
+      description: 'Initialize self.'
       parameters:
         properties:
           features:
             type: list
-            description: "columns to be processed"
+            description: 'columns to be processed'
           strategy:
             type: str
-            description: "the imputation strategy, notice mean/median can only be used for numeric features"
+            description: 'the imputation strategy, notice mean/median can only be used for numeric features'
             default: mean
             enum:
               - mean
@@ -119,48 +221,49 @@ FillMissingValue:
               - constant
           fill_value:
             type: int
-            description: "fill_value is used to replace all occurrences of missing_values"
+            description: 'fill_value is used to replace all occurrences of missing_values'
             default: null
         required:
           - features
     fit:
-      description: "Fit the FillMissingValue model."
+      description: 'Fit the FillMissingValue model.'
       parameters:
         properties:
           df:
             type: DataFrame
-            description: "The input DataFrame."
+            description: 'The input DataFrame.'
         required:
           - df
     transform:
-      description: "Transform the input DataFrame with the fitted model."
+      description: 'Transform the input DataFrame with the fitted model.'
       parameters:
         properties:
           df:
             type: DataFrame
-            description: "The input DataFrame."
+            description: 'The input DataFrame.'
         required:
           - df
       returns:
         df:
           type: DataFrame
-          description: "The transformed DataFrame."
+          description: 'The transformed DataFrame.'
     fit_transform:
-      description: "Fit and transform the input DataFrame."
+      description: 'Fit and transform the input DataFrame.'
       parameters:
         properties:
           df:
             type: DataFrame
-            description: "The input DataFrame."
+            description: 'The input DataFrame.'
         required:
           - df
       returns:
         df:
           type: DataFrame
-          description: "The transformed DataFrame."
+          description: 'The transformed DataFrame.'
 ```
 
 #### Step 2: (Optional) Customizing the Schema File
+
 If you wish to customize the schema file, you can do so in the following two ways:
 
 1. Specify the `schema_path` when using the `@register_tool` decorator, for example:
@@ -168,90 +271,17 @@ If you wish to customize the schema file, you can do so in the following two way
    @register_tool(tool_type="data_preprocess", schema_path="/data/FillMissingValue.yml")
    class FillMissingValue(MLProcess):
        ...
-    ```
+   ```
 2. Directly create a custom schema file in the `metagpt.tools.schemas` directory, like `data_preprocess/FillMissingValue.yml`, and define your schema content in this file.
 
-### Usage Example
+### Automatic Tool Registration and Task Allocation
 
-#### Task
+When `MLEngineer` starts, it automatically registers all tools in the `metagpt.tools.libs` directory. Concurrently, during the task planning phase, `MLEngineer` allocates appropriate task types for each task based on requirements, facilitating the match with tool types.
 
-Use `MLEngineer` to model and predict the [ICR](https://www.kaggle.com/competitions/icr-identify-age-related-conditions/data) dataset, and batch invoke tools during the data preprocessing and feature engineering stages (multiple tools of types data_preprocess and feature_engineering have already been created following the process described in the "Tool Creation" section).
+### Dynamic Tool Retrieval
 
-#### Code
+During the task execution phase, if there are tools in the registry that match the task type, `MLEngineer` automatically retrieves all available tools of that type from the registry.
 
-The data preprocessing code (which includes the use of 3 tools: `FillMissingValue`, `MinMaxScale`, and `LabelEncode`) is as follows:
-```python
-# Load the evaluation dataset
-import pandas as pd
+### Tool Selection and Combination
 
-eval_data_path = '/Users/lidanyang/deepw/code/ml_engineer/dev/data_agents_opt/data/icr-identify-age-related-conditions/split_eval.csv'
-eval_data = pd.read_csv(eval_data_path)
-
-# Make a copy of the datasets
-copy_train_data = train_data.copy()
-copy_eval_data = eval_data.copy()
-
-# Fill missing values for numeric columns
-numeric_features = copy_train_data.select_dtypes(include=[np.number]).columns.tolist()
-fill_missing_numeric = FillMissingValue(features=numeric_features, strategy='mean')
-fill_missing_numeric.fit(copy_train_data)
-copy_train_data = fill_missing_numeric.transform(copy_train_data)
-copy_eval_data = fill_missing_numeric.transform(copy_eval_data)
-
-# Fill missing values for categorical columns
-categorical_features = ['EJ']
-fill_missing_categorical = FillMissingValue(features=categorical_features, strategy='most_frequent')
-fill_missing_categorical.fit(copy_train_data)
-copy_train_data = fill_missing_categorical.transform(copy_train_data)
-copy_eval_data = fill_missing_categorical.transform(copy_eval_data)
-
-# Scale numerical features
-from metagpt.tools.libs.data_preprocess import MinMaxScale
-
-# Exclude the target column 'Class' from scaling
-scaling_features = [feature for feature in numeric_features if feature != 'Class']
-minmax_scale = MinMaxScale(features=scaling_features)
-minmax_scale.fit(copy_train_data)
-copy_train_data = minmax_scale.transform(copy_train_data)
-copy_eval_data = minmax_scale.transform(copy_eval_data)
-
-# Encode categorical variables
-from metagpt.tools.libs.data_preprocess import LabelEncode
-
-# Apply label encoding to the categorical feature 'EJ'
-label_encode = LabelEncode(features=categorical_features)
-label_encode.fit(copy_train_data)
-copy_train_data = label_encode.transform(copy_train_data)
-copy_eval_data = label_encode.transform(copy_eval_data)
-```
-
-The feature engineering code (which includes the use of 2 tools: `PolynomialExpansion` and `CatCount`) is as follows:
-```python
-# Step 1: Add polynomial and interaction features
-from metagpt.tools.libs.feature_engineering import PolynomialExpansion
-
-# List of numeric columns for polynomial expansion, excluding the 'Id' and 'Class' columns
-numeric_features_for_poly = [col for col in numeric_features if col not in ['Id', 'Class']]
-polynomial_expansion = PolynomialExpansion(cols=numeric_features_for_poly, label_col='Class')
-polynomial_expansion.fit(copy_train_data)
-copy_train_data = polynomial_expansion.transform(copy_train_data)
-copy_eval_data = polynomial_expansion.transform(copy_eval_data)
-
-# Step 2: Add value counts of a categorical column as new feature
-# Since 'EJ' is the only categorical feature, we will use it for CatCount
-from metagpt.tools.libs.feature_engineering import CatCount
-cat_count = CatCount(col='EJ')
-cat_count.fit(copy_train_data)
-copy_train_data = cat_count.transform(copy_train_data)
-copy_eval_data = cat_count.transform(copy_eval_data)
-```
-The complete code can be found in [ml_batch_use_of_tools.ipynb](./code/ml_batch_use_of_tools.ipynb)
-
-#### Mechanism Explanation
-1. **Tool Pre-definition**: In the `metagpt.tools.libs` directory, we have predefined two types of tools: `data_preprocess` and `feature_engineering`.
-
-2. **Automatic Tool Registration and Task Allocation**: When `MLEngineer` starts, it automatically registers all tools in the `metagpt.tools.libs` directory. Concurrently, during the task planning phase, `MLEngineer` allocates appropriate task types for each task based on requirements, facilitating the match with tool types.
-
-3. **Dynamic Tool Retrieval**: During the task execution phase, if there are tools in the registry that match the task type, `MLEngineer` automatically retrieves all available tools of that type from the registry.
-
-4. **Tool Selection and Combination**: Once the available tools are identified, `MLEngineer` automatically selects and combines these tools based on the task requirements, forming a code solution tailored to the specific task.
+Once the available tools are identified, `MLEngineer` automatically selects and combines these tools based on the task requirements, forming a code solution tailored to the specific task.
