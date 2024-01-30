@@ -245,6 +245,20 @@ export default defineConfig({
                         text: 'Receipt Assistant',
                         link: 'use_cases/agent/receipt_assistant.md',
                       },
+                      {
+                        text: 'CodeInterpreter',
+                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        items: [
+                          {
+                            text: 'Data analysis and visualization',
+                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
+                          },
+                          {
+                            text: 'Machine learning modeling',
+                            link: 'use_cases/agent/code_interpreter/ml_modeling.md',
+                          },
+                        ],
+                      },
                     ],
                   },
                   {
@@ -438,6 +452,20 @@ export default defineConfig({
                       {
                         text: '票据助手',
                         link: 'use_cases/agent/receipt_assistant.md',
+                      },
+                      {
+                        text: '代码解释器',
+                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        items: [
+                          {
+                            text: '数据分析和可视化',
+                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
+                          },
+                          {
+                            text: '机器学习建模',
+                            link: 'use_cases/agent/code_interpreter/ml_modeling.md',
+                          },
+                        ],
                       },
                     ],
                   },
