@@ -5,7 +5,8 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "format": "prettier --write --cache \"**/*.{js,ts,vue,mts,mjs,md}\""
+    "format": "prettier --write --cache \"**/*.{js,ts,vue,mts,mjs,md}\"",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
     "vitepress": "1.0.0-rc.24",
@@ -29,7 +30,7 @@
     "vue-gtag": "^2.0.1"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "npm run precommit"
   },
   "lint-staged": {
     "*.{js,ts,vue,mts,mjs,md}": "prettier --write"
