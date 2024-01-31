@@ -47,16 +47,16 @@ pip install -e .
 ### 使用默认的MetaGPT镜像
 
 ```bash
-# 第1步：下载metagpt官方镜像并准备config.yaml
+# 第1步：下载metagpt官方镜像并准备config2.yaml
 docker pull metagpt/metagpt:latest
 mkdir -p /opt/metagpt/{config,workspace}
-docker run --rm metagpt/metagpt:latest cat /app/metagpt/config/config.yaml > /opt/metagpt/config/key.yaml
-vim /opt/metagpt/config/key.yaml # 修改配置
+docker run --rm metagpt/metagpt:latest cat /app/metagpt/config/config2.yaml > /opt/metagpt/config/config2.yaml
+vim /opt/metagpt/config/config2.yaml # 修改配置
 
 # 第2步：使用容器运行metagpt demo
 docker run --rm \
     --privileged \
-    -v /opt/metagpt/config/key.yaml:/app/metagpt/config/key.yaml \
+    -v /opt/metagpt/config/config2.yaml:/app/metagpt/config/config2.yaml \
     -v /opt/metagpt/workspace:/app/metagpt/workspace \
     metagpt/metagpt:latest \
     metagpt "Write a cli snake game"
@@ -64,7 +64,7 @@ docker run --rm \
 # 你也可以启动一个容器并在其中执行命令
 docker run --name metagpt -d \
     --privileged \
-    -v /opt/metagpt/config/key.yaml:/app/metagpt/config/key.yaml \
+    -v /opt/metagpt/config/config2.yaml:/app/metagpt/config/config2.yaml \
     -v /opt/metagpt/workspace:/app/metagpt/workspace \
     metagpt/metagpt:latest
 
@@ -75,7 +75,7 @@ $ metagpt "Write a cli snake game"
 `docker run ...`命令做了以下事情：
 
 - 以特权模式运行，以获得运行浏览器的权限
-- 将主机配置文件`/opt/metagpt/config/key.yaml`映射到容器`/app/metagpt/config/key.yaml`
+- 将主机配置文件`/opt/metagpt/config/config2.yaml`映射到容器`/app/metagpt/config/config2.yaml`
 - 将主机目录`/opt/metagpt/workspace`映射到容器`/app/metagpt/workspace`
 - 执行demo命令`metagpt "Write a cli snake game"`
 

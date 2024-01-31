@@ -33,11 +33,12 @@ pip install -e.
   npm install @mermaid-js/mermaid-cli
   ```
 
-- don't forget to the configuration for mmdc in config.yml
+- don't forget to the configuration for mmdc in config2.yaml
 
-  ```yml
-  PUPPETEER_CONFIG: './config/puppeteer-config.json'
-  MMDC: './node_modules/.bin/mmdc'
+  ```yaml
+  mermaid:
+    puppeteer_config: './config/puppeteer-config.json'
+    path: './node_modules/.bin/mmdc'
   ```
 
 - if `pip install -e.` fails with error `[Errno 13] Permission denied: '/usr/local/lib/python3.11/dist-packages/test-easy-install-13129.write-test'`, try instead running `pip install -e. --user`
@@ -60,12 +61,13 @@ pip install -e.
     playwright install --with-deps chromium
     ```
 
-    - **modify `config.yaml`**
+    - **modify `config2.yaml`**
 
-    uncomment MERMAID_ENGINE from config.yaml and change it to `playwright`
+    add mermaid config to config2.yaml and change it to `playwright`
 
     ```yaml
-    MERMAID_ENGINE: playwright
+    mermaid:
+      engine: playwright
     ```
 
   - pyppeteer
@@ -90,22 +92,24 @@ pip install -e.
     pyppeteer-install
     ```
 
-    - **modify `config.yaml`**
+    - **modify `config2.yaml`**
 
-    uncomment MERMAID_ENGINE from config.yaml and change it to `pyppeteer`
+    uncomment mermaid.engine from config2.yaml and change it to `pyppeteer`
 
     ```yaml
-    MERMAID_ENGINE: pyppeteer
+    mermaid:
+      engine: pyppeteer
     ```
 
   - mermaid.ink
 
-    - **modify `config.yaml`**
+    - **modify `config2.yaml`**
 
-    uncomment MERMAID_ENGINE from config.yaml and change it to `ink`
+    add mermaid engine to config2.yaml and change it to `ink`
 
     ```yaml
-    MERMAID_ENGINE: ink
+    mermaid:
+      engine: ink
     ```
 
     Note: this method does not support pdf export.
@@ -113,16 +117,16 @@ pip install -e.
 ### Installation by Docker
 
 ```bash
-# Step 1: Download metagpt official image and prepare config.yaml
+# Step 1: Download metagpt official image and prepare config2.yaml
 docker pull metagpt/metagpt:latest
 mkdir -p /opt/metagpt/{config,workspace}
-docker run --rm metagpt/metagpt:latest cat /app/metagpt/config/config.yaml > /opt/metagpt/config/key.yaml
-vim /opt/metagpt/config/key.yaml # Change the config
+docker run --rm metagpt/metagpt:latest cat /app/metagpt/config/config2.yaml > /opt/metagpt/config/config2.yaml
+vim /opt/metagpt/config/config2.yaml # Change the config
 
 # Step 2: Run metagpt demo with container
 docker run --rm \
     --privileged \
-    -v /opt/metagpt/config/key.yaml:/app/metagpt/config/key.yaml \
+    -v /opt/metagpt/config/config2.yaml:/app/metagpt/config/config2.yaml \
     -v /opt/metagpt/workspace:/app/metagpt/workspace \
     metagpt/metagpt:latest \
     metagpt "Write a cli snake game"
@@ -130,7 +134,7 @@ docker run --rm \
 # You can also start a container and execute commands in it
 docker run --name metagpt -d \
     --privileged \
-    -v /opt/metagpt/config/key.yaml:/app/metagpt/config/key.yaml \
+    -v /opt/metagpt/config/config2.yaml:/app/metagpt/config/config2.yaml \
     -v /opt/metagpt/workspace:/app/metagpt/workspace \
     metagpt/metagpt:latest
 
@@ -141,7 +145,7 @@ $ metagpt "Write a cli snake game"
 The command `docker run ...` do the following things:
 
 - Run in privileged mode to have permission to run the browser
-- Map host configure file `/opt/metagpt/config/key.yaml` to container `/app/metagpt/config/key.yaml`
+- Map host configure file `/opt/metagpt/config/config2.yaml` to container `/app/metagpt/config/config2.yaml`
 - Map host directory `/opt/metagpt/workspace` to container `/app/metagpt/workspace`
 - Execute the demo command `metagpt "Write a cli snake game"`
 
@@ -155,18 +159,13 @@ cd MetaGPT && docker build -t metagpt:custom .
 
 ## Configuration
 
-- Configure your `OPENAI_API_KEY` in any of `config/key.yaml / config/config.yaml / env`
-- Priority order: `config/key.yaml > config/config.yaml > env`
+- Configure your `api_key` in any of `~/.metagpt/config2.yaml / config/config2.yaml`
+- Priority order: `~/.metagpt/config2.yaml > config/config2.yaml`
 
 ```bash
 # Copy the configuration file and make the necessary modifications.
-cp config/config.yaml config/key.yaml
+cp config/config2.yaml ~/.metagpt/config2.yaml
 ```
-
-| Variable Name                              | config/key.yaml                           | env                                             |
-| ------------------------------------------ | ----------------------------------------- | ----------------------------------------------- |
-| OPENAI_API_KEY # Replace with your own key | OPENAI_API_KEY: "sk-..."                  | export OPENAI_API_KEY="sk-..."                  |
-| OPENAI_BASE_URL # Optional                 | OPENAI_BASE_URL: "https://<YOUR_SITE>/v1" | export OPENAI_BASE_URL="https://<YOUR_SITE>/v1" |
 
 ## Tutorial: Initiating a startup
 

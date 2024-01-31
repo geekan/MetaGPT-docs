@@ -284,17 +284,17 @@ class Researcher(Role):
 配置：
 
 - serpapi
-  - SEARCH_ENGINE: 设置为serpapi
-  - SERPAPI_API_KEY: 从https://serpapi.com/获取
+  - search.engine: 设置为serpapi
+  - search.api_key: 从https://serpapi.com/获取
 - google
-- SEARCH_ENGINE: 设置为google
-- GOOGLE_API_KEY: 从https://console.cloud.google.com/apis/credentials获取
-- GOOGLE_CSE_ID: 从https://programmablesearchengine.google.com/controlpanel/create获取
+  - search.engine: 设置为google
+  - search.api_key: 从https://console.cloud.google.com/apis/credentials获取
+  - search.cse_id: 从https://programmablesearchengine.google.com/controlpanel/create获取
 - serper
-  - SEARCH_ENGINE: 设置为serper
-  - SERPER_API_KEY: 从https://serper.dev/获取
+  - search.engine: 设置为serper
+  - search.api_key: 从https://serper.dev/获取
 - ddg
-  - SEARCH_ENGINE: 设置为ddg
+  - search.engine: 设置为ddg
 
 `WebBrowserEngine`支持playwright/selenium引擎，要使用它们都需要安装额外的依赖，它们区别如下：
 
@@ -306,16 +306,11 @@ class Researcher(Role):
 配置：
 
 - playwright
-  - WEB_BROWSER_ENGINE: 设置为playwright
-  - PLAYWRIGHT_BROWSER_TYPE: 支持chromium/firefox/webkit，默认chromium，更多信息参考https://playwright.dev/python/docs/api/class-browsertype
+  - browser.engine: 设置为playwright
+  - browser.driver: 支持chromium/firefox/webkit，默认chromium，更多信息参考https://playwright.dev/python/docs/api/class-browsertype
 - selenium
-  - WEB_BROWSER_ENGINE: 设置为selenium
-  - SELENIUM_BROWSER_TYPE: 支持chrome/firefox/edge/ie, 默认chrome，更多信息参考https://www.selenium.dev/documentation/webdriver/browsers/
-
-此外，Researcher本身也提供了以下两个配置：
-
-- MODEL_FOR_RESEARCHER_SUMMARY: 用于内容总结的gpt模型，默认gpt-3.5-turbo
-- MODEL_FOR_RESEARCHER_REPORT: 用于生成报告的gpt模型，默认gpt-3.5-turbo-16k
+  - browser.engine: 设置为selenium
+  - browser.browser: 支持chrome/firefox/edge/ie, 默认chrome，更多信息参考https://www.selenium.dev/documentation/webdriver/browsers/
 
 ### 运行示例与结果
 

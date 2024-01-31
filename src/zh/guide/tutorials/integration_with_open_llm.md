@@ -240,13 +240,13 @@ curl -X POST http://localhost:11434/api/chat -d '{
 
 ## LLM配置
 
-由于上述部署为API接口，因此通过修改配置文件`config/key.yaml`进行生效。
+由于上述部署为API接口，因此通过修改配置文件`config/config2.yaml`进行生效。
 
 #### openai兼容接口
 
 如 LLaMA-Factory、FastChat、vllm部署的openai兼容接口
 
-**config/key.yaml**
+**config/config2.yaml**
 
 ```yaml
 OPEN_LLM_API_BASE: 'http://106.75.10.65:8001/v1'
@@ -259,7 +259,7 @@ openapi chat接口的完整路由`http://0.0.0.0:8000/v1/chat/completions`，`OP
 
 如通过ollama部署的模型服务
 
-**config/key.yaml**
+**config/config2.yaml**
 
 ```yaml
 OLLAMA_API_BASE: 'http://127.0.0.1:11434/api'
@@ -283,10 +283,10 @@ MetaGPT的prompt对输出有较强的结构要求，开源模型输出时，往�
 - 输出的json纯文本存在缺失或多出特殊字符。如，`{"a":b"}}`，`{"a":b"]}`，`{"a":b"` 等等。
 
 针对上述情况，我们增加了修复开源LLM输出的功能，具体的  
-**config/key.yaml**
+**config/config2.yaml**
 
 ```yaml
-REPAIR_LLM_OUTPUT: true
+repair_llm_output: true
 ```
 
 开启该功能后，执行过程中将尝试去修复上述情况。该开关目前并不能保证完整修复，仍会有些情况我们暂未覆盖（不同的开源模型的情况有所不同），执行过程会中断退出。如果你对此感兴趣，欢迎提PR，并附上对应的模型说明、测试日志和单测用例。

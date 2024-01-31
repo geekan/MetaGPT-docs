@@ -10,15 +10,9 @@ Available installation methods can be found in the [Installation](./installation
 
 ## Setup
 
-```
-import os
-os.environ["OPENAI_API_KEY"] = "sk-..."
-os.environ["OPENAI_API_MODEL"] = "gpt-4-1106-preview"
-```
-
 Variations for setting up LLM API (OpenAI, Azure, Anthropic, etc.) and other components can be found in the [Setup](./setup) section.
 
-We use environment variables for a quick demo. For formal usage of MetaGPT, we recommend using a config or key file. See [Setup](./setup).
+For formal usage of MetaGPT, using a config2.yaml. See [Setup](./setup).
 
 ## Develop software with a one-line requirement
 

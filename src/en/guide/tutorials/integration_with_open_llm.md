@@ -239,17 +239,19 @@ response result
 
 ## LLM Configuration
 
-Since the above deployment is an API interface, it takes effect by modifying the configuration file `config/key.yaml`.
+Since the above deployment is an API interface, it takes effect by modifying the configuration file `config/config2.yaml`.
 
 #### openai compatible interface
 
 Such as LLaMA-Factory, FastChat, vllm openai compatible interface
 
-**config/key.yaml**
+**config/config2.yaml**
 
 ```yaml
-OPEN_LLM_API_BASE: 'http://106.75.10.65:8001/v1'
-OPEN_LLM_API_MODEL: 'llama2-13b'
+llm:
+  llm_type: 'open_llm'
+  base_url: 'http://106.75.10.65:8001/v1'
+  model: 'llama2-13b'
 ```
 
 The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/completions`, `OPEN_LLM_API_BASE` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `OPEN_LLM_API_MODEL` is the actual value of the request interface parameter `model`.
@@ -258,11 +260,13 @@ The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/
 
 Such as model services deployed through ollama
 
-**config/key.yaml**
+**config/config2.yaml**
 
 ```yaml
-OLLAMA_API_BASE: 'http://127.0.0.1:11434/api'
-OLLAMA_API_MODEL: 'llama2'
+llm:
+  llm_type: 'ollama'
+  base_url: 'http://127.0.0.1:11434/api'
+  model: 'llama2'
 ```
 
 The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `OLLAMA_API_BASE` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaGPTAPI`. `OLLAMA_API_MODEL` is the actual value of the request parameter `model`.
@@ -282,10 +286,10 @@ MetaGPT's prompt has strong structural requirements for output. It is often diff
 - The output json plain text contains missing or extra special characters. For example, `{"a":b"}}`, `{"a":b"]}`, `{"a":b"` and so on.
 
 In response to the above situation, we have added the feature of repairing open source LLM output, specifically  
-**config/key.yaml**
+**config/config2.yaml**
 
 ```yaml
-REPAIR_LLM_OUTPUT: true
+repair_llm_output: true
 ```
 
 After turning on this function, an attempt will be made to repair the above situation during execution. This switch currently does not guarantee a complete repair. There will still be some situations that we have not covered yet (different open source models have different situations), and the execution process will be interrupted and exited. If you are interested with this, please submit a PR and attach the corresponding model description, test log and unittest cases.

@@ -285,17 +285,17 @@ Supports serpapi/google/serper/ddg search engines. They differ as follows:
 Configuration:
 
 - serpapi
-  - SEARCH_ENGINE: Set to serpapi
-  - SERPAPI_API_KEY: Obtain from https://serpapi.com/
+  - search.engine: Set to serpapi
+  - search.api_key: Obtain from https://serpapi.com/
 - google
-  - SEARCH_ENGINE: Set to google
-  - GOOGLE_API_KEY: Obtain from https://console.cloud.google.com/apis/credentials
-  - GOOGLE_CSE_ID: Obtain from https://programmablesearchengine.google.com/controlpanel/create
+  - search.engine: Set to google
+  - search.api_key: Obtain from https://console.cloud.google.com/apis/credentials
+  - search.cse_id: Obtain from https://programmablesearchengine.google.com/controlpanel/create
 - serper
-  - SEARCH_ENGINE: Set to serper
-  - SERPER_API_KEY: Obtain from https://serper.dev/
+  - search.engine: Set to serper
+  - search.api_key: Obtain from https://serper.dev/
 - ddg
-  - SEARCH_ENGINE: Set to ddg
+  - search.engine: Set to ddg
 
 #### WebBrowserEngine
 
@@ -309,17 +309,12 @@ Supports playwright/selenium engines. To use them, additional dependencies must 
 Configuration:
 
 - playwright
-  - WEB_BROWSER_ENGINE: Set to playwright
-  - PLAYWRIGHT_BROWSER_TYPE: Supports chromium/firefox/webkit; defaults to chromium. More information: [Playwright BrowserType](https://playwright.dev/python/docs/api/class-browsertype)
+  - browser.engine: Set to playwright
+  - browser.driver: Supports chromium/firefox/webkit; defaults to chromium. More information: [Playwright BrowserType](https://playwright.dev/python/docs/api/class-browsertype)
 - selenium
-  - WEB_BROWSER_ENGINE: Set to selenium
-  - SELENIUM_BROWSER_TYPE: Supports chrome/firefox/edge/ie; defaults to chrome. More information: [Selenium BrowserTypes](https://www.selenium.dev/documentation/webdriver/browsers/)
-
-Additionally, the Researcher provides the following configurations:
-
-- MODEL_FOR_RESEARCHER_SUMMARY: GPT model for content summarization; defaults to gpt-3.5-turbo
-- MODEL_FOR_RESEARCHER_REPORT: GPT model for report generation; defaults to gpt-3.5-turbo-16k
-
+  - browser.engine: Set to selenium
+  - browser.browser: Supports chrome/firefox/edge/ie; defaults to chrome. More information: [Selenium BrowserTypes](https://www.selenium.dev/documentation/webdriver/browsers/)
+  
 ### Running Examples and Results
 
 The `metagpt.roles.researcher` module provides a command-line interface for executing the functionalities of the Researcher. An example is as follows:
