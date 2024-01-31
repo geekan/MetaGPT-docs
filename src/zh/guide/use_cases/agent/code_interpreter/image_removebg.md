@@ -1,10 +1,10 @@
 # 图像去背景
 
 ## 概述
-Image background removal is a technique used to separate the main objects from the background in an image. It finds applications in various fields such as image editing, person segmentation, product showcasing, and computer vision. By removing the background, it highlights the subject, enhances the visual appeal of the image, and provides a cleaner base for further processing and analysis.
+图像去背景是指将图像中的主要对象与背景分离。它在图像编辑、人物抠图、商品展示和计算机视觉等领域有广泛应用。通过去除背景，可以突出主体对象，提高图像的可视化效果，并为后续处理和分析提供更好的基础。.
 ## 例子 : 
 ### 任务
-Use `codeInterpreter` to remove background from a picture of a dog.
+使用 `codeInterpreter` 对一张狗狗照片去除背景.
 ### 代码
 ```python
 import asyncio
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     asyncio.run(main(requirement))
 ```
 ### 运行过程
-`CodeInterpreter` proposes the following solution steps:
+1. `CodeInterpreter` 写的task如下:
 ```json
 [
     {
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 ```
 `CodeInterpreter`能够根据问题划分为合理的task，这里可以看到第一步便是安装rembg这个python库
 
-`CodeInterpreter` writes the following code:
+2. `CodeInterpreter` writes the following code:
 ```python
 # -----------------------------task1-------------------------------
 !pip install rembg 
