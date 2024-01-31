@@ -1,7 +1,7 @@
 # Solve Mathematical Problems
 
 ## Overview
-Use `CodeInterpreter` to solve MATH problems randomly selected from the level5 level of the Math dataset
+Use `CodeInterpreter` to solve Mathematical problems randomly selected from the level5 level of the Math dataset.
 ## Example : 
 
 ### Problem
