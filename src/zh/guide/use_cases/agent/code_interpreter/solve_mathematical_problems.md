@@ -84,5 +84,5 @@ students_two_teams = (math_team + basketball_team + soccer_team) - total_student
 students_two_teams
 ```
 ### 运行结果
-`CodeInterpreter`所生成的代码完全遵循规划好的task并且能成功运行，并最终计算出正确答案为：**14**
+`CodeInterpreter`所生成的代码完全遵循规划好的`task`并且能成功运行，并最终计算出正确答案为：**14**
 
