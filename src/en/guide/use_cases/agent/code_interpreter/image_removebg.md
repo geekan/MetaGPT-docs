@@ -29,7 +29,7 @@ Here is the input image of a dog and the image of the dog with the background re
 ![dog.JPEG](../../../../../public/image/guide/use_cases/CodeInterpreter/dog.JPEG) ![dog_rmg.png](../../../../../public/image/guide/use_cases/CodeInterpreter/dog_rmg.png)
 <div align=center>
 <img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog.JPEG" width="360" height="210"> 
-dog.JPEG>
+<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog_rmg.png" width="360" height="210"> 
 </div>
 
 
