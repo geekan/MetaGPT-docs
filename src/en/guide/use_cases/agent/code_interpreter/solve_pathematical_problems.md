@@ -46,7 +46,8 @@ if __name__ == "__main__":
 ]
 ```
 Since half the students are on the basketball team, it is easy to calculate the total number of basketball team members; Then the total number of math team and soccer team can be calculated according to the proportion of the number of math team, basketball team and soccer team. Finally, the answer is obtained according to the exclusion principle. It can be seen that the steps planned by `CodeInterpreter` are very reasonable and in line with human thinking of solving mathematical problems.
-'CodeInterpreter' writes the following code:
+
+`CodeInterpreter` writes the following code:
 ```python
 # ------------------------------task1------------------------------
 total_students = 60
