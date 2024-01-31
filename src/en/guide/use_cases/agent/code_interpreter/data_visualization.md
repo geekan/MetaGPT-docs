@@ -3,7 +3,7 @@
 Data visualization is the process of representing data in a visual form, such as charts, graphs, and other visual elements. It helps us to discover patterns, trends, and correlations in the data, as well as provide insights and understanding. Through data visualization, we can gain a better understanding of the meaning of the data, communicate and explain the results, and support data-driven decision making and communication.
 ## Example : 
 ### Task
-Use `codeInterpreter` to perform a simple data analysis and visualize the sklearn Iris dataset.
+Use `CodeInterpreter` to perform a simple data analysis and visualize the sklearn Iris dataset.
 ### Code
 ```python
 import asyncio
