@@ -6,7 +6,7 @@
 
 ### 问题
 At a school, all 60 students play on at least one of three teams: Basketball, Soccer, and Mathletics. 8 students play all three sports, half the students play basketball, and the ratio of the size of the math team to the size of the basketball team to the size of the soccer team is $4:3:2$. How many students at the school play on exactly two teams?
-### Code
+### 代码
 ```python
 import asyncio
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     }
 ]
 ```
-由于有一半的学生参加篮球队，因此很容易计算出篮球队的总人数；然后根据数学队、篮球队和足球队的人数比例能够计算出数学队和足球队的总人数；最后根据容斥原理来得到答案。可以看出CodeInterpreter规划的步骤非常合理且符合人类解数学题的思维。
+由于有一半的学生参加篮球队，因此很容易计算出篮球队的总人数；然后根据数学队、篮球队和足球队的人数比例能够计算出数学队和足球队的总人数；最后根据容斥原理来得到答案。可以看出`CodeInterpreter`规划的步骤非常合理且符合人类解数学题的思维。
 
 `CodeInterpreter` 写的代码如下:
 ```python
