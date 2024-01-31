@@ -314,7 +314,7 @@ Configuration:
 - selenium
   - browser.engine: Set to selenium
   - browser.browser: Supports chrome/firefox/edge/ie; defaults to chrome. More information: [Selenium BrowserTypes](https://www.selenium.dev/documentation/webdriver/browsers/)
-  
+
 ### Running Examples and Results
 
 The `metagpt.roles.researcher` module provides a command-line interface for executing the functionalities of the Researcher. An example is as follows:
