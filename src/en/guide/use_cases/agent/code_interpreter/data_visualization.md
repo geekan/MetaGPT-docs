@@ -79,5 +79,5 @@ During the completion of task 1, an error occurred on the first execution due to
 ### Output
 Below is the graph plotted by `CodeInterpreter` running the code. It is evident that the code executed successfully and generated a beautiful visualization table, which can help us analyze the features of the dataset more effectively.
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/out.png" width="1000" height="1000"> 
+<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/output.png" width="1000" height="1000"> 
 </div>
