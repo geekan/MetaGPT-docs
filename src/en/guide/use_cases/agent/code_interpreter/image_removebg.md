@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
 `CodeInterpreter` writes the following code:
 ```python
-# ----------------------------task1--------------------------------
+# -----------------------------task1-------------------------------
 !pip install rembg 
 # -----------------------------task2-------------------------------
 from rembg import remove
@@ -66,7 +66,7 @@ output_image = remove(input_image)
 with open(output_path, 'wb') as o:
     o.write(output_image)
 ```
-rembg is an open-source Python toolkit that enables automatic image background removal and can run on CPU. When we mention the use of this toolkit in the requirements, `CodeInterpreter` is capable of automatically installing and correctly utilizing this toolkit.(This is likely because LLM (Language Model) learned the usage of the "rembg" Python library during its training)
+rembg is an open-source Python toolkit that enables automatic image background removal and can run on CPU. When we mention the use of this toolkit in the requirements, `CodeInterpreter` is capable of automatically installing and correctly utilizing this toolkit.(This is likely because LLM learned the usage of the "rembg" Python library during its training)
 ### Output
 Here is the input image of a dog and the image of the dog with the background removed. It can be seen that the background removal effect is excellent, and `CodeInterpreter` can smoothly accomplish this problem.
 <div align=center>
