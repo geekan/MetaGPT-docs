@@ -68,7 +68,7 @@ with open(output_path, 'wb') as o:
 ```
 rembg是一个实现自动图像去背景的开源python工具包，且可以在CPU上运行。当我们在requirement中提示使用这个工具包时，`CodeInterpreter`能够自动安装这个工具包并正确使用(这很可能是因为LLM在训练时学会了'rembg'这个Python库的使用方法)
 ### 运行结果
-这是一张有狗的输入图片以及去除了背景的狗的图片。可以看到背景去除的效果非常好，`CodeInterpreter`可以顺利完成这个问题。
+这是一张有狗的输入图片以及去除了背景的狗的图片。可以看到背景去除的效果非常好，`CodeInterpreter`可以顺利完成这个任务。
 <div align=center>
 <img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog.JPEG" width="500" height="300"> 
 <img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog_rmg.png" width="500" height="300"> 
