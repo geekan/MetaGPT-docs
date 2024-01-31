@@ -23,7 +23,7 @@ if __name__ == "__main__":
     asyncio.run(main(requirement))
 ```
 ### Execution process
-`CodeInterpreter` proposes the following solution steps:
+1. `CodeInterpreter` proposes the following solution steps:
 ```json
 [
     {
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 ```
 `CodeInterpreter` is able to divide the problem into logical tasks, and here we can see that the first step is to install the Python library "rembg".
 
-`CodeInterpreter` writes the following code:
+2. `CodeInterpreter` writes the following code:
 ```python
 # -----------------------------task1-------------------------------
 !pip install rembg 
