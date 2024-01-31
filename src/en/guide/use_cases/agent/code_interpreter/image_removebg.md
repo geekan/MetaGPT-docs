@@ -28,8 +28,8 @@ if __name__ == "__main__":
 Here is the input image of a dog and the image of the dog with the background removed. It can be seen that the background removal effect is excellent, and CodeInterpreter can smoothly accomplish this task.
 ![dog.JPEG](../../../../../public/image/guide/use_cases/CodeInterpreter/dog.JPEG) ![dog_rmg.png](../../../../../public/image/guide/use_cases/CodeInterpreter/dog_rmg.png)
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog.JPEG" width="720" height="420"> 
-<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog_rmg.png" width="720" height="420"> 
+<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog.JPEG" width="600" height="300"> 
+<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/dog_rmg.png" width="600" height="300"> 
 </div>
 
 
