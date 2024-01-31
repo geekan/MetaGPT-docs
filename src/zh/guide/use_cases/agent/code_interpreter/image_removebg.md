@@ -43,7 +43,7 @@ if __name__ == "__main__":
     }
 ]
 ```
-`CodeInterpreter`能够根据问题划分为合理的task，这里可以看到第一步便是安装rembg这个python库
+`CodeInterpreter`能够根据问题划分为合理的`task`，这里可以看到第一步便是安装rembg库。
 
 2. `CodeInterpreter` 写的代码如下:
 ```python
@@ -66,7 +66,7 @@ output_image = remove(input_image)
 with open(output_path, 'wb') as o:
     o.write(output_image)
 ```
-rembg是一个实现自动图像去背景的开源python工具包，且可以在CPU上运行。当我们在requirement中提示使用这个工具包时，`CodeInterpreter`能够自动安装这个工具包并正确使用(这很可能是因为LLM在训练时学会了'rembg'这个Python库的使用方法)
+`rembg`是一个实现自动图像去背景的开源python工具包，且可以在CPU上运行。当我们在requirement中提示使用这个工具包时，`CodeInterpreter`能够自动安装这个工具包并正确使用(这很可能是因为LLM在训练时学会了'rembg'这个Python库的使用方法)
 ### 运行结果
 这是一张有狗的输入图片以及去除了背景的狗的图片。可以看到背景去除的效果非常好，`CodeInterpreter`可以顺利完成这个任务。
 <div align=center>
