@@ -45,7 +45,7 @@ if __name__ == "__main__":
 ```
 `CodeInterpreter`能够根据问题划分为合理的task，这里可以看到第一步便是安装rembg这个python库
 
-2. `CodeInterpreter` writes the following code:
+2. `CodeInterpreter` 写的代码如下:
 ```python
 # -----------------------------task1-------------------------------
 !pip install rembg 
