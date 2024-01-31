@@ -3,7 +3,7 @@
 数据可视化是通过图表、图形和其他视觉元素将数据转化为可理解和易于分析的形式。它帮助我们发现数据中的模式、趋势和关联，以及提供洞察力和见解。通过数据可视化，我们可以更好地理解数据的含义，传达和解释数据的结果，并支持数据驱动的决策和沟通。
 ## 例子 
 ### 任务
-使用`CodeInterpreter`对sklearn Iris dataset进行简单的数据分析并绘制可视化图表。
+使用`CodeInterpreter`对sklearn Iris数据集进行简单的数据分析并绘制可视化图表。
 ### 代码
 ```python
 import asyncio
@@ -75,9 +75,9 @@ sns.set(style='whitegrid', context='notebook')
 iris_pairplot = sns.pairplot(iris_df, hue='species', height=2.5)
 plt.show()
 ```
-在完成`task1`时，由于环境中没有安装`scikit-learn`导致第一次执行报错，但`CodeInterpreter`可以分析并通过安装`scikit-learn`来解决这个问题。在`task3`中`CodeInterpreter`使用`seaborn`的`pairplot`函数绘制一个散点图矩阵，用于可视化数据集中不同特征之间的关系，并通过颜色区分不同种类的数据点。最后使用`plt.show()`将图形显示出来。
+在完成`task1`时，由于环境中没有安装`scikit-learn`导致第一次执行报错，但`CodeInterpreter`可以分析并通过安装`scikit-learn`来解决这个问题。在`task3`中`CodeInterpreter`使用`seaborn`的`pairplot`函数绘制一个散点图矩阵，用于可视化数据集中不同特征之间的关系，并通过颜色区分不同种类的数据点，最后使用`plt.show()`将图表显示出来。
 ### 运行结果
-下面是`CodeInterpreter`运行代码绘制出的图，可以看出代码成功执行并绘制了精美的可视化表格，可以帮助我们更好地对数据集特征进行分析。
+下面是`CodeInterpreter`运行代码绘制出的图，可以看出代码成功执行并绘制了精美的可视化图表，帮助我们更好地对数据集特征进行分析。
 <div align=center>
 <img src="../../../../../public/image/guide/use_cases/CodeInterpreter/output.png" width="1000" height="1000"> 
 </div>
