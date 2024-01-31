@@ -20,7 +20,7 @@ if __name__ == "__main__":
     asyncio.run(main(requirement))
 ```
 ### Execution process
-1. `CodeInterpreter` proposes the following solution steps:
+1. `CodeInterpreter` proposes the following solution tasks:
 ```json
 [
     {
