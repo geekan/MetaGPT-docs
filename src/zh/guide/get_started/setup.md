@@ -104,8 +104,8 @@ browser:
 ### Azure TTS
 
 ```yaml
-AZURE_TTS_SUBSCRIPTION_KEY: 'YOUR_API_KEY'
-AZURE_TTS_REGION: 'eastus'
+azure_tts_subscription_key: 'YOUR_API_KEY'
+azure_tts_region: 'eastus'
 ```
 
 ### Mermaid
