@@ -16,9 +16,9 @@ Our vision is to [extend human life](https://github.com/geekan/HowToLiveLonger) 
     2. Tutorial: [MetaGPT: Deploy POWERFUL Autonomous Ai Agents BETTER Than SUPERAGI!](https://www.youtube.com/watch?v=q16Gi9pTG_M&t=659s)
     3. Author's thoughts video(EN): [MetaGPT Matthew Berman](https://youtu.be/uT75J_KG_aY?si=EgbfQNAwD8F5Y1Ak)
 4.  CN
-    1. Demo Video: [MetaGPT：一行代码搭建你的虚拟公司_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1NP411C7GW/?spm_id_from=333.999.0.0&vd_source=735773c218b47da1b4bd1b98a33c5c77)
+    1. Demo Video: [MetaGPT：一行代码搭建你的虚拟公司\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1NP411C7GW/?spm_id_from=333.999.0.0&vd_source=735773c218b47da1b4bd1b98a33c5c77)
     1. Tutorial: [一个提示词写游戏 Flappy bird, 比AutoGPT强10倍的MetaGPT，最接近AGI的AI项目](https://youtu.be/Bp95b8yIH5c)
-    2. Author's thoughts video(CN): [MetaGPT作者深度解析直播回放_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Ru411V7XL/?spm_id_from=333.337.search-card.all.click)
+    1. Author's thoughts video(CN): [MetaGPT作者深度解析直播回放\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1Ru411V7XL/?spm_id_from=333.337.search-card.all.click)
 
 ### How to become a contributor?
 
@@ -58,36 +58,36 @@ MetaGPT Community - The position of Chief Evangelist rotates on a monthly basis.
     1.  Did you use Chi or a similar service? These services are prone to errors, and it seems that the error rate is higher when consuming 3.5k-4k tokens in GPT-4
 9.  What does Max token mean?
     1.  It's a configuration for OpenAI's maximum response length. If the response exceeds the max token, it will be truncated.
-10.  How to change the investment amount?
-    1.  You can view all commands by typing `metagpt --help`
-11.  Which version of Python is more stable?
-    1.  python3.9 / python3.10
-12.  Can't use GPT-4, getting the error "The model gpt-4 does not exist."
-    1.  OpenAI's official requirement: You can use GPT-4 only after spending $1 on OpenAI.
-    1.  Tip: Run some data with gpt-3.5-turbo (consume the free quota and $1), and then you should be able to use gpt-4.
-13.  Can games whose code has never been seen before be written?
-    1.  Refer to the README. The recommendation system of Toutiao is one of the most complex systems in the world currently. Although it's not on GitHub, many discussions about it exist online. If it can visualize these, it suggests it can also summarize these discussions and convert them into code. The prompt would be something like "write a recommendation system similar to Toutiao". Note: this was approached in earlier versions of the software. The SOP of those versions was different; the current one adopts Elon Musk's five-step work method, emphasizing trimming down requirements as much as possible.
-14.  Under what circumstances would there typically be errors?
-    1.  More than 500 lines of code: some function implementations may be left blank.
-    2.  When using a database, it often gets the implementation wrong — since the SQL database initialization process is usually not in the code.
-    3.  With more lines of code, there's a higher chance of false impressions, leading to calls to non-existent APIs.
-15.  An error occurred during installation: "Another program is using this file...egg".
-    1.  Delete the file and try again.
-    2.  Or manually execute`pip install -r requirements.txt`
-16.  The origin of the name MetaGPT？
-    1.  The name was derived after iterating with GPT-4 over a dozen rounds. GPT-4 scored and suggested it.
-17.  openai.error.RateLimitError: You exceeded your current quota, please check your plan and billing details
-    1.  If you haven't exhausted your free quota, set RPM to 3 or lower in the settings.
-    2.  If your free quota is used up, consider adding funds to your account.
-18.  What does "borg" mean in n_borg?
-    1.  [Wikipedia borg meaning ](https://en.wikipedia.org/wiki/Borg)
-    2.  The Borg civilization operates based on a hive or collective mentality, known as "the Collective." Every Borg individual is connected to the collective via a sophisticated subspace network, ensuring continuous oversight and guidance for every member. This collective consciousness allows them to not only "share the same thoughts" but also to adapt swiftly to new strategies. While individual members of the collective rarely communicate, the collective "voice" sometimes transmits aboard ships.
-19.  How to use the Claude API？
-    1.  The full implementation of the Claude API is not provided in the current code.
-    1.  You can use the Claude API through third-party API conversion projects like: https://github.com/jtsang4/claude-to-chatgpt
-20.  Is Llama2 supported？
-    1.  On the day Llama2 was released, some of the community members began experiments and found that output can be generated based on MetaGPT's structure. However, Llama2's context is too short to generate a complete project. Before regularly using Llama2, it's necessary to expand the context window to at least 8k. If anyone has good recommendations for expansion models or methods, please leave a comment.
-21.  `mermaid-cli getElementsByTagName SyntaxError: Unexpected token '.'`
-    1.  Upgrade node to version 14.x or above:
-        1.  `npm install -g n`
-        2.  `n stable` to install the stable version of node（v18.x）
+10. How to change the investment amount?
+11. You can view all commands by typing `metagpt --help`
+12. Which version of Python is more stable?
+13. python3.9 / python3.10
+14. Can't use GPT-4, getting the error "The model gpt-4 does not exist."
+15. OpenAI's official requirement: You can use GPT-4 only after spending $1 on OpenAI.
+16. Tip: Run some data with gpt-3.5-turbo (consume the free quota and $1), and then you should be able to use gpt-4.
+17. Can games whose code has never been seen before be written?
+18. Refer to the README. The recommendation system of Toutiao is one of the most complex systems in the world currently. Although it's not on GitHub, many discussions about it exist online. If it can visualize these, it suggests it can also summarize these discussions and convert them into code. The prompt would be something like "write a recommendation system similar to Toutiao". Note: this was approached in earlier versions of the software. The SOP of those versions was different; the current one adopts Elon Musk's five-step work method, emphasizing trimming down requirements as much as possible.
+19. Under what circumstances would there typically be errors?
+20. More than 500 lines of code: some function implementations may be left blank.
+21. When using a database, it often gets the implementation wrong — since the SQL database initialization process is usually not in the code.
+22. With more lines of code, there's a higher chance of false impressions, leading to calls to non-existent APIs.
+23. An error occurred during installation: "Another program is using this file...egg".
+24. Delete the file and try again.
+25. Or manually execute`pip install -r requirements.txt`
+26. The origin of the name MetaGPT？
+27. The name was derived after iterating with GPT-4 over a dozen rounds. GPT-4 scored and suggested it.
+28. openai.error.RateLimitError: You exceeded your current quota, please check your plan and billing details
+29. If you haven't exhausted your free quota, set RPM to 3 or lower in the settings.
+30. If your free quota is used up, consider adding funds to your account.
+31. What does "borg" mean in n_borg?
+32. [Wikipedia borg meaning ](https://en.wikipedia.org/wiki/Borg)
+33. The Borg civilization operates based on a hive or collective mentality, known as "the Collective." Every Borg individual is connected to the collective via a sophisticated subspace network, ensuring continuous oversight and guidance for every member. This collective consciousness allows them to not only "share the same thoughts" but also to adapt swiftly to new strategies. While individual members of the collective rarely communicate, the collective "voice" sometimes transmits aboard ships.
+34. How to use the Claude API？
+35. The full implementation of the Claude API is not provided in the current code.
+36. You can use the Claude API through third-party API conversion projects like: https://github.com/jtsang4/claude-to-chatgpt
+37. Is Llama2 supported？
+38. On the day Llama2 was released, some of the community members began experiments and found that output can be generated based on MetaGPT's structure. However, Llama2's context is too short to generate a complete project. Before regularly using Llama2, it's necessary to expand the context window to at least 8k. If anyone has good recommendations for expansion models or methods, please leave a comment.
+39. `mermaid-cli getElementsByTagName SyntaxError: Unexpected token '.'`
+40. Upgrade node to version 14.x or above:
+    1.  `npm install -g n`
+    2.  `n stable` to install the stable version of node（v18.x）
