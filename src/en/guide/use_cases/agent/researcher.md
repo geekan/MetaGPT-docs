@@ -310,10 +310,10 @@ Configuration:
 
 - playwright
   - browser.engine: Set to playwright
-  - browser.driver: Supports chromium/firefox/webkit; defaults to chromium. More information: [Playwright BrowserType](https://playwright.dev/python/docs/api/class-browsertype)
+  - browser.browser_type: Supports chromium/firefox/webkit; defaults to chromium. More information: [Playwright BrowserType](https://playwright.dev/python/docs/api/class-browsertype)
 - selenium
   - browser.engine: Set to selenium
-  - browser.browser: Supports chrome/firefox/edge/ie; defaults to chrome. More information: [Selenium BrowserTypes](https://www.selenium.dev/documentation/webdriver/browsers/)
+  - browser.browser_type: Supports chrome/firefox/edge/ie; defaults to chrome. More information: [Selenium BrowserTypes](https://www.selenium.dev/documentation/webdriver/browsers/)
 
 ### Running Examples and Results
 

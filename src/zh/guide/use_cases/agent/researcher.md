@@ -307,10 +307,10 @@ class Researcher(Role):
 
 - playwright
   - browser.engine: 设置为playwright
-  - browser.driver: 支持chromium/firefox/webkit，默认chromium，更多信息参考https://playwright.dev/python/docs/api/class-browsertype
+  - browser.browser_type: 支持chromium/firefox/webkit，默认chromium，更多信息参考https://playwright.dev/python/docs/api/class-browsertype
 - selenium
   - browser.engine: 设置为selenium
-  - browser.browser: 支持chrome/firefox/edge/ie, 默认chrome，更多信息参考https://www.selenium.dev/documentation/webdriver/browsers/
+  - browser.browser_type: 支持chrome/firefox/edge/ie, 默认chrome，更多信息参考https://www.selenium.dev/documentation/webdriver/browsers/
 
 ### 运行示例与结果
 

@@ -95,10 +95,10 @@ search:
 
 ```yaml
 browser:
-  engine: 'playwright' # playwright/selenium/custom
-  browser: 'chrome' # chrome/firefox/edge/ie, check https://www.selenium.dev/documentation/webdriver/browsers/
-  driver: 'chromium' # chromium/firefox/webkit, check https://playwright.dev/python/docs/api/class-browsertype
-  path: 'YOUR_DRIVER_PATH' # only for custom, such as /usr/bin/google-chrome-stable
+  engine: 'playwright' # playwright/selenium
+  # for playwright engine, please check https://playwright.dev/python/docs/api/class-browsertype
+  # for selenium engine, please check https://www.selenium.dev/documentation/webdriver/browsers
+  browser_type: 'chrome' # playwright: chromium/firefox/webkit; selenium: chrome/firefox/edge/ie
 ```
 
 ### Azure TTS
