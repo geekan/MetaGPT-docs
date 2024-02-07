@@ -10,22 +10,8 @@
 
 ### 代码
 
-```
-from metagpt.roles.ci.code_interpreter import code_interpreter
-
-
-async def main():
-    web_url = 'https://pytorch.org/'
-    prompt = f"""This is a URL of webpage: '{web_url}' .
-Firstly, utilize Selenium and WebDriver to render the webpage, ensuring the browser window is maximized for an optimal viewing experience. Secondly, convert image to a webpage including HTML, CSS and JS in one go. Finally, save webpage in a file. NOTE: All required dependencies and environments have been fully installed and configured."""
-
-    ci = code_interpreter(goal=prompt, use_tools=True)
-
-    await ci.run(prompt)
-
-if __name__ == '__main__':
-    import asyncio
-    asyncio.run(main())
+```bash
+python examples/ci/imitate_webpage.py
 ```
 
 ### 运行结果

@@ -12,12 +12,8 @@
 
 ### 代码
 
-```
-from metagpt.roles.code_interpreter import CodeInterpreter
-prompt = """Get data from `paperlist` table in https://papercopilot.com/statistics/iclr-statistics/iclr-2024-statistics/,
-            and save it to a csv file. paper title must include `multiagent` or `large language model`. *notice: print key data*"""
-ci = CodeInterpreter(goal=prompt, use_tools=True)
-await ci.run(prompt)
+```bash
+python examples/ci/scrape_webpage.py
 ```
 
 ### 运行结果
