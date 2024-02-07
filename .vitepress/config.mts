@@ -251,11 +251,19 @@ export default defineConfig({
                         items: [
                           {
                             text: 'Data analysis and visualization',
-                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
+                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
                           },
                           {
                             text: 'Machine learning modeling',
                             link: 'use_cases/agent/code_interpreter/ml_modeling.md',
+                          },
+                          {
+                            text: 'Removing Image's Background',
+                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
+                          },
+                          {
+                            text: 'Solve Pathematical Problems',
+                            link: 'use_cases/agent/code_interpreter/solve_pathematical_problems.md',
                           },
                         ],
                       },
@@ -459,11 +467,19 @@ export default defineConfig({
                         items: [
                           {
                             text: '数据分析和可视化',
-                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
+                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
                           },
                           {
                             text: '机器学习建模',
                             link: 'use_cases/agent/code_interpreter/ml_modeling.md',
+                          },
+                          {
+                            text: '图像去背景',
+                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
+                          },
+                          {
+                            text: '解数学问题',
+                            link: 'use_cases/agent/code_interpreter/solve_pathematical_problems.md',
                           },
                         ],
                       },
