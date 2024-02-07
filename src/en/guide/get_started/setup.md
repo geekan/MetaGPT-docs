@@ -91,7 +91,7 @@ use `endpoint`
 ```yaml
 llm:
    api_type: qianfan
-   access_key: 'YOUR_API_KEY'
+   access_key: 'YOUR_ACCESS_KEY'
    secret_key: 'YOUR_SECRET_KEY'
    endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
 ```
@@ -102,7 +102,7 @@ use `model`
 ```yaml
 llm:
    api_type: qianfan
-   api_key: 'YOUR_ACCESS_KEY'
+   api_key: 'YOUR_API_KEY'
    secret_key: 'YOUR_SECRET_KEY'
    model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
 ```
