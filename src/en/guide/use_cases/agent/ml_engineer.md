@@ -11,7 +11,7 @@ Use `MLEngineer` to model and predict the [ICR](https://www.kaggle.com/competiti
 ```python
 import asyncio
 
-from metagpt.roles.ml_engineer import MLEngineer
+from metagpt.roles.ci.ml_engineer import MLEngineer
 
 
 async def main(requirement: str, auto_run: bool = True, use_tools: bool = True):
@@ -20,9 +20,9 @@ async def main(requirement: str, auto_run: bool = True, use_tools: bool = True):
 
 
 if __name__ == "__main__":
-    data_path = "your_path_to_icr/icr-identify-age-related-conditions"  # 替换 'your_path_to_icr' 为实际数据存放的路径
-    train_path = f"{data_path}/your_train_data.csv"  # 替换 'your_train_data.csv' 为你的训练数据文件名
-    eval_path = f"{data_path}/your_eval_data.csv"  # 替换 'your_eval_data.csv' 为你的评估数据文件名
+    data_path = "your_path_to_icr/icr-identify-age-related-conditions"  # Replace 'your_path_to_icr' with the actual path where your data is stored
+    train_path = f"{data_path}/your_train_data.csv"  # Replace 'your_train_data.csv' with the name of your training data file
+    eval_path = f"{data_path}/your_eval_data.csv"  # Replace 'your_eval_data.csv' with the name of your evaluation data file
     requirement = f"This is a medical dataset with over fifty anonymized health characteristics linked to three age-related conditions. Your goal is to predict whether a subject has or has not been diagnosed with one of these conditions.The target column is Class. Perform data analysis, data preprocessing, feature engineering, and modeling to predict the target. Report f1 score on the eval data. Train data path: {train_path}, eval data path:{eval_path}."
     asyncio.run(main(requirement))
 ```
@@ -98,15 +98,11 @@ copy_train_data = cat_count.transform(copy_train_data)
 copy_eval_data = cat_count.transform(copy_eval_data)
 ```
 
-The complete code can be found in [ml_batch_use_of_tools.ipynb](./code/ml_batch_use_of_tools.ipynb)
-
 ## Mechanism Explanation
 
 ### Tool Creation
 
 In the `metagpt.tools.libs` directory, we have predefined two types of tools: `data_preprocess` and `feature_engineering`. Below, taking data_preprocess tasks as an example, we provide a complete guide for creating a simple tool, including how to define and register the tool.
-
-#### Step 1: Creation and Registration of Tools
 
 - First, create a file named `data_preprocess.py` in the `metagpt.tools.libs` directory.
 - In this file, you will define your data preprocessing tool and complete the registration of the tool using the `@register_tool` decorator. By setting the `tool_type` parameter, you can explicitly specify the category of the tool.
@@ -198,6 +194,8 @@ After registering the tool, the system will automatically create a corresponding
 
 In this subdirectory, the system will generate a schema file for each tool (such as `FillMissingValue.yml`), detailing the structure, methods, and parameter types of the tool class, ensuring that the LLM can accurately understand and utilize the tool.
 
+Additionally, saving such schema files also facilitates users in verifying their correctness and completeness.
+
 **Schema File Example**:
 
 ```yaml
@@ -263,18 +261,6 @@ FillMissingValue:
           type: DataFrame
           description: 'The transformed DataFrame.'
 ```
-
-#### Step 2: (Optional) Customizing the Schema File
-
-If you wish to customize the schema file, you can do so in the following two ways:
-
-1. Specify the `schema_path` when using the `@register_tool` decorator, for example:
-   ```python
-   @register_tool(tool_type="data_preprocess", schema_path="/data/FillMissingValue.yml")
-   class FillMissingValue(MLProcess):
-       ...
-   ```
-2. Directly create a custom schema file in the `metagpt.tools.schemas` directory, like `data_preprocess/FillMissingValue.yml`, and define your schema content in this file.
 
 ### Automatic Tool Registration and Task Allocation
 

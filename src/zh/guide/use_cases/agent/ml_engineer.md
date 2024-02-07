@@ -11,7 +11,7 @@
 ```python
 import asyncio
 
-from metagpt.roles.ml_engineer import MLEngineer
+from metagpt.roles.ci.ml_engineer import MLEngineer
 
 
 async def main(requirement: str, auto_run: bool = True, use_tools: bool = True):
@@ -98,15 +98,11 @@ copy_train_data = cat_count.transform(copy_train_data)
 copy_eval_data = cat_count.transform(copy_eval_data)
 ```
 
-完整的代码可见 [ml_batch_use_of_tools.ipynb](../../../../en/guide/use_cases/agent/code/ml_batch_use_of_tools.ipynb)。
-
 ## 机制解释
 
 ### 工具创建
 
 在 `metagpt.tools.libs` 目录下，我们预先定义了两类工具：数据预处理（`data_preprocess`）和特征工程（`feature_engineering`）。下面以数据预处理任务为例，给出一个简单工具的完整创建指引，包括工具的定义和注册方法。
-
-#### 步骤1：创建和注册工具
 
 - 首先，在 `metagpt.tools.libs` 目录下创建文件 `data_preprocess.py`。
 - 在该文件中，您将定义您的数据预处理工具，并利用 `@register_tool` 装饰器完成工具的注册。通过设置 `tool_type` 参数，明确指定工具的类别。
@@ -198,6 +194,8 @@ class FillMissingValue(MLProcess):
 
 在该子目录中，系统会为每个工具生成相应的 schema 文件（如 `FillMissingValue.yml`），详细描述工具类的结构、方法以及参数类型，确保LLM能够准确理解并使用该工具。
 
+同时，通过保存这样的 schema 文件，也便于用户验证其正确性和完整性。
+
 **Schema 文件示例**：
 
 ```yaml
@@ -263,18 +261,6 @@ FillMissingValue:
           type: DataFrame
           description: 'The transformed DataFrame.'
 ```
-
-#### 步骤 2: （可选）自定义 Schema 文件
-
-如果您希望自定义 schema 文件，可以通过以下两种方式：
-
-1. 在使用 `@register_tool` 装饰器时指定 `schema_path`，如：
-   ```python
-   @register_tool(tool_type="data_preprocess", schema_path="/data/FillMissingValue.yml")
-   class FillMissingValue(MLProcess):
-       ...
-   ```
-2. 在 `metagpt.tools.schemas` 目录下直接创建自定义的 schema 文件，如 `data_preprocess/FillMissingValue.yml`，并在该文件中定义您的 schema 内容。
 
 ### 自动工具注册与任务分配
 
