@@ -35,7 +35,7 @@ The data preprocessing code (which includes the use of 3 tools: `FillMissingValu
 # Load the evaluation dataset
 import pandas as pd
 
-eval_data_path = '/Users/lidanyang/deepw/code/ml_engineer/dev/data_agents_opt/data/icr-identify-age-related-conditions/split_eval.csv'
+eval_data_path = '/data/icr-identify-age-related-conditions/split_eval.csv'
 eval_data = pd.read_csv(eval_data_path)
 
 # Make a copy of the datasets
@@ -116,29 +116,8 @@ from sklearn.impute import SimpleImputer
 from metagpt.tools.tool_registry import register_tool
 
 
-class MLProcess(object):
-    def fit(self, df):
-        raise NotImplementedError
-
-    def transform(self, df):
-        raise NotImplementedError
-
-    def fit_transform(self, df) -> pd.DataFrame:
-        """
-        Fit and transform the input DataFrame.
-
-        Args:
-            df (pd.DataFrame): The input DataFrame.
-
-        Returns:
-            pd.DataFrame: The transformed DataFrame.
-        """
-        self.fit(df)
-        return self.transform(df)
-
-
 @register_tool(tool_type="data_preprocess")
-class FillMissingValue(MLProcess):
+class FillMissingValue:
     """
     Completing missing values with simple strategies.
     """
@@ -186,9 +165,22 @@ class FillMissingValue(MLProcess):
         new_df = df.copy()
         new_df[self.features] = self.si.transform(new_df[self.features])
         return new_df
+
+    def fit_transform(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Fit and transform the input DataFrame.
+
+        Args:
+            df (pd.DataFrame): The input DataFrame.
+
+        Returns:
+            pd.DataFrame: The transformed DataFrame.
+        """
+        self.fit(df)
+        return self.transform(df)
 ```
 
-In the example above, `MLProcess` defines the base class for data preprocessing tools. The `FillMissingValue` class, inheriting from this base class, specifically implements the functionality for filling missing values and is registered as a data_preprocess tool using the `@register_tool` decorator.
+In the example above, the `FillMissingValue` class implements the functionality for filling missing values and is registered as a data_preprocess tool using the `@register_tool` decorator.
 
 After registering the tool, the system will automatically create a corresponding subdirectory in the `metagpt.tools.schemas` directory for your tool type (in this case, `data_preprocess`).
 

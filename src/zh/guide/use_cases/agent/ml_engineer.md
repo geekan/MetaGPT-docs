@@ -35,7 +35,7 @@ if __name__ == "__main__":
 # Load the evaluation dataset
 import pandas as pd
 
-eval_data_path = '/Users/lidanyang/deepw/code/ml_engineer/dev/data_agents_opt/data/icr-identify-age-related-conditions/split_eval.csv'
+eval_data_path = '/data/icr-identify-age-related-conditions/split_eval.csv'
 eval_data = pd.read_csv(eval_data_path)
 
 # Make a copy of the datasets
@@ -116,29 +116,8 @@ from sklearn.impute import SimpleImputer
 from metagpt.tools.tool_registry import register_tool
 
 
-class MLProcess(object):
-    def fit(self, df):
-        raise NotImplementedError
-
-    def transform(self, df):
-        raise NotImplementedError
-
-    def fit_transform(self, df) -> pd.DataFrame:
-        """
-        Fit and transform the input DataFrame.
-
-        Args:
-            df (pd.DataFrame): The input DataFrame.
-
-        Returns:
-            pd.DataFrame: The transformed DataFrame.
-        """
-        self.fit(df)
-        return self.transform(df)
-
-
 @register_tool(tool_type="data_preprocess")
-class FillMissingValue(MLProcess):
+class FillMissingValue:
     """
     Completing missing values with simple strategies.
     """
@@ -186,9 +165,22 @@ class FillMissingValue(MLProcess):
         new_df = df.copy()
         new_df[self.features] = self.si.transform(new_df[self.features])
         return new_df
+
+    def fit_transform(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Fit and transform the input DataFrame.
+
+        Args:
+            df (pd.DataFrame): The input DataFrame.
+
+        Returns:
+            pd.DataFrame: The transformed DataFrame.
+        """
+        self.fit(df)
+        return self.transform(df)
 ```
 
-在上述示例中，`MLProcess` 定义了数据预处理工具的基类。继承自此基类的 `FillMissingValue` 类具体实现了缺失值的填充功能，并通过 `@register_tool` 装饰器注册为数据预处理工具。
+在上述示例中，`FillMissingValue` 类具体实现了缺失值的填充功能，并通过 `@register_tool` 装饰器注册为数据预处理工具。
 
 注册工具后，系统将自动在 `metagpt.tools.schemas` 目录下为您的工具类型（此例中为 `data_preprocess`）创建相应的子目录。
 
