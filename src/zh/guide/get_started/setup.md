@@ -71,6 +71,65 @@ llm:
   model: 'YOUR_MODEL_NAME'
 ```
 
+### 百度 千帆 API
+
+支持`ERNIE-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`
+
+#### 使用安全认证AK/SK鉴权
+
+使用`model`进行调用
+
+```yaml
+llm:
+  api_type: qianfan
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+```
+
+使用`endpoint`进行调用
+
+```yaml
+llm:
+  api_type: qianfan
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+```
+
+#### 使用应用AK/SK鉴权（不推荐）
+
+使用`model`进行调用
+
+```yaml
+llm:
+  api_type: qianfan
+  api_key: 'YOUR_API_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+```
+
+使用`endpoint`进行调用
+
+```yaml
+llm:
+  api_type: qianfan
+  api_key: 'YOUR_API_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+```
+
+### 阿里云 灵积 DashScope API
+
+支持`qwen-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: dashscope
+  api_key: 'YOUR_API_KEY'
+  model: 'YOUR_ENDPOINT_NAME like qwen-max'
+```
+
 ## 配置工具（可选）
 
 除了让智能体能调用大模型，我们时常期望智能体能调用工具。我们需要配置好所需工具以完成准备工作。

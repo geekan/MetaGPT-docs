@@ -75,6 +75,66 @@ llm:
   model: 'YOUR_MODEL_NAME'
 ```
 
+### Baidu QianFan API
+
+support `ERNIE-*` models and some popular open-source models, see `metagpt/utils/token_counter.py`
+
+#### Use security authentication AK/SK to authenticate
+
+use `model`
+
+```yaml
+llm:
+  api_type: qianfan
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+```
+
+use `endpoint`
+
+```yaml
+llm:
+  api_type: qianfan
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+```
+
+#### Use application AK/SK to authenticate(Not Recommended)
+
+use `model`
+
+```yaml
+llm:
+  api_type: qianfan
+  api_key: 'YOUR_API_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+```
+
+use `endpoint`  
+for parts of self-deployed models
+
+```yaml
+llm:
+  api_type: qianfan
+  api_key: 'YOUR_API_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+```
+
+### Aliyun DashScope API
+
+support `qwen-*` models and some popular open-source models, see `metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: dashscope
+  api_key: 'YOUR_API_KEY'
+  model: 'YOUR_ENDPOINT_NAME like qwen-max'
+```
+
 ## Setup for tools (Optional)
 
 In addition to LLM, we often want agents to use tools. We cover their setup in this section.
