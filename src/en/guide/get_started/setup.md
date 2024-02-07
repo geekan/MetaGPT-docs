@@ -76,6 +76,7 @@ llm:
 ```
 
 ### Baidu QianFan API
+support `ERNIE-*` models and some popular open-source models, see `metagpt/utils/token_counter.py`  
 
 #### Use security authentication AK/SK to authenticate
 
@@ -120,6 +121,16 @@ llm:
   api_key: 'YOUR_API_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+```
+
+### Aliyun DashScope API
+support `qwen-*` models and some popular open-source models, see `metagpt/utils/token_counter.py`  
+
+```yaml
+llm:
+   api_type: dashscope
+   api_key: 'YOUR_API_KEY'
+   model: 'YOUR_ENDPOINT_NAME like qwen-max'
 ```
 
 ## Setup for tools (Optional)
