@@ -72,7 +72,8 @@ llm:
 ```
 
 ### 百度 千帆 API
-支持`ERNIE-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`   
+
+支持`ERNIE-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`
 
 #### 使用安全认证AK/SK鉴权
 
@@ -119,13 +120,14 @@ llm:
 ```
 
 ### 阿里云 灵积 DashScope API
-支持`qwen-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`   
+
+支持`qwen-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
-   api_type: dashscope
-   api_key: 'YOUR_API_KEY'
-   model: 'YOUR_ENDPOINT_NAME like qwen-max'
+  api_type: dashscope
+  api_key: 'YOUR_API_KEY'
+  model: 'YOUR_ENDPOINT_NAME like qwen-max'
 ```
 
 ## 配置工具（可选）
