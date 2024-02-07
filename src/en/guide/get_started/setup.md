@@ -76,48 +76,51 @@ llm:
 ```
 
 ### Baidu QianFan API
+
 #### Use security authentication AK/SK to authenticate
+
 use `model`
 
 ```yaml
 llm:
-   api_type: qianfan
-   access_key: 'YOUR_ACCESS_KEY'
-   secret_key: 'YOUR_SECRET_KEY'
-   model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+  api_type: qianfan
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
 ```
 
 use `endpoint`
+
 ```yaml
 llm:
-   api_type: qianfan
-   access_key: 'YOUR_ACCESS_KEY'
-   secret_key: 'YOUR_SECRET_KEY'
-   endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+  api_type: qianfan
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
 ```
 
 #### Use application AK/SK to authenticate(Not Recommended)
+
 use `model`
 
 ```yaml
 llm:
-   api_type: qianfan
-   api_key: 'YOUR_API_KEY'
-   secret_key: 'YOUR_SECRET_KEY'
-   model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+  api_type: qianfan
+  api_key: 'YOUR_API_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
 ```
 
 use `endpoint`  
-for parts of self-deployed models  
+for parts of self-deployed models
 
 ```yaml
 llm:
-   api_type: qianfan
-   api_key: 'YOUR_API_KEY'
-   secret_key: 'YOUR_SECRET_KEY'
-   endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+  api_type: qianfan
+  api_key: 'YOUR_API_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
 ```
-
 
 ## Setup for tools (Optional)
 
