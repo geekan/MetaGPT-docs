@@ -258,12 +258,12 @@ export default defineConfig({
                             link: 'use_cases/agent/code_interpreter/ml_modeling.md',
                           },
                           {
-                            text: 'Removing Image's Background',
+                            text: 'Image Background Removal',
                             link: 'use_cases/agent/code_interpreter/image_removebg.md',
                           },
                           {
-                            text: 'Solve Pathematical Problems',
-                            link: 'use_cases/agent/code_interpreter/solve_pathematical_problems.md',
+                            text: 'Solve Mathematical Problems',
+                            link: 'use_cases/agent/code_interpreter/solve_mathematical_problems.md',
                           },
                         ],
                       },
@@ -442,6 +442,48 @@ export default defineConfig({
                     text: '智能体',
                     items: [
                       {
+                        text: '代码解释器',
+                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        items: [
+                          {
+                            text: '数据分析和可视化',
+                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
+                          },
+                          {
+                            text: '机器学习建模',
+                            link: 'use_cases/agent/code_interpreter/machine_learning.md',
+                          },
+                          {
+                            text: '图像去背景',
+                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
+                          },
+                          {
+                            text: '解数学问题',
+                            link: 'use_cases/agent/code_interpreter/solve_mathematical_problems.md',
+                          },
+                          {
+                            text: '票据OCR',
+                            link: 'use_cases/agent/code_interpreter/ocr_receipt.md',
+                          },
+                          {
+                            text: '工具使用：网页仿写',
+                            link: 'use_cases/agent/code_interpreter/imitate_webpage.md',
+                          },
+                          {
+                            text: '工具使用：网页爬取',
+                            link: 'use_cases/agent/code_interpreter/scrape_webpage.md',
+                          },
+                          {
+                            text: '工具使用：Text2Image',
+                            link: 'use_cases/agent/code_interpreter/text2image.md',
+                          },
+                          {
+                            text: '工具使用：邮件总结与回复',
+                            link: 'use_cases/agent/code_interpreter/email_reply.md',
+                          },
+                        ],
+                      },
+                      {
                         text: '调研员',
                         link: 'use_cases/agent/researcher.md',
                       },
@@ -460,28 +502,6 @@ export default defineConfig({
                       {
                         text: '票据助手',
                         link: 'use_cases/agent/receipt_assistant.md',
-                      },
-                      {
-                        text: '代码解释器',
-                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
-                        items: [
-                          {
-                            text: '数据分析和可视化',
-                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
-                          },
-                          {
-                            text: '机器学习建模',
-                            link: 'use_cases/agent/code_interpreter/ml_modeling.md',
-                          },
-                          {
-                            text: '图像去背景',
-                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
-                          },
-                          {
-                            text: '解数学问题',
-                            link: 'use_cases/agent/code_interpreter/solve_pathematical_problems.md',
-                          },
-                        ],
                       },
                     ],
                   },

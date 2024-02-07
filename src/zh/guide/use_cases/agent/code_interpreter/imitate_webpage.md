@@ -1,0 +1,43 @@
+# 工具使用：网页仿写
+
+## 概述
+
+## 示例：使用GPT-4V仿写网页
+
+### 任务
+
+给定一个网页的URL或图片，使用MetaGPT内部集成GPT-4 Vision的工具GPTvGenerator仿写出一个相似的网页
+
+### 代码
+
+```
+from metagpt.roles.ci.code_interpreter import code_interpreter
+
+
+async def main():
+    web_url = 'https://pytorch.org/'
+    prompt = f"""This is a URL of webpage: '{web_url}' .
+Firstly, utilize Selenium and WebDriver to render the webpage, ensuring the browser window is maximized for an optimal viewing experience. Secondly, convert image to a webpage including HTML, CSS and JS in one go. Finally, save webpage in a file. NOTE: All required dependencies and environments have been fully installed and configured."""
+
+    ci = code_interpreter(goal=prompt, use_tools=True)
+
+    await ci.run(prompt)
+
+if __name__ == '__main__':
+    import asyncio
+    asyncio.run(main())
+```
+
+### 运行结果
+
+原网页截图：
+<img src="../../../../../public/image/guide/use_cases/code_interpreter/ori_webpage.png">
+
+仿写后的网页：
+<img src="../../../../../public/image/guide/use_cases/code_interpreter/imitate1.png">
+<img src="../../../../../public/image/guide/use_cases/code_interpreter/imitate2.png">
+
+## 机制解释
+
+1. code_interpreter规划任务Plan时，生成了若干个任务，根据所有注册工具的docstring分配任务的工具类型。code_interpreter自动将生成网页的中间任务类型设置为"image2webpage"，在执行任务时将扫描是否有GPTvGenerator相关工具可用。
+2. 发现可用工具：['GPTvGenerator']，加载工具代码，根据当前需求使用generate_webpages方法生成相关的前端代码，并使用save_webpages方法保存。
