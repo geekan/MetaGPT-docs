@@ -227,7 +227,7 @@ export default defineConfig({
                     items: [
                       {
                         text: 'CodeInterpreter',
-                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        link: 'use_cases/agent/code_interpreter/ci_intro.md',
                         items: [
                           {
                             text: 'Data analysis and visualization',
@@ -463,7 +463,7 @@ export default defineConfig({
                     items: [
                       {
                         text: '代码解释器',
-                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        link: 'use_cases/agent/code_interpreter/ci_intro.md',
                         items: [
                           {
                             text: '数据分析和可视化',
