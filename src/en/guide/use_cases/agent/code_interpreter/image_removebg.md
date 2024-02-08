@@ -12,21 +12,8 @@ Use `CodeInterpreter` to remove background from a picture of a dog.
 
 ### Code
 
-```python
-import asyncio
-from metagpt.roles.code_interpreter import CodeInterpreter
-
-async def main(requirement: str = ""):
-    code_interpreter = CodeInterpreter(use_tools=False, goal=requirement)
-    await code_interpreter.run(requirement)
-
-if __name__ == "__main__":
-    image_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog.JPEG'
-    save_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog_rmg.png'
-    requirement = (
-        f"This is a image, you need to use python toolkit rembg to remove the background of the image and save the result. image path:{image_path}; save path:{save_path}."
-    )
-    asyncio.run(main(requirement))
+```bash
+python examples/ci/rm_image_background.py
 ```
 
 ### Output
@@ -62,8 +49,8 @@ if __name__ == "__main__":
 !pip install rembg
 # -----------------------------task2-------------------------------
 from rembg import remove
-input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty.JPEG'
-output_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty_rmg.png'
+input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog.jpg'
+output_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog_rmg.png'
 
 # Read the input image
 with open(input_path, 'rb') as i:
@@ -83,6 +70,6 @@ with open(output_path, 'wb') as o:
 Here is the input image of a dog and the image of the dog with the background removed. It can be seen that the background removal effect is excellent, and `CodeInterpreter` can smoothly accomplish this problem.
 
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog.JPEG" width="500" height="300"> 
+<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog.jpg" width="500" height="300"> 
 <img src="../../../../../public/image/guide/use_cases/code_interpreter/dog_rmg.png" width="500" height="300"> 
 </div>
