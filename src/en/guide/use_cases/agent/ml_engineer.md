@@ -27,7 +27,7 @@ if __name__ == "__main__":
     asyncio.run(main(requirement))
 ```
 
-### Running Result
+### Execution Result
 
 The data preprocessing code (which includes the use of 3 tools: `FillMissingValue`, `MinMaxScale`, and `LabelEncode`) is as follows:
 

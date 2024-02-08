@@ -4,7 +4,7 @@
 
 Image background removal is a technique used to separate the main objects from the background in an image. It finds applications in various fields such as image editing, person segmentation, product showcasing, and computer vision. By removing the background, it highlights the subject, enhances the visual appeal of the image, and provides a cleaner base for further processing and analysis.
 
-## Example :
+## Example
 
 ### Task
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     asyncio.run(main(requirement))
 ```
 
-### Execution process
+### Output
 
 1. `CodeInterpreter` proposes the following solution steps:
 
@@ -79,8 +79,6 @@ with open(output_path, 'wb') as o:
 ```
 
 `rembg` is an open-source Python toolkit that enables automatic image background removal and can run on CPU. When we mention the use of this toolkit in the requirements, `CodeInterpreter` is capable of automatically installing and correctly utilizing this toolkit.(This is likely because LLM learned the usage of the "rembg" Python library during its training)
-
-### Output
 
 Here is the input image of a dog and the image of the dog with the background removed. It can be seen that the background removal effect is excellent, and `CodeInterpreter` can smoothly accomplish this problem.
 
