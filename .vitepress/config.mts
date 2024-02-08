@@ -491,7 +491,7 @@ export default defineConfig({
                           },
                           {
                             text: '工具使用：网页爬取',
-                            link: 'use_cases/agent/code_interpreter/scrape_webpage.md',
+                            link: 'use_cases/agent/code_interpreter/crawl_webpage.md',
                           },
                           {
                             text: '工具使用：Text2Image',
