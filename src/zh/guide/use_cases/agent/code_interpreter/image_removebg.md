@@ -49,7 +49,7 @@ python examples/ci/rm_image_background.py
 !pip install rembg
 # -----------------------------task2-------------------------------
 from rembg import remove
-input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty.JPEG'
+input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty.jpg'
 output_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty_rmg.png'
 
 # Read the input image
@@ -70,6 +70,6 @@ with open(output_path, 'wb') as o:
 这是一张有狗的输入图片以及去除了背景的狗的图片。可以看到背景去除的效果非常好，`CodeInterpreter`可以顺利完成这个任务。
 
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog.JPEG" width="500" height="300"> 
+<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog.jpg" width="500" height="300"> 
 <img src="../../../../../public/image/guide/use_cases/code_interpreter/dog_rmg.png" width="500" height="300"> 
 </div>

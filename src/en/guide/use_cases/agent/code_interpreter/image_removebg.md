@@ -21,7 +21,7 @@ async def main(requirement: str = ""):
     await code_interpreter.run(requirement)
 
 if __name__ == "__main__":
-    image_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog.JPEG'
+    image_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog.jpg'
     save_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog_rmg.png'
     requirement = (
         f"This is a image, you need to use python toolkit rembg to remove the background of the image and save the result. image path:{image_path}; save path:{save_path}."
@@ -62,7 +62,7 @@ if __name__ == "__main__":
 !pip install rembg
 # -----------------------------task2-------------------------------
 from rembg import remove
-input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty.JPEG'
+input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty.jpg'
 output_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty_rmg.png'
 
 # Read the input image
@@ -83,6 +83,6 @@ with open(output_path, 'wb') as o:
 Here is the input image of a dog and the image of the dog with the background removed. It can be seen that the background removal effect is excellent, and `CodeInterpreter` can smoothly accomplish this problem.
 
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog.JPEG" width="500" height="300"> 
+<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog.jpg" width="500" height="300"> 
 <img src="../../../../../public/image/guide/use_cases/code_interpreter/dog_rmg.png" width="500" height="300"> 
 </div>
