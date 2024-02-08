@@ -13,7 +13,7 @@
 ### 代码
 
 ```bash
-python examples/ci/email_reply.py
+python examples/ci/email_summary.py
 ```
 
 ### 运行结果

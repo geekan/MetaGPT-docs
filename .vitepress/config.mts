@@ -479,7 +479,7 @@ export default defineConfig({
                           },
                           {
                             text: '工具使用：邮件总结与回复',
-                            link: 'use_cases/agent/code_interpreter/email_reply.md',
+                            link: 'use_cases/agent/code_interpreter/email_summary.md',
                           },
                         ],
                       },
