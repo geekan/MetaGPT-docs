@@ -1,8 +1,8 @@
 # Code Interpreter (CI)
 
-## What are CodeInterpreter
+## What is CodeInterpreter
 
-CodeInterpreter is an agent who solves problems through codes. It understands user requirements, makes plans, writes codes for execution, and uses tools if necessary. These capabilities enable it to tackle a wide range of scenarios, please check out the examples below.
+CodeInterpreter is an agent who solves problems through codes. It understands user requirements, makes plans, writes codes for execution, and uses tools if necessary. These capabilities enable it to tackle a wide range of scenarios. Please check out the examples below.
 
 ## Example List
 
