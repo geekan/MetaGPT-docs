@@ -2,6 +2,8 @@
 
 ## Overview
 
+Webpage imitation involves creating a copy or a similar version of an existing webpage, suitable for various purposes such as functional testing, visual design comparisons, and as an auxiliary tool for teaching webpage design and development. The imitation process includes replicating the layout, style, and content of the target webpage.
+
 ## Example: Imitating Web Pages Using GPT-4V
 
 ### Task
