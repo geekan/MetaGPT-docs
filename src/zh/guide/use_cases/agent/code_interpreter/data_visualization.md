@@ -1,48 +1,49 @@
-# 数据可视化分析
+# 数据分析和可视化
+
 ## 概述
+
 数据可视化是通过图表、图形和其他视觉元素将数据转化为可理解和易于分析的形式。它帮助我们发现数据中的模式、趋势和关联，以及提供洞察力和见解。通过数据可视化，我们可以更好地理解数据的含义，传达和解释数据的结果，并支持数据驱动的决策和沟通。
-## 例子 
+
+## 示例：Iris数据集可视化
+
 ### 任务
+
 使用`CodeInterpreter`对sklearn Iris数据集进行简单的数据分析并绘制可视化图表。
+
 ### 代码
-```python
-import asyncio
-from metagpt.roles.code_interpreter import CodeInterpreter
 
-async def main(requirement: str = ""):
-    code_interpreter = CodeInterpreter(use_tools=False, goal=requirement)
-    await code_interpreter.run(requirement)
-
-if __name__ == "__main__":
-    requirement = (
-        "Run data analysis on sklearn Iris dataset, include a plot."
-    )
-    asyncio.run(main(requirement))
+```bash
+python examples/ci/data_visualization.py
 ```
-### 运行过程
+
+### 运行结果
+
 1. `CodeInterpreter` 提出的`task`如下:
+
 ```json
 [
-    {
-        "task_id": "1",
-        "dependent_task_ids": [],
-        "instruction": "Load the Iris dataset from sklearn."
-    },
-    {
-        "task_id": "2",
-        "dependent_task_ids": ["1"],
-        "instruction": "Perform exploratory data analysis on the Iris dataset."
-    },
-    {
-        "task_id": "3",
-        "dependent_task_ids": ["2"],
-        "instruction": "Create a plot visualizing the Iris dataset features."
-    }
+  {
+    "task_id": "1",
+    "dependent_task_ids": [],
+    "instruction": "Load the Iris dataset from sklearn."
+  },
+  {
+    "task_id": "2",
+    "dependent_task_ids": ["1"],
+    "instruction": "Perform exploratory data analysis on the Iris dataset."
+  },
+  {
+    "task_id": "3",
+    "dependent_task_ids": ["2"],
+    "instruction": "Create a plot visualizing the Iris dataset features."
+  }
 ]
 ```
+
 `CodeInterpreter` 能够把任务分解为合理的`tasks`, 并按照加载数据、分析数据和绘制图表的步骤运行。
 
 2. `CodeInterpreter`写的代码如下:
+
 ```python
 # ----------------------------------task3------------------------------------
 from sklearn.datasets import load_iris
@@ -75,9 +76,11 @@ sns.set(style='whitegrid', context='notebook')
 iris_pairplot = sns.pairplot(iris_df, hue='species', height=2.5)
 plt.show()
 ```
+
 在完成`task1`时，由于环境中没有安装`scikit-learn`导致第一次执行报错，但`CodeInterpreter`可以分析并通过安装`scikit-learn`来解决这个问题。在`task3`中`CodeInterpreter`使用`seaborn`的`pairplot`函数绘制一个散点图矩阵，用于可视化数据集中不同特征之间的关系，并通过颜色区分不同种类的数据点，最后使用`plt.show()`将图表显示出来。
-### 运行结果
+
 下面是`CodeInterpreter`运行代码绘制出的图，可以看出代码成功执行并绘制了精美的可视化图表，帮助我们更好地对数据集特征进行分析。
+
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/CodeInterpreter/output.png" width="1000" height="1000"> 
+<img src="../../../../../public/image/guide/use_cases/code_interpreter/output.png" width="1000" height="1000"> 
 </div>
