@@ -49,8 +49,8 @@ python examples/ci/rm_image_background.py
 !pip install rembg
 # -----------------------------task2-------------------------------
 from rembg import remove
-input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty.jpg'
-output_path = '/data/luxiangtao/data_agents_opt-code_intepreter/beauty_rmg.png'
+input_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog.jpg'
+output_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog_rmg.png'
 
 # Read the input image
 with open(input_path, 'rb') as i:
