@@ -226,12 +226,54 @@ export default defineConfig({
                     text: 'Agent',
                     items: [
                       {
-                        text: 'Researcher: search web and write reports',
-                        link: 'use_cases/agent/researcher.md',
+                        text: 'CodeInterpreter',
+                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        items: [
+                          {
+                            text: 'Data analysis and visualization',
+                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
+                          },
+                          {
+                            text: 'Machine learning modeling',
+                            link: 'use_cases/agent/code_interpreter/machine_learning.md',
+                          },
+                          {
+                            text: 'Image background removal',
+                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
+                          },
+                          {
+                            text: 'Solve mathematical problems',
+                            link: 'use_cases/agent/code_interpreter/solve_mathematical_problems.md',
+                          },
+                          {
+                            text: 'Receipt OCR',
+                            link: 'use_cases/agent/code_interpreter/ocr_receipt.md',
+                          },
+                          {
+                            text: 'Tool usage: web page imitation',
+                            link: 'use_cases/agent/code_interpreter/imitate_webpage.md',
+                          },
+                          {
+                            text: 'Tool usage: web scraping',
+                            link: 'use_cases/agent/code_interpreter/crawl_webpage.md',
+                          },
+                          {
+                            text: 'Tool usage：text2image',
+                            link: 'use_cases/agent/code_interpreter/text2image.md',
+                          },
+                          {
+                            text: 'Tool usage: email summarization and response',
+                            link: 'use_cases/agent/code_interpreter/email_summary.md',
+                          },
+                        ],
                       },
                       {
                         text: 'Machine Learning Engineer',
                         link: 'use_cases/agent/ml_engineer.md',
+                      },
+                      {
+                        text: 'Researcher: search web and write reports',
+                        link: 'use_cases/agent/researcher.md',
                       },
                       {
                         text: 'Tutorial Assistant',
@@ -244,20 +286,6 @@ export default defineConfig({
                       {
                         text: 'Receipt Assistant',
                         link: 'use_cases/agent/receipt_assistant.md',
-                      },
-                      {
-                        text: 'CodeInterpreter',
-                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
-                        items: [
-                          {
-                            text: 'Data analysis and visualization',
-                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
-                          },
-                          {
-                            text: 'Machine learning modeling',
-                            link: 'use_cases/agent/code_interpreter/ml_modeling.md',
-                          },
-                        ],
                       },
                     ],
                   },
@@ -434,12 +462,54 @@ export default defineConfig({
                     text: '智能体',
                     items: [
                       {
-                        text: '调研员',
-                        link: 'use_cases/agent/researcher.md',
+                        text: '代码解释器',
+                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        items: [
+                          {
+                            text: '数据分析和可视化',
+                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
+                          },
+                          {
+                            text: '机器学习建模',
+                            link: 'use_cases/agent/code_interpreter/machine_learning.md',
+                          },
+                          {
+                            text: '图像去背景',
+                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
+                          },
+                          {
+                            text: '解数学问题',
+                            link: 'use_cases/agent/code_interpreter/solve_mathematical_problems.md',
+                          },
+                          {
+                            text: '票据OCR',
+                            link: 'use_cases/agent/code_interpreter/ocr_receipt.md',
+                          },
+                          {
+                            text: '工具使用：网页仿写',
+                            link: 'use_cases/agent/code_interpreter/imitate_webpage.md',
+                          },
+                          {
+                            text: '工具使用：网页爬取',
+                            link: 'use_cases/agent/code_interpreter/scrape_webpage.md',
+                          },
+                          {
+                            text: '工具使用：Text2Image',
+                            link: 'use_cases/agent/code_interpreter/text2image.md',
+                          },
+                          {
+                            text: '工具使用：邮件总结与回复',
+                            link: 'use_cases/agent/code_interpreter/email_summary.md',
+                          },
+                        ],
                       },
                       {
                         text: '机器学习工程师',
                         link: 'use_cases/agent/ml_engineer.md',
+                      },
+                      {
+                        text: '调研员',
+                        link: 'use_cases/agent/researcher.md',
                       },
                       {
                         text: '教程文案助手',
@@ -452,20 +522,6 @@ export default defineConfig({
                       {
                         text: '票据助手',
                         link: 'use_cases/agent/receipt_assistant.md',
-                      },
-                      {
-                        text: '代码解释器',
-                        // link: 'use_cases/agent/code_interpreter/ci_intro.md',
-                        items: [
-                          {
-                            text: '数据分析和可视化',
-                            link: 'use_cases/agent/code_interpreter/data_analysis_viz.md',
-                          },
-                          {
-                            text: '机器学习建模',
-                            link: 'use_cases/agent/code_interpreter/ml_modeling.md',
-                          },
-                        ],
                       },
                     ],
                   },
