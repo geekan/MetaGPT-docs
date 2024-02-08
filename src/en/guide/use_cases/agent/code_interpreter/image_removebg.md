@@ -12,21 +12,8 @@ Use `CodeInterpreter` to remove background from a picture of a dog.
 
 ### Code
 
-```python
-import asyncio
-from metagpt.roles.code_interpreter import CodeInterpreter
-
-async def main(requirement: str = ""):
-    code_interpreter = CodeInterpreter(use_tools=False, goal=requirement)
-    await code_interpreter.run(requirement)
-
-if __name__ == "__main__":
-    image_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog.jpg'
-    save_path = '/data/luxiangtao/data_agents_opt-code_intepreter/dog_rmg.png'
-    requirement = (
-        f"This is a image, you need to use python toolkit rembg to remove the background of the image and save the result. image path:{image_path}; save path:{save_path}."
-    )
-    asyncio.run(main(requirement))
+```bash
+python examples/ci/rm_image_background.py
 ```
 
 ### Output
