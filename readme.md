@@ -52,7 +52,9 @@ follow steps below to start the dev server
    or refer to [pnpm Installation](https://pnpm.io/installation)
 
 2. `pnpm i` to install dependency
+3. if you get this error `pnpm is not recognized as an internal or external command,
+operable program or batch file.` run ` npm install -g pnpm` or `npm install -g @pnpm/exe`
 
-3. `npm run docs:dev`
+4. `npm run docs:dev`
 
 The dev server should be running at http://localhost:5173. Visit the URL in your browser to see your new site in action!
