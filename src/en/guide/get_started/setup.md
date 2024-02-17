@@ -14,8 +14,8 @@ You can finish the setup by modifying the [config2.yaml](https://github.com/geek
 #### Use a config2.yaml
 
 1. Run `metagpt --init-config`. It will create `~/.metagpt/config2.yaml`, just modify it to your own config. This way you don't accidentally commit and share your API key using git.
-2. Take a look at [example](https://github.com/geekan/MetaGPT/blob/main/config/config2.yaml.example) and [code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) to understand the configuration. 
-It's reflected in the `~/.metagpt/config2.yaml` file.
+2. Take a look at [example](https://github.com/geekan/MetaGPT/blob/main/config/config2.yaml.example) and [code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) to understand the configuration.
+   It's reflected in the `~/.metagpt/config2.yaml` file.
 3. Fill in your own values to the file:
 
 ```yaml
