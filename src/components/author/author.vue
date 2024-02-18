@@ -1,20 +1,25 @@
 <template>
-  <div class="author flex flex-items-center gap-16px mt-48px" v-if="authorInfo">
-    <img
-      class="h50px w50px rounded-50% cursor-pointer"
-      :src="authorInfo.image_url"
-      alt="avatar"
-      @click="linkfn"
-    />
-    <div>
-      <div
-        class="name c-#1064d3 font-600 text-17px lh-22px cursor-pointer"
+  <div class="author" v-if="authorInfo">
+    <div class="text-15px font-400 lh-25px my-17px">
+      {{ time }} · {{ `${readingTime} read` }}
+    </div>
+    <div class="flex flex-items-center gap-16px">
+      <img
+        class="h50px w50px rounded-50% cursor-pointer"
+        :src="authorInfo.image_url"
+        alt="avatar"
         @click="linkfn"
-      >
-        {{ authorInfo.name }}
-      </div>
-      <div class="title c-#1c1e21 font-400 text-14px mt-4px lh-24px">
-        {{ authorInfo.title }}
+      />
+      <div>
+        <div
+          class="name c-#1064d3 font-600 text-17px lh-22px cursor-pointer"
+          @click="linkfn"
+        >
+          {{ authorInfo.name }}
+        </div>
+        <div class="title c-#1c1e21 font-400 text-14px mt-4px lh-24px">
+          {{ authorInfo.title }}
+        </div>
       </div>
     </div>
   </div>
@@ -23,9 +28,14 @@
 import { useData } from 'vitepress';
 import { authors } from './authors';
 import { useCurrentElement } from '@vueuse/core';
+import { formateDate } from '@/utils/tool';
 
 const { frontmatter } = useData();
 const authorInfo = authors.find((_) => _.name === frontmatter.value.author);
+const time = frontmatter.value.createTime
+  ? formateDate(frontmatter.value.createTime)
+  : '';
+const readingTime = frontmatter.value.readingTime;
 
 const currentEle = useCurrentElement();
 

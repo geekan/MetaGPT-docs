@@ -6,6 +6,8 @@ next: false
 editLink: false
 footer: false
 author: MetaGPT
+createTime: '2023-10-10T00:00:00.000+00:00'
+readingTime: '8 min'
 ---
 
 # Werewolf
