@@ -8,17 +8,17 @@ After completing the installation, follow these steps to configure the LLM API, 
 
    - Execute `metagpt --init-config` to generate `~/.metagpt/config2.yaml`. Edit this file with your configurations to avoid sharing your API key by accident.
 
-2. **Configuration Example**:
-
-   - Refer to the [example configuration](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and [configuration code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for understanding the setup reflected in `~/.metagpt/config2.yaml`.
-
-3. **Edit Configuration**:
+2. **Edit Configuration**:
+   
+   - Examples: Refer to the [example configuration](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and [configuration code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for understanding the setup reflected in `~/.metagpt/config2.yaml`.
    - Update `~/.metagpt/config2.yaml` with your details:
 
 ```yaml
 llm:
   api_key: 'YOUR_API_KEY'
-  model: 'gpt-4-turbo-preview' # Other options: gpt-3.5-turbo-1106 / gpt-4-1106-preview
+  model: 'gpt-4-turbo-preview'  # Other options: gpt-3.5-turbo-1106 / gpt-4-1106-preview
+  # base_url: 'https://api.openai.com/v1'  # or any forward url.
+  # proxy: 'YOUR_PROXY'  # Optional. If you want to use a proxy, set it here.
 ```
 
 > **Note**:
