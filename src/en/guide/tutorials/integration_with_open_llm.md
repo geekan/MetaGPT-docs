@@ -249,12 +249,12 @@ Such as LLaMA-Factory, FastChat, vllm openai compatible interface
 
 ```yaml
 llm:
-  llm_type: 'open_llm'
-  base_url: 'http://106.75.10.65:8001/v1'
+  api_type: 'open_llm'
+  base_url: 'http://106.75.10.xxx:8000/v1'
   model: 'llama2-13b'
 ```
 
-The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/completions`, `OPEN_LLM_API_BASE` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `OPEN_LLM_API_MODEL` is the actual value of the request interface parameter `model`.
+The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/completions`, `base_url` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `model` is the actual value of the request interface parameter `model`.
 
 #### ollama api interface
 
@@ -264,12 +264,12 @@ Such as model services deployed through ollama
 
 ```yaml
 llm:
-  llm_type: 'ollama'
+  api_type: 'ollama'
   base_url: 'http://127.0.0.1:11434/api'
   model: 'llama2'
 ```
 
-The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `OLLAMA_API_BASE` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaGPTAPI`. `OLLAMA_API_MODEL` is the actual value of the request parameter `model`.
+The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `base_url` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaLLM`. `model` is the actual value of the request parameter `model`.
 
 ## Optional, repair LLM output
 
