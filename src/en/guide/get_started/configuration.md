@@ -14,11 +14,13 @@ After completing the installation, follow these steps to configure the LLM API, 
    - Update `~/.metagpt/config2.yaml` with your details:
 
 ```yaml
+# Full Example: https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml
+# Reflected Code: https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py
 llm:
-  api_key: 'YOUR_API_KEY'
-  model: 'gpt-4-turbo-preview' # Other options: gpt-3.5-turbo-1106 / gpt-4-1106-preview
-  # base_url: 'https://api.openai.com/v1'  # or any forward url.
-  # proxy: 'YOUR_PROXY'  # Optional. If you want to use a proxy, set it here.
+  api_type: "openai"  # or azure / ollama / open_llm etc. Check LLMType for more options
+  model: "gpt-4-turbo-preview"  # or gpt-3.5-turbo-1106 / gpt-4-1106-preview
+  base_url: "https://api.openai.com/v1"  # or forward url / other llm url
+  api_key: "YOUR_API_KEY"
 ```
 
 > **Note**:
