@@ -5,9 +5,11 @@
 After completing the installation, follow these steps to configure the LLM API, using the OpenAI API as an example. This process is similar for other LLM APIs.
 
 1. **Initialize Configuration**:
+
    - Execute `metagpt --init-config` to generate `~/.metagpt/config2.yaml`. Edit this file with your configurations to avoid sharing your API key by accident.
 
 2. **Configuration Example**:
+
    - Refer to the [example configuration](https://github.com/geekan/MetaGPT/blob/main/config/config2.yaml.example) and [configuration code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for understanding the setup reflected in `~/.metagpt/config2.yaml`.
 
 3. **Edit Configuration**:
@@ -19,7 +21,7 @@ llm:
   model: 'gpt-4-turbo-preview' # Other options: gpt-3.5-turbo-1106 / gpt-4-1106-preview
 ```
 
-> **Note**: 
+> **Note**:
 > Configuration priority is `~/.metagpt/config2.yaml > config/config2.yaml`.
 
 With these steps, your setup is complete. For starting with MetaGPT, check out the [Quickstart guide](./quickstart) or our [Tutorials](/guide/tutorials/agent_101).
