@@ -420,7 +420,7 @@ export default defineConfig({
                   },
                   {
                     text: '配置',
-                    link: 'get_started/setup',
+                    link: 'get_started/configuration',
                   },
                 ],
               },

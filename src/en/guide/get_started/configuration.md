@@ -23,7 +23,7 @@ llm:
 > **Note**:
 > Configuration priority is `~/.metagpt/config2.yaml > config/config2.yaml`.
 
-With these steps, your setup is complete. For starting with MetaGPT, check out the [Quickstart guide](./quickstart) or our [Tutorials](/guide/tutorials/agent_101).
+With these steps, your setup is complete. For starting with MetaGPT, check out the [Quickstart guide](./quickstart) or our [Tutorials](/en/guide/tutorials/agent_101).
 
 MetaGPT supports a range of LLM models. Configure your model API keys as needed.
 
