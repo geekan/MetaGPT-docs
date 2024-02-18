@@ -44,10 +44,12 @@ const linkfn = () => {
 };
 
 onMounted(() => {
-  console.log(currentEle.value);
   const title = document.querySelector('h1 ~*');
   const wraper = document.querySelector('.vp-doc div');
   wraper?.insertBefore(currentEle.value, title!);
+});
+onUnmounted(() => {
+  currentEle.value.remove();
 });
 </script>
 <style lang="scss"></style>
