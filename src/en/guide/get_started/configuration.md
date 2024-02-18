@@ -10,12 +10,9 @@ After completing the installation, follow these steps to configure the LLM API, 
 
 2. **Edit Configuration**:
 
-   - Examples: Refer to the [example configuration](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and [configuration code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for understanding the setup reflected in `~/.metagpt/config2.yaml`.
-   - Update `~/.metagpt/config2.yaml` with your details:
+   - Update `~/.metagpt/config2.yaml` according to the [example](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and [configuration code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py):
 
 ```yaml
-# Full Example: https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml
-# Reflected Code: https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py
 llm:
   api_type: 'openai' # or azure / ollama / open_llm etc. Check LLMType for more options
   model: 'gpt-4-turbo-preview' # or gpt-3.5-turbo-1106 / gpt-4-1106-preview
