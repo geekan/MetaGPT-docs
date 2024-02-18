@@ -10,9 +10,9 @@ Available installation methods can be found in the [Installation](./installation
 
 ## Setup
 
-Variations for setting up LLM API (OpenAI, Azure, Anthropic, etc.) and other components can be found in the [Setup](./setup) section.
+Variations for setting up LLM API (OpenAI, Azure, Anthropic, etc.) and other components can be found in the [Configuration](./configuration) section.
 
-For formal usage of MetaGPT, using a config2.yaml. See [Setup](./setup).
+For formal usage of MetaGPT, using a config2.yaml. See [Configuration](./configuration).
 
 ## Develop software with a one-line requirement
 

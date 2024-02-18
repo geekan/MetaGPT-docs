@@ -10,7 +10,7 @@ pip install metagpt
 
 ## 配置
 
-完整配置不同LLM API（比如OpenAI、Azure、Anthropic等）的方法可在 [配置](./setup) 部分找到。
+完整配置不同LLM API（比如OpenAI、Azure、Anthropic等）的方法可在 [配置](./configuration) 部分找到。
 
 ## 一句话需求的软件开发
 

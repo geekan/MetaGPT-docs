@@ -1,4 +1,4 @@
-# Setup
+# Configuration
 
 ## LLM API Configuration Steps
 
@@ -126,7 +126,7 @@ llm:
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
 ```
 
-## Setup for tools (Optional)
+## Configuration for tools (Optional)
 
 In addition to LLM, we often want agents to use tools. We cover their setup in this section.
 
