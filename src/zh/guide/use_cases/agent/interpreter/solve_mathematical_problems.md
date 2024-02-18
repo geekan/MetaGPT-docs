@@ -2,7 +2,7 @@
 
 ## 概述
 
-使用 `CodeInterpreter` 解决数学问题，具体的数学问题随机选自MATH数据集的level5等级。
+使用 `Interpreter` 解决数学问题，具体的数学问题随机选自MATH数据集的level5等级。
 
 ## 示例
 
@@ -13,12 +13,12 @@ At a school, all 60 students play on at least one of three teams: Basketball, So
 ### 代码
 
 ```bash
-python examples/ci/solve_math_problems.py
+python examples/mi/solve_math_problems.py
 ```
 
 ### 运行结果
 
-1. `CodeInterpreter` 提出的`task`如下:
+1. `Interpreter` 提出的`task`如下:
 
 ```json
 [
@@ -40,9 +40,9 @@ python examples/ci/solve_math_problems.py
 ]
 ```
 
-由于有一半的学生参加篮球队，因此很容易计算出篮球队的总人数；然后根据数学队、篮球队和足球队的人数比例能够计算出数学队和足球队的总人数；最后根据容斥原理来得到答案。可以看出`CodeInterpreter`规划的步骤非常合理且符合人类解数学题的思维。
+由于有一半的学生参加篮球队，因此很容易计算出篮球队的总人数；然后根据数学队、篮球队和足球队的人数比例能够计算出数学队和足球队的总人数；最后根据容斥原理来得到答案。可以看出`Interpreter`规划的步骤非常合理且符合人类解数学题的思维。
 
-2. `CodeInterpreter` 写的代码如下:
+2. `Interpreter` 写的代码如下:
 
 ```python
 # ------------------------------task1------------------------------
@@ -80,4 +80,4 @@ students_two_teams = (math_team + basketball_team + soccer_team) - total_student
 students_two_teams
 ```
 
-`CodeInterpreter`所生成的代码完全遵循规划好的`task`并且能成功运行，并最终计算出正确答案为：**14**
+`Interpreter`所生成的代码完全遵循规划好的`task`并且能成功运行，并最终计算出正确答案为：**14**

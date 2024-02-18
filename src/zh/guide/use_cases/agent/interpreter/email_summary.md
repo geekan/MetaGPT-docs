@@ -2,7 +2,7 @@
 
 ## 概述
 
-使用CodeInterpreter对邮箱邮件的查看，快速审阅与自动回复
+使用Interpreter对邮箱邮件的查看，快速审阅与自动回复
 
 ## 示例：登陆邮箱，查看并总结邮件内容
 
@@ -13,7 +13,7 @@
 ### 代码
 
 ```bash
-python examples/ci/email_summary.py
+python examples/mi/email_summary.py
 ```
 
 ### 运行结果

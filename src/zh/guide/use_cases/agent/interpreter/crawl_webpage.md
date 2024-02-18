@@ -2,7 +2,7 @@
 
 ## 概述
 
-网页爬取是对网页内容的抽取和理解，为用户提供更智能、定制化的信息检索和分析功能。 我们将用CodeInterpreter实现这一场景需求。
+网页爬取是对网页内容的抽取和理解，为用户提供更智能、定制化的信息检索和分析功能。 我们将用Interpreter实现这一场景需求。
 
 ## 示例：使用工具获取静态网页中的表格数据
 
@@ -13,7 +13,7 @@
 ### 代码
 
 ```bash
-python examples/ci/crawl_webpage.py
+python examples/mi/crawl_webpage.py
 ```
 
 ### 运行结果

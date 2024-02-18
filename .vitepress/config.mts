@@ -211,44 +211,44 @@ export default defineConfig({
                     text: 'Agent',
                     items: [
                       {
-                        text: 'CodeInterpreter',
-                        link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        text: 'Interpreter',
+                        link: 'use_cases/agent/interpreter/mi_intro.md',
                         items: [
                           {
                             text: 'Data analysis and visualization',
-                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
+                            link: 'use_cases/agent/interpreter/data_visualization.md',
                           },
                           {
                             text: 'Machine learning modeling',
-                            link: 'use_cases/agent/code_interpreter/machine_learning.md',
+                            link: 'use_cases/agent/interpreter/machine_learning.md',
                           },
                           {
                             text: 'Image background removal',
-                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
+                            link: 'use_cases/agent/interpreter/image_removebg.md',
                           },
                           {
                             text: 'Solve mathematical problems',
-                            link: 'use_cases/agent/code_interpreter/solve_mathematical_problems.md',
+                            link: 'use_cases/agent/interpreter/solve_mathematical_problems.md',
                           },
                           {
                             text: 'Receipt OCR',
-                            link: 'use_cases/agent/code_interpreter/ocr_receipt.md',
+                            link: 'use_cases/agent/interpreter/ocr_receipt.md',
                           },
                           {
                             text: 'Tool usage: web page imitation',
-                            link: 'use_cases/agent/code_interpreter/imitate_webpage.md',
+                            link: 'use_cases/agent/interpreter/imitate_webpage.md',
                           },
                           {
                             text: 'Tool usage: web scraping',
-                            link: 'use_cases/agent/code_interpreter/crawl_webpage.md',
+                            link: 'use_cases/agent/interpreter/crawl_webpage.md',
                           },
                           {
                             text: 'Tool usage: text2image',
-                            link: 'use_cases/agent/code_interpreter/text2image.md',
+                            link: 'use_cases/agent/interpreter/text2image.md',
                           },
                           {
                             text: 'Tool usage: email summarization and response',
-                            link: 'use_cases/agent/code_interpreter/email_summary.md',
+                            link: 'use_cases/agent/interpreter/email_summary.md',
                           },
                         ],
                       },
@@ -434,44 +434,44 @@ export default defineConfig({
                     text: '智能体',
                     items: [
                       {
-                        text: '代码解释器',
-                        link: 'use_cases/agent/code_interpreter/ci_intro.md',
+                        text: '解释器',
+                        link: 'use_cases/agent/interpreter/mi_intro.md',
                         items: [
                           {
                             text: '数据分析和可视化',
-                            link: 'use_cases/agent/code_interpreter/data_visualization.md',
+                            link: 'use_cases/agent/interpreter/data_visualization.md',
                           },
                           {
                             text: '机器学习建模',
-                            link: 'use_cases/agent/code_interpreter/machine_learning.md',
+                            link: 'use_cases/agent/interpreter/machine_learning.md',
                           },
                           {
                             text: '图像去背景',
-                            link: 'use_cases/agent/code_interpreter/image_removebg.md',
+                            link: 'use_cases/agent/interpreter/image_removebg.md',
                           },
                           {
                             text: '解数学问题',
-                            link: 'use_cases/agent/code_interpreter/solve_mathematical_problems.md',
+                            link: 'use_cases/agent/interpreter/solve_mathematical_problems.md',
                           },
                           {
                             text: '票据OCR',
-                            link: 'use_cases/agent/code_interpreter/ocr_receipt.md',
+                            link: 'use_cases/agent/interpreter/ocr_receipt.md',
                           },
                           {
                             text: '工具使用：网页仿写',
-                            link: 'use_cases/agent/code_interpreter/imitate_webpage.md',
+                            link: 'use_cases/agent/interpreter/imitate_webpage.md',
                           },
                           {
                             text: '工具使用：网页爬取',
-                            link: 'use_cases/agent/code_interpreter/crawl_webpage.md',
+                            link: 'use_cases/agent/interpreter/crawl_webpage.md',
                           },
                           {
                             text: '工具使用：Text2Image',
-                            link: 'use_cases/agent/code_interpreter/text2image.md',
+                            link: 'use_cases/agent/interpreter/text2image.md',
                           },
                           {
                             text: '工具使用：邮件总结与回复',
-                            link: 'use_cases/agent/code_interpreter/email_summary.md',
+                            link: 'use_cases/agent/interpreter/email_summary.md',
                           },
                         ],
                       },
