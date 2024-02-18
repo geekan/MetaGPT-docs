@@ -8,17 +8,17 @@
 
 ### 任务
 
-使用 `codeInterpreter` 对一张狗狗照片去除背景。
+使用 `Interpreter` 对一张狗狗照片去除背景。
 
 ### 代码
 
 ```bash
-python examples/ci/rm_image_background.py
+python examples/mi/rm_image_background.py
 ```
 
 ### 运行结果
 
-1. `CodeInterpreter` 写的task如下:
+1. `Interpreter` 写的task如下:
 
 ```json
 [
@@ -40,9 +40,9 @@ python examples/ci/rm_image_background.py
 ]
 ```
 
-`CodeInterpreter`能够根据问题划分为合理的`task`，这里可以看到第一步便是安装rembg库。
+`Interpreter`能够根据问题划分为合理的`task`，这里可以看到第一步便是安装rembg库。
 
-2. `CodeInterpreter` 写的代码如下:
+2. `Interpreter` 写的代码如下:
 
 ```python
 # -----------------------------task1-------------------------------
@@ -65,11 +65,11 @@ with open(output_path, 'wb') as o:
     o.write(output_image)
 ```
 
-`rembg`是一个实现自动图像去背景的开源python工具包，且可以在CPU上运行。当我们在requirement中提示使用这个工具包时，`CodeInterpreter`能够自动安装这个工具包并正确使用(这很可能是因为LLM在训练时学会了'rembg'这个Python库的使用方法)
+`rembg`是一个实现自动图像去背景的开源python工具包，且可以在CPU上运行。当我们在requirement中提示使用这个工具包时，`Interpreter`能够自动安装这个工具包并正确使用(这很可能是因为LLM在训练时学会了'rembg'这个Python库的使用方法)
 
-这是一张有狗的输入图片以及去除了背景的狗的图片。可以看到背景去除的效果非常好，`CodeInterpreter`可以顺利完成这个任务。
+这是一张有狗的输入图片以及去除了背景的狗的图片。可以看到背景去除的效果非常好，`Interpreter`可以顺利完成这个任务。
 
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog.jpg" width="500" height="300"> 
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/dog_rmg.png" width="500" height="300"> 
+<img src="../../../../../public/image/guide/use_cases/interpreter/dog.jpg" width="500" height="300"> 
+<img src="../../../../../public/image/guide/use_cases/interpreter/dog_rmg.png" width="500" height="300"> 
 </div>

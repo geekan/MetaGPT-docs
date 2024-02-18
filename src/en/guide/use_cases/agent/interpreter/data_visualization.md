@@ -8,17 +8,17 @@ Data visualization is the process of representing data in a visual form, such as
 
 ### Task
 
-Use `CodeInterpreter` to perform a simple data analysis and visualize the sklearn Iris dataset.
+Use `Interpreter` to perform a simple data analysis and visualize the sklearn Iris dataset.
 
 ### Code
 
 ```bash
-python examples/ci/data_visualization.py
+python examples/mi/data_visualization.py
 ```
 
 ### Execution Results
 
-1. `CodeInterpreter` proposes the following solution tasks:
+1. `Interpreter` proposes the following solution tasks:
 
 ```json
 [
@@ -40,9 +40,9 @@ python examples/ci/data_visualization.py
 ]
 ```
 
-`CodeInterpreter` is able to divide the problem into logical tasks, and And run according to the steps of loading the data, analyzing the data, and plotting the chart.
+`Interpreter` is able to divide the problem into logical tasks, and And run according to the steps of loading the data, analyzing the data, and plotting the chart.
 
-2. `CodeInterpreter` writes the following code:
+2. `Interpreter` writes the following code:
 
 ```python
 # ----------------------------------task3------------------------------------
@@ -77,10 +77,10 @@ iris_pairplot = sns.pairplot(iris_df, hue='species', height=2.5)
 plt.show()
 ```
 
-During the completion of task 1, an error occurred on the first execution due to the lack of scikit-learn installed in the environment. However, `CodeInterpreter` can analyze and resolve this issue by installing scikit-learn. In task 3, `CodeInterpreter` uses the pairplot function from seaborn to create a scatterplot matrix, which visualizes the relationships between different features in the dataset and differentiates data points of different species using colors. Finally, `plt.show()` is used to display the graph.
+During the completion of task 1, an error occurred on the first execution due to the lack of scikit-learn installed in the environment. However, `Interpreter` can analyze and resolve this issue by installing scikit-learn. In task 3, `Interpreter` uses the pairplot function from seaborn to create a scatterplot matrix, which visualizes the relationships between different features in the dataset and differentiates data points of different species using colors. Finally, `plt.show()` is used to display the graph.
 
-Below is the graph plotted by `CodeInterpreter` running the code. It is evident that the code executed successfully and generated a beautiful visualization table, which can help us analyze the features of the dataset more effectively.
+Below is the graph plotted by `Interpreter` running the code. It is evident that the code executed successfully and generated a beautiful visualization table, which can help us analyze the features of the dataset more effectively.
 
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/output.png" width="1000" height="1000"> 
+<img src="../../../../../public/image/guide/use_cases/interpreter/output.png" width="1000" height="1000"> 
 </div>

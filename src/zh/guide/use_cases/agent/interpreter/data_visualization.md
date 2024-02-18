@@ -8,17 +8,17 @@
 
 ### 任务
 
-使用`CodeInterpreter`对sklearn Iris数据集进行简单的数据分析并绘制可视化图表。
+使用`Interpreter`对sklearn Iris数据集进行简单的数据分析并绘制可视化图表。
 
 ### 代码
 
 ```bash
-python examples/ci/data_visualization.py
+python examples/mi/data_visualization.py
 ```
 
 ### 运行结果
 
-1. `CodeInterpreter` 提出的`task`如下:
+1. `Interpreter` 提出的`task`如下:
 
 ```json
 [
@@ -40,9 +40,9 @@ python examples/ci/data_visualization.py
 ]
 ```
 
-`CodeInterpreter` 能够把任务分解为合理的`tasks`, 并按照加载数据、分析数据和绘制图表的步骤运行。
+`Interpreter` 能够把任务分解为合理的`tasks`, 并按照加载数据、分析数据和绘制图表的步骤运行。
 
-2. `CodeInterpreter`写的代码如下:
+2. `Interpreter`写的代码如下:
 
 ```python
 # ----------------------------------task3------------------------------------
@@ -77,10 +77,10 @@ iris_pairplot = sns.pairplot(iris_df, hue='species', height=2.5)
 plt.show()
 ```
 
-在完成`task1`时，由于环境中没有安装`scikit-learn`导致第一次执行报错，但`CodeInterpreter`可以分析并通过安装`scikit-learn`来解决这个问题。在`task3`中`CodeInterpreter`使用`seaborn`的`pairplot`函数绘制一个散点图矩阵，用于可视化数据集中不同特征之间的关系，并通过颜色区分不同种类的数据点，最后使用`plt.show()`将图表显示出来。
+在完成`task1`时，由于环境中没有安装`scikit-learn`导致第一次执行报错，但`Interpreter`可以分析并通过安装`scikit-learn`来解决这个问题。在`task3`中`Interpreter`使用`seaborn`的`pairplot`函数绘制一个散点图矩阵，用于可视化数据集中不同特征之间的关系，并通过颜色区分不同种类的数据点，最后使用`plt.show()`将图表显示出来。
 
-下面是`CodeInterpreter`运行代码绘制出的图，可以看出代码成功执行并绘制了精美的可视化图表，帮助我们更好地对数据集特征进行分析。
+下面是`Interpreter`运行代码绘制出的图，可以看出代码成功执行并绘制了精美的可视化图表，帮助我们更好地对数据集特征进行分析。
 
 <div align=center>
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/output.png" width="1000" height="1000"> 
+<img src="../../../../../public/image/guide/use_cases/interpreter/output.png" width="1000" height="1000"> 
 </div>

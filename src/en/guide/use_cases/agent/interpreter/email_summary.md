@@ -2,7 +2,7 @@
 
 ## Overview
 
-Using CodeInterpreter for viewing emails, quickly reviewing, and automatically replying to them.
+Using Interpreter for viewing emails, quickly reviewing, and automatically replying to them.
 
 ## Example: Logging into Email, Viewing, and Summarizing Email Content
 
@@ -13,7 +13,7 @@ After logging into the email, display the sender and the body of the latest 5 em
 ### Code
 
 ```bash
-python examples/ci/email_summary.py
+python examples/mi/email_summary.py
 ```
 
 ### Execution Results

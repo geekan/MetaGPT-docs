@@ -13,19 +13,19 @@
 ### 代码
 
 ```bash
-python examples/ci/imitate_webpage.py
+python examples/mi/imitate_webpage.py
 ```
 
 ### 运行结果
 
 原网页截图：
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/ori_webpage.png">
+<img src="../../../../../public/image/guide/use_cases/interpreter/ori_webpage.png">
 
 仿写后的网页：
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/imitate1.png">
-<img src="../../../../../public/image/guide/use_cases/code_interpreter/imitate2.png">
+<img src="../../../../../public/image/guide/use_cases/interpreter/imitate1.png">
+<img src="../../../../../public/image/guide/use_cases/interpreter/imitate2.png">
 
 ## 机制解释
 
-1. code_interpreter规划任务Plan时，生成了若干个任务，根据所有注册工具的docstring分配任务的工具类型。code_interpreter自动将生成网页的中间任务类型设置为"image2webpage"，在执行任务时将扫描是否有GPTvGenerator相关工具可用。
+1. interpreter规划任务Plan时，生成了若干个任务，根据所有注册工具的docstring分配任务的工具类型。interpreter自动将生成网页的中间任务类型设置为"image2webpage"，在执行任务时将扫描是否有GPTvGenerator相关工具可用。
 2. 发现可用工具：['GPTvGenerator']，加载工具代码，根据当前需求使用generate_webpages方法生成相关的前端代码，并使用save_webpages方法保存。

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Web scraping involves the extraction and understanding of web page content, providing users with more intelligent, customized information retrieval and analysis capabilities. We will implement this scenario requirement with CodeInterpreter.
+Web scraping involves the extraction and understanding of web page content, providing users with more intelligent, customized information retrieval and analysis capabilities. We will implement this scenario requirement with Interpreter.
 
 ## Example: Using the Tool to Obtain Table Data from a Static Web Page
 
@@ -13,7 +13,7 @@ Retrieve paper information containing the keywords: `multiagent` and `large lang
 ### Code
 
 ```bash
-python examples/ci/crawl_webpage.py
+python examples/mi/crawl_webpage.py
 ```
 
 ### Execution Results
