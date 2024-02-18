@@ -89,7 +89,7 @@ cd MetaGPT && docker build -t metagpt:custom .
 
 ## 安装全部功能
 
-如果你想生成一些图表，比如象限图，系统设计图，顺序流程图等，这非常有用。如果你运行[软件启动示例](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py)，它们将作为中间结果提供给你。
+如果你想生成一些图表，比如象限图，系统设计图，顺序流程图等，这非常有用。如果你运行[软件启动示例](https://github.com/geekan/MetaGPT/blob/main/metagpt/software_company.py)，它们将作为中间结果提供给你。
 
 ### Mermaid
 

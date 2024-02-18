@@ -16,7 +16,7 @@ pip install metagpt
 
 > 注意：
 >
-> 下面为 [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py) 的节选。如果你使用`git clone`方法进行安装，只需简单执行
+> 下面为 [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/software_company.py) 的节选。如果你使用`git clone`方法进行安装，只需简单执行
 >
 > ```
 > metagpt "write a cli blackjack game"

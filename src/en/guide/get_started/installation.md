@@ -89,7 +89,7 @@ cd MetaGPT && docker build -t metagpt:custom .
 
 ## Installation for full features
 
-This is relevant if you want to generate diagrams such as quadrant chart, system designs, sequence flow, etc. They are provided as intermediate results if you run the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py).
+This is relevant if you want to generate diagrams such as quadrant chart, system designs, sequence flow, etc. They are provided as intermediate results if you run the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/software_company.py).
 
 ### Mermaid
 

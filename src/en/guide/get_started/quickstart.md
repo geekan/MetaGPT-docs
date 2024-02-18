@@ -18,7 +18,7 @@ For formal usage of MetaGPT, using a config2.yaml. See [Configuration](./configu
 
 > Note:
 >
-> Below is a breakdown of the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/startup.py). If you install MetaGPT with the git clone approach, simply run
+> Below is a breakdown of the [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/software_company.py). If you install MetaGPT with the git clone approach, simply run
 >
 > ```
 > metagpt "write a cli blackjack game"
