@@ -17,7 +17,7 @@
         >
           {{ authorInfo.name }}
         </div>
-        <div class="title c-#1c1e21 font-400 text-14px mt-4px lh-24px">
+        <div class="title font-400 text-14px mt-4px lh-24px">
           {{ authorInfo.title }}
         </div>
       </div>
