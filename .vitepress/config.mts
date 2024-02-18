@@ -243,7 +243,7 @@ export default defineConfig({
                             link: 'use_cases/agent/code_interpreter/crawl_webpage.md',
                           },
                           {
-                            text: 'Tool usage：text2image',
+                            text: 'Tool usage: text2image',
                             link: 'use_cases/agent/code_interpreter/text2image.md',
                           },
                           {
