@@ -254,7 +254,7 @@ llm:
   model: 'llama2-13b'
 ```
 
-The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/completions`, `OPEN_LLM_API_BASE` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself. `OPEN_LLM_API_MODEL` is the actual value of the request interface parameter `model`.
+The complete routing of the openapi chat interface `http://0.0.0.0:8000/v1/chat/completions`, `base_url` only needs to be configured to `http://0.0.0.0:8000/v1`, and the remaining parts will be filled by openai sdk itself.
 
 #### ollama api interface
 
@@ -269,7 +269,7 @@ llm:
   model: 'llama2'
 ```
 
-The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `OLLAMA_API_BASE` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaGPTAPI`. `OLLAMA_API_MODEL` is the actual value of the request parameter `model`.
+The complete route of ollama chat interface `http://127.0.0.1:11434/api/chat`, `base_url` only needs to be configured to `http://127.0.0.1:11434/api`, and the remaining part is filled by `OllamaGPTAPI`.
 
 ## Optional, repair LLM output
 
