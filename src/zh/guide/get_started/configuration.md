@@ -181,7 +181,7 @@ mermaid:
 
 ## 其他配置（可选）
 
-Check [config2.yaml.example](https://github.com/geekan/MetaGPT/blob/dev/config/config2.yaml.example) and
+Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/dev/config/config2.example.yaml) and
 [config2.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/config2.py) for more details.
 
 ```yaml

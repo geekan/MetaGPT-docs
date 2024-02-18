@@ -10,7 +10,7 @@ After completing the installation, follow these steps to configure the LLM API, 
 
 2. **Configuration Example**:
 
-   - Refer to the [example configuration](https://github.com/geekan/MetaGPT/blob/main/config/config2.yaml.example) and [configuration code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for understanding the setup reflected in `~/.metagpt/config2.yaml`.
+   - Refer to the [example configuration](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and [configuration code](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for understanding the setup reflected in `~/.metagpt/config2.yaml`.
 
 3. **Edit Configuration**:
    - Update `~/.metagpt/config2.yaml` with your details:
@@ -180,7 +180,7 @@ mermaid:
 
 ## Others (Optional)
 
-Check [config2.yaml.example](https://github.com/geekan/MetaGPT/blob/dev/config/config2.yaml.example) and
+Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/dev/config/config2.example.yaml) and
 [config2.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/config2.py) for more details.
 
 ```yaml

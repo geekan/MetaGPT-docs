@@ -194,7 +194,7 @@ export default defineConfig({
                   { text: 'Introduction', link: 'get_started/introduction' },
                   { text: 'Quickstart', link: 'get_started/quickstart' },
                   { text: 'Installation', link: 'get_started/installation' },
-                  { text: 'Setup', link: 'get_started/setup' },
+                  { text: 'Configuration', link: 'get_started/configuration' },
                 ],
               },
               {
