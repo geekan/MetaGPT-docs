@@ -10,7 +10,7 @@ After this tutorial, you will be able to:
 ## Run the software startup example
 
 ```shell
-metagpt --idea "write a cli flappy bird game"
+metagpt "write a cli flappy bird game"
 ```
 
 ## Develop your first team of agents
