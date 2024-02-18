@@ -5,6 +5,7 @@ prev: false
 next: false
 editLink: false
 footer: false
+author: MetaGPT
 ---
 
 # Werewolf

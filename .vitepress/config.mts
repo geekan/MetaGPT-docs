@@ -99,7 +99,7 @@ for (const source of sources) {
 }
 // }
 
-const branchInfo = await simpleGit('.', {}).pull().branch({});
+const branchInfo = await simpleGit('.', {}).fetch().branch({});
 
 const { current, branches } = branchInfo;
 const isMain = current === 'main';
@@ -166,21 +166,6 @@ export default defineConfig({
             link: '/en/guide/get_started/introduction',
             activeMatch: '/en/guide/',
           },
-          ...arrVisible(
-            [
-              {
-                text: 'Blog',
-                link: '/en/blog/agents',
-                activeMatch: '/blog/',
-              },
-              {
-                text: 'RFCs',
-                link: '/en/rfcs/RFC-116-MetaGPT优化方案',
-                activeMatch: '/euns/rfcs/',
-              },
-            ],
-            blogAndRfcVisible
-          ),
           ...getVersions(),
         ],
         sidebar: {
@@ -354,19 +339,6 @@ export default defineConfig({
               },
             ],
           },
-          '/en/blog/': {
-            base: '/en/blog/',
-            items: [
-              {
-                text: 'Agents',
-                link: 'agents',
-              },
-            ],
-          },
-          '/en/rfcs/': {
-            base: '/en/rfcs/',
-            items: [...rfcLinks],
-          },
         },
       },
     },
@@ -385,7 +357,7 @@ export default defineConfig({
             [
               {
                 text: '博客',
-                link: '/zh/blog/agents',
+                link: '/zh/blog/blogs',
                 activeMatch: '/zh/blog/',
               },
               {
@@ -594,8 +566,8 @@ export default defineConfig({
             base: '/zh/blog/',
             items: [
               {
-                text: 'Agents',
-                link: 'agents',
+                text: 'blogs',
+                link: 'blogs',
               },
             ],
           },

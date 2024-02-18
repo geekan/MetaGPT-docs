@@ -68,6 +68,8 @@
   --vp-c-danger-2: var(--vp-c-red-2);
   --vp-c-danger-3: var(--vp-c-red-3);
   --vp-c-danger-soft: var(--vp-c-red-soft);
+
+  --vp-layout-max-width: 1640px !important;
 }
 
 /**
@@ -135,6 +137,10 @@
 
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: 900px !important;
 }
 
 @media (min-width: 1440px) {
