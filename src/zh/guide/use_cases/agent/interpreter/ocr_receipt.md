@@ -8,7 +8,7 @@ OCR，是一种识别图片中文字，得到结构化文本信息的技术手�
 
 ### 任务
 
-使用Interpreter对如下的票据进行OCR识别，提取并保存总金额和票据号码
+使用Interpreter对如下的票据进行OCR识别，提取并保存总金额
 
 <img src="../../../../../public/image/guide/use_cases/interpreter/receipt_shopping.png" width="200">
 
@@ -22,6 +22,10 @@ python examples/mi/ocr_receipt.py
 ```
 
 ### 运行结果
+
+Interpreter会在当前工作路径下保存一个csv文件，内含抽取出的总金额
+
+<img src="../../../../../public/image/guide/use_cases/interpreter/receipt_shopping_ocr_result.png" width="200">
 
 ## 机制解释
 
