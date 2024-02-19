@@ -18,6 +18,11 @@ python examples/mi/machine_learning.py
 
 ### 运行结果
 
+<br>
+<video  controls>
+  <source src="/image/guide/use_cases/interpreter/ml_wine_dataset.mp4" type="video/mp4">
+</video>
+
 ## 机制解释
 
 Interpreter根据我们的需求做出计划，形成若干任务并依次执行，最终完成需求。Interpreter生成的完整代码将存储在data/output路径下
