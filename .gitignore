@@ -13,3 +13,4 @@ node_modules
 
 src/*/blog
 src/*/rfcs
+src/utils/diff.ts
