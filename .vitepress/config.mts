@@ -155,7 +155,7 @@ const arrVisible = (arr: any[], visible: boolean) => {
 if (process.env.NODE_ENV === 'production') {
   const prevVersion = await getPrevVerBranch();
   if (prevVersion) {
-    genDiffFile(current, prevVersion);
+    await genDiffFile(current, prevVersion);
   }
 }
 
