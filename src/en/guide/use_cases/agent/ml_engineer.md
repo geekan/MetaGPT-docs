@@ -12,7 +12,7 @@ Use `MLEngineer` to model and predict the [ICR](https://www.kaggle.com/competiti
 python examples/mi/ml_engineer_with_tools.py
 ```
 
-### Execution Result
+### Execution Results
 
 The data preprocessing code (which includes the use of 3 tools: `FillMissingValue`, `MinMaxScale`, and `LabelEncode`) is as follows:
 
@@ -83,7 +83,7 @@ copy_train_data = cat_count.transform(copy_train_data)
 copy_eval_data = cat_count.transform(copy_eval_data)
 ```
 
-## Mechanism Explanation
+## Mechanism Explained
 
 ### Tool Creation
 

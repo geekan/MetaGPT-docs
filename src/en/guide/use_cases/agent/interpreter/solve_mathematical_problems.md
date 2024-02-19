@@ -30,7 +30,7 @@ if __name__ == "__main__":
     asyncio.run(main(requirement))
 ```
 
-### Output
+### Execution Results
 
 1. `Interpreter` proposes the following solution steps:
 
