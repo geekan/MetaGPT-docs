@@ -1,7 +1,8 @@
 import { writeFile, writeFileSync } from 'fs';
 import path from 'path';
 import { simpleGit } from 'simple-git';
-import { $ } from 'zx';
+import { execa } from 'execa';
+import { PassThrough } from 'stream';
 
 export const getCurrentBranch = async () => {
   const git = await simpleGit('.', {});
@@ -39,12 +40,50 @@ export const getPrevVerBranch = async () => {
 
 export const genDiffFile = async (branchA: string, branchB: string) => {
   const git = await simpleGit('.', {});
-  const diff =
-    await $`git diff --name-only ${branchA}..${branchB} | while read -r file; do lines=$(git diff --shortstat ${branchA}..${branchB} -- "$file" | grep -o '[0-9]*' | tail -1); if [ $lines -gt 3 ]; then echo "$file"; fi; done`;
+  console.log(JSON.stringify(branchA), JSON.stringify(branchB));
+  // 执行 git diff 命令并获取文件列表
+  const { stdout: fileNames } = await execa('git', [
+    'diff',
+    '--name-only',
+    `${branchA}..${branchB}`,
+  ]);
 
+  // 将文件列表拆分成数组
+  const files = fileNames.split('\n').filter(Boolean);
+
+  let diff = '';
+  // 遍历文件列表
+  for (const file of files) {
+    // 执行 git diff 命令获取文件改动行数
+    const { stdout: diffOutput } = await execa('git', [
+      'diff',
+      '--shortstat',
+      `${branchA}..${branchB}`,
+      '--',
+      file,
+    ]);
+    if (!diffOutput) {
+      continue;
+    }
+    // 使用流处理 diff 输出
+    const input = new PassThrough();
+    input.write(diffOutput);
+    input.end();
+
+    // 使用 grep 过滤出改动行数
+    const { stdout: lines } = await execa('grep', ['-o', '[0-9]*'], { input });
+
+    // 获取最后一行的改动行数
+    const lineCount = lines.trim().split('\n').pop();
+
+    // 检查改动行数是否大于 3
+    if (lineCount && parseInt(lineCount) > 3) {
+      diff += `${file}\n`;
+    }
+  }
   writeFileSync(
     path.resolve(__dirname, './diff.ts'),
     `
-  export const diff = \`${diff.stdout}\`;`
+export const diff = \`${diff}\`;`
   );
 };
