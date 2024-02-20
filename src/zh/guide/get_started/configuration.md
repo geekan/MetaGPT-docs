@@ -83,7 +83,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
@@ -93,7 +93,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
@@ -105,7 +105,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   api_key: 'YOUR_API_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
@@ -115,7 +115,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   api_key: 'YOUR_API_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
@@ -127,9 +127,21 @@ llm:
 
 ```yaml
 llm:
-  api_type: dashscope
+  api_type: 'dashscope'
   api_key: 'YOUR_API_KEY'
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
+```
+
+### 月之暗面 Moonshot API
+
+支持 `moonshot-v1-*`模型和部分开源模型，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'moonshot'
+  base_url: 'https://api.moonshot.cn/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'moonshot-v1-8k'
 ```
 
 ## 配置工具（可选）
