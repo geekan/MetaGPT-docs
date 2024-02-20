@@ -149,7 +149,7 @@ llm:
 
 ### MoonShot AI Moonshot API
 
-support `moonshot-v1-*`models and some popular closed-source models，详见`metagpt/utils/token_counter.py`
+support `moonshot-v1-*`models，详见`metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
