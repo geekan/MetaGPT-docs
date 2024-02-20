@@ -13,6 +13,11 @@ import {
   mkdirSync,
 } from 'node:fs';
 import { simpleGit } from 'simple-git';
+import {
+  getPrevVerBranch,
+  getCurrentBranch,
+  genDiffFile,
+} from '../src/utils/gendifffile';
 
 const Logo = `
 <svg  viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,6 +151,13 @@ const blogAndRfcVisible = isMain;
 const arrVisible = (arr: any[], visible: boolean) => {
   return visible ? arr : [];
 };
+
+if (process.env.NODE_ENV === 'production') {
+  const prevVersion = await getPrevVerBranch();
+  if (prevVersion) {
+    await genDiffFile(current, prevVersion);
+  }
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

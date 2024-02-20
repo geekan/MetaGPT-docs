@@ -19,6 +19,7 @@
     "@vitejs/plugin-vue": "^4.4.0",
     "@vueuse/core": "^10.6.1",
     "dayjs": "^1.11.10",
+    "execa": "^8.0.1",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "simple-git": "^3.20.0",
@@ -27,7 +28,8 @@
     "unplugin-auto-import": "^0.16.7",
     "unplugin-icons": "^0.17.3",
     "unplugin-vue-components": "^0.25.2",
-    "vue-gtag": "^2.0.1"
+    "vue-gtag": "^2.0.1",
+    "zx": "^7.2.3"
   },
   "simple-git-hooks": {
     "pre-commit": "npm run precommit"
