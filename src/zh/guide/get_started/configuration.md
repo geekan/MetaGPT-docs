@@ -156,7 +156,7 @@ llm:
 
 ### 月之暗面 Moonshot API
 
-支持 `moonshot-v1-*`模型和部分闭源模型，详见`metagpt/utils/token_counter.py`
+支持 `moonshot-v1-*`模型，详见`metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
