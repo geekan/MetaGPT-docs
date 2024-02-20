@@ -147,6 +147,18 @@ llm:
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
 ```
 
+### MoonShot AI Moonshot API
+
+support `moonshot-v1-*`models and some popular open-source models，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'moonshot'
+  base_url: 'https://api.moonshot.cn/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'moonshot-v1-8k'
+```
+
 ## Configuration for tools (Optional)
 
 In addition to LLM, we often want agents to use tools. We cover their setup in this section.
