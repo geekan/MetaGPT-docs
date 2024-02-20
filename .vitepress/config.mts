@@ -208,6 +208,7 @@ export default defineConfig({
                     link: 'tutorials/multi_agent_101.md',
                   },
                   { text: 'Use memories', link: 'tutorials/use_memories.md' },
+                  { text: 'Make tools', link: 'tutorials/make_tools.md' },
                   {
                     text: 'Human engagement',
                     link: 'tutorials/human_engagement.md',
@@ -443,6 +444,10 @@ export default defineConfig({
                   {
                     text: '使用记忆',
                     link: 'tutorials/use_memories',
+                  },
+                  {
+                    text: '制作工具',
+                    link: 'tutorials/make_tools',
                   },
                   {
                     text: '人类介入',
