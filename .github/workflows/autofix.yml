@@ -24,6 +24,11 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      - name: install lfs
+        run: git lfs install
+      - name: trigger lfs
+        run: git config user.email "464806884@qq.com" && git config user.name "zerolee" && git commit -am 'trigger lfs'
+
       - run: pnpm install
 
       - name: Run prettier
