@@ -23,7 +23,6 @@ python examples/mi/machine_learning.py --use_case wine
   <source src="/image/guide/use_cases/interpreter/ml_wine_dataset.mp4" type="video/mp4">
 </video>
 
-
 ## Example: Sales Forecast
 
 ### Task
@@ -46,11 +45,9 @@ python examples/mi/machine_learning.py --use_case sales_forecast
 <img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/ground_truth_vs_predictions.png" width=400>
 </center>
 
-
 <center>
 <img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/wmae.jpeg" width=400 >
 </center>
-
 
 ## Mechanism Explained
 
