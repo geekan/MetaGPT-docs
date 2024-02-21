@@ -27,7 +27,7 @@ python examples/mi/machine_learning.py --use_case wine
 
 ### Task
 
-Use time series regression machine learning to make predictions for Dept sales of the stores as accurate as possible.
+Let's use the [Walmart Sales Forecast Dataset](https://www.kaggle.com/datasets/aslanahmedov/walmart-sales-forecast/data) as an example to show how to use the Interpreter for sales forecasting modeling. There are four tables in the dataset: train.csv, test.csv, feature.csv, and store.csv, and we ask the Interpreter to fetch the data, stitch the data, slice the training and validation sets, train the model, and make predictions on the test set.
 
 ### Code
 
