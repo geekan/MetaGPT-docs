@@ -38,20 +38,18 @@ python examples/mi/sales_forecast.py
 
 ### Execution Results
 
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/total_weekly_sales_over_time.png" width=400>
+</center>
 
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/total_weekly_sales_over_time.png">
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/ground_truth_vs_predictions.png" width=400>
+</center>
 
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/correlation_heatmap.png">
 
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/effect_of_holidays_on_weekly_sales.png">
-
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/sales_distribution_across_departments.png">
-
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/sales_distribution_across_stores.png">
-
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/wmae.jpeg">
-
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/ground_truth_vs_predictions.png">
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/wmae.jpeg" width=400 >
+</center>
 
 
 ## Mechanism Explained
