@@ -13,7 +13,7 @@ We use the [sklearn wine recognition dataset](https://scikit-learn.org/stable/da
 ### Code
 
 ```bash
-python examples/mi/machine_learning.py
+python examples/mi/machine_learning.py --use_case wine
 ```
 
 ### Execution Results
@@ -33,7 +33,7 @@ Use time series regression machine learning to make predictions for Dept sales o
 ### Code
 
 ```bash
-python examples/mi/sales_forecast.py
+python examples/mi/machine_learning.py --use_case sales_forecast
 ```
 
 ### Execution Results
