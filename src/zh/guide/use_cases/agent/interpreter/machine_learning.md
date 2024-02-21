@@ -23,6 +23,32 @@ python examples/mi/machine_learning.py
   <source src="/image/guide/use_cases/interpreter/ml_wine_dataset.mp4" type="video/mp4">
 </video>
 
+## 示例: 销售额预测
+
+### 任务
+
+使用机器学习训练时序模型，预测门店中Dept的销售额。
+
+### 代码
+
+```bash
+python examples/mi/machine_learning.py --use_case sales_forecast
+```
+
+### 运行结果
+
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/total_weekly_sales_over_time.png" width=400>
+</center>
+
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/ground_truth_vs_predictions.png" width=400>
+</center>
+
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/wmae.jpeg" width=400 >
+</center>
+
 ## 机制解释
 
 Interpreter根据我们的需求做出计划，形成若干任务并依次执行，最终完成需求。Interpreter生成的完整代码将存储在data/output路径下
