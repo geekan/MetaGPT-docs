@@ -13,7 +13,7 @@
    - 为每个函数或类配备谷歌风格的文档字符串。这作为一个简洁而全面的参考资料，详细说明其用途、输入参数和预期输出。
 
 3. **应用@register_tool装饰器：**
-   - 使用`@register_tool`装饰器以确保在工具注册表中准确注册。这个装饰器简化了函数或类与`Interpreter`的集成。
+   - 使用`@register_tool`装饰器以确保在工具注册表中准确注册。这个装饰器简化了函数或类与解释器`Interpreter`（在MetaGPT中的智能体）的集成。
 
 ## 自定义工具案例
 
@@ -65,7 +65,7 @@
    )
    ```
 
-4. **在解释器中使用工具：**
+4. **在解释器`Interpreter`中使用工具：**
 
    ```python
    from metagpt.roles.ci.code_interpreter import CodeInterpreter

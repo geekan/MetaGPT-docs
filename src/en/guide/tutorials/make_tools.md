@@ -13,7 +13,7 @@ Making tools in MetaGPT is a straightforward process that involves creating your
    - Accompany each function or class with a Google-style Docstring. This serves as a concise yet comprehensive reference, detailing the purpose, input parameters, and expected output.
 
 3. **Apply @register_tool Decorator:**
-   - Utilize the `@register_tool` decorator to ensure accurate registration within the tool registry. This decorator simplifies the integration of functions or classes with the `Interpreter`.
+   - Utilize the `@register_tool` decorator to ensure accurate registration within the tool registry. This decorator simplifies the integration of functions or classes with the `Interpreter`(Agent in MetaGPT).
 
 ## Customizing Tool Case
 
