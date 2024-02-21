@@ -38,6 +38,10 @@ python examples/mi/machine_learning.py --use_case sales_forecast
 ### Execution Results
 
 <center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/split_data.png" width=400>
+</center>
+
+<center>
 <img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/total_weekly_sales_over_time.png" width=400>
 </center>
 
@@ -46,7 +50,7 @@ python examples/mi/machine_learning.py --use_case sales_forecast
 </center>
 
 <center>
-<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/wmae.jpeg" width=400 >
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/wmae.png" width=400 >
 </center>
 
 ## Mechanism Explained
