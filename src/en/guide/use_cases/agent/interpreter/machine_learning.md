@@ -13,7 +13,7 @@ We use the [sklearn wine recognition dataset](https://scikit-learn.org/stable/da
 ### Code
 
 ```bash
-python examples/mi/machine_learning.py --use_case wine
+python examples/mi/machine_learning.py
 ```
 
 ### Execution Results
