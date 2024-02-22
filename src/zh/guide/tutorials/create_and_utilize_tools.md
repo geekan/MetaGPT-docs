@@ -1,19 +1,19 @@
-# 制作工具
+# 创建和使用工具
 
-在MetaGPT中制作工具是一个简单的过程，涉及创建您自己的函数或类以及工具注册表。本教程提供了制作工具的逐步指南。
+在MetaGPT中创建工具是一个简单的过程，涉及创建您自己的函数或类以及工具注册表。本教程提供了创建工具和在解释器`Interpreter`（MetaGPT中的智能体）中使用它们的逐步指南。
 
-## 制作工具的步骤
+## 创建工具的步骤
 
 1. **创建预提供的函数或类：**
 
    - 编写专门用于与外部环境进行特定交互的函数或类。将它们放置在`metagpt/tools/libs`目录中。
 
-2. **使用谷歌风格的文档字符串：**
+2. **使用谷歌风格的文档字符串（Docstring）：**
 
    - 为每个函数或类配备谷歌风格的文档字符串。这作为一个简洁而全面的参考资料，详细说明其用途、输入参数和预期输出。
 
 3. **应用@register_tool装饰器：**
-   - 使用`@register_tool`装饰器以确保在工具注册表中准确注册。这个装饰器简化了函数或类与解释器`Interpreter`（在MetaGPT中的智能体）的集成。
+   - 使用`@register_tool`装饰器以确保在工具注册表中准确注册。这个装饰器简化了函数或类与`Interpreter`的集成。
 
 ## 自定义工具案例
 
@@ -29,7 +29,7 @@
    from metagpt.tools.tool_registry import register_tool
    from metagpt.tools.tool_type import ToolType
 
-   @register_tool(tool_type=ToolType.ADDITION.type_name)
+   @register_tool(tool_type=ToolType.MATH.type_name)
    def addition(number1: float, number2: float) -> float:
        """
        用于加两个数字的方法。
@@ -59,7 +59,7 @@
 
    from metagpt.tools.tool_registry import ToolTypeDef
 
-   ADDITION = ToolTypeDef(
+   MATH = ToolTypeDef(
        name="addition",
        desc="用于计算两个数字的和",
    )
@@ -82,4 +82,4 @@
        asyncio.run(main())
    ```
 
-通过遵循这些步骤，用户可以无缝地整合和制作MetaGPT中`Tools`框架内的工具，使`Interpreter`能够有效地与外部环境交互。
+通过遵循这些步骤，用户可以无缝地创建并整合MetaGPT中`Tools`框架内的工具，使`Interpreter`能够有效地与外部环境交互。

@@ -1,21 +1,21 @@
-# Make Tools
+# Create and Utilize Tools
 
-Making tools in MetaGPT is a straightforward process that involves creating your own functions or classes within the `metagpt/tools/libs` directory and updating the tool registry in `metagpt/tools/tool_type.py`. This tutorial provides a step-by-step guide to making tools.
+Creating tools in MetaGPT is a straightforward process that involves creating your own functions or classes within the `metagpt/tools/libs` directory and updating the tool registry in `metagpt/tools/tool_type.py`. This tutorial provides a step-by-step guide to creating tools and utilizing them within the `Interpreter`(Agent in MetaGPT).
 
-## Steps for Making Tools
+## Steps for creating tools
 
 1. **Create Pre-provided Functions or Classes:**
 
    - Craft functions or classes tailored to enable specific interactions with the external environment. Place them in the `metagpt/tools/libs` directory.
 
-2. **Use Google Style Docstring:**
+2. **Employ Google Style Docstring:**
 
    - Accompany each function or class with a Google-style Docstring. This serves as a concise yet comprehensive reference, detailing the purpose, input parameters, and expected output.
 
 3. **Apply @register_tool Decorator:**
-   - Utilize the `@register_tool` decorator to ensure accurate registration within the tool registry. This decorator simplifies the integration of functions or classes with the `Interpreter`(Agent in MetaGPT).
+   - Utilize the `@register_tool` decorator to ensure accurate registration within the tool registry. This decorator simplifies the integration of functions or classes with the `Interpreter`.
 
-## Customizing Tool Case
+## Customizing tools case
 
 To illustrate the process, consider the following example of customizing a tool named "addition."
 
@@ -29,7 +29,7 @@ To illustrate the process, consider the following example of customizing a tool 
    from metagpt.tools.tool_registry import register_tool
    from metagpt.tools.tool_type import ToolType
 
-   @register_tool(tool_type=ToolType.ADDITION.type_name)
+   @register_tool(tool_type=ToolType.MATH.type_name)
    def addition(number1: float, number2: float) -> float:
        """
        Method for adding two numbers.
@@ -59,13 +59,13 @@ To illustrate the process, consider the following example of customizing a tool 
 
    from metagpt.tools.tool_registry import ToolTypeDef
 
-   ADDITION = ToolTypeDef(
+   MATH = ToolTypeDef(
        name="addition",
        desc="For calculating the sum of two numbers",
    )
    ```
 
-4. **Use the Tool in the Interpreter:**
+4. **Utilize the Tool in the Interpreter:**
 
    ```python
    from metagpt.roles.ci.code_interpreter import CodeInterpreter
@@ -82,4 +82,4 @@ To illustrate the process, consider the following example of customizing a tool 
        asyncio.run(main())
    ```
 
-By following these steps, users can seamlessly integrate and make tools within the `Tool` framework of MetaGPT. This empowers the `Interpreter` to effectively interact with the external environment.
+By following these steps, users can seamlessly create and integrate tools within the `Tool` framework of MetaGPT. This empowers the `Interpreter` to effectively interact with the external environment.
