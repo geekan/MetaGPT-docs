@@ -23,6 +23,36 @@ python examples/mi/machine_learning.py
   <source src="/image/guide/use_cases/interpreter/ml_wine_dataset.mp4" type="video/mp4">
 </video>
 
+## 示例: 销售额预测
+
+### 任务
+
+我们以[沃尔玛销售额预测数据集](https://www.kaggle.com/datasets/aslanahmedov/walmart-sales-forecast/data)为例说明如何使用Interpreter进行销售额预测建模。数据集内有train.csv、test.csv、feature.csv、store.csv共计四张表，我们要求Interpreter获取数据，拼接数据，切分训练和验证集，训练模型，并在测试集上进行预测。
+
+### 代码
+
+```bash
+python examples/mi/machine_learning.py --use_case sales_forecast
+```
+
+### 运行结果
+
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/split_data.png" width=400>
+</center>
+
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/total_weekly_sales_over_time.png" width=400>
+</center>
+
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/ground_truth_vs_predictions.png" width=400>
+</center>
+
+<center>
+<img src="../../../../../public/image/guide/use_cases/interpreter/sales_forecast/wmae.png" width=400 >
+</center>
+
 ## 机制解释
 
 Interpreter根据我们的需求做出计划，形成若干任务并依次执行，最终完成需求。Interpreter生成的完整代码将存储在data/output路径下
