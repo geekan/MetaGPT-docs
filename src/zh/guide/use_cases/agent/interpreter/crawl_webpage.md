@@ -18,8 +18,16 @@ python examples/mi/crawl_webpage.py
 
 ### 运行结果
 
+<br>
+<video  controls>
+  <source src="/image/guide/use_cases/interpreter/paper_list2.mp4" type="video/mp4">
+</video>
+
+<br>
+<img src="../../../../../public/image/guide/use_cases/interpreter/iclr2024_filtered_papers.png">
+
 ## 机制解释
 
 1. 使用metagpt.tools.libs.web_scraping下的工具函数scrape_web_playwright来获取网页html和inner text。工具函数是对浏览器自动化测试库Playwright的封装。
 2. 使用BeautifulSoup获取id为paperlist的表格，并载入为pandas的DataFrame。
-3. 获取DataFrame的列名来定位标题列，匹配关键词`multiagent` ，`large language model`来过滤数据。并将过滤后的数据保存在filtered_iclr_2024_papers.csv中。
+3. 获取DataFrame的列名来定位标题列，匹配关键词`multiagent` ，`large language model`来过滤数据。并将过滤后的数据保存在filtered_papers.csv中。
