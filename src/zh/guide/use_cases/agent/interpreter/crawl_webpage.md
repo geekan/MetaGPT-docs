@@ -18,6 +18,8 @@ python examples/mi/crawl_webpage.py
 
 ### 运行结果
 
+<img src="../../../../../public/image/guide/use_cases/interpreter/iclr2024_filtered_papers.png">
+
 ## 机制解释
 
 1. 使用metagpt.tools.libs.web_scraping下的工具函数scrape_web_playwright来获取网页html和inner text。工具函数是对浏览器自动化测试库Playwright的封装。
