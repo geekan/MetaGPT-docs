@@ -251,6 +251,10 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/imitate_webpage.md',
                           },
                           {
+                            text: 'Human interaction',
+                            link: 'use_cases/agent/interpreter/human_interaction.md',
+                          },
+                          {
                             text: 'Tool usage: web scraping',
                             link: 'use_cases/agent/interpreter/crawl_webpage.md',
                           },
@@ -468,6 +472,10 @@ export default defineConfig({
                           {
                             text: '票据OCR',
                             link: 'use_cases/agent/interpreter/ocr_receipt.md',
+                          },
+                          {
+                            text: '人类交互',
+                            link: 'use_cases/agent/interpreter/human_interaction.md',
                           },
                           {
                             text: '工具使用：网页仿写',

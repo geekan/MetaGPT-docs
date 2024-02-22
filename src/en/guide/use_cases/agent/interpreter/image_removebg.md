@@ -1,4 +1,4 @@
-# Remove The Background of Image
+# Remove Image Background
 
 ## Overview
 
@@ -16,7 +16,7 @@ Use `Interpreter` to remove background from a picture of a dog.
 python examples/mi/rm_image_background.py
 ```
 
-### Output
+### Execution Results
 
 1. `Interpreter` proposes the following solution steps:
 

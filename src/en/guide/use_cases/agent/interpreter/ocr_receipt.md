@@ -8,7 +8,7 @@ OCR (Optical Character Recognition) is a technology that recognizes text within 
 
 ### Task
 
-Use Interpreter to perform OCR recognition on the following receipt, extract and save the total amount and the receipt number.
+Use Interpreter to perform OCR recognition on the following receipt, extract and save the total amount.
 
 <img src="../../../../../public/image/guide/use_cases/interpreter/receipt_shopping.png" width="200">
 
@@ -22,6 +22,10 @@ python examples/mi/ocr_receipt.py
 ```
 
 ### Execution Results
+
+Interpreter will save a csv file containing the total amount under current working directory.
+
+<img src="../../../../../public/image/guide/use_cases/interpreter/receipt_shopping_ocr_result.png" width="200">
 
 ## Mechanism Explained
 
