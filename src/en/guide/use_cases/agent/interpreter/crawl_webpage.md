@@ -30,4 +30,4 @@ python examples/mi/crawl_webpage.py
 
 1. Use the tool function scrape_web_playwright from metagpt.tools.libs.web_scraping to obtain the webpage's HTML and inner text. This tool function is a wrapper for the browser automation library Playwright.
 2. Use BeautifulSoup to retrieve the table with the id paperlist, and load it as a pandas DataFrame.
-3. Obtain the column names of the DataFrame to locate the title column, match keywords multiagent, large language model to filter data. Save the filtered data in filtered_iclr_2024_papers.csv.
+3. Obtain the column names of the DataFrame to locate the title column, match keywords multiagent, large language model to filter data. Save the filtered data in filtered_papers.csv.
