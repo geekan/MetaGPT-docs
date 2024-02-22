@@ -29,7 +29,6 @@ python examples/mi/machine_learning.py
 
 我们以[沃尔玛销售额预测数据集](https://www.kaggle.com/datasets/aslanahmedov/walmart-sales-forecast/data)为例说明如何使用Interpreter进行销售额预测建模。数据集内有train.csv、test.csv、feature.csv、store.csv共计四张表，我们要求Interpreter获取数据，拼接数据，切分训练和验证集，训练模型，并在测试集上进行预测。
 
-
 ### 代码
 
 ```bash
