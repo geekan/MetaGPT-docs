@@ -66,7 +66,8 @@ llm:
 ```
 
 ### Google Gemini
-supports default model `gemini-pro`  
+
+supports default model `gemini-pro`
 
 ```yaml
 llm:
