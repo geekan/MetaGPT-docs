@@ -74,7 +74,8 @@ llm:
 ```
 
 ### 谷歌 Gemini
-默认支持模型`gemini-pro`  
+
+默认支持模型`gemini-pro`
 
 ```yaml
 llm:
@@ -91,7 +92,6 @@ llm:
   api_key: 'YOUR_API_KEY'
   model: 'YOUR_MODEL_NAME' # like `accounts/fireworks/models/llama-v2-7b-chat`
 ```
-
 
 ### 百度 千帆 API
 
