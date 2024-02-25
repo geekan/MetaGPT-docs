@@ -39,7 +39,7 @@ MetaGPT还支持各种LLM模型，根据您的需求配置模型API的密钥。
 
 ### 智谱 API
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) for more details.
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -50,7 +50,7 @@ llm:
 
 ### 科大讯飞的大模型 Spark API：
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) for more details.
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -64,7 +64,7 @@ llm:
 
 ### Azure OpenAI API
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) for more details.
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -72,6 +72,26 @@ llm:
   api_key: 'YOUR_API_KEY'
   model: 'YOUR_MODEL_NAME'
 ```
+
+### 谷歌 Gemini
+默认支持模型`gemini-pro`  
+
+```yaml
+llm:
+  api_type: 'gemini'
+  api_key: 'YOUR_API_KEY'
+```
+
+### Fireworks
+
+```yaml
+llm:
+  api_type: 'fireworks'
+  base_url: 'https://api.fireworks.ai/inference/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'YOUR_MODEL_NAME' # like `accounts/fireworks/models/llama-v2-7b-chat`
+```
+
 
 ### 百度 千帆 API
 

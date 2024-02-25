@@ -65,6 +65,25 @@ llm:
   model: 'YOUR_MODEL_NAME'
 ```
 
+### Google Gemini
+supports default model `gemini-pro`  
+
+```yaml
+llm:
+  api_type: 'gemini'
+  api_key: 'YOUR_API_KEY'
+```
+
+### Fireworks
+
+```yaml
+llm:
+  api_type: 'fireworks'
+  base_url: 'https://api.fireworks.ai/inference/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'YOUR_MODEL_NAME' # like `accounts/fireworks/models/llama-v2-7b-chat`
+```
+
 ### Baidu QianFan API
 
 support `ERNIE-*` models and some popular open-source models, see `metagpt/utils/token_counter.py`
