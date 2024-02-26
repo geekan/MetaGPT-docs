@@ -40,7 +40,6 @@ export const getPrevVerBranch = async () => {
 
 export const genDiffFile = async (branchA: string, branchB: string) => {
   const git = await simpleGit('.', {});
-  console.log(JSON.stringify(branchA), JSON.stringify(branchB));
   // 执行 git diff 命令并获取文件列表
   const { stdout: fileNames } = await execa('git', [
     'diff',
@@ -84,6 +83,7 @@ export const genDiffFile = async (branchA: string, branchB: string) => {
   writeFileSync(
     path.resolve(__dirname, './diff.ts'),
     `
+export const currendBranch = '${branchA}';
 export const diff = \`${diff}\`;`
   );
 };
