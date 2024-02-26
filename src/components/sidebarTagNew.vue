@@ -45,6 +45,5 @@ onMounted(() => {
   height: 11.6px;
   background-image: url(../public/new.png);
   background-size: 100% 100%;
-  background-color: red;
 }
 </style>
