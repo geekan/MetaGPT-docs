@@ -61,7 +61,9 @@ Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs
 ```yaml
 llm:
   api_type: 'azure'
+  base_url: 'YOUR_AZURE_BASE_URL'
   api_key: 'YOUR_API_KEY'
+  api_version: 'YOUR_API_VERSION'
   model: 'YOUR_MODEL_NAME'
 ```
 
