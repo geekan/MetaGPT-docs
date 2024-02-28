@@ -1,6 +1,6 @@
-# 为角色或动作配置LLM
+# 为角色或动作配置不同LLM
 
-MetaGPT允许你为团队中的不同Role和Action使用不同的LLM，这极大地增强了团队互动的灵活性和现实性，使得每个Role可以根据其特定的需求和背景，以及每个Action的特点，选择最合适的LLM。通过这种方式，你可以更精细地控制对话的质量和方向，从而创造出更加丰富和真实的交互体验。请在开始之前，确保你已阅读[配置](../get_started/configuration.md)和[辩论](../use_cases/multi_agent/debate.md)。
+MetaGPT允许你为团队中的不同Role和Action使用不同的LLM，这极大地增强了团队互动的灵活性和现实性，使得每个Role可以根据其特定的需求和背景，以及每个Action的特点，选择最合适的LLM。通过这种方式，你可以更精细地控制对话的质量和方向，从而创造出更加丰富和真实的交互体验。请在开始教程之前，确保你已阅读[配置](../get_started/configuration.md)和[辩论](../use_cases/multi_agent/debate.md)。
 
 以下是设置步骤：
 
@@ -28,13 +28,7 @@ gpt35.llm.model = "gpt-3.5-turbo-1106"  # 将model修改为"gpt-3.5-turbo-1106"
 
 ### 分配配置
 
-创建Role和Action，并为其分配配置。请注意，所有配置的优先级为：Action config > Role config > Global config 。不同Role和Action的配置情况如下。
-
-| Action of interest | Global config | Role config | Action config | Effective config for the Action |
-| ------------------ | ------------- | ----------- | ------------- | ------------------------------- |
-| a1                 | gpt4          | gpt4        | gpt4t         | gpt4t                           |
-| a2                 | gpt4          | gpt4        | unspecified   | gpt4                            |
-| a3                 | gpt4          | gpt35       | unspecified   | gpt35                           |
+创建Role和Action，并为其分配配置。
 
 ```python
 from metagpt.roles import Role
@@ -45,14 +39,22 @@ a1 = Action(config=gpt4t, name="Say", instruction="Say your opinion with emotion
 a2 = Action(name="Say", instruction="Say your opinion with emotion and don't repeat it")
 a3 = Action(name="Vote", instruction="Vote for the candidate, and say why you vote for him/her")
 
-# 创建A，B，C三个角色，分别为“民主党候选人”、“共和党候选人”和“选民”，并分别分配`gpt4`、`gpt4`和`gpt35`的配置。
-# A的gpt4配置不会为a1工作，因为a1已经配置了gpt4t的Action config
+# 创建A，B，C三个角色，分别为“民主党候选人”、“共和党候选人”和“选民”。
+# 虽然A设置了config为gpt4，但因为a1已经配置了Action config，所以A将使用model为gpt4的配置，而a1将使用model为gpt4t的配置。
 A = Role(name="A", profile="Democratic candidate", goal="Win the election", actions=[a1], watch=[a2], config=gpt4)
-# B的gpt4配置将为a2工作，因为a2未设置Action config。
-B = Role(name="B", profile="Republican candidate", goal="Win the election", actions=[a2], watch=[a1], config=gpt4)
-# C的gpt35配置将为a3工作，因为a3未设置Action config。
-C = Role(name="C", profile="Voter", goal="Vote for the candidate", actions=[a3], watch=[a1, a2], config=gpt35)
+# 因为B设置了config为gpt35，而为a2未设置Action config，所以B和a2将使用Role config，即model为gpt35的配置。
+B = Role(name="B", profile="Republican candidate", goal="Win the election", actions=[a2], watch=[a1], config=gpt35)
+# 因为C未设置config，而a3也未设置config，所以C和a3将使用Global config，即model为gpt4的配置。
+C = Role(name="C", profile="Voter", goal="Vote for the candidate", actions=[a3], watch=[a1, a2])
 ```
+
+请注意，对于关注的Action而言，配置的优先级为：Action config > Role config > Global config 。不同Role和Action的配置情况如下：
+
+| Action of interest | Global config | Role config | Action config | Effective config for the Action |
+| ------------------ | ------------- | ----------- | ------------- | ------------------------------- |
+| a1                 | gpt4          | gpt4        | gpt4t         | gpt4t                           |
+| a2                 | gpt4          | gpt35       | unspecified   | gpt35                           |
+| a3                 | gpt4          | unspecified | unspecified   | gpt4                            |
 
 ### 团队交互
 
