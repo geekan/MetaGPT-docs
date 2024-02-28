@@ -203,7 +203,7 @@ class ConductResearch(Action):
 
 ### Role(Researcher)
 
-`Researcher`通过组合`CollectLinks`、`WebBrowseAndSummarize`、`ConductResearch`三个Action，实现从网络进行搜索并总结报告的能力。因此，上述三个Action需要在`Researcher`初始化时，通过`_init_actions`方法，添加到角色中。这三个Action中，是按照`CollectLinks`->`WebBrowseAndSummarize`->`ConductResearch`顺序执行的，所以需要在`react`/`_act`定义这三个Action的执行逻辑。具体的实现参考[metagpt/roles/researcher.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/researcher.py)的`Researcher`的定义，以下是对`Researcher`的基础说明：
+`Researcher`通过组合`CollectLinks`、`WebBrowseAndSummarize`、`ConductResearch`三个Action，实现从网络进行搜索并总结报告的能力。因此，上述三个Action需要在`Researcher`初始化时，通过`set_actions`方法，添加到角色中。这三个Action中，是按照`CollectLinks`->`WebBrowseAndSummarize`->`ConductResearch`顺序执行的，所以需要在`react`/`_act`定义这三个Action的执行逻辑。具体的实现参考[metagpt/roles/researcher.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/researcher.py)的`Researcher`的定义，以下是对`Researcher`的基础说明：
 
 ```python
 class Researcher(Role):
@@ -219,7 +219,7 @@ class Researcher(Role):
         super().__init__(name, profile, goal, constraints, **kwargs)
 
         # 添加`CollectLinks`、`WebBrowseAndSummarize`、`ConductResearch`三个Action
-        self._init_actions([CollectLinks(name), WebBrowseAndSummarize(name), ConductResearch(name)])
+        self.set_actions([CollectLinks(name), WebBrowseAndSummarize(name), ConductResearch(name)])
 
         # 设置为顺序执行
         self._set_react_mode(react_mode="by_order")

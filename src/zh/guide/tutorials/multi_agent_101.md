@@ -100,7 +100,7 @@ class SimpleWriteReview(Action):
 
 在许多多智能体场景中，定义`Role`可能只需几行代码。对于`SimpleCoder`，我们做了两件事：
 
-1. 使用 `_init_actions` 为`Role`配备适当的 `Action`，这与设置单智能体相同
+1. 使用 `set_actions` 为`Role`配备适当的 `Action`，这与设置单智能体相同
 2. 多智能体操作逻辑：我们使`Role` `_watch` 来自用户或其他智能体的重要上游消息。回想我们的SOP，`SimpleCoder`接收用户指令，这是由MetaGPT中的`UserRequirement`引起的`Message`。因此，我们添加了 `self._watch([UserRequirement])`。
 
 这就是用户需要做的全部。对于那些对底层机制感兴趣的人，请参见本教程的本章中的[机制解释](#机制解释)。
@@ -113,14 +113,14 @@ class SimpleCoder(Role):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._watch([UserRequirement])
-        self._init_actions([SimpleWriteCode])
+        self.set_actions([SimpleWriteCode])
 ```
 
 ---
 
 与上述相似，对于 `SimpleTester`，我们：
 
-1. 使用 `_init_actions` 为`SimpleTester`配备 `SimpleWriteTest` 动作
+1. 使用 `set_actions` 为`SimpleTester`配备 `SimpleWriteTest` 动作
 2. 使`Role` `_watch` 来自其他智能体的重要上游消息。回想我们的SOP，`SimpleTester`从 `SimpleCoder` 中获取主代码，这是由 `SimpleWriteCode` 引起的 `Message`。因此，我们添加了 `self._watch([SimpleWriteCode])`。
    > 一个扩展的问题：想一想如果我们使用 `self._watch([SimpleWriteCode, SimpleWriteReview])` 会意味着什么，可以尝试这样做
 
@@ -135,7 +135,7 @@ class SimpleTester(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteTest])
+        self.set_actions([SimpleWriteTest])
         self._watch([SimpleWriteCode])
         # self._watch([SimpleWriteCode, SimpleWriteReview])  # feel free to try this too
 
@@ -163,7 +163,7 @@ class SimpleReviewer(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteReview])
+        self.set_actions([SimpleWriteReview])
         self._watch([SimpleWriteTest])
 ```
 

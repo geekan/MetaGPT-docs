@@ -16,7 +16,7 @@
 
 ## 角色定义
 
-1. 定义角色类，继承 `Role` 基类，重写 `__init__` 初始化方法。`__init__` 方法必须包含`name`、`profile`、`goal`、`constraints` 参数。第一行代码使用`super().__init__(name, profile, goal, constraints)` 调用父类的构造函数，实现 `Role` 的初始化。使用 `self._init_actions([WriteDirectory(language=language)])` 添加初始的 `action` 和 `states`，这里先添加写目录的 `action`。同时，也可以自定义参数，这里加了 `language` 参数支持自定义语言。使用`self._set_react_mode(react_mode="by_order")` 将 `_init_actions` 的 `action` 执行顺序设置为顺序。
+1. 定义角色类，继承 `Role` 基类，重写 `__init__` 初始化方法。`__init__` 方法必须包含`name`、`profile`、`goal`、`constraints` 参数。第一行代码使用`super().__init__(name, profile, goal, constraints)` 调用父类的构造函数，实现 `Role` 的初始化。使用 `self.set_actions([WriteDirectory(language=language)])` 添加初始的 `action` 和 `states`，这里先添加写目录的 `action`。同时，也可以自定义参数，这里加了 `language` 参数支持自定义语言。使用`self._set_react_mode(react_mode="by_order")` 将 `set_actions` 的 `action` 执行顺序设置为顺序。
 
    ```python
    class TutorialAssistant(Role):
@@ -39,7 +39,7 @@
            language: str = "Chinese",
        ):
            super().__init__(name, profile, goal, constraints)
-           self._init_actions([WriteDirectory(language=language)])
+           self.set_actions([WriteDirectory(language=language)])
            self.topic = ""
            self.main_title = ""
            self.total_content = ""
@@ -101,7 +101,7 @@
            directory += f"- {key}\n"
            for second_dir in first_dir[key]:
                directory += f"  - {second_dir}\n"
-       self._init_actions(actions)
+       self.set_actions(actions)
    ```
 
 ## Action定义

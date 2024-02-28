@@ -17,7 +17,7 @@
 
 ## 角色定义
 
-1. 定义角色类，继承 `Role` 基类，重写 `__init__` 初始化方法。`__init__` 方法必须包含`name`、`profile`、`goal`、`constraints` 参数。第一行代码使用`super().__init__(name, profile, goal, constraints)` 调用父类的构造函数，实现 `Role` 的初始化。使用 `self._init_actions([InvoiceOCR])` 添加初始的 `action` 和 `states`，这里先添加 `ocr` 识别发票的 `action`。也可以自定义参数，这里加了 `language` 参数支持自定义语言。这里用 `filename`, `origin_query`, `orc_data` 分别暂存发票文件名、原始提问、`ocr` 识别结果。使用 `self._set_react_mode(react_mode="by_order")` 将 `_init_actions` 的 `action` 执行顺序设置为顺序。
+1. 定义角色类，继承 `Role` 基类，重写 `__init__` 初始化方法。`__init__` 方法必须包含`name`、`profile`、`goal`、`constraints` 参数。第一行代码使用`super().__init__(name, profile, goal, constraints)` 调用父类的构造函数，实现 `Role` 的初始化。使用 `self.set_actions([InvoiceOCR])` 添加初始的 `action` 和 `states`，这里先添加 `ocr` 识别发票的 `action`。也可以自定义参数，这里加了 `language` 参数支持自定义语言。这里用 `filename`, `origin_query`, `orc_data` 分别暂存发票文件名、原始提问、`ocr` 识别结果。使用 `self._set_react_mode(react_mode="by_order")` 将 `set_actions` 的 `action` 执行顺序设置为顺序。
 
    ```python
    class InvoiceOCRAssistant(Role):
@@ -42,7 +42,7 @@
            language: str = "ch",
        ):
            super().__init__(name, profile, goal, constraints)
-           self._init_actions([InvoiceOCR])
+           self.set_actions([InvoiceOCR])
            self.language = language
            self.filename = ""
            self.origin_query = ""
@@ -71,10 +71,10 @@
            resp = await todo.run(file_path)
            if len(resp) == 1:
                # Single file support for questioning based on OCR recognition results
-               self._init_actions([GenerateTable, ReplyQuestion])
+               self.set_actions([GenerateTable, ReplyQuestion])
                self.orc_data = resp[0]
            else:
-               self._init_actions([GenerateTable])
+               self.set_actions([GenerateTable])
 
            self.rc.todo = None
            content = INVOICE_OCR_SUCCESS

@@ -16,7 +16,7 @@ The design approach involves using the `LLM` (Large Language Model) to initially
 
 ## Role Definition
 
-1. Define the role class, inheriting from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include the parameters `name`, `profile`, `goal`, and `constraints`. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, initializing the `Role`. Use `self._init_actions([WriteDirectory(language=language)])` to add initial `action` and `states`. Here, the write directory action is added initially. Additionally, custom parameters can be defined; here, the `language` parameter is added to support custom languages. Use `self._set_react_mode(react_mode="by_order")` to set the execution order of actions in `_init_actions` to sequential.
+1. Define the role class, inheriting from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include the parameters `name`, `profile`, `goal`, and `constraints`. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, initializing the `Role`. Use `self.set_actions([WriteDirectory(language=language)])` to add initial `action` and `states`. Here, the write directory action is added initially. Additionally, custom parameters can be defined; here, the `language` parameter is added to support custom languages. Use `self._set_react_mode(react_mode="by_order")` to set the execution order of actions in `set_actions` to sequential.
 
    ```python
    class TutorialAssistant(Role):
@@ -39,7 +39,7 @@ The design approach involves using the `LLM` (Large Language Model) to initially
            language: str = "Chinese",
        ):
            super().__init__(name, profile, goal, constraints)
-           self._init_actions([WriteDirectory(language=language)])
+           self.set_actions([WriteDirectory(language=language)])
            self.topic = ""
            self.main_title = ""
            self.total_content = ""
@@ -96,7 +96,7 @@ The design approach involves using the `LLM` (Large Language Model) to initially
            directory += f"- {key}\n"
            for second_dir in first_dir[key]:
                directory += f"  - {second_dir}\n"
-       self._init_actions(actions)
+       self.set_actions(actions)
    ```
 
 ## Action Definition
