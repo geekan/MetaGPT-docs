@@ -102,7 +102,7 @@ class SimpleWriteReview(Action):
 
 In many multi-agent scenarios, defining a `Role` can be as simple as 10 lines of codes. For `SimpleCoder`, we do two things:
 
-1. Equip the `Role` with the appropriate `Action`s with `_init_actions`, this is identical to setting up a single agent
+1. Equip the `Role` with the appropriate `Action`s with `set_actions`, this is identical to setting up a single agent
 2. A multi-agent operation: we make the `Role` `_watch` important upstream messages from users or other agents. Recall our SOP, `SimpleCoder` takes user instruction, which is a `Message` caused by `UserRequirement` in MetaGPT. Therefore, we add `self._watch([UserRequirement])`.
 
 That's all users have to do. For those who are interested in the mechanism under the hood, see [Mechanism Explained](#mechanism-explained) of this chapter.
@@ -115,14 +115,14 @@ class SimpleCoder(Role):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._watch([UserRequirement])
-        self._init_actions([SimpleWriteCode])
+        self.set_actions([SimpleWriteCode])
 ```
 
 ---
 
 Similar to above, for `SimpleTester`, we:
 
-1. Equip the `SimpleTester` with `SimpleWriteTest` action using `_init_actions`
+1. Equip the `SimpleTester` with `SimpleWriteTest` action using `set_actions`
 2. Make the `Role` `_watch` important upstream messages from other agents. Recall our SOP, `SimpleTester` takes main code from `SimpleCoder`, which is a `Message` caused by `SimpleWriteCode`. Therefore, we add `self._watch([SimpleWriteCode])`.
    > An extended question: Think about what it means if we use `self._watch([SimpleWriteCode, SimpleWriteReview])` instead, feel free to try this too
 
@@ -137,7 +137,7 @@ class SimpleTester(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteTest])
+        self.set_actions([SimpleWriteTest])
         self._watch([SimpleWriteCode])
         # self._watch([SimpleWriteCode, SimpleWriteReview])  # feel free to try this too
 
@@ -165,7 +165,7 @@ class SimpleReviewer(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteReview])
+        self.set_actions([SimpleWriteReview])
         self._watch([SimpleWriteTest])
 ```
 

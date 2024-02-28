@@ -17,7 +17,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
 
 ## Role Definition
 
-1. Define the role class, inherit from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include the `name`, `profile`, `goal`, and `constraints` parameters. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, implementing the initialization of the `Role`. Use `self._init_actions([InvoiceOCR])` to add initial actions and states. Here, the initial action is to add an action for OCR recognition of invoices. Custom parameters can also be added; here, the `language` parameter is added to support custom languages. Variables such as `filename`, `origin_query`, and `orc_data` are used to temporarily store the invoice file name, the original query, and the OCR recognition result, respectively. Use `self._set_react_mode(react_mode="by_order")` to set the execution order of actions to be sequential in the `_init_actions`.
+1. Define the role class, inherit from the `Role` base class, and override the `__init__` initialization method. The `__init__` method must include the `name`, `profile`, `goal`, and `constraints` parameters. The first line of code uses `super().__init__(name, profile, goal, constraints)` to call the constructor of the parent class, implementing the initialization of the `Role`. Use `self.set_actions([InvoiceOCR])` to add initial actions and states. Here, the initial action is to add an action for OCR recognition of invoices. Custom parameters can also be added; here, the `language` parameter is added to support custom languages. Variables such as `filename`, `origin_query`, and `orc_data` are used to temporarily store the invoice file name, the original query, and the OCR recognition result, respectively. Use `self._set_react_mode(react_mode="by_order")` to set the execution order of actions to be sequential in the `set_actions`.
 
    ```python
    class InvoiceOCRAssistant(Role):
@@ -42,7 +42,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
            language: str = "ch",
        ):
            super().__init__(name, profile, goal, constraints)
-           self._init_actions([InvoiceOCR])
+           self.set_actions([InvoiceOCR])
            self.language = language
            self.filename = ""
            self.origin_query = ""
@@ -71,10 +71,10 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
            resp = await todo.run(file_path)
            if len(resp) == 1:
                # Single file support for questioning based on OCR recognition results
-               self._init_actions([GenerateTable, ReplyQuestion])
+               self.set_actions([GenerateTable, ReplyQuestion])
                self.orc_data = resp[0]
            else:
-               self._init_actions([GenerateTable])
+               self.set_actions([GenerateTable])
 
            self.rc.todo = None
            content = INVOICE_OCR_SUCCESS

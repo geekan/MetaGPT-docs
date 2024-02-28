@@ -25,7 +25,7 @@ self._set_react_mode(react_mode="react", max_react_loop=6)
 
 ### 按顺序执行
 
-每次按照\_init_actions中定义的顺序执行可行的操作，即 `_act` (Action1) -> `_act` (Action2) -> `_act` (Action3) -> ...
+每次按照\set_actions中定义的顺序执行可行的操作，即 `_act` (Action1) -> `_act` (Action2) -> `_act` (Action3) -> ...
 
 这种模式适合于确定性的标准操作程序（SOP），在这种情况下我们确切地知道`Role`应该采取什么行动以及它们的顺序。使用这种模式，你只需要定义`Action`，框架将接管管道构建。
 
@@ -40,7 +40,7 @@ class RunnableCoder(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteCode, SimpleRunCode])
+        self.set_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:

@@ -47,7 +47,7 @@ class SpeakAloud(Action):
 
 我们将定义一个通用的 `Role`，称为 `Debator`。
 
-在这里，`_init_actions` 使我们的 `Role` 拥有我们刚刚定义的 `SpeakAloud` 动作。我们还使用 `_watch` 监视了 `SpeakAloud` 和 `UserRequirement`，因为我们希望每个辩手关注来自对手的 `SpeakAloud` 消息，以及来自用户的 `UserRequirement`（人类指令）。
+在这里，`set_actions` 使我们的 `Role` 拥有我们刚刚定义的 `SpeakAloud` 动作。我们还使用 `_watch` 监视了 `SpeakAloud` 和 `UserRequirement`，因为我们希望每个辩手关注来自对手的 `SpeakAloud` 消息，以及来自用户的 `UserRequirement`（人类指令）。
 
 ```python
 class Debator(Role):
@@ -59,7 +59,7 @@ class Debator(Role):
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
+        self.set_actions([SpeakAloud])
         self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name
@@ -111,7 +111,7 @@ class Debator(Role):
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
+        self.set_actions([SpeakAloud])
         self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name

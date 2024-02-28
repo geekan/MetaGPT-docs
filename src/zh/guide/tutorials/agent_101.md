@@ -93,7 +93,7 @@ class SimpleCoder(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteCode])
+        self.set_actions([SimpleWriteCode])
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
@@ -152,8 +152,8 @@ class SimpleRunCode(Action):
 
 与定义单一动作的智能体没有太大不同！让我们来映射一下：
 
-1. 用 `self._init_actions` 初始化所有 `Action`
-2. 指定每次 `Role` 会选择哪个 `Action`。我们将 `react_mode` 设置为 "by_order"，这意味着 `Role` 将按照 `self._init_actions` 中指定的顺序执行其能够执行的 `Action`（有关更多讨论，请参见 [思考和行动](agent_think_act)）。在这种情况下，当 `Role` 执行 `_act` 时，`self.rc.todo` 将首先是 `SimpleWriteCode`，然后是 `SimpleRunCode`。
+1. 用 `self.set_actions` 初始化所有 `Action`
+2. 指定每次 `Role` 会选择哪个 `Action`。我们将 `react_mode` 设置为 "by_order"，这意味着 `Role` 将按照 `self.set_actions` 中指定的顺序执行其能够执行的 `Action`（有关更多讨论，请参见 [思考和行动](agent_think_act)）。在这种情况下，当 `Role` 执行 `_act` 时，`self.rc.todo` 将首先是 `SimpleWriteCode`，然后是 `SimpleRunCode`。
 3. 覆盖 `_act` 函数。`Role` 从上一轮的人类输入或动作输出中检索消息，用适当的 `Message` 内容提供当前的 `Action` (`self.rc.todo`)，最后返回由当前 `Action` 输出组成的 `Message`。
 
 ```python
@@ -163,7 +163,7 @@ class RunnableCoder(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteCode, SimpleRunCode])
+        self.set_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:
