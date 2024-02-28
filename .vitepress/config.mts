@@ -213,6 +213,10 @@ export default defineConfig({
                     text: 'Integration with open LLM',
                     link: 'tutorials/integration_with_open_llm.md',
                   },
+                  {
+                    text: 'Customize LLMs for roles or actions',
+                    link: 'tutorials/customize_llms_for_roles_or_actions.md',
+                  },
                 ],
               },
               {
@@ -439,6 +443,10 @@ export default defineConfig({
                   {
                     text: '集成开源LLM',
                     link: 'tutorials/integration_with_open_llm',
+                  },
+                  {
+                    text: '为角色或动作配置不同LLM',
+                    link: 'tutorials/customize_llms_for_roles_or_actions',
                   },
                 ],
               },
