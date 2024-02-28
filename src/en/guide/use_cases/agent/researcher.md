@@ -201,7 +201,7 @@ class ConductResearch(Action):
 
 ### Role (Researcher)
 
-The `Researcher` role combines the `CollectLinks`, `WebBrowseAndSummarize`, and `ConductResearch` Actions to enable the capability of searching the internet and summarizing reports. Therefore, these three Actions need to be added to the role during initialization using the `_init_actions` method. Since these Actions are executed in the order of `CollectLinks` -> `WebBrowseAndSummarize` -> `ConductResearch`, the execution logic for these Actions needs to be defined in the `react`/`_act` methods. The implementation details can be found in [metagpt/roles/researcher.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/researcher.py), and the following provides a basic explanation of the `Researcher` class:
+The `Researcher` role combines the `CollectLinks`, `WebBrowseAndSummarize`, and `ConductResearch` Actions to enable the capability of searching the internet and summarizing reports. Therefore, these three Actions need to be added to the role during initialization using the `set_actions` method. Since these Actions are executed in the order of `CollectLinks` -> `WebBrowseAndSummarize` -> `ConductResearch`, the execution logic for these Actions needs to be defined in the `react`/`_act` methods. The implementation details can be found in [metagpt/roles/researcher.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/researcher.py), and the following provides a basic explanation of the `Researcher` class:
 
 ```python
 
@@ -218,7 +218,7 @@ class Researcher(Role):
         super().__init__(name, profile, goal, constraints, **kwargs)
 
         # Add the `CollectLinks`, `WebBrowseAndSummarize`, and `ConductResearch` actions
-        self._init_actions([CollectLinks(name), WebBrowseAndSummarize(name), ConductResearch(name)])
+        self.set_actions([CollectLinks(name), WebBrowseAndSummarize(name), ConductResearch(name)])
 
         # Set to execute in order
         self._set_react_mode(react_mode="by_order")

@@ -25,7 +25,7 @@ self._set_react_mode(react_mode="react", max_react_loop=6)
 
 ### By order
 
-Perform capable actions each time by order defined in `_init_actions`, i.e. `_act` (Action1) -> `_act` (Action2) -> `_act` (Action3) -> ...
+Perform capable actions each time by order defined in `set_actions`, i.e. `_act` (Action1) -> `_act` (Action2) -> `_act` (Action3) -> ...
 
 This mode is suitable for a deterministic SOP, where we know exactly what actions a `Role` should take and their order. With this mode, you only need to define the `Action`s and the framework will take over the pipeline building.
 
@@ -40,7 +40,7 @@ class RunnableCoder(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteCode, SimpleRunCode])
+        self.set_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:

@@ -47,7 +47,7 @@ class SpeakAloud(Action):
 
 We will define a common `Role` called `Debator`.
 
-Here `_init_actions` make our `Role` possess the `SpeakAloud` action we just define. We also `_watch` both `SpeakAloud` and `UserRequirement`, because we want each debator to pay attention to messages of `SpeakAloud` from his opponent, as well as `UserRequirement` (human instruction) from users.
+Here `set_actions` make our `Role` possess the `SpeakAloud` action we just define. We also `_watch` both `SpeakAloud` and `UserRequirement`, because we want each debator to pay attention to messages of `SpeakAloud` from his opponent, as well as `UserRequirement` (human instruction) from users.
 
 ```python
 class Debator(Role):
@@ -59,7 +59,7 @@ class Debator(Role):
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
+        self.set_actions([SpeakAloud])
         self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name
@@ -111,7 +111,7 @@ class Debator(Role):
         **kwargs,
     ):
         super().__init__(name, profile, **kwargs)
-        self._init_actions([SpeakAloud])
+        self.set_actions([SpeakAloud])
         self._watch([UserRequirement, SpeakAloud])
         self.name = name
         self.opponent_name = opponent_name

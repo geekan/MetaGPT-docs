@@ -95,7 +95,7 @@ class SimpleCoder(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteCode])
+        self.set_actions([SimpleWriteCode])
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
@@ -154,8 +154,8 @@ class SimpleRunCode(Action):
 
 Not that different from defining a single-action agent! Let's map it out:
 
-1. Initiate all `Action` with `self._init_actions`
-2. Specify how `Role` will choose `Action` each time. We set `react_mode` to be "by_order", which means the `Role` will take its capable `Action`s in order specified in `self._init_actions` (more discussion in [Think and act](agent_think_act)). In this case, when the `Role` `_act`s, `self.rc.todo` will be `SimpleWriteCode` first and `SimpleRunCode` next.
+1. Initiate all `Action` with `self.set_actions`
+2. Specify how `Role` will choose `Action` each time. We set `react_mode` to be "by_order", which means the `Role` will take its capable `Action`s in order specified in `self.set_actions` (more discussion in [Think and act](agent_think_act)). In this case, when the `Role` `_act`s, `self.rc.todo` will be `SimpleWriteCode` first and `SimpleRunCode` next.
 3. Overwrite the `_act` function. The `Role` retrieves messages from human input or action outputs from the last round, feeds the current `Action` (`self.rc.todo`) with the appropriate `Message` content, and finally returns a `Message` composed of the current `Action` output.
 
 ```python
@@ -165,7 +165,7 @@ class RunnableCoder(Role):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._init_actions([SimpleWriteCode, SimpleRunCode])
+        self.set_actions([SimpleWriteCode, SimpleRunCode])
         self._set_react_mode(react_mode="by_order")
 
     async def _act(self) -> Message:

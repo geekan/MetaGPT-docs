@@ -28,7 +28,7 @@ We are a human `SimpleReviewer` interacting with the two LLM-based agents `Simpl
 Each time when it's our turn to respond, the running process will pause to wait for our input. Just type in what we want, we are sending our messages to the agents!
 
 > Constraint:  
-> For develops who customize `Role`'s `_act` function, the `Action`s called in `_act` must be among the `self._actions` initialized with `_init_actions` for the human engagement to take effect.
+> For develops who customize `Role`'s `_act` function, the `Action`s called in `_act` must be among the `self._actions` initialized with `set_actions` for the human engagement to take effect.
 
 > LIMITATION:  
 > Currently the interaction is through terminal input, which is inconvenient for multi-line or structured writeup. Meanwhile, users must adhere to the prompt in content or format like what we require of an LLM, in order for the logic after human input works as usual. We will provide solutions to these issues in following update.
