@@ -159,6 +159,17 @@ llm:
   model: 'moonshot-v1-8k'
 ```
 
+### FireWorks AI  API
+
+support `FireWorks`models，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'fireworks'
+  base_url: 'https://api.fireworks.ai/inference/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'accounts/fireworks/models/llama-v2-13b-chat'
+
 ## Configuration for tools (Optional)
 
 In addition to LLM, we often want agents to use tools. We cover their setup in this section.
