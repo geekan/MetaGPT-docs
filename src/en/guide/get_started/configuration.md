@@ -127,7 +127,7 @@ llm:
 
 ### MoonShot AI Moonshot API
 
-support `moonshot-v1-*`models，详见`metagpt/utils/token_counter.py`
+support `moonshot-v1-*`models，see `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
@@ -139,7 +139,7 @@ llm:
 
 ### FireWorks AI  API
 
-support `FireWorks`models，详见`metagpt/utils/token_counter.py`
+support `FireWorks`models，see `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
