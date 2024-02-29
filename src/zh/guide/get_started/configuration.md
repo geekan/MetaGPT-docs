@@ -166,6 +166,17 @@ llm:
   model: 'moonshot-v1-8k'
 ```
 
+### FireWorks AI  API
+
+支持 `FireWorks`models模型，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'fireworks'
+  base_url: 'https://api.fireworks.ai/inference/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'accounts/fireworks/models/llama-v2-13b-chat'
+
 ## 配置工具（可选）
 
 除了让智能体能调用大模型，我们时常期望智能体能调用工具。我们需要配置好所需工具以完成准备工作。
