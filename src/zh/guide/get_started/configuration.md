@@ -154,6 +154,19 @@ llm:
   base_url: 'https://api.fireworks.ai/inference/v1'
   api_key: 'YOUR_API_KEY'
   model: 'accounts/fireworks/models/llama-v2-13b-chat'
+```
+
+### Mistral AI  API
+
+支持 `Mistral`models模型，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: "mistral"
+  base_url: "https://api.mistral.ai/v1"
+  api_key: "YOUR_API_KEY"
+  model: "open-mixtral-8x7b"
+```
 
 ## 配置工具（可选）
 
