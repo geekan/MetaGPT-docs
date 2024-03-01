@@ -13,7 +13,7 @@
 ### 代码
 
 ```
-python examples/mi/machine_learning.py --auto_run False
+python examples/di/machine_learning.py --auto_run False
 ```
 
 ### 运行结果

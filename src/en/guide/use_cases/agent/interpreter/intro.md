@@ -1,8 +1,8 @@
-# MetaGPT Interpreter (MI)
+# Data Interpreter (DI)
 
-## What is Interpreter
+## What is Data Interpreter
 
-Interpreter is an agent who solves problems through codes. It understands user requirements, makes plans, writes codes for execution, and uses tools if necessary. These capabilities enable it to tackle a wide range of scenarios. Please check out the examples below.
+Data Interpreter is an agent who solves data-related problems through codes. It understands user requirements, makes plans, writes codes for execution, and uses tools if necessary. These capabilities enable it to tackle a wide range of scenarios. Feel free to check out [the paper](https://arxiv.org/abs/2402.18679) and the examples below.
 
 ## Example List
 
