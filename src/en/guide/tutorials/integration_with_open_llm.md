@@ -289,8 +289,7 @@ In response to the above situation, we have added the feature of repairing open 
 **config/config2.yaml**
 
 ```yaml
-llm:
-  ...
+llm: ...
 
 repair_llm_output: true
 ```
