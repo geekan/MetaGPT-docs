@@ -85,16 +85,6 @@ llm:
   api_key: 'YOUR_API_KEY'
 ```
 
-### Fireworks
-
-```yaml
-llm:
-  api_type: 'fireworks'
-  base_url: 'https://api.fireworks.ai/inference/v1'
-  api_key: 'YOUR_API_KEY'
-  model: 'YOUR_MODEL_NAME' # like `accounts/fireworks/models/llama-v2-7b-chat`
-```
-
 ### 百度 千帆 API
 
 支持`ERNIE-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`
@@ -166,7 +156,7 @@ llm:
   model: 'moonshot-v1-8k'
 ```
 
-### FireWorks AI API
+### FireWorks API
 
 支持 `FireWorks`models模型，详见`metagpt/utils/token_counter.py`
 
@@ -178,7 +168,7 @@ llm:
   model: 'accounts/fireworks/models/llama-v2-13b-chat'
 ```
 
-### Mistral AI API
+### Mistral API
 
 支持 `Mistral`models模型，详见`metagpt/utils/token_counter.py`
 
