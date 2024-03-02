@@ -290,8 +290,7 @@ MetaGPT的prompt对输出有较强的结构要求，开源模型输出时，往�
 **config/config2.yaml**
 
 ```yaml
-llm:
-  ...
+llm: ...
 
 repair_llm_output: true
 ```
