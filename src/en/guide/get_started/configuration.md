@@ -137,7 +137,7 @@ llm:
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
 ```
 
-### MoonShot AI Moonshot API
+### Moonshot API
 
 support `moonshot-v1-*`models，see `metagpt/utils/token_counter.py`
 
@@ -149,7 +149,7 @@ llm:
   model: 'moonshot-v1-8k'
 ```
 
-### FireWorks AI API
+### FireWorks API
 
 support `FireWorks`models，see `metagpt/utils/token_counter.py`
 
@@ -161,7 +161,7 @@ llm:
   model: 'accounts/fireworks/models/llama-v2-13b-chat'
 ```
 
-### Mistral AI API
+### Mistral API
 
 support `Mistral`models，see `metagpt/utils/token_counter.py`
 
