@@ -223,8 +223,8 @@ export default defineConfig({
                     text: 'Agent',
                     items: [
                       {
-                        text: 'Interpreter',
-                        link: 'use_cases/agent/interpreter/mi_intro.md',
+                        text: 'Data Interpreter',
+                        link: 'use_cases/agent/interpreter/intro.md',
                         items: [
                           {
                             text: 'Data analysis and visualization',
@@ -450,8 +450,8 @@ export default defineConfig({
                     text: '智能体',
                     items: [
                       {
-                        text: '解释器',
-                        link: 'use_cases/agent/interpreter/mi_intro.md',
+                        text: '数据解释器',
+                        link: 'use_cases/agent/interpreter/intro.md',
                         items: [
                           {
                             text: '数据分析和可视化',

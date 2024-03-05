@@ -2,7 +2,7 @@
 
 ## Overview
 
-Using Interpreter for viewing emails, quickly reviewing, and automatically replying to them.
+Using `DataInterpreter` for viewing emails, quickly reviewing, and automatically replying to them.
 
 ## Example: Logging into Email, Viewing, and Summarizing Email Content
 
@@ -13,10 +13,13 @@ After logging into the email, display the sender and the body of the latest 5 em
 ### Code
 
 ```bash
-python examples/mi/email_summary.py
+python examples/di/email_summary.py
 ```
 
 ### Execution Results
+
+<br>
+<img src="../../../../../public/image/guide/use_cases/interpreter/email.jpeg">
 
 ## Mechanism Explained
 

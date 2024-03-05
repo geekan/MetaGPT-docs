@@ -13,7 +13,7 @@ Given a URL or an image of a webpage, use the MetaGPT tool integrated with GPT-4
 ### Code
 
 ```bash
-python examples/mi/imitate_webpage.py
+python examples/di/imitate_webpage.py
 ```
 
 ### Execution Results
