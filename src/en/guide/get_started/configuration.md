@@ -28,11 +28,12 @@ With these steps, your setup is complete. For starting with MetaGPT, check out t
 MetaGPT supports a range of LLM models. Configure your model API keys as needed.
 
 ### Anthropic / Claude API
-supported model list, see `claude-*` inside `metagpt/utils/token_counter.py`  
+
+supported model list, see `claude-*` inside `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
-  api_type: 'claude'  # or anthropic
+  api_type: 'claude' # or anthropic
   base_url: 'https://api.anthropic.com'
   api_key: 'YOUR_API_KEY'
   model: 'claude-3-opus-20240229'
