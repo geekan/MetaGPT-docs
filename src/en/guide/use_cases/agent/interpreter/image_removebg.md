@@ -8,17 +8,17 @@ Image background removal is a technique used to separate the main objects from t
 
 ### Task
 
-Use `Interpreter` to remove background from a picture of a dog.
+Use `DataInterpreter` to remove background from a picture of a dog.
 
 ### Code
 
 ```bash
-python examples/mi/rm_image_background.py
+python examples/di/rm_image_background.py
 ```
 
 ### Execution Results
 
-1. `Interpreter` proposes the following solution steps:
+1. `DataInterpreter` proposes the following solution steps:
 
 ```json
 [
@@ -40,9 +40,9 @@ python examples/mi/rm_image_background.py
 ]
 ```
 
-`Interpreter` is able to divide the problem into logical tasks, and here we can see that the first step is to install the Python library "rembg".
+`DataInterpreter` is able to divide the problem into logical tasks, and here we can see that the first step is to install the Python library "rembg".
 
-2. `Interpreter` writes the following code:
+2. `DataInterpreter` writes the following code:
 
 ```python
 # -----------------------------task1-------------------------------
@@ -65,9 +65,9 @@ with open(output_path, 'wb') as o:
     o.write(output_image)
 ```
 
-`rembg` is an open-source Python toolkit that enables automatic image background removal and can run on CPU. When we mention the use of this toolkit in the requirements, `Interpreter` is capable of automatically installing and correctly utilizing this toolkit.(This is likely because LLM learned the usage of the "rembg" Python library during its training)
+`rembg` is an open-source Python toolkit that enables automatic image background removal and can run on CPU. When we mention the use of this toolkit in the requirements, `DataInterpreter` is capable of automatically installing and correctly utilizing this toolkit.(This is likely because LLM learned the usage of the "rembg" Python library during its training)
 
-Here is the input image of a dog and the image of the dog with the background removed. It can be seen that the background removal effect is excellent, and `Interpreter` can smoothly accomplish this problem.
+Here is the input image of a dog and the image of the dog with the background removed. It can be seen that the background removal effect is excellent, and `DataInterpreter` can smoothly accomplish this problem.
 
 <div align=center>
 <img src="../../../../../public/image/guide/use_cases/interpreter/dog.jpg" width="500" height="300"> 

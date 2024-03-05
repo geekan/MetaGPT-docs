@@ -13,7 +13,7 @@
 ### 代码
 
 ```bash
-python examples/mi/imitate_webpage.py
+python examples/di/imitate_webpage.py
 ```
 
 ### 运行结果

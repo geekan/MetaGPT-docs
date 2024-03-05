@@ -13,7 +13,7 @@ We use the same [machine learning scenario](./machine_learning.md) as an example
 ### Code
 
 ```
-python examples/mi/machine_learning.py --auto_run False
+python examples/di/machine_learning.py --auto_run False
 ```
 
 ### Execution Results
@@ -35,7 +35,7 @@ The interpreter dynamically adjusts and executes to fulfill our requests.
 
 To use the human interaction mode, set `auto_run=False` when initializing the interpreter. The interpreter will request human review after proposing each plan and completing each task in the plan. Combining keywords, users can inform the interpreter how to modify the proposed plan or written code using natural language. The interpreter supports plan status management, preserving progress on unaffected tasks when adding, modifying, or deleting tasks. Please refer to the following usage example.
 
-### Example of an Interpreter-Generated Plan
+### Example of an `DataInterpreter`-Generated Plan
 
 ```json
 [

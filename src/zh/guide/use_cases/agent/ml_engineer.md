@@ -9,7 +9,7 @@
 ### 代码
 
 ```bash
-python examples/mi/ml_engineer_with_tools.py
+python examples/di/ml_engineer_with_tools.py
 ```
 
 ### 运行结果
