@@ -37,6 +37,17 @@ llm:
 
 MetaGPT还支持各种LLM模型，根据您的需求配置模型API的密钥。
 
+### Anthropic / Claude API
+支持模型名列表，在`metagpt/utils/token_counter.py`的`claude-*`  
+
+```yaml
+llm:
+  api_type: 'claude'  # 或 anthropic
+  base_url: 'https://api.anthropic.com'
+  api_key: 'YOUR_API_KEY'
+  model: 'claude-3-opus-20240229'
+```
+
 ### 智谱 API
 
 访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) 获得更新详情。
