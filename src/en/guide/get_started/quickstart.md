@@ -74,6 +74,7 @@ You may expect similar outputs below:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1xlReN7EIpKzgZO1If29-zsw7QNUUfEbx?usp=sharing)
 
+---
 ## Usage
 
 ```
