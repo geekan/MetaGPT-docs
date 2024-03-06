@@ -21,10 +21,12 @@
 
 ```yaml
 llm:
+  api_type: 'openai' # or azure / ollama / open_llm etc. Check LLMType for more options
   api_key: 'sk-...' # YOUR_API_KEY
   model: 'gpt-4-turbo-preview' # or gpt-3.5-turbo-1106 / gpt-4-1106-preview
   # base_url: 'https://api.openai.com/v1'  # or any forward url.
-  # proxy: 'YOUR_PROXY'  # Optional. If you want to use a proxy, set it here.
+  # proxy: 'YOUR_LLM_PROXY_IF_NEEDED'  # Optional. If you want to use a proxy, set it here.
+  # pricing_plan: 'YOUR_PRICING_PLAN' # Optional. If your pricing plan uses a different name than the `model`.
 ```
 
 请记住：如果您按照[安装](./installation)中的`git clone`方法，`config/config2.yaml`
