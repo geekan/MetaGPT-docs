@@ -1,5 +1,5 @@
 <template>
-  <div class="demowrap flex gap-24px">
+  <div class="demowrap flex gap-16px">
     <div class="imgside w-500px flex-shrink-0">
       <img class="p16px w100%" src="/authors.jpg" alt="" />
       <div class="divider"></div>
@@ -24,7 +24,6 @@
             <div class="line-clamp-3 font-300 text-12px">{{ item.prompt }}</div>
           </Tooltip>
         </div>
-        <i></i><i></i><i></i><i></i><i></i>
       </template>
     </div>
   </div>
@@ -76,28 +75,19 @@ onMounted(() => {
   }
 }
 .demoList {
-  display: flex;
-  flex-wrap: wrap;
   flex: 1;
-
-  gap: 20px;
-  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  grid-gap: 16px;
+  padding: 16px 0;
   justify-content: space-around;
-  > i {
-    content: '';
-    width: 330px;
-  }
   .demoItem {
-    width: 330px;
     overflow: hidden;
     padding: 16px;
     border-radius: 10px;
     border: 8px solid #f5f5f5;
     box-sizing: border-box;
     cursor: pointer;
-    // &:hover {
-    //   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    // }
   }
 }
 .dark {
