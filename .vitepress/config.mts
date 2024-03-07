@@ -1,5 +1,6 @@
 import { DefaultTheme, defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
+import VueTsx from '@vitejs/plugin-vue-jsx';
 import AutoImport from 'unplugin-auto-import/vite';
 import { resolve, join } from 'node:path';
 import {
@@ -54,7 +55,7 @@ const genRfcLinks = (dir: string, prefixPath = '') => {
   return data;
 };
 const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
-const sources = ['blog', 'rfcs'];
+const sources = ['blog', 'rfcs', 'demos'];
 const dests = ['zh', 'en'];
 
 const copyDir = (source: string, dest: string) => {
@@ -177,6 +178,11 @@ export default defineConfig({
             text: 'Docs',
             link: '/en/guide/get_started/introduction',
             activeMatch: '/en/guide/',
+          },
+          {
+            text: 'Data Interpreter',
+            link: '/en/demos/index',
+            activeMatch: '/en/demos/',
           },
           ...getVersions(),
         ],
@@ -372,6 +378,11 @@ export default defineConfig({
             text: '文档',
             link: '/zh/guide/get_started/introduction',
             activeMatch: '/zh/guide/',
+          },
+          {
+            text: 'Data Interpreter',
+            link: '/zh/demos/index',
+            activeMatch: '/zh/demos/',
           },
           ...arrVisible(
             [
@@ -615,6 +626,7 @@ export default defineConfig({
       alias: [{ find: '@/', replacement: `${resolve(__dirname, '../src')}/` }],
     },
     plugins: [
+      VueTsx(),
       UnoCSS(),
       AutoImport({
         imports: ['vue'],
