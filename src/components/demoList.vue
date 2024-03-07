@@ -45,7 +45,7 @@ const getData = async () => {
 
   const djson = await datas.json();
   loading.value = false;
-  lists.value = djson;
+  lists.value = djson.slice(0, -1);
 };
 
 const router = useRouter();
