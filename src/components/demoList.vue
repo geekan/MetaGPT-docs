@@ -40,12 +40,12 @@ const loading = ref(false);
 const getData = async () => {
   loading.value = true;
   const datas = await fetch(
-    `https://metagpt.us-ca.ufileos.com/data/demos.json?t=${2}`
+    `https://metagpt.us-ca.ufileos.com/data/demos.json?t=${3}`
   );
 
   const djson = await datas.json();
   loading.value = false;
-  lists.value = djson.slice(0, -1);
+  lists.value = djson;
 };
 
 const router = useRouter();

@@ -24,7 +24,7 @@
   />
   <div class="demoWraper" v-if="detailItem">
     <div class="prompt">
-      <div class="text-20px font-500 pb-8px">Requiement</div>
+      <div class="text-20px font-500 pb-8px">Requirement</div>
       <template v-if="detailItem.prompt.length > 300">
         {{
           isShort ? `${detailItem.prompt.slice(0, 200)} ...` : detailItem.prompt
@@ -168,7 +168,7 @@ const lists = ref<IDemo[]>([]);
 const detailItem = ref<IDemo>();
 const getData = async () => {
   const datas = await fetch(
-    `https://metagpt.us-ca.ufileos.com/data/demos.json?t=${2}`
+    `https://metagpt.us-ca.ufileos.com/data/demos.json?t=${3}`
   );
   const djson = await datas.json();
 
