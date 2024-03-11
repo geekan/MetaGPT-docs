@@ -13,5 +13,6 @@ node_modules
 
 src/*/blog
 src/*/rfcs
+src/*/DataInterpreter
 src/*/demos
 src/utils/diff.ts

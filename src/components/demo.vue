@@ -167,9 +167,12 @@ const renderSvg = async () => {
 const lists = ref<IDemo[]>([]);
 const detailItem = ref<IDemo>();
 const getData = async () => {
-  const datas = await fetch(
-    `https://metagpt.us-ca.ufileos.com/data/demos.json?t=${3}`
-  );
+  const datas = await Promise.race([
+    fetch(`https://metagpt.us-ca.ufileos.com/data/demos.json?t=${3}`),
+    fetch(
+      `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/data/demos.json?t=${3}`
+    ),
+  ]);
   const djson = await datas.json();
 
   lists.value = djson;
