@@ -5,7 +5,14 @@
       <div class="divider"></div>
       <img class="p16px w100%" src="/plans.png" alt="" />
     </div>
-    <div class="demoList">
+    <div v-if="failed" class="w100%">
+      <div
+        class="text-16px flex1 flex flex-justify-center flex-items-center h200px"
+      >
+        The data retrieval failed. Please refresh the page and try again.
+      </div>
+    </div>
+    <div class="demoList" v-else>
       <div
         v-if="loading"
         class="flex1 flex flex-justify-center flex-items-center h200px"
@@ -14,7 +21,7 @@
       </div>
       <template v-else>
         <div
-          v-for="(item, index) of lists"
+          v-for="(item, index) of datas"
           :key="item.project"
           class="demoItem"
           @click="toDetail(index)"
@@ -29,27 +36,14 @@
   </div>
 </template>
 <script setup lang="ts">
+import { DataInterpreterStore } from '@/store/datainterpreter';
 import { Tooltip, Spin } from '@arco-design/web-vue';
 import '@arco-design/web-vue/dist/arco.min.css';
 import { useRouter, withBase, useData } from 'vitepress';
 
 const { lang } = useData();
 
-const lists = ref<IDemo[]>([]);
-const loading = ref(false);
-const getData = async () => {
-  loading.value = true;
-  const datas = await Promise.race([
-    fetch(`https://metagpt.us-ca.ufileos.com/data/demos.json?t=${3}`),
-    fetch(
-      `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/data/demos.json?t=${3}`
-    ),
-  ]);
-
-  const djson = await datas.json();
-  loading.value = false;
-  lists.value = djson;
-};
+const { datas, failed, getData, loading } = DataInterpreterStore();
 
 const router = useRouter();
 const toDetail = (index: number) => {

@@ -22,6 +22,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+
   <div class="demoWraper" v-if="detailItem">
     <div class="prompt">
       <div class="text-20px font-500 pb-8px">Requirement</div>
@@ -47,13 +48,30 @@
       <div class="vp-doc" @scroll="onScroll" v-html="detailItem.html"></div>
     </div>
   </div>
+  <div v-else-if="loading">
+    <div
+      class="text-16px flex1 flex flex-justify-center flex-items-center h200px"
+    >
+      <Spin tip="loading"></Spin>
+    </div>
+  </div>
+  <div v-else-if="failed">
+    <div
+      class="text-16px flex1 flex flex-justify-center flex-items-center h200px"
+    >
+      The data retrieval failed. Please refresh the page and try again.
+    </div>
+  </div>
 </template>
 <script setup lang="tsx">
 import { Graphviz } from '@hpcc-js/wasm';
 import { Popover } from '@arco-design/web-vue';
 import '@arco-design/web-vue/dist/arco.min.css';
 import { useData } from 'vitepress';
+import { DataInterpreterStore } from '@/store/datainterpreter';
+import { Spin } from '@arco-design/web-vue';
 
+const { datas, failed, getData, loading } = DataInterpreterStore();
 const { isDark } = useData();
 
 const getDotData = (tasks: any) => {
@@ -164,30 +182,18 @@ const renderSvg = async () => {
   });
 };
 
-const lists = ref<IDemo[]>([]);
 const detailItem = ref<IDemo>();
-const getData = async () => {
-  const datas = await Promise.race([
-    fetch(`https://metagpt.us-ca.ufileos.com/data/demos.json?t=${3}`),
-    fetch(
-      `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/data/demos.json?t=${3}`
-    ),
-  ]);
-  const djson = await datas.json();
 
-  lists.value = djson;
-
+onMounted(async () => {
+  await getData();
   const reg = /id=(\d+)/;
   const [, id] = reg.exec(window.location.search) || [];
   if (!id) {
     return;
   }
-  detailItem.value = lists.value[+id];
+  detailItem.value = datas.value[+id];
 
   renderSvg();
-};
-onMounted(() => {
-  getData();
 });
 </script>
 <style lang="scss" scoped>
