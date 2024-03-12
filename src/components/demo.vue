@@ -71,7 +71,6 @@ import { useData } from 'vitepress';
 import { DataInterpreterStore } from '@/store/datainterpreter';
 import { Spin } from '@arco-design/web-vue';
 
-const { datas, failed, getData, loading } = DataInterpreterStore();
 const { isDark } = useData();
 
 const getDotData = (tasks: any) => {
@@ -184,16 +183,31 @@ const renderSvg = async () => {
 
 const detailItem = ref<IDemo>();
 
-onMounted(async () => {
-  await getData();
-  const reg = /id=(\d+)/;
-  const [, id] = reg.exec(window.location.search) || [];
+const loading = ref(false);
+const failed = ref(false);
+const getData = async () => {
+  const urlItem = new URL(window.location.href);
+
+  const id = urlItem.searchParams.get('id');
   if (!id) {
     return;
   }
-  detailItem.value = datas.value[+id];
+  try {
+    loading.value = true;
+    const result = await fetch(
+      `https://public-frontend-1300249583.cos.accelerate.myqcloud.com/data/0312/di/${id}.json`
+    );
+    detailItem.value = await result.json();
+    renderSvg();
+  } catch {
+    failed.value = true;
+  } finally {
+    loading.value = false;
+  }
+};
 
-  renderSvg();
+onMounted(async () => {
+  getData();
 });
 </script>
 <style lang="scss" scoped>

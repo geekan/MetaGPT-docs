@@ -8,13 +8,9 @@ export const DataInterpreterStore = () => {
     }
     loading.value = true;
     try {
-      const result = await raceWithCatch([
-        fetch(`https://metagpt.us-ca.ufileos.com/data/demos.json?t=${3}`),
-        fetch(
-          `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/data/demos.json?t=${3}`
-        ),
-      ]);
-
+      const result = await fetch(
+        `https://public-frontend-1300249583.cos.accelerate.myqcloud.com/data/0312/diList.json`
+      );
       datas.value = await result.json();
     } catch {
       failed.value = true;

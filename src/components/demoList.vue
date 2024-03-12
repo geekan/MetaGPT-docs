@@ -24,7 +24,7 @@
           v-for="(item, index) of datas"
           :key="item.project"
           class="demoItem"
-          @click="toDetail(index)"
+          @click="toDetail(item)"
         >
           <div class="font-500 h44px">{{ item.project }}</div>
           <Tooltip :content="item.prompt" position="top">
@@ -46,9 +46,9 @@ const { lang } = useData();
 const { datas, failed, getData, loading } = DataInterpreterStore();
 
 const router = useRouter();
-const toDetail = (index: number) => {
+const toDetail = (index: IDemo) => {
   const prefix = `/${lang.value}`;
-  router.go(withBase(`${prefix}/DataInterpreter/detail?id=${index}`));
+  router.go(withBase(`${prefix}/DataInterpreter/detail?id=${index.pathIndex}`));
 };
 
 onMounted(() => {
