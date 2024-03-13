@@ -9,7 +9,7 @@ Use `MLEngineer` to model and predict the [ICR](https://www.kaggle.com/competiti
 ### Code
 
 ```bash
-python examples/di/ml_engineer_with_tools.py
+python examples/di/machine_learning_with_tools.py
 ```
 
 ### Execution Results
