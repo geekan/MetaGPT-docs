@@ -187,6 +187,18 @@ llm:
   model: 'open-mixtral-8x7b'
 ```
 
+### Yi / lingyiwanwu API
+support `yi-34b-*`models，see `metagpt/utils/token_counter.py`  
+
+```yaml
+llm:
+  api_type: 'yi'
+  base_url: 'https://api.lingyiwanwu.com/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'yi-34b-chat-0205'
+  max_token: 4000
+```
+
 ## Configuration for tools (Optional)
 
 In addition to LLM, we often want agents to use tools. We cover their setup in this section.
