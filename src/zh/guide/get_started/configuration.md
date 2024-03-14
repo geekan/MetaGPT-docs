@@ -195,7 +195,8 @@ llm:
 ```
 
 ### Yi / 零一万物 API
-支持模型名列表，在`metagpt/utils/token_counter.py`的`yi-34b-*`  
+
+支持模型名列表，在`metagpt/utils/token_counter.py`的`yi-34b-*`
 
 ```yaml
 llm:

@@ -188,7 +188,8 @@ llm:
 ```
 
 ### Yi / lingyiwanwu API
-support `yi-34b-*`models，see `metagpt/utils/token_counter.py`  
+
+support `yi-34b-*`models，see `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
