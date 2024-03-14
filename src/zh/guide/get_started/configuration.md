@@ -194,6 +194,18 @@ llm:
   model: 'open-mixtral-8x7b'
 ```
 
+### Yi / 零一万物 API
+支持模型名列表，在`metagpt/utils/token_counter.py`的`yi-34b-*`  
+
+```yaml
+llm:
+  api_type: 'yi'
+  base_url: 'https://api.lingyiwanwu.com/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'yi-34b-chat-0205'
+  max_token: 4000
+```
+
 ## 配置工具（可选）
 
 除了让智能体能调用大模型，我们时常期望智能体能调用工具。我们需要配置好所需工具以完成准备工作。
