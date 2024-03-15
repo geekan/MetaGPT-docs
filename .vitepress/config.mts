@@ -245,6 +245,10 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/machine_learning.md',
                           },
                           {
+                            text: 'Machine learning modeling with tools',
+                            link: 'use_cases/agent/interpreter/machine_learning_with_tools.md',
+                          },
+                          {
                             text: 'Image background removal',
                             link: 'use_cases/agent/interpreter/image_removebg.md',
                           },
@@ -277,10 +281,6 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/email_summary.md',
                           },
                         ],
-                      },
-                      {
-                        text: 'Machine Learning Engineer',
-                        link: 'use_cases/agent/ml_engineer.md',
                       },
                       {
                         text: 'Researcher: search web and write reports',
@@ -481,6 +481,10 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/machine_learning.md',
                           },
                           {
+                            text: '结合工具使用的机器学习建模',
+                            link: 'use_cases/agent/interpreter/machine_learning_with_tools.md',
+                          },
+                          {
                             text: '图像去背景',
                             link: 'use_cases/agent/interpreter/image_removebg.md',
                           },
@@ -513,10 +517,6 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/email_summary.md',
                           },
                         ],
-                      },
-                      {
-                        text: '机器学习工程师',
-                        link: 'use_cases/agent/ml_engineer.md',
                       },
                       {
                         text: '调研员',
