@@ -4,6 +4,17 @@
       <img class="p16px w100%" src="/authors.jpg" alt="" />
       <div class="divider"></div>
       <img class="p16px w100%" src="/plans.png" alt="" />
+      <div class="divider"></div>
+      <div class="p16px text-16px">
+        Check
+        <span
+          class="cursor-pointer font-700"
+          style="color: var(--vp-c-brand-1)"
+          @click="toDataInterpreterUsage"
+          >here</span
+        >
+        for detailed usage of Data Interpreter
+      </div>
     </div>
     <div v-if="failed" class="w100%">
       <div
@@ -49,6 +60,11 @@ const router = useRouter();
 const toDetail = (index: IDemo) => {
   const prefix = `/${lang.value}`;
   router.go(withBase(`${prefix}/DataInterpreter/detail?id=${index.pathIndex}`));
+};
+
+const toDataInterpreterUsage = () => {
+  const prefix = `/${lang.value}`;
+  router.go(withBase(`${prefix}/guide/use_cases/agent/interpreter/intro`));
 };
 
 onMounted(() => {
