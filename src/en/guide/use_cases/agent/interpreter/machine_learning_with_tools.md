@@ -45,7 +45,7 @@ train_data.drop(columns=non_informative_columns, axis=1, inplace=True, errors='i
 train_data.head()
 ```
 
-The feature engineering code (which includes the use of 1 tools: `PolynomialExpansion`) is as follows:
+The feature engineering code (which includes the use of 1 tool: `PolynomialExpansion`) is as follows:
 
 ```python
 from metagpt.tools.libs.feature_engineering import PolynomialExpansion
@@ -145,11 +145,7 @@ class FillMissingValue:
 
 In the example above, the `FillMissingValue` class implements the functionality for filling missing values and is registered as a data_preprocess tool using the `@register_tool` decorator.
 
-After registering the tool, the system will automatically generate a subdirectory with the same name as your tool code file in the `metagpt.tools.schemas` directory (in this case, `data_preprocess`).
-
-In this subdirectory, the system will automatically generate a corresponding schema file (such as FillMissingValue.yml) for each tool based on the comments of the tool functions, detailing the structure, methods, and parameter types of the tool class, ensuring that the LLM can accurately understand and utilize the tool.
-
-Additionally, saving such schema files also facilitates users in verifying their correctness and completeness.
+After registering the tool, the system will automatically generate a corresponding schema file (such as FillMissingValue.yml) for each tool in `metagpt.tools.schemas` based on the comments of the tool functions, detailing the structure, methods, and parameter types of the tool class, ensuring that the LLM can accurately understand and utilize the tool.
 
 **Schema File Example (FillMissingValue.yml)**:
 
@@ -159,74 +155,42 @@ description: Completing missing values with simple strategies.
 methods:
   __init__:
     type: function
-    description: Initialize self.
+    description: 'Initialize self. '
+    signature:
+      '(self, features: ''list'', strategy: "Literal[''mean'', ''median'',
+      ''most_frequent'', ''constant'']" = ''mean'', fill_value=None)'
     parameters:
-      properties:
-        features:
-          type: list
-          description: Columns to be processed.
-        strategy:
-          type: str
-          description: "The imputation strategy, notice 'mean' and 'median' can
-            only be used for numeric features. Enum: ['mean', 'median', 'most_frequent',
-            'constant']. Defaults to 'mean'."
-          default: "'mean'"
-          enum:
-            - "'mean'"
-            - "'median'"
-            - "'most_frequent'"
-            - "'constant'"
-        fill_value:
-          type: int
-          description:
-            Fill_value is used to replace all occurrences of missing_values.
-            Defaults to None.
-          default: None
-      required:
-        - features
+      'Args: features (list): Columns to be processed. strategy (Literal["mean",
+      "median", "most_frequent", "constant"], optional): The imputation strategy,
+      notice ''mean'' and ''median'' can only be used for numeric features. Defaults
+      to ''mean''. fill_value (int, optional): Fill_value is used to replace all occurrences
+      of missing_values. Defaults to None.'
   fit:
     type: function
-    description: Fit a model to be used in subsequent transform.
-    parameters:
-      properties:
-        df:
-          type: pd.DataFrame
-          description: The input DataFrame.
-      required:
-        - df
+    description: 'Fit a model to be used in subsequent transform. '
+    signature: "(self, df: 'pd.DataFrame')"
+    parameters: 'Args: df (pd.DataFrame): The input DataFrame.'
   fit_transform:
     type: function
-    description: Fit and transform the input DataFrame.
+    description: 'Fit and transform the input DataFrame. '
+    signature: "(self, df: 'pd.DataFrame') -> 'pd.DataFrame'"
     parameters:
-      properties:
-        df:
-          type: pd.DataFrame
-          description: The input DataFrame.
-      required:
-        - df
-    returns:
-      - type: pd.DataFrame
-        description: The transformed DataFrame.
+      'Args: df (pd.DataFrame): The input DataFrame. Returns: pd.DataFrame:
+      The transformed DataFrame.'
   transform:
     type: function
-    description: Transform the input DataFrame with the fitted model.
+    description: 'Transform the input DataFrame with the fitted model. '
+    signature: "(self, df: 'pd.DataFrame') -> 'pd.DataFrame'"
     parameters:
-      properties:
-        df:
-          type: pd.DataFrame
-          description: The input DataFrame.
-      required:
-        - df
-    returns:
-      - type: pd.DataFrame
-        description: The transformed DataFrame.
+      'Args: df (pd.DataFrame): The input DataFrame. Returns: pd.DataFrame:
+      The transformed DataFrame.'
 ```
 
 ### Automatic Tool Registration and Selection
 
 By setting the `tools` parameter of `DataInterpreter`, you can manually specify which tools to use. If you want to use all tools, you can set `tools=["<all>"]`.
 
-When `DataInterpreter` starts, it will automatically register all the tools in the `tools` list. At the same time, during the task planning stage, `DataInterpreter` will allocate appropriate task types according to the requirements for each task, and score each tool, selecting the TOP tools suitable for the current task for LLM to use.
+When `DataInterpreter` starts, it will automatically register all the tools in the `tools` list. At the same time, during the task planning stage, `DataInterpreter` will recommend available tools for each task based on the requirements, and select the TOP-k for LLM to use.
 
 ### Tool Combination and Invocation
 

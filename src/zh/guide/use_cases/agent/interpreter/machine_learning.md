@@ -59,4 +59,4 @@ python examples/di/machine_learning.py --use_case sales_forecast
 
 ## 延伸
 
-对更复杂机器学习任务的针对性处理，请参考[结合工具使用的机器学习建模](./machine_learning_with_tools.md)
+对更复杂机器学习任务的针对性处理，请参考[使用工具进行机器学习建模](./machine_learning_with_tools.md)

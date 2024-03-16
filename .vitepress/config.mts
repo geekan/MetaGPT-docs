@@ -481,7 +481,7 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/machine_learning.md',
                           },
                           {
-                            text: '结合工具使用的机器学习建模',
+                            text: '使用工具进行机器学习建模',
                             link: 'use_cases/agent/interpreter/machine_learning_with_tools.md',
                           },
                           {

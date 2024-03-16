@@ -1,4 +1,4 @@
-# 结合工具使用的机器学习建模
+# 使用工具进行机器学习建模
 
 ## 工具批量使用
 
@@ -145,11 +145,7 @@ class FillMissingValue:
 
 在上述示例中，`FillMissingValue` 类具体实现了缺失值的填充功能，并通过 `@register_tool` 装饰器注册为数据预处理工具。
 
-注册工具后，系统将自动在 `metagpt.tools.schemas` 目录下为您生成与工具代码文件同名的子目录（此例中为 `data_preprocess`）。
-
-在该子目录中，系统会根据工具函数的注释自动为每个工具生成相应的 schema 文件（如 `FillMissingValue.yml`），详细描述工具类的结构、方法以及参数类型，确保LLM能够准确理解并使用该工具。
-
-同时，通过保存这样的 schema 文件，也便于用户验证其正确性和完整性。
+注册工具后，系统将自动根据工具函数的注释在 `metagpt.tools.schemas` 目录下为您生成每个工具生成相应的 schema 文件（如 `FillMissingValue.yml`），详细描述工具类的结构、方法以及参数类型，确保LLM能够准确理解并使用该工具。
 
 **Schema 文件示例（FillMissingValue.yml）**：
 
@@ -159,74 +155,42 @@ description: Completing missing values with simple strategies.
 methods:
   __init__:
     type: function
-    description: Initialize self.
+    description: 'Initialize self. '
+    signature:
+      '(self, features: ''list'', strategy: "Literal[''mean'', ''median'',
+      ''most_frequent'', ''constant'']" = ''mean'', fill_value=None)'
     parameters:
-      properties:
-        features:
-          type: list
-          description: Columns to be processed.
-        strategy:
-          type: str
-          description: "The imputation strategy, notice 'mean' and 'median' can
-            only be used for numeric features. Enum: ['mean', 'median', 'most_frequent',
-            'constant']. Defaults to 'mean'."
-          default: "'mean'"
-          enum:
-            - "'mean'"
-            - "'median'"
-            - "'most_frequent'"
-            - "'constant'"
-        fill_value:
-          type: int
-          description:
-            Fill_value is used to replace all occurrences of missing_values.
-            Defaults to None.
-          default: None
-      required:
-        - features
+      'Args: features (list): Columns to be processed. strategy (Literal["mean",
+      "median", "most_frequent", "constant"], optional): The imputation strategy,
+      notice ''mean'' and ''median'' can only be used for numeric features. Defaults
+      to ''mean''. fill_value (int, optional): Fill_value is used to replace all occurrences
+      of missing_values. Defaults to None.'
   fit:
     type: function
-    description: Fit a model to be used in subsequent transform.
-    parameters:
-      properties:
-        df:
-          type: pd.DataFrame
-          description: The input DataFrame.
-      required:
-        - df
+    description: 'Fit a model to be used in subsequent transform. '
+    signature: "(self, df: 'pd.DataFrame')"
+    parameters: 'Args: df (pd.DataFrame): The input DataFrame.'
   fit_transform:
     type: function
-    description: Fit and transform the input DataFrame.
+    description: 'Fit and transform the input DataFrame. '
+    signature: "(self, df: 'pd.DataFrame') -> 'pd.DataFrame'"
     parameters:
-      properties:
-        df:
-          type: pd.DataFrame
-          description: The input DataFrame.
-      required:
-        - df
-    returns:
-      - type: pd.DataFrame
-        description: The transformed DataFrame.
+      'Args: df (pd.DataFrame): The input DataFrame. Returns: pd.DataFrame:
+      The transformed DataFrame.'
   transform:
     type: function
-    description: Transform the input DataFrame with the fitted model.
+    description: 'Transform the input DataFrame with the fitted model. '
+    signature: "(self, df: 'pd.DataFrame') -> 'pd.DataFrame'"
     parameters:
-      properties:
-        df:
-          type: pd.DataFrame
-          description: The input DataFrame.
-      required:
-        - df
-    returns:
-      - type: pd.DataFrame
-        description: The transformed DataFrame.
+      'Args: df (pd.DataFrame): The input DataFrame. Returns: pd.DataFrame:
+      The transformed DataFrame.'
 ```
 
 ### 自动工具注册与选择
 
 通过设置`DataInterpreter`的参数`tools`，可以人为指定使用哪些工具。如果希望使用所有工具，可以设定`tools=["<all>"]`。
 
-当 `DataInterpreter` 启动时，它会自动注册 `tools` 列表中的所有工具。同时，在任务规划阶段，`DataInterpreter` 会根据需求为每个任务分配适当的任务类型，并且为每个工具打分，挑选适合当前任务的 TOP 工具供 LLM 使用。
+当 `DataInterpreter` 启动时，它会自动注册 `tools` 列表中的所有工具。同时，在任务规划阶段，`DataInterpreter` 会根据需求为每个任务推荐可用的工具，并挑选出 TOP-k 供 LLM 使用。
 
 ### 工具组合与调用
 

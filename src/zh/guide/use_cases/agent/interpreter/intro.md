@@ -8,7 +8,7 @@
 
 - [数据可视化](./data_visualization.md)
 - [机器学习建模](./machine_learning.md)
-- [结合工具使用的机器学习建模](./machine_learning_with_tools.md)
+- [使用工具进行机器学习建模](./machine_learning_with_tools.md)
 - [图像背景移除](./image_removebg.md)
 - [解决数学问题](./solve_mathematical_problems.md)
 - [票据OCR](./ocr_receipt.md)
