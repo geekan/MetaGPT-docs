@@ -8,6 +8,7 @@ Data Interpreter is an agent who solves data-related problems through codes. It 
 
 - [Data visualization](./data_visualization.md)
 - [Machine learning modeling](./machine_learning.md)
+- [Machine learning with tools](./machine_learning_with_tools.md)
 - [Image background removal](./image_removebg.md)
 - [Solve math problems](./solve_mathematical_problems.md)
 - [Receipt OCR](./ocr_receipt.md)

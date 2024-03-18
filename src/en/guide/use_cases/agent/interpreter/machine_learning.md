@@ -59,4 +59,4 @@ python examples/di/machine_learning.py --use_case sales_forecast
 
 ## Extension
 
-For targeted processing of more complex machine learning tasks, please refer to [Machine Learning Engineer](../ml_engineer.md).
+For targeted processing of more complex machine learning tasks, please refer to [Machine Learning with Tools](./machine_learning_with_tools.md).
