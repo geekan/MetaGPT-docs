@@ -336,7 +336,7 @@ export default defineConfig({
                     link: 'in_depth_guides/agent_communication.md',
                   },
                   {
-                    text: 'Incremental devlopment',
+                    text: 'Incremental development',
                     link: 'in_depth_guides/incremental_development.md',
                   },
                   {
