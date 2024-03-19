@@ -9,7 +9,7 @@ export const DataInterpreterStore = () => {
     loading.value = true;
     try {
       const result = await fetch(
-        `https://public-frontend-1300249583.cos.accelerate.myqcloud.com/data/0312/diList.json`
+        `https://public-frontend-1300249583.cos.accelerate.myqcloud.com/data/0319/diList.json`
       );
       datas.value = await result.json();
     } catch {

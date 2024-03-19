@@ -195,7 +195,7 @@ const getData = async () => {
   try {
     loading.value = true;
     const result = await fetch(
-      `https://public-frontend-1300249583.cos.accelerate.myqcloud.com/data/0312/di/${id}.json`
+      `https://public-frontend-1300249583.cos.accelerate.myqcloud.com/data/0319/di/${id}.json`
     );
     detailItem.value = await result.json();
     renderSvg();
