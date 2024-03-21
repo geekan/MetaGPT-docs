@@ -201,6 +201,14 @@ llm:
   max_token: 4000
 ```
 
+### ollama API
+```yaml
+llm:
+  api_type: 'ollama'
+  base_url: 'http://127.0.0.1:11434/api'
+  model: 'llama2'
+```
+
 ## Configuration for tools (Optional)
 
 In addition to LLM, we often want agents to use tools. We cover their setup in this section.
