@@ -208,6 +208,14 @@ llm:
   max_token: 4000
 ```
 
+### ollama API
+```yaml
+llm:
+  api_type: 'ollama'
+  base_url: 'http://127.0.0.1:11434/api'
+  model: 'llama2'
+```
+
 ## 配置工具（可选）
 
 除了让智能体能调用大模型，我们时常期望智能体能调用工具。我们需要配置好所需工具以完成准备工作。
