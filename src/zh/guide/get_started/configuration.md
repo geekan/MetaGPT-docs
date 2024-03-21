@@ -97,6 +97,7 @@ llm:
 llm:
   api_type: 'gemini'
   api_key: 'YOUR_API_KEY'
+  model: 'gemini-pro'
 ```
 
 ### 百度 千帆 API

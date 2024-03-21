@@ -89,6 +89,7 @@ supports default model `gemini-pro`
 llm:
   api_type: 'gemini'
   api_key: 'YOUR_API_KEY'
+  model: 'gemini-pro'
 ```
 
 ### Baidu QianFan API
