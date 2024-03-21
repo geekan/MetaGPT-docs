@@ -202,6 +202,7 @@ llm:
 ```
 
 ### ollama API
+
 ```yaml
 llm:
   api_type: 'ollama'
