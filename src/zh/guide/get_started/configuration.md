@@ -226,6 +226,11 @@ search:
   api_type: 'google' # serpapi/google/serper/ddg
   api_key: 'YOUR_API_KEY'
   cse_id: 'YOUR_CSE_ID' # only for google
+  params:
+    engine: google  # google/bing/yahoo/baidu/yandex, check https://serpapi.com/bing-search-api for more details
+    google_domain: "google.com"
+    gl: us
+    hl: en
 ```
 
 ### 网页浏览
