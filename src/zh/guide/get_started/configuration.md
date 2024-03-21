@@ -53,7 +53,7 @@ llm:
 
 ### 智谱 API
 
-访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) 获得更新详情。
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -64,7 +64,7 @@ llm:
 
 ### 科大讯飞的大模型 Spark API：
 
-访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) 获得更新详情。
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -78,7 +78,7 @@ llm:
 
 ### Azure OpenAI API
 
-访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) 获得更新详情。
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -214,7 +214,7 @@ llm:
 
 ### 网页搜索 API
 
-Check [search_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/search_config.py) for more details.
+Check [search_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/search_config.py) for more details.
 
 ```yaml
 ## Supported api_type: serpapi/google/serper/ddg
@@ -252,7 +252,7 @@ azure_tts_region: 'eastus'
 
 ### Mermaid
 
-Check [mermaid_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/mermaid_config.py) for more details.
+Check [mermaid_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/mermaid_config.py) for more details.
 
 ```yaml
 mermaid:
@@ -264,8 +264,8 @@ mermaid:
 
 ## 其他配置（可选）
 
-Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/dev/config/config2.example.yaml) and
-[config2.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/config2.py) for more details.
+Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and
+[config2.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for more details.
 
 ```yaml
 enable_longterm_memory: false

@@ -43,7 +43,7 @@ llm:
 
 ### Zhipu API
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py)
+Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py)
 
 ```yaml
 llm:
@@ -54,7 +54,7 @@ llm:
 
 ### iFlytek's large model Spark API :
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py)
+Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py)
 
 Normally YOU only need to modify `SPARK_APPID` `SPARK_API_SECRET` `SPARK_API_KEY`
 
@@ -70,7 +70,7 @@ llm:
 
 ### Azure OpenAI API
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py)
+Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py)
 
 ```yaml
 llm:
@@ -207,7 +207,7 @@ In addition to LLM, we often want agents to use tools. We cover their setup in t
 
 ### Web searching API
 
-Check [search_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/search_config.py)
+Check [search_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/search_config.py)
 
 ```yaml
 ## Supported api_type: serpapi/google/serper/ddg
@@ -228,7 +228,7 @@ search:
 
 ### Web browsing
 
-Check [browser_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/browser_config.py)
+Check [browser_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/browser_config.py)
 
 ```yaml
 browser:
@@ -248,7 +248,7 @@ azure_tts_region: 'eastus'
 
 ### Mermaid
 
-Check [mermaid_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/mermaid_config.py)
+Check [mermaid_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/mermaid_config.py)
 
 ```yaml
 mermaid:
@@ -260,8 +260,8 @@ mermaid:
 
 ## Others (Optional)
 
-Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/dev/config/config2.example.yaml) and
-[config2.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/config2.py) for more details.
+Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and
+[config2.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for more details.
 
 ```yaml
 enable_longterm_memory: false
