@@ -17,3 +17,7 @@ Data Interpreter is an agent who solves data-related problems through codes. It 
 - [Tool usage: text2image](./text2image.md)
 - [Tool usage: email summarization and response](./email_summary.md)
 - More on the way!
+
+## Note
+
+If you want to save the Jupyter Notebook file and the results of the plan at runtime for future reference and analysis, you can refer to the code of the **Data Visualization** example above. (the location of the code is:`examples/di/data_visualization.py` )
