@@ -42,26 +42,26 @@
 
 2.  **在数据解释器`DataInterpreter`中使用工具**
 
-        ```python
-        # main.py
-        import asyncio
-        from metagpt.roles.di.data_interpreter import DataInterpreter
-        from metagpt.tools.libs import calculate_factorial
+    ```python
+    # main.py
+    import asyncio
+    from metagpt.roles.di.data_interpreter import DataInterpreter
+    from metagpt.tools.libs import calculate_factorial
 
-        async def main(requirement: str):
-            role = DataInterpreter(tools=["calculate_factorial"]) # 集成工具
-            await role.run(requirement)
+    async def main(requirement: str):
+        role = DataInterpreter(tools=["calculate_factorial"]) # 集成工具
+        await role.run(requirement)
 
-        if __name__ == "__main__":
-            requirement = "请计算 5 的阶乘"
-            asyncio.run(main(requirement))
-        ```
+    if __name__ == "__main__":
+        requirement = "请计算 5 的阶乘"
+        asyncio.run(main(requirement))
+    ```
 
-    **注意**：
+**注意**：
 
-3.  别忘了为你的函数编写文档字符串（docstring），这将有助于 `DataInterpreter` 选择合适的工具并理解其工作方式。
-4.  在注册工具时，工具的名称就是函数的名称。
-5.  在运行 DataInterpreter 之前，记得从 `metagpt.tools.libs` 导入你的 `calculate_factorial` 模块，以确保该工具已被注册。
+1. 别忘了为你的函数编写文档字符串（docstring），这将有助于 `DataInterpreter` 选择合适的工具并理解其工作方式。
+2. 在注册工具时，工具的名称就是函数的名称。
+3. 在运行 DataInterpreter 之前，记得从 `metagpt.tools.libs` 导入你的 `calculate_factorial` 模块，以确保该工具已被注册。
 
 ### 自定义计算器工具
 
