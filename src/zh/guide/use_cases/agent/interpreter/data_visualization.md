@@ -15,7 +15,9 @@
 ```bash
 python examples/di/data_visualization.py
 ```
+
 `examples/di/data_visualization.py`文件中的代码具体为：
+
 ```python
 import asyncio
 from metagpt.logs import logger
@@ -35,7 +37,9 @@ if __name__ == "__main__":
     requirement = "Run data analysis on sklearn Iris dataset, include a plot"
     asyncio.run(main(requirement))
 ```
+
 执行上面的代码，生成的plan和code会分别保存在 `dada/output/当前时间/plan.json`和 `dada/output/当前时间/code.ipynb`中。
+
 ### 运行结果
 
 1. `DataInterpreter` 提出的`task`如下:
