@@ -209,8 +209,8 @@ export default defineConfig({
                   },
                   { text: 'Use memories', link: 'tutorials/use_memories.md' },
                   {
-                    text: 'Create and utilize tools',
-                    link: 'tutorials/create_and_utilize_tools.md',
+                    text: 'Create and use tools',
+                    link: 'tutorials/create_and_use_tools.md',
                   },
                   {
                     text: 'Human engagement',
@@ -450,7 +450,7 @@ export default defineConfig({
                   },
                   {
                     text: '创建和使用工具',
-                    link: 'tutorials/create_and_utilize_tools',
+                    link: 'tutorials/create_and_use_tools',
                   },
                   {
                     text: '人类介入',
