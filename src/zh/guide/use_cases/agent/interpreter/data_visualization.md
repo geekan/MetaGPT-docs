@@ -45,7 +45,7 @@ python examples/di/data_visualization.py
 2. `DataInterpreter`写的代码如下:
 
 ```python
-# ----------------------------------task3------------------------------------
+# ----------------------------------task1------------------------------------
 from sklearn.datasets import load_iris
 iris_data = load_iris()
 iris_data.keys()
