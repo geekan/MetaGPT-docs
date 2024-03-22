@@ -4,16 +4,17 @@
 
 ## 创建工具的步骤
 
-1. **创建预提供的函数或类：**
+1. **创建预提供的函数或类**:
 
-   - 编写专门用于与外部环境进行特定交互的函数或类，并将它们放置在`metagpt/tools/libs`目录中。
+   编写专门用于与外部环境进行特定交互的函数或类，并将它们放置在`metagpt/tools/libs`目录中。
 
-2. **使用谷歌风格的文档字符串（Docstring）：**
+2. **使用谷歌风格的文档字符串（Docstring）**:
 
-   - 为每个函数或类配备谷歌风格的文档字符串。这作为一个简洁而全面的参考资料，详细说明其用途、输入参数和预期输出。
+   为每个函数或类配备谷歌风格的文档字符串。这作为一个简洁而全面的参考资料，详细说明其用途、输入参数和预期输出。
 
-3. **应用@register_tool装饰器：**
-   - 使用`@register_tool`装饰器以确保在工具注册表中准确注册。这个装饰器简化了函数或类与`DataInterpreter`的集成。
+3. **应用@register_tool装饰器**:
+
+   使用`@register_tool`装饰器以确保在工具注册表中准确注册。这个装饰器简化了函数或类与`DataInterpreter`的集成。
 
 ## 自定义工具案例
 
@@ -42,21 +43,20 @@
 2.  **在数据解释器`DataInterpreter`中使用工具**
 
         ```python
+        # main.py
+        import asyncio
+        from metagpt.roles.di.data_interpreter import DataInterpreter
+        from metagpt.tools.libs import calculate_factorial
 
-    # main.py
+        async def main(requirement: str):
+            role = DataInterpreter(tools=["calculate_factorial"]) # 集成工具
+            await role.run(requirement)
 
-    import asyncio
-    from metagpt.roles.di.data_interpreter import DataInterpreter
-    from metagpt.tools.libs import calculate_factorial
+        if __name__ == "__main__":
+            requirement = "请计算 5 的阶乘"
+            asyncio.run(main(requirement))
+        ```
 
-    async def main(requirement: str):
-    role = DataInterpreter(tools=["calculate_factorial"]) # 集成工具
-    await role.run(requirement)
-
-    if **name** == "**main**":
-    requirement = "Please calculate the factorial of 5."
-    asyncio.run(main(requirement))
-    ```
     **注意**：
 
 3.  别忘了为你的函数编写文档字符串（docstring），这将有助于 `DataInterpreter` 选择合适的工具并理解其工作方式。
@@ -119,7 +119,6 @@
           if n < 0:
               raise ValueError("输入必须是非负整数")
           return math.factorial(n)
-
    ```
 
 2. **在数据解释器`DataInterpreter`中使用工具**

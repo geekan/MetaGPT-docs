@@ -1,19 +1,20 @@
-# Create and Utilize Tools
+# Create and Use Tools
 
 Creating tools in MetaGPT is a straightforward process that involves creating your own functions or classes within the `metagpt/tools/libs` directory. This tutorial provides a step-by-step guide to creating tools and utilizing them within the `DataInterpreter`.
 
 ## Steps for creating tools
 
-1. **Create Pre-provided Functions or Classes:**
+1. **Create Pre-provided Functions or Classes**:
 
-   - Craft functions or classes tailored to enable specific interactions with the external environment and place them in the `metagpt/tools/libs` directory.
+   Craft functions or classes tailored to enable specific interactions with the external environment and place them in the `metagpt/tools/libs` directory.
 
 2. **Employ Google Style Docstring:**
 
-   - Accompany each function or class with a Google-style Docstring. This serves as a concise yet comprehensive reference, detailing the purpose, input parameters, and expected output.
+   Accompany each function or class with a Google-style Docstring. This serves as a concise yet comprehensive reference, detailing the purpose, input parameters, and expected output.
 
 3. **Apply @register_tool Decorator:**
-   - Utilize the `@register_tool` decorator to ensure accurate registration within the tool registry. This decorator simplifies the integration of functions or classes with the `DataInterpreter`.
+
+   Utilize the `@register_tool` decorator to ensure accurate registration within the tool registry. This decorator simplifies the integration of functions or classes with the `DataInterpreter`.
 
 ## Customizing tools case
 
@@ -122,26 +123,25 @@ To illustrate the process, consider the following examples of customizing tools 
 
 2.  **Use DataInterpreter with your custom tool, supposing in the `main.py` file.**
 
-        ```python
-
+    ```python
     # main.py
-
     import asyncio
     from metagpt.roles.di.data_interpreter import DataInterpreter
     from metagpt.tools.libs import calculator
 
     async def main(requirement: str):
-    role = DataInterpreter(tools=["calculator"]) # integrate the tool
-    await role.run(requirement)
+        role = DataInterpreter(tools=["calculator"]) # integrate the tool
+        await role.run(requirement)
 
-    if **name** == "**main**":
-    requirement = "Please calculate the sum of 3 and 11, and then calculate the factorial of 5."
-    asyncio.run(main(requirement))
+    if __name__ == "__main__":
+        requirement = "Please calculate 5 plus 3 and then calculate the factorial of 5."
+        asyncio.run(main(requirement))
     ```
-    **Note**:
 
-3.  Don't forget to write the docstring for your class and its functions that will help to select the tool and understand how it works for the `DataInterpreter`.
-4.  The tool name is the class name when registering the tool.
-5.  Remember to import your `calculator` from `metagpt.tools.libs` to make sure the tool is registered before running DataInterpreter
+**Note**:
+
+1. Don't forget to write the docstring for your class and its functions that will help to select the tool and understand how it works for the `DataInterpreter`.
+2. The tool name is the class name when registering the tool.
+3. Remember to import your `calculator` from `metagpt.tools.libs` to make sure the tool is registered before running DataInterpreter
 
 By following these steps, users can seamlessly create and integrate tools within the `Tool` framework of MetaGPT. This empowers the `DataInterpreter` to effectively interact with the external environment.
