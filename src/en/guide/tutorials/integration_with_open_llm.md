@@ -289,9 +289,9 @@ In response to the above situation, we have added the feature of repairing open 
 **config/config2.yaml**
 
 ```yaml
-llm:
-  ...
-  repair_llm_output: true
+llm: ...
+
+repair_llm_output: true
 ```
 
 After turning on this function, an attempt will be made to repair the above situation during execution. This switch currently does not guarantee a complete repair. There will still be some situations that we have not covered yet (different open source models have different situations), and the execution process will be interrupted and exited. If you are interested with this, please submit a PR and attach the corresponding model description, test log and unittest cases.

@@ -21,10 +21,12 @@
 
 ```yaml
 llm:
+  api_type: 'openai' # or azure / ollama / open_llm etc. Check LLMType for more options
   api_key: 'sk-...' # YOUR_API_KEY
   model: 'gpt-4-turbo-preview' # or gpt-3.5-turbo-1106 / gpt-4-1106-preview
   # base_url: 'https://api.openai.com/v1'  # or any forward url.
-  # proxy: 'YOUR_PROXY'  # Optional. If you want to use a proxy, set it here.
+  # proxy: 'YOUR_LLM_PROXY_IF_NEEDED'  # Optional. If you want to use a proxy, set it here.
+  # pricing_plan: 'YOUR_PRICING_PLAN' # Optional. If your pricing plan uses a different name than the `model`.
 ```
 
 请记住：如果您按照[安装](./installation)中的`git clone`方法，`config/config2.yaml`
@@ -37,9 +39,21 @@ llm:
 
 MetaGPT还支持各种LLM模型，根据您的需求配置模型API的密钥。
 
+### Anthropic / Claude API
+
+支持模型名列表，在`metagpt/utils/token_counter.py`的`claude-*`
+
+```yaml
+llm:
+  api_type: 'claude' # 或 anthropic
+  base_url: 'https://api.anthropic.com'
+  api_key: 'YOUR_API_KEY'
+  model: 'claude-3-opus-20240229'
+```
+
 ### 智谱 API
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) for more details.
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -50,7 +64,7 @@ llm:
 
 ### 科大讯飞的大模型 Spark API：
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) for more details.
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
@@ -64,13 +78,26 @@ llm:
 
 ### Azure OpenAI API
 
-Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/llm_config.py) for more details.
+访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
 
 ```yaml
 llm:
   api_type: 'azure'
+  base_url: 'YOUR_AZURE_BASE_URL'
   api_key: 'YOUR_API_KEY'
+  api_version: 'YOUR_API_VERSION'
   model: 'YOUR_MODEL_NAME'
+```
+
+### 谷歌 Gemini
+
+默认支持模型`gemini-pro`
+
+```yaml
+llm:
+  api_type: 'gemini'
+  api_key: 'YOUR_API_KEY'
+  model: 'gemini-pro'
 ```
 
 ### 百度 千帆 API
@@ -83,7 +110,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
@@ -93,7 +120,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
@@ -105,7 +132,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   api_key: 'YOUR_API_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
@@ -115,7 +142,7 @@ llm:
 
 ```yaml
 llm:
-  api_type: qianfan
+  api_type: 'qianfan'
   api_key: 'YOUR_API_KEY'
   secret_key: 'YOUR_SECRET_KEY'
   endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
@@ -127,9 +154,67 @@ llm:
 
 ```yaml
 llm:
-  api_type: dashscope
+  api_type: 'dashscope'
   api_key: 'YOUR_API_KEY'
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
+```
+
+### 月之暗面 Moonshot API
+
+支持 `moonshot-v1-*`模型，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'moonshot'
+  base_url: 'https://api.moonshot.cn/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'moonshot-v1-8k'
+```
+
+### FireWorks API
+
+支持 `FireWorks`models模型，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'fireworks'
+  base_url: 'https://api.fireworks.ai/inference/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'accounts/fireworks/models/llama-v2-13b-chat'
+```
+
+### Mistral API
+
+支持 `Mistral`models模型，详见`metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'mistral'
+  base_url: 'https://api.mistral.ai/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'open-mixtral-8x7b'
+```
+
+### Yi / 零一万物 API
+
+支持模型名列表，在`metagpt/utils/token_counter.py`的`yi-34b-*`
+
+```yaml
+llm:
+  api_type: 'yi'
+  base_url: 'https://api.lingyiwanwu.com/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'yi-34b-chat-0205'
+  max_token: 4000
+```
+
+### ollama API
+
+```yaml
+llm:
+  api_type: 'ollama'
+  base_url: 'http://127.0.0.1:11434/api'
+  model: 'llama2'
 ```
 
 ## 配置工具（可选）
@@ -138,7 +223,7 @@ llm:
 
 ### 网页搜索 API
 
-Check [search_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/search_config.py) for more details.
+Check [search_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/search_config.py) for more details.
 
 ```yaml
 ## Supported api_type: serpapi/google/serper/ddg
@@ -150,6 +235,11 @@ search:
   api_type: 'google' # serpapi/google/serper/ddg
   api_key: 'YOUR_API_KEY'
   cse_id: 'YOUR_CSE_ID' # only for google
+  params:
+    engine: google # google/bing/yahoo/baidu/yandex, check https://serpapi.com/bing-search-api for more details
+    google_domain: 'google.com'
+    gl: us
+    hl: en
 ```
 
 ### 网页浏览
@@ -171,7 +261,7 @@ azure_tts_region: 'eastus'
 
 ### Mermaid
 
-Check [mermaid_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs/mermaid_config.py) for more details.
+Check [mermaid_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/mermaid_config.py) for more details.
 
 ```yaml
 mermaid:
@@ -183,8 +273,8 @@ mermaid:
 
 ## 其他配置（可选）
 
-Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/dev/config/config2.example.yaml) and
-[config2.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/config2.py) for more details.
+Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and
+[config2.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for more details.
 
 ```yaml
 enable_longterm_memory: false

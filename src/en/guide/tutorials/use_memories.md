@@ -46,4 +46,4 @@ It is recommended to add `Message`s of action output to the `Role`'s memory when
 
 ## Next step
 
-Memory is a huge topic in agents. To be precise, the memory this tutorial talks about corresponds to the concept of "short-term memory". The retrieval is also based on simple recency. However, there are multiple branches of memories as well as a wide range of memory generation and retrieval techniques. Please consult [Memory](/guide/in_depth_guides/memory) for using memory to really boost your agent's performance.
+Memory is a huge topic in agents. To be precise, the memory this tutorial talks about corresponds to the concept of "short-term memory". The retrieval is also based on simple recency. However, there are multiple branches of memories as well as a wide range of memory generation and retrieval techniques. Please consult [Memory](/en/guide/in_depth_guides/memory) for using memory to really boost your agent's performance.

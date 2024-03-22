@@ -38,7 +38,7 @@ Recommended for developers and researchers looking to customize the framework fo
 
 ```
 git clone https://github.com/geekan/MetaGPT.git
-cd /your/path/to/MetaGPT
+cd ./MetaGPT
 pip install -e .
 ```
 

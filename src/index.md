@@ -15,8 +15,8 @@ hero:
       text: Get Started
       link: /en/guide/get_started/introduction
     - theme: alt
-      text: View on Github
-      link: https://github.com/geekan/MetaGPT
+      text: Use Cases
+      link: https://www.deepwisdom.ai/usecases
 
 features:
   - title: Agents

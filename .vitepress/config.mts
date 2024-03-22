@@ -1,5 +1,6 @@
 import { DefaultTheme, defineConfig } from 'vitepress';
 import UnoCSS from 'unocss/vite';
+import VueTsx from '@vitejs/plugin-vue-jsx';
 import AutoImport from 'unplugin-auto-import/vite';
 import { resolve, join } from 'node:path';
 import {
@@ -54,7 +55,7 @@ const genRfcLinks = (dir: string, prefixPath = '') => {
   return data;
 };
 const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
-const sources = ['blog', 'rfcs'];
+const sources = ['blog', 'rfcs', 'DataInterpreter'];
 const dests = ['zh', 'en'];
 
 const copyDir = (source: string, dest: string) => {
@@ -178,6 +179,11 @@ export default defineConfig({
             link: '/en/guide/get_started/introduction',
             activeMatch: '/en/guide/',
           },
+          {
+            text: 'Data Interpreter',
+            link: '/en/DataInterpreter/index',
+            activeMatch: '/en/DataInterpreter/',
+          },
           ...getVersions(),
         ],
         sidebar: {
@@ -213,6 +219,10 @@ export default defineConfig({
                     text: 'Integration with open LLM',
                     link: 'tutorials/integration_with_open_llm.md',
                   },
+                  {
+                    text: 'Customize LLMs for roles or actions',
+                    link: 'tutorials/customize_llms_for_roles_or_actions.md',
+                  },
                 ],
               },
               {
@@ -233,6 +243,10 @@ export default defineConfig({
                           {
                             text: 'Machine learning modeling',
                             link: 'use_cases/agent/interpreter/machine_learning.md',
+                          },
+                          {
+                            text: 'Machine learning modeling with tools',
+                            link: 'use_cases/agent/interpreter/machine_learning_with_tools.md',
                           },
                           {
                             text: 'Image background removal',
@@ -267,10 +281,6 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/email_summary.md',
                           },
                         ],
-                      },
-                      {
-                        text: 'Machine Learning Engineer',
-                        link: 'use_cases/agent/ml_engineer.md',
                       },
                       {
                         text: 'Researcher: search web and write reports',
@@ -326,7 +336,7 @@ export default defineConfig({
                     link: 'in_depth_guides/agent_communication.md',
                   },
                   {
-                    text: 'Incremental devlopment',
+                    text: 'Incremental development',
                     link: 'in_depth_guides/incremental_development.md',
                   },
                   {
@@ -368,6 +378,11 @@ export default defineConfig({
             text: '文档',
             link: '/zh/guide/get_started/introduction',
             activeMatch: '/zh/guide/',
+          },
+          {
+            text: 'Data Interpreter',
+            link: '/zh/DataInterpreter/index',
+            activeMatch: '/zh/DataInterpreter/',
           },
           ...arrVisible(
             [
@@ -440,6 +455,10 @@ export default defineConfig({
                     text: '集成开源LLM',
                     link: 'tutorials/integration_with_open_llm',
                   },
+                  {
+                    text: '为角色或动作配置不同LLM',
+                    link: 'tutorials/customize_llms_for_roles_or_actions',
+                  },
                 ],
               },
               {
@@ -460,6 +479,10 @@ export default defineConfig({
                           {
                             text: '机器学习建模',
                             link: 'use_cases/agent/interpreter/machine_learning.md',
+                          },
+                          {
+                            text: '使用工具进行机器学习建模',
+                            link: 'use_cases/agent/interpreter/machine_learning_with_tools.md',
                           },
                           {
                             text: '图像去背景',
@@ -494,10 +517,6 @@ export default defineConfig({
                             link: 'use_cases/agent/interpreter/email_summary.md',
                           },
                         ],
-                      },
-                      {
-                        text: '机器学习工程师',
-                        link: 'use_cases/agent/ml_engineer.md',
                       },
                       {
                         text: '调研员',
@@ -607,6 +626,7 @@ export default defineConfig({
       alias: [{ find: '@/', replacement: `${resolve(__dirname, '../src')}/` }],
     },
     plugins: [
+      VueTsx(),
       UnoCSS(),
       AutoImport({
         imports: ['vue'],

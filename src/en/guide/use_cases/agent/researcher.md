@@ -287,6 +287,7 @@ Configuration:
 - serpapi
   - search.engine: Set to serpapi
   - search.api_key: Obtain from https://serpapi.com/
+  - search.params: Additional parameters to pass to the search engine, e.g., {"engine": "google"}
 - google
   - search.engine: Set to google
   - search.api_key: Obtain from https://console.cloud.google.com/apis/credentials

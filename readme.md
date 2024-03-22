@@ -27,7 +27,7 @@ This repo hosts the [documentation site](https://docs.deepwisdom.ai/) for [MetaG
 
 ## Make contribution
 
-- Find the file of your interest by navigating `src/[language]/guide` and make your changes. The files are aranged to reflect the hierachy on the documentation site. For example, `src/en/guide/get_started/quickstart.md` corresponds to `https://docs.deepwisdom.ai/en/guide/get_started/quickstart.html`
+- Find the file of your interest by navigating `src/[language]/guide` and make your changes. The files are aranged to reflect the hierarchy on the documentation site. For example, `src/en/guide/get_started/quickstart.md` corresponds to `https://docs.deepwisdom.ai/en/guide/get_started/quickstart.html`
 - Place your media files such as images or videos under `src/public/image/guide`, the path should correspond to the documents using the media. Documents of different languages use the same media. In your document, use **relative path** to refer to the media
 - Translate: If you are adding a new file, translate the documents to all languages. We will provide a Translator agent soon
 - For editting the sidebar, change `src/.vitepress/config.mts`, find the dictionary under `sidebar`

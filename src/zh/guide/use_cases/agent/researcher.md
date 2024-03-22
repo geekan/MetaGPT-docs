@@ -286,6 +286,7 @@ class Researcher(Role):
 - serpapi
   - search.engine: 设置为serpapi
   - search.api_key: 从https://serpapi.com/获取
+  - search.params: 可选，设置搜索引擎的参数
 - google
   - search.engine: 设置为google
   - search.api_key: 从https://console.cloud.google.com/apis/credentials获取
