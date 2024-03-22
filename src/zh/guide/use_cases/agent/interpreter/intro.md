@@ -16,3 +16,6 @@
 - [工具使用：文转图](./text2image.md)
 - [工具使用：邮件总结与回复](./email_summary.md)
 - 更多示例补充中
+
+## 注意
+MetaGPT（v0.7版本）仅支持**OpenAI**模型。
