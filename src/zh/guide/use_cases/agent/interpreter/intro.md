@@ -17,3 +17,7 @@
 - [工具使用：文转图](./text2image.md)
 - [工具使用：邮件总结与回复](./email_summary.md)
 - 更多示例补充中
+
+## 注意
+
+如果您希望在运行时保存Jupyter Notebook文件和plan的结果以供将来参考和分析，可以参考示例列表中的[数据可视化](./data_visualization.md)对应的代码。

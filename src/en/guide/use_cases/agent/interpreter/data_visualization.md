@@ -16,6 +16,30 @@ Use `DataInterpreter` to perform a simple data analysis and visualize the sklear
 python examples/di/data_visualization.py
 ```
 
+The code in `examples/di/data_visualization.py` is as follows:
+
+```python
+import asyncio
+from metagpt.logs import logger
+from metagpt.roles.di.data_interpreter import DataInterpreter
+from metagpt.utils.recovery_util import save_history
+
+async def main(requirement: str = ""):
+
+    di = DataInterpreter()
+    rsp = await di.run(requirement)
+    logger.info(rsp)
+    save_history(role=di)
+
+
+if __name__ == "__main__":
+
+    requirement = "Run data analysis on sklearn Iris dataset, include a plot"
+    asyncio.run(main(requirement))
+```
+
+By executing the above code, the generated plan and code will be saved separately in `data/output/current_time/plan.json` and `data/output/current_time/code.ipynb`, respectively.
+
 ### Execution Results
 
 1. `DataInterpreter` proposes the following solution tasks:
@@ -45,7 +69,7 @@ python examples/di/data_visualization.py
 2. `DataInterpreter` writes the following code:
 
 ```python
-# ----------------------------------task3------------------------------------
+# ----------------------------------task1------------------------------------
 from sklearn.datasets import load_iris
 iris_data = load_iris()
 iris_data.keys()

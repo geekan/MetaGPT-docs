@@ -16,6 +16,30 @@
 python examples/di/data_visualization.py
 ```
 
+`examples/di/data_visualization.py`文件中的代码具体为：
+
+```python
+import asyncio
+from metagpt.logs import logger
+from metagpt.roles.di.data_interpreter import DataInterpreter
+from metagpt.utils.recovery_util import save_history
+
+async def main(requirement: str = ""):
+
+    di = DataInterpreter()
+    rsp = await di.run(requirement)
+    logger.info(rsp)
+    save_history(role=di)
+
+
+if __name__ == "__main__":
+
+    requirement = "Run data analysis on sklearn Iris dataset, include a plot"
+    asyncio.run(main(requirement))
+```
+
+执行上面的代码，生成的plan和code会分别保存在 `dada/output/当前时间/plan.json`和 `dada/output/当前时间/code.ipynb`中。
+
 ### 运行结果
 
 1. `DataInterpreter` 提出的`task`如下:
@@ -45,7 +69,7 @@ python examples/di/data_visualization.py
 2. `DataInterpreter`写的代码如下:
 
 ```python
-# ----------------------------------task3------------------------------------
+# ----------------------------------task1------------------------------------
 from sklearn.datasets import load_iris
 iris_data = load_iris()
 iris_data.keys()
