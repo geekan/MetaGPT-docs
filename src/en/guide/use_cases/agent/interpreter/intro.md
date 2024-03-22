@@ -18,4 +18,5 @@ Data Interpreter is an agent who solves data-related problems through codes. It 
 - More on the way!
 
 ## Note
+
 MetaGPT (v0.7 version) only supports **OpenAI** models.
