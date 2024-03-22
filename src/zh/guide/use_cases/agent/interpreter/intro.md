@@ -20,4 +20,4 @@
 
 ## 注意
 
-如果您希望在运行时保存Jupyter Notebook文件和plan的结果以供将来参考和分析，可以参考上面示例列表中的**数据可视化**对应的代码。（代码的位置为：`examples/di/data_visualization.py`）
+如果您希望在运行时保存Jupyter Notebook文件和plan的结果以供将来参考和分析，可以参考上面示例列表中的**数据可视化**对应的代码。
