@@ -137,8 +137,11 @@ To illustrate the process, consider the following examples of customizing tools 
     if **name** == "**main**":
     requirement = "Please calculate the sum of 3 and 11, and then calculate the factorial of 5."
     asyncio.run(main(requirement))
+
     ```
     **Note**:
+
+    ```
 
 3.  Don't forget to write the docstring for your class and its functions that will help to select the tool and understand how it works for the `DataInterpreter`.
 4.  The tool name is the class name when registering the tool.
