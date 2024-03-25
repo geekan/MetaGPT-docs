@@ -18,4 +18,5 @@ Data Interpreter is an agent who solves data-related problems through codes. It 
 - More on the way!
 
 ## Note
+
 In current version (v0.7), Data Interpreter only supports **OpenAI** models.
