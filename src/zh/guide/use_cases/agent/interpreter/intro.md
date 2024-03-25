@@ -18,9 +18,11 @@
 - 更多示例补充中
 
 ## 注意
+
 <<<<<<< HEAD
 在当前版本(v0.7), 数据解释器仅支持 **OpenAI** 模型。
 =======
 
 MetaGPT（v0.7版本）仅支持**OpenAI**模型。
->>>>>>> ef4cf94f90a95c55789e7d4539df8ca3af59bcff
+
+> > > > > > > ef4cf94f90a95c55789e7d4539df8ca3af59bcff
