@@ -18,6 +18,8 @@ llm:
   model: 'gpt-4-turbo-preview' # or gpt-3.5-turbo-1106 / gpt-4-1106-preview
   base_url: 'https://api.openai.com/v1' # or forward url / other llm url
   api_key: 'YOUR_API_KEY'
+  # proxy: 'YOUR_LLM_PROXY_IF_NEEDED' # Optional. If you want to use a proxy, set it here.
+  # pricing_plan: 'YOUR_PRICING_PLAN' # Optional. If your pricing plan uses a different name than the `model`.
 ```
 
 > **Note**:
@@ -26,6 +28,18 @@ llm:
 With these steps, your setup is complete. For starting with MetaGPT, check out the [Quickstart guide](./quickstart) or our [Tutorials](/en/guide/tutorials/agent_101).
 
 MetaGPT supports a range of LLM models. Configure your model API keys as needed.
+
+### Anthropic / Claude API
+
+supported model list, see `claude-*` inside `metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'claude' # or anthropic
+  base_url: 'https://api.anthropic.com'
+  api_key: 'YOUR_API_KEY'
+  model: 'claude-3-opus-20240229'
+```
 
 ### Zhipu API
 
@@ -61,8 +75,20 @@ Check [llm_config.py](https://github.com/geekan/MetaGPT/blob/dev/metagpt/configs
 ```yaml
 llm:
   api_type: 'azure'
+  base_url: 'YOUR_AZURE_BASE_URL'
   api_key: 'YOUR_API_KEY'
+  api_version: 'YOUR_API_VERSION'
   model: 'YOUR_MODEL_NAME'
+```
+
+### Google Gemini
+
+supports default model `gemini-pro`
+
+```yaml
+llm:
+  api_type: 'gemini'
+  api_key: 'YOUR_API_KEY'
 ```
 
 ### Baidu QianFan API
@@ -123,6 +149,42 @@ llm:
   api_type: dashscope
   api_key: 'YOUR_API_KEY'
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
+```
+
+### Moonshot API
+
+support `moonshot-v1-*`models，see `metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'moonshot'
+  base_url: 'https://api.moonshot.cn/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'moonshot-v1-8k'
+```
+
+### FireWorks API
+
+support `FireWorks`models，see `metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'fireworks'
+  base_url: 'https://api.fireworks.ai/inference/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'accounts/fireworks/models/llama-v2-13b-chat'
+```
+
+### Mistral API
+
+support `Mistral`models，see `metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'mistral'
+  base_url: 'https://api.mistral.ai/v1'
+  api_key: 'YOUR_API_KEY'
+  model: 'open-mixtral-8x7b'
 ```
 
 ## Configuration for tools (Optional)
