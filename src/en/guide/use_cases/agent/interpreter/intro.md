@@ -16,3 +16,13 @@ Data Interpreter is an agent who solves data-related problems through codes. It 
 - [Tool usage: text2image](./text2image.md)
 - [Tool usage: email summarization and response](./email_summary.md)
 - More on the way!
+
+## Note
+
+<<<<<<< HEAD
+In current version (v0.7), Data Interpreter only supports **OpenAI** models.
+=======
+
+MetaGPT (v0.7 version) only supports **OpenAI** models.
+
+> > > > > > > ef4cf94f90a95c55789e7d4539df8ca3af59bcff
