@@ -24,6 +24,9 @@ Recommended for most users. You can import MetaGPT like any python package, empl
 pip install metagpt
 ```
 
+### Install submodules
+- RAG, `pip install metagpt[rag]`
+
 ## Install latest development version
 
 Best for experiencing newest features.

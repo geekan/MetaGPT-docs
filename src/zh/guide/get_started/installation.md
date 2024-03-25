@@ -24,6 +24,9 @@ python3 --version
 pip install metagpt
 ```
 
+### 安装子模块
+- RAG，`pip install metagpt[rag]`
+
 ## 安装最新的开发版本
 
 最适合体验最新功能的用户。
