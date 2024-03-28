@@ -9,9 +9,13 @@ This article focuses on the RAG functions provided by the current MetaGPT:
 5. Data storage and recovery, vectorization is not required each time.
 
 ## Prepare
-- Install
+- Installation
 ```
 pip install metagpt[rag]
+```
+- Note
+```
+1. Some modules are quite large and use lazy loading, requiring manual installation. For example, to use ColbertRerank, you need to install `llama-index-postprocessor-colbert-rerank`
 ```
 
 ## 1. Data input

@@ -13,6 +13,10 @@ RAG（Retrieval-Augmented Generation）通过引用外部权威知识库来优�
 ```
 pip install metagpt[rag]
 ```
+- 注意点
+```
+1. 有些模块比较大，采用延迟加载，需要自行安装，比如要使用ColbertRerank，需安装`llama-index-postprocessor-colbert-rerank`
+```
 
 ## 1. 数据输入
 ### 示例 1.1: 文件或目录
