@@ -25,6 +25,7 @@ pip install metagpt
 ```
 
 ### Install submodules
+
 - RAG, `pip install metagpt[rag]`
 
 ## Install latest development version
@@ -46,6 +47,7 @@ pip install -e .
 ```
 
 ### Install submodules
+
 - RAG, `pip install -e .[rag]`
 
 ## Install with Docker
