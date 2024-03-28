@@ -25,7 +25,6 @@ pip install metagpt
 ```
 
 ### 安装子模块
-
 - RAG，`pip install metagpt[rag]`
 
 ## 安装最新的开发版本
@@ -45,6 +44,9 @@ git clone https://github.com/geekan/MetaGPT.git
 cd /your/path/to/MetaGPT
 pip install -e .
 ```
+
+## 安装子模块
+- RAG，`pip install -e .[rag]`
 
 ## 使用Docker安装
 

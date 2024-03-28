@@ -25,7 +25,6 @@ pip install metagpt
 ```
 
 ### Install submodules
-
 - RAG, `pip install metagpt[rag]`
 
 ## Install latest development version
@@ -45,6 +44,9 @@ git clone https://github.com/geekan/MetaGPT.git
 cd ./MetaGPT
 pip install -e .
 ```
+
+### Install submodules
+- RAG, `pip install -e .[rag]`
 
 ## Install with Docker
 
