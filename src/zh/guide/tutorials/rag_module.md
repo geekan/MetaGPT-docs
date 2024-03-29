@@ -11,7 +11,12 @@ RAG（Retrieval-Augmented Generation）通过引用外部权威知识库来优�
 ## 前置准备
 - 安装RAG模块
 ```
+# 从pypi安装
 pip install metagpt[rag]
+```
+```
+# 从源码安装
+pip install -e .[rag]
 ```
 - 注意点
 ```

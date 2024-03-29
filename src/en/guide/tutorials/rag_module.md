@@ -11,8 +11,14 @@ This article focuses on the RAG functions provided by the current MetaGPT:
 ## Prepare
 - Installation
 ```
+# from pypi
 pip install metagpt[rag]
 ```
+```
+# from source code
+pip install -e .[rag]
+```
+
 - Note
 ```
 1. Some modules are quite large and use lazy loading, requiring manual installation. For example, to use ColbertRerank, you need to install `llama-index-postprocessor-colbert-rerank`
@@ -128,7 +134,7 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
-In this example, we first use faiss for retrieval, then apply LLMRanker to re-rank the retrieved results, and obtain the final search outcome.
+In this example, we first use faiss for retrieval, then apply LLMRanker to re-rank the retrieved results, and obtain the final search outcome. 
 ## 4. Data update
 ### Example 4.1: Adding text and Python objects
 ```
