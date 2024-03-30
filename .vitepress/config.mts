@@ -343,6 +343,10 @@ export default defineConfig({
                     text: 'Serialization & Breakpoint Recovery',
                     link: 'in_depth_guides/breakpoint_recovery.md',
                   },
+                  {
+                    text: 'RAG Module',
+                    link: 'in_depth_guides/rag_module.md',
+                  },
                 ],
               },
               {
@@ -578,6 +582,10 @@ export default defineConfig({
                   {
                     text: '序列化&断点恢复',
                     link: 'in_depth_guides/breakpoint_recovery.md',
+                  },
+                  {
+                    text: 'RAG模块',
+                    link: 'in_depth_guides/rag_module.md',
                   },
                 ],
               },
