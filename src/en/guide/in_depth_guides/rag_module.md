@@ -82,7 +82,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-In this example, with the simplest configuration, we define the Player object, wherein the most important is that the custom object must meet the interface (for details, refer to [RAGObject](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/interface.py)), input a file, receive a question, and then print out the query results.
+In this example, with the simplest configuration, we define the Player object, wherein the most important is that the custom object must meet the interface (for details, refer to [RAGObject](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/interface.py)).
 
 ## 2. Retrieval
 
