@@ -82,7 +82,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-在这个示例中，我们使用最简配置，定义Player对象，其中最重要的是自定义对象需满足接口（具体查看[RAGObject](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/interface.py)），输入文件，接收一个问题，并打印出查询结果。
+在这个示例中，我们使用最简配置，定义Player对象，其中最重要的是自定义对象需满足接口（具体查看[RAGObject](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/interface.py)）。
 
 ## 2. 检索功能
 
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-在这个示例中，我们创建engine后，可以添加文档或者对象，最重要的是，如果自定义retriever需要实现接口[ModifiableRAGRetriever](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/retrievers/base.py)
+在这个示例中，我们创建engine后，可以添加文档或者对象，最重要的是，如果自定义retriever需要实现接口[ModifiableRAGRetriever](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/retrievers/base.py)。
 
 ## 5.数据保存及恢复
 
@@ -230,4 +230,4 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-在这个示例中，我们先把向量化相关数据保存在persist_dir，然后从persist_dir进行恢复后查询
+在这个示例中，我们先把向量化相关数据保存在persist_dir，然后从persist_dir进行恢复后查询。
