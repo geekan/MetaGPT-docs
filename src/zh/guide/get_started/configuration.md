@@ -159,7 +159,7 @@ llm:
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
 ```
 
-### 月之暗面 Moonshot API
+### 月之暗面 Moonshot / Kimi API
 
 支持 `moonshot-v1-*`模型，详见`metagpt/utils/token_counter.py`
 

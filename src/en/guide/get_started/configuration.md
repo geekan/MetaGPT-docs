@@ -152,7 +152,7 @@ llm:
   model: 'YOUR_ENDPOINT_NAME like qwen-max'
 ```
 
-### Moonshot API
+### Moonshot / Kimi API
 
 support `moonshot-v1-*`models，see `metagpt/utils/token_counter.py`
 
