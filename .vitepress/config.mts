@@ -197,7 +197,20 @@ export default defineConfig({
                   { text: 'Introduction', link: 'get_started/introduction' },
                   { text: 'Quickstart', link: 'get_started/quickstart' },
                   { text: 'Installation', link: 'get_started/installation' },
-                  { text: 'Configuration', link: 'get_started/configuration' },
+                  {
+                    text: 'Configuration',
+                    link: 'get_started/configuration',
+                    items: [
+                      {
+                        text: 'LLM API',
+                        link: 'get_started/configuration/llm_api_configuration',
+                      },
+                      {
+                        text: 'tools',
+                        link: 'get_started/configuration/tools',
+                      },
+                    ],
+                  },
                 ],
               },
               {
@@ -428,6 +441,16 @@ export default defineConfig({
                   {
                     text: '配置',
                     link: 'get_started/configuration',
+                    items: [
+                      {
+                        text: '大模型API',
+                        link: 'get_started/configuration/llm_api_configuration',
+                      },
+                      {
+                        text: '工具',
+                        link: 'get_started/configuration/tools',
+                      },
+                    ],
                   },
                 ],
               },
