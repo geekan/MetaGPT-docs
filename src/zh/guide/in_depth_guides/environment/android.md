@@ -42,8 +42,8 @@ spaces.Dict(
 | 字段        | 说明                | 取值说明 |
 | ----       | ----                | ----      |
 | action_type| 动作类型             | 不同动作对应不同IntEnum值，依次None、SYSTEM_BACK、SYSTEM_TAP、USER_INPUT、USER_LONGPRESS、USER_SWIPE、USER_SWIPE_TO |
-| coord      | 基础操作的开始坐标，尺寸为(2,)的`ndarray` | 第一个数值为最小值为0，最大值为屏幕宽度。单位pixel |
-| tgt_coord  | 用于滑动动作，对应目标位置坐标。尺寸为(2,)的`ndarray` | 第一个数值为最小值为0，最大值为屏幕宽度。单位pixel |
+| coord      | 基础操作的开始坐标，尺寸为(2,)的`ndarray` | 第一个数值最小值为0，最大值为屏幕宽度。第二个数值最小值为0，最大值为屏幕高度。单位pixel |
+| tgt_coord  | 用于滑动动作，对应目标位置坐标。尺寸为(2,)的`ndarray` | 第一个数值最小值为0，最大值为屏幕宽度。第二个数值最小值为0，最大值为屏幕高度。单位pixel |
 | input_txt  | 输入的文本            | 最大长度256 |
 | orient     | 滑动方向              | 对应`up`，`down`，`left`，`right` |
 | dist       | 滑动距离              | 对应`long`，`medium` |
@@ -77,7 +77,7 @@ screenshot_path: Path = env.observe(
 )  # 得到局部观察值
 
 
-action = EnvAction(action_type=EnvActionType.USER_INPUT, input_txt=user_input)  # define a action, and init corresponding params
+action = EnvAction(action_type=EnvActionType.USER_INPUT, input_txt=user_input)  # 初始化一组动作值，关于用户输入文本。
 obs, _, _, _, info = env.step(action)  # 执行动作并得到新的完整观察
 
 logger.info(f'action execute result: {info["res"]}')  # 动作执行的结果值

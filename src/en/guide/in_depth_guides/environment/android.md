@@ -42,8 +42,8 @@ Description of action
 | Field | Description | Value Description |
 | ---- | ---- | ---- |
 | action_type| Action type | Different actions correspond to different IntEnum values, followed by None, SYSTEM_BACK, SYSTEM_TAP, USER_INPUT, USER_LONGPRESS, USER_SWIPE, USER_SWIPE_TO |
-| coord | The starting coordinate of the basic operation, an `ndarray` with size (2,) | The first value is the minimum value 0, and the maximum value is the screen width. Unit pixel |
-| tgt_coord | Used for sliding actions, corresponding to the target position coordinates. `ndarray` with size (2,) | The first value is the minimum value 0, the maximum value is the screen width. Unit pixel |
+| coord | The starting coordinate of the basic operation, an `ndarray` with size (2,) | The minimum value of the first value is 0, and the maximum value is the screen width. The minimum value of the second value is 0 and the maximum value is the screen height. Unit pixel |
+| tgt_coord | Used for sliding actions, corresponding to the target position coordinates. `ndarray` with size (2,) | The minimum value of the first value is 0, and the maximum value is the screen width. The minimum value of the second value is 0 and the maximum value is the screen height. Unit pixel |
 | input_txt | Input text | Maximum length 256 |
 | orient | sliding direction | corresponding to `up`, `down`, `left`, `right` |
 | dist | sliding distance | corresponding to `long`, `medium` |
