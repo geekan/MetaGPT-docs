@@ -7,7 +7,7 @@
 
 ## [配置大模型API](./configuration/llm_api_configuration.md)
 
-## [配置工具（可选）](./configuration/tools.md.md)
+## [配置工具（可选）](./configuration/tools.md)
 
 ## 其他配置（可选）
 
