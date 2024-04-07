@@ -2,7 +2,7 @@
 
 ## [LLM API Configuration](./configuration/llm_api_configuration.md)
 
-## [Configuration for tools (Optional)](./configuration/tools.md.md)
+## [Configuration for tools (Optional)](./configuration/tools.md)
 
 ## Others (Optional)
 
