@@ -360,6 +360,20 @@ export default defineConfig({
                     text: 'RAG Module',
                     link: 'in_depth_guides/rag_module.md',
                   },
+                  {
+                    text: 'Environment',
+                    link: 'in_depth_guides/environment/intro.md',
+                    items: [
+                      {
+                        text: 'Stanford Town',
+                        link: 'in_depth_guides/environment/stanford_town.md',
+                      },
+                      {
+                        text: 'Android',
+                        link: 'in_depth_guides/environment/android.md',
+                      }
+                    ]
+                  }
                 ],
               },
               {
@@ -610,6 +624,20 @@ export default defineConfig({
                     text: 'RAG模块',
                     link: 'in_depth_guides/rag_module.md',
                   },
+                  {
+                    text: '环境',
+                    link: 'in_depth_guides/environment/intro.md',
+                    items: [
+                      {
+                        text: '斯坦福小镇,
+                        link: 'in_depth_guides/environment/stanford_town.md',
+                      },
+                      {
+                        text: '安卓模拟器',
+                        link: 'in_depth_guides/environment/android.md'
+                      }
+                    ]
+                  }
                 ],
               },
               {
