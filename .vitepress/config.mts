@@ -629,7 +629,7 @@ export default defineConfig({
                     link: 'in_depth_guides/environment/intro.md',
                     items: [
                       {
-                        text: '斯坦福小镇,
+                        text: '斯坦福小镇',
                         link: 'in_depth_guides/environment/stanford_town.md',
                       },
                       {
