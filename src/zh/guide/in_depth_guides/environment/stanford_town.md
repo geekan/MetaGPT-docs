@@ -1,13 +1,17 @@
 # 斯坦福小镇环境
+
 斯坦福小镇环境内部通过定义了一个包括小镇建筑等目标信息的网格地图，并使用[generative_agents](https://github.com/joonspk-research/generative_agents) 的`frontend_server`进行小镇环境前端展现和角色行为输出。一般的，可以从环境中直接观察到网格地图以及地图上不同位置的建筑信息描述等，可以在环境中操作的动作集合为：在地图指定位置添加事件信息、从地图指定位置删除符合条件的事件信息、重置地图指定位置的事件等。
 
 ## 空间定义
 
 ### 观察空间
+
 由于完整观察值定义较为复杂，在实际使用过程中并未使用。这里使用了桩观察空间，顾不在这里展开。
 
 ### 动作空间
-定义：   
+
+定义：
+
 ```
 space = spaces.Dict(
     {
@@ -25,19 +29,21 @@ space = spaces.Dict(
 
 动作值说明
 
-| 字段        | 说明                | 取值说明 |
-| ----       | ----                | ----      |
-| action_type| 动作类型             | 不同动作对应不同IntEnum值，依次None、ADD_TILE_EVENT、RM_TILE_EVENT、TURN_TILE_EVENT_IDLE、RM_TITLE_SUB_EVENT |
-| coord      | 地图上的坐标，尺寸为(2,)的`ndarray` | 第一个数值最小值为0，最大值为地图宽度。第二个数值最小值为0，最大值为地图高度。|
-| subject    | 事件的主题，文本类型            | 最大长度256  |
-| event      | 事件，包含4个文本的元组类型  | 每个元素最大长度256 |
+| 字段        | 说明                                | 取值说明                                                                                                     |
+| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| action_type | 动作类型                            | 不同动作对应不同IntEnum值，依次None、ADD_TILE_EVENT、RM_TILE_EVENT、TURN_TILE_EVENT_IDLE、RM_TITLE_SUB_EVENT |
+| coord       | 地图上的坐标，尺寸为(2,)的`ndarray` | 第一个数值最小值为0，最大值为地图宽度。第二个数值最小值为0，最大值为地图高度。                               |
+| subject     | 事件的主题，文本类型                | 最大长度256                                                                                                  |
+| event       | 事件，包含4个文本的元组类型         | 每个元素最大长度256                                                                                          |
 
 空间sample示例：
+
 ```
 OrderedDict([('action_type', 1), ('coord', array([102.284424, 142.02187 ], dtype=float32)), ('event', ('cW6PUEhxxxKp9xitcEjNm', '9noCkVjHexxxd0D45p37q', '5r4ICxxxnqkoyGXv6', 'PK7YxxxOOsJq93')), ('subject', 'kTvgixxx4C4')])
 ```
 
 ## 使用
+
 ```
 from metagpt.environment.stanford_town.stanford_town_ext_env import StanfordTownExtEnv
 from metagpt.environment.stanford_town.env_space import (

@@ -371,9 +371,9 @@ export default defineConfig({
                       {
                         text: 'Android',
                         link: 'in_depth_guides/environment/android.md',
-                      }
-                    ]
-                  }
+                      },
+                    ],
+                  },
                 ],
               },
               {
@@ -634,10 +634,10 @@ export default defineConfig({
                       },
                       {
                         text: '安卓模拟器',
-                        link: 'in_depth_guides/environment/android.md'
-                      }
-                    ]
-                  }
+                        link: 'in_depth_guides/environment/android.md',
+                      },
+                    ],
+                  },
                 ],
               },
               {
