@@ -22,7 +22,7 @@
 目前，我们提供了几种场景环境并在`MetaGPT/examples/`下提供了对应的场景使用入口。
 
 - 待添加，[Minecraft环境](./minecraft.md)
-- 待添加，[狼人杀环境](./werewolf.md)
+- 已添加，[狼人杀环境](./werewolf.md)
 - 已添加，[斯坦福小镇环境](./stanford_town.md)
 - 已添加，[安卓模拟器环境](./android.md)
 - 待添加，[网页环境](./web.md)
