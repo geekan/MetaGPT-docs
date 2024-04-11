@@ -12,7 +12,13 @@ Since the definition of complete observations is complicated, it is not used in 
 
 Definition:
 
-```
+```python
+from gymnasium import spaces
+import numpy as np
+from metagpt.environment.stanford_town.env_space import EnvActionType
+
+maze_shape = (140, 100)
+
 space = spaces.Dict(
     {
         "action_type": spaces.Discrete(len(EnvActionType)),
@@ -44,7 +50,7 @@ OrderedDict([('action_type', 1), ('coord', array([102.284424, 142.02187 ], dtype
 
 ## Usage
 
-```
+```python
 from metagpt.environment.stanford_town.stanford_town_ext_env import StanfordTownExtEnv
 from metagpt.environment.stanford_town.env_space import (
     EnvAction,
@@ -57,12 +63,12 @@ env = StanfordTownExtEnv(maze_asset_path="/path/to/maze_asset_path")
 
 obs, _ = env.reset()  # get full observation
 
-nearby_tiles = self.rc.env.observe(
+nearby_tiles = env.observe(
     EnvObsParams(
-        obs_type=EnvObsType.TILE_NBR, coord=(200, 300), vision_radius=10
+        obs_type=EnvObsType.TILE_NBR, coord=(72, 14), vision_radius=10
     )
 )  # get partial observation，other grid information inside the vision of coordinate(200, 300)
 
-action = EnvAction(action_type=EnvActionType.RM_TITLE_SUB_EVENT, coord=(200, 300), subject="Isabella Rodriguez")  # define a action, delete the event which subject is `Isabella Rodriguez` from particular coordinate.
+action = EnvAction(action_type=EnvActionType.RM_TITLE_SUB_EVENT, coord=(72, 14), subject="Isabella Rodriguez")  # define a action, delete the event which subject is `Isabella Rodriguez` from particular coordinate.
 obs, _, _, _, info = env.step(action)  # execute action and get new observation
 ```
