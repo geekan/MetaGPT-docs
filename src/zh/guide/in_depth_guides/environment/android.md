@@ -25,8 +25,14 @@ OrderedDict([('screenshot', 'cQUnpNjpsOeTAFG3TkFWRQpRBcF3vAPeblVbM7Kc4KRcnCe2UVM
 
 定义：
 
-```
-spaces.Dict(
+```python
+from gymnasium import spaces
+import numpy as np
+from metagpt.environment.android.env_space import EnvActionType
+
+device_shape = (720, 1080)
+
+space = spaces.Dict(
     {
         "action_type": spaces.Discrete(len(EnvActionType)),
         "coord": spaces.Box(
@@ -63,7 +69,8 @@ OrderedDict([('action_type', 1), ('coord', array([ 55.44057, 842.3602 ], dtype=f
 
 ## 使用
 
-```
+```python
+from pathlib import Path
 from metagpt.environment.android.android_ext_env import AndroidExtEnv
 from metagpt.environment.android.env_space import (
     EnvAction,
@@ -83,8 +90,7 @@ screenshot_path: Path = env.observe(
     )
 )  # 得到局部观察值
 
-
-action = EnvAction(action_type=EnvActionType.USER_INPUT, input_txt=user_input)  # 初始化一组动作值，关于用户输入文本。
+action = EnvAction(action_type=EnvActionType.USER_INPUT, input_txt="user_input")  # 初始化一组动作值，关于用户输入文本。
 obs, _, _, _, info = env.step(action)  # 执行动作并得到新的完整观察
 
 logger.info(f'action execute result: {info["res"]}')  # 动作执行的结果值

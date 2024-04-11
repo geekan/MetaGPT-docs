@@ -25,8 +25,14 @@ OrderedDict([('screenshot', 'cQUnpNjpsOeTAFG3TkFWRQpRBcF3vAPeblVbM7Kc4KRcnCe2UVM
 
 Definition:
 
-```
-spaces.Dict(
+```python
+from gymnasium import spaces
+import numpy as np
+from metagpt.environment.android.env_space import EnvActionType
+
+device_shape = (720, 1080)
+
+space = spaces.Dict(
     {
         "action_type": spaces.Discrete(len(EnvActionType)),
         "coord": spaces.Box(
@@ -63,7 +69,8 @@ When used, use `EnvAction` to initialize an action: the action type to be execut
 
 ## Usage
 
-```
+```python
+from pathlib import Path
 from metagpt.environment.android.android_ext_env import AndroidExtEnv
 from metagpt.environment.android.env_space import (
     EnvAction,
@@ -84,7 +91,7 @@ screenshot_path: Path = env.observe(
 )  # get partial observation
 
 
-action = EnvAction(action_type=EnvActionType.USER_INPUT, input_txt=user_input)  # define a action, and init corresponding params
+action = EnvAction(action_type=EnvActionType.USER_INPUT, input_txt="user_input")  # define a action, and init corresponding params
 obs, _, _, _, info = env.step(action)  # execute action and get new observation
 
 logger.info(f'action execute result: {info["res"]}')  # action execute result

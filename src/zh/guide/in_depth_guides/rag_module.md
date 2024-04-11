@@ -14,12 +14,12 @@ RAG（Retrieval-Augmented Generation）通过引用外部权威知识库来优�
 
 - 安装RAG模块
 
-```
+```shell
 # 从pypi安装
 pip install metagpt[rag]
 ```
 
-```
+```shell
 # 从源码安装
 pip install -e .[rag]
 ```
@@ -34,7 +34,7 @@ pip install -e .[rag]
 
 ### 示例 1.1: 文件或目录
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 ### 示例 1.2: 自定义对象
 
-```
+```python
 import asyncio
 
 from pydantic import BaseModel
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
 ### 示例 2.1: faiss检索
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
 ### 示例 2.2: faiss和bm25混合检索
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
 ### 示例 3.1: LLM重排
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -161,7 +161,7 @@ if __name__ == "__main__":
 
 ### 示例 4.1: 增加文本与python对象
 
-```
+```python
 import asyncio
 
 from pydantic import BaseModel
@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
 ### 示例 5.1
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine

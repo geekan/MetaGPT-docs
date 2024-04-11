@@ -14,12 +14,12 @@ This article focuses on the RAG functions provided by the current MetaGPT:
 
 - Installation
 
-```
+```shell
 # from pypi
 pip install metagpt[rag]
 ```
 
-```
+```shell
 # from source code
 pip install -e .[rag]
 ```
@@ -34,7 +34,7 @@ pip install -e .[rag]
 
 ### Example 1.1: files or directory
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -56,7 +56,7 @@ In this example, we use the simplest configuration, input a file, receive a ques
 
 ### Example 1.2: Python objects
 
-```
+```python
 import asyncio
 
 from pydantic import BaseModel
@@ -88,7 +88,7 @@ In this example, with the simplest configuration, we define the Player object, w
 
 ### Example 2.1: faiss
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -111,7 +111,7 @@ In this example, we use faiss for retrieval, where more parameters can be viewed
 
 ### Example 2.2: faiss and bm25 hybrid retrieval
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -136,7 +136,7 @@ In this example, we use faiss and bm25 for mixed retrieval, combining the result
 
 ### Example 3.1: LLM re-ranking
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine
@@ -161,7 +161,7 @@ In this example, we first use faiss for retrieval, then apply LLMRanker to re-ra
 
 ### Example 4.1: Adding text and Python objects
 
-```
+```python
 import asyncio
 
 from pydantic import BaseModel
@@ -202,7 +202,7 @@ In this example, after creating an engine, we can add documents or objects. Most
 
 ### Example 5.1
 
-```
+```python
 import asyncio
 
 from metagpt.rag.engines import SimpleEngine

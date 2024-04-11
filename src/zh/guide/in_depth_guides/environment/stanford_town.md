@@ -13,6 +13,12 @@
 定义：
 
 ```
+from gymnasium import spaces
+import numpy as np
+from metagpt.environment.stanford_town.env_space import EnvActionType
+
+maze_shape = (140, 100)
+
 space = spaces.Dict(
     {
         "action_type": spaces.Discrete(len(EnvActionType)),
@@ -44,7 +50,7 @@ OrderedDict([('action_type', 1), ('coord', array([102.284424, 142.02187 ], dtype
 
 ## 使用
 
-```
+```python
 from metagpt.environment.stanford_town.stanford_town_ext_env import StanfordTownExtEnv
 from metagpt.environment.stanford_town.env_space import (
     EnvAction,
@@ -57,12 +63,12 @@ env = StanfordTownExtEnv(maze_asset_path="/path/to/maze_asset_path")
 
 obs, _ = env.reset()  # 得到完整观察值
 
-nearby_tiles = self.rc.env.observe(
+nearby_tiles = env.observe(
     EnvObsParams(
-        obs_type=EnvObsType.TILE_NBR, coord=(200, 300), vision_radius=10
+        obs_type=EnvObsType.TILE_NBR, coord=(72, 14), vision_radius=10
     )
 )  # 得到局部观察值，当前位置(200, 300)视野内的其他网格信息
 
-action = EnvAction(action_type=EnvActionType.RM_TITLE_SUB_EVENT, coord=(200, 300), subject="Isabella Rodriguez")  # 初始化一组动作值，删除指定位置主语为subject的事件。
+action = EnvAction(action_type=EnvActionType.RM_TITLE_SUB_EVENT, coord=(72, 14), subject="Isabella Rodriguez")  # 初始化一组动作值，删除指定位置主语为subject的事件。
 obs, _, _, _, info = env.step(action)  # 执行动作并得到新的完整观察
 ```
