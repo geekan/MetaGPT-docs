@@ -364,6 +364,10 @@ export default defineConfig({
                     text: 'Environment',
                     link: 'in_depth_guides/environment/intro.md',
                     items: [
+                        {
+                        text: 'Werewolf Game',
+                        link: 'in_depth_guides/environment/werewolf.md',
+                      },
                       {
                         text: 'Stanford Town',
                         link: 'in_depth_guides/environment/stanford_town.md',
@@ -628,6 +632,10 @@ export default defineConfig({
                     text: '环境',
                     link: 'in_depth_guides/environment/intro.md',
                     items: [
+                        {
+                        text: '狼人杀',
+                        link: 'in_depth_guides/environment/werewolf.md',
+                      },
                       {
                         text: '斯坦福小镇',
                         link: 'in_depth_guides/environment/stanford_town.md',
