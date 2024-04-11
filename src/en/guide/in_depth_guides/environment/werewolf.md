@@ -13,23 +13,23 @@ from gymnasium import spaces
 from metagpt.environment.werewolf.const import STEP_INSTRUCTIONS
 
 space = spaces.Dict(
-         {
-             "game_setup": spaces.Text(256),
-             "step_idx": spaces.Discrete(len(STEP_INSTRUCTIONS)),
-             "living_players": spaces.Tuple(
-                 (spaces.Text(16), spaces.Text(16))
-             ), # TODO should be tuple of variable length
-             "werewolf_players": spaces.Tuple(
-                 (spaces.Text(16), spaces.Text(16))
-             ), # TODO should be tuple of variable length
-             "player_hunted": spaces.Text(16),
-             "player_current_dead": spaces.Tuple((spaces.Text(16))), # TODO should be tuple of variable length
-             "witch_poison_left": spaces.Discrete(2),
-             "witch_antidote_left": spaces.Discrete(2),
-             "winner": spaces.Text(16),
-             "win_reason": spaces.Text(64),
-         }
-     )
+     {
+         "game_setup": spaces.Text(256),
+         "step_idx": spaces.Discrete(len(STEP_INSTRUCTIONS)),
+         "living_players": spaces.Tuple(
+             (spaces.Text(16), spaces.Text(16))
+         ), # TODO should be tuple of variable length
+         "werewolf_players": spaces.Tuple(
+             (spaces.Text(16), spaces.Text(16))
+         ), # TODO should be tuple of variable length
+         "player_hunted": spaces.Text(16),
+         "player_current_dead": spaces.Tuple((spaces.Text(16))), # TODO should be tuple of variable length
+         "witch_poison_left": spaces.Discrete(2),
+         "witch_antidote_left": spaces.Discrete(2),
+         "winner": spaces.Text(16),
+         "win_reason": spaces.Text(64),
+     }
+ )
 ```
 
 Description of observation  
