@@ -26,7 +26,7 @@ pip install metagpt
 
 ### Install submodules
 
-- RAG, `pip install metagpt[rag]`
+- RAG, `pip install metagpt[rag]`. On macOS/zsh: `pip install 'metagpt[rag]'`
 
 ## Install latest development version
 
