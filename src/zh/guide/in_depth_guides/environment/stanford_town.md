@@ -12,7 +12,7 @@
 
 定义：
 
-```
+```python
 from gymnasium import spaces
 import numpy as np
 from metagpt.environment.stanford_town.env_space import EnvActionType
