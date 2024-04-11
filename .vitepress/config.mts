@@ -202,11 +202,11 @@ export default defineConfig({
                     link: 'get_started/configuration',
                     items: [
                       {
-                        text: 'LLM API',
+                        text: 'LLM',
                         link: 'get_started/configuration/llm_api_configuration',
                       },
                       {
-                        text: 'tools',
+                        text: 'Tools',
                         link: 'get_started/configuration/tools',
                       },
                     ],
