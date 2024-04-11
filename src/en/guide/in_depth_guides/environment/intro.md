@@ -15,7 +15,7 @@ In addition, the decorators `mark_as_readable` and `mark_as_writeable` for the d
 Currently, we provide several scenario environments and provide corresponding scenario usage entrances under `MetaGPT/examples/`.
 
 - ToBeAdded, [Minecraft Environment](./minecraft.md)
-- ToBeAdded, [Werewolf Environment](./werewolf.md)
+- Added, [Werewolf Environment](./werewolf.md)
 - Added, [Stanford Town Environment](./stanford_town.md)
 - Added, [Android Environment](./android.md)
 - ToBeAdded, [Web Environment](./web.md)
