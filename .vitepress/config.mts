@@ -364,7 +364,7 @@ export default defineConfig({
                     text: 'Environment',
                     link: 'in_depth_guides/environment/intro.md',
                     items: [
-                        {
+                      {
                         text: 'Werewolf Game',
                         link: 'in_depth_guides/environment/werewolf.md',
                       },
@@ -632,7 +632,7 @@ export default defineConfig({
                     text: '环境',
                     link: 'in_depth_guides/environment/intro.md',
                     items: [
-                        {
+                      {
                         text: '狼人杀',
                         link: 'in_depth_guides/environment/werewolf.md',
                       },
