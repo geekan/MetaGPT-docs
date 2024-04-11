@@ -44,7 +44,7 @@ Description of observation
 | player_current_dead | List of currently eliminated player names | Multiple players possible |
 | witch_poison_left | The number of poisons left by the witch | 0 or 1 |
 | witch_antidote_left | The number of antidote left by the witch | 0 or 1 |
-| winner | winner | maximum length 16 |
+| winner | The Winner | Maximum length 16 |
 | win_reason | Winning reason | Maximum length 64 |
 
 
