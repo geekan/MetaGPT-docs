@@ -6,7 +6,7 @@ Werewolf Environment provides a strategy desktop game environment that allows yo
 
 ### Observation Space
 
-Definition:  
+Definition:
 
 ```python
 from gymnasium import spaces
@@ -32,23 +32,23 @@ space = spaces.Dict(
  )
 ```
 
-Description of observation  
+Description of observation
 
-| Field | Description | Value Description |
-| ---------- | ----------------------- | ---------- |
-| game_setup | Game initial information text string | Maximum length 16 |
-| step_idx | The current number of steps in each round of the game | Value range `[0-18]` |
-| living_players | List of currently living player names | Multiple players possible |
-| werewolf_players | Werewolf player name list | Multiple werewolves available. There is currently no isolation, and the list can be obtained directly from the environment, to be optimized |
-| player_hunted | The name of the player currently eliminated by werewolves | 0 or 1 player |
-| player_current_dead | List of currently eliminated player names | Multiple players possible |
-| witch_poison_left | The number of poisons left by the witch | 0 or 1 |
-| witch_antidote_left | The number of antidote left by the witch | 0 or 1 |
-| winner | The Winner | Maximum length 16 |
-| win_reason | Winning reason | Maximum length 64 |
-
+| Field               | Description                                               | Value Description                                                                                                                           |
+| ------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| game_setup          | Game initial information text string                      | Maximum length 16                                                                                                                           |
+| step_idx            | The current number of steps in each round of the game     | Value range `[0-18]`                                                                                                                        |
+| living_players      | List of currently living player names                     | Multiple players possible                                                                                                                   |
+| werewolf_players    | Werewolf player name list                                 | Multiple werewolves available. There is currently no isolation, and the list can be obtained directly from the environment, to be optimized |
+| player_hunted       | The name of the player currently eliminated by werewolves | 0 or 1 player                                                                                                                               |
+| player_current_dead | List of currently eliminated player names                 | Multiple players possible                                                                                                                   |
+| witch_poison_left   | The number of poisons left by the witch                   | 0 or 1                                                                                                                                      |
+| witch_antidote_left | The number of antidote left by the witch                  | 0 or 1                                                                                                                                      |
+| winner              | The Winner                                                | Maximum length 16                                                                                                                           |
+| win_reason          | Winning reason                                            | Maximum length 64                                                                                                                           |
 
 Space sample example:
+
 ```
 OrderedDict([('game_setup', 'Game setup: xxx'), ('living_players', ('Player1', 'Player2')), ('player_current_dead', ('Player5', 'Player6')), (' player_hunted', 'Player5'), ('step_idx', 7), ('werewolf_players', ('Player3', 'Player4')), ('win_reason', 'xx'), ('winner', 'werewolf' ), ('witch_antidote_left', 1), ('witch_poison_left', 1)])
 ```
@@ -70,13 +70,13 @@ space = spaces.Dict(
 )
 ```
 
-Description of action   
+Description of action
 
-| Field | Description | Value Description |
-| ----------- | ----------------------------------- | --------- |
-| action_type | Action type | Different actions correspond to different IntEnum values, followed by None, WOLF_KILL, VOTE_KILL, WITCH_POISON, WITCH_SAVE, GUARD_PROTECT, PROGRESS_STEP |
-| player_name | The initiator of the action | Maximum length 16 |
-| target_player_name | The target party of the action | Maximum length 16 |
+| Field              | Description                    | Value Description                                                                                                                                        |
+| ------------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action_type        | Action type                    | Different actions correspond to different IntEnum values, followed by None, WOLF_KILL, VOTE_KILL, WITCH_POISON, WITCH_SAVE, GUARD_PROTECT, PROGRESS_STEP |
+| player_name        | The initiator of the action    | Maximum length 16                                                                                                                                        |
+| target_player_name | The target party of the action | Maximum length 16                                                                                                                                        |
 
 Space sample example:
 
