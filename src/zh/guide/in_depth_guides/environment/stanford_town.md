@@ -1,5 +1,7 @@
 # 斯坦福小镇环境
 
+[代码入口](https://github.com/geekan/MetaGPT/tree/main/metagpt/environment/stanford_town)
+
 斯坦福小镇环境内部通过定义了一个包括小镇建筑等目标信息的网格地图，并使用[generative_agents](https://github.com/joonspk-research/generative_agents) 的`frontend_server`进行小镇环境前端展现和角色行为输出。一般的，可以从环境中直接观察到网格地图以及地图上不同位置的建筑信息描述等，可以在环境中操作的动作集合为：在地图指定位置添加事件信息、从地图指定位置删除符合条件的事件信息、重置地图指定位置的事件等。
 
 ## 空间定义

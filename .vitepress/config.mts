@@ -315,6 +315,10 @@ export default defineConfig({
                         text: 'Receipt Assistant',
                         link: 'use_cases/agent/receipt_assistant.md',
                       },
+                      {
+                        text: 'Android Assistant',
+                        link: 'use_cases/agent/android_assistant.md',
+                      },
                     ],
                   },
                   {
@@ -582,6 +586,10 @@ export default defineConfig({
                       {
                         text: '票据助手',
                         link: 'use_cases/agent/receipt_assistant.md',
+                      },
+                      {
+                        text: '安卓助手',
+                        link: 'use_cases/agent/android_assistant.md',
                       },
                     ],
                   },
