@@ -10,6 +10,8 @@ RAG（Retrieval-Augmented Generation）通过引用外部权威知识库来优�
 4. 数据更新，增加文本与python对象
 5. 数据保存及恢复，不用每次都进行向量化
 
+更多的例子请查看 [rag_pipeline](https://github.com/geekan/MetaGPT/blob/main/examples/rag_pipeline.py) 和 [rag_search](https://github.com/geekan/MetaGPT/blob/main/examples/rag_search.py)
+
 ## 前置准备
 
 - 安装RAG模块
@@ -24,11 +26,42 @@ pip install metagpt[rag]
 pip install -e .[rag]
 ```
 
-- 注意点
+> 注意点：
+>
+> 1. 有些模块比较大，采用延迟加载，需要自行安装，比如要使用ColbertRerank，需安装`llama-index-postprocessor-colbert-rerank`。
 
+- 配置embedding
+
+```yaml
+# openai
+embedding:
+  api_type: "openai"
+  base_url: "YOU_BASE_URL"
+  api_key: "YOU_API_KEY"
+
+# azure
+embedding:
+  api_type: "azure"
+  base_url: "YOU_BASE_URL"
+  api_key: "YOU_API_KEY"
+  api_version: "YOU_API_VERSION"
+
+# gemini
+embedding:
+  api_type: "gemini"
+  api_key: "YOU_API_KEY"
+
+# ollama
+embedding:
+  api_type: "ollama"
+  base_url: "YOU_BASE_URL"
+  model: "YOU_MODEL"
 ```
-1. 有些模块比较大，采用延迟加载，需要自行安装，比如要使用ColbertRerank，需安装`llama-index-postprocessor-colbert-rerank`
-```
+
+> 注意点：
+>
+> 1. 为了向后兼容，如果config不设置embedding，并且llm的api_type类型是openai或azure，那么会使用llm的配置进行embedding。
+> 2. 如果llm是ollama，可能会出现"context size was not non-negative"报错，这时需要在llm里配置max_token，比如2048。
 
 ## 1. 数据输入
 
@@ -157,7 +190,7 @@ if __name__ == "__main__":
 
 在这个示例中，我们先使用faiss进行检索，然后对检索出来的结果再用LLMRanker进行重排，得到最后检索的结果。
 
-## 4.数据更新
+## 4. 数据更新
 
 ### 示例 4.1: 增加文本与python对象
 
@@ -198,7 +231,7 @@ if __name__ == "__main__":
 
 在这个示例中，我们创建engine后，可以添加文档或者对象，最重要的是，如果自定义retriever需要实现接口[ModifiableRAGRetriever](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/retrievers/base.py)。
 
-## 5.数据保存及恢复
+## 5. 数据保存及恢复
 
 ### 示例 5.1
 
@@ -231,3 +264,5 @@ if __name__ == "__main__":
 ```
 
 在这个示例中，我们先把向量化相关数据保存在persist_dir，然后从persist_dir进行恢复后查询。
+
+
