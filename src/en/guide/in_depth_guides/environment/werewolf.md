@@ -1,5 +1,7 @@
 # Werewolf Environment
 
+[Code](https://github.com/geekan/MetaGPT/tree/main/metagpt/environment/werewolf)
+
 Werewolf Environment provides a strategy desktop game environment that allows you to customize the number of werewolves and villager when initializing the environment. When the game is executed, through the built-in prompt words of different players, non-moderator characters can conduct private chats at dusk and public speeches at dawn under the guidance of the moderator. Based on the results of different speeches and votes, the environment automatically calculates the eliminated player, the player's skill usage and survival status, whether the game is over, the winner and the reason, etc.
 
 ## Space Definition

@@ -1,5 +1,7 @@
 # Stanford Town Environment
 
+[Code](https://github.com/geekan/MetaGPT/tree/main/metagpt/environment/stanford_town)
+
 The Stanford Town Environment internally defines a grid map including target information such as town buildings, and uses the `frontend_server` of [generative_agents](https://github.com/joonspk-research/generative_agents) to display the town environment. and character behavior output. Generally, the grid map and the description of building information at different locations on the map can be directly observed from the environment. The set of actions that can be operated in the environment are: adding event at the specified location on the map, deleting qualified event from the specified location on the map, resetting event from the specified location on the map, etc.
 
 ## Space Definition
