@@ -1,6 +1,6 @@
 # Android Assistant
 
-[README](https://github.com/geekan/MetaGPT/blob/main/metagpt/ext/android_assistant/README.md)  
+[README](https://github.com/geekan/MetaGPT/blob/main/metagpt/ext/android_assistant/README.md)
 
 [Execution entry example code](https://github.com/geekan/MetaGPT/tree/main/examples/android_assistant)
 
