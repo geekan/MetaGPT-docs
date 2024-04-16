@@ -77,7 +77,7 @@ llm:
   api_type: 'azure'
   base_url: 'YOUR_AZURE_BASE_URL'
   api_key: 'YOUR_API_KEY'
-  api_version: 'YOUR_API_VERSION'  # such as '2024-03-01-preview'
+  api_version: 'YOUR_API_VERSION' # such as '2024-03-01-preview'
   model: 'YOUR_MODEL_NAME'
 ```
 
