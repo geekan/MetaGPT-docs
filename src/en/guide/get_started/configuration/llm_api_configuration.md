@@ -210,13 +210,13 @@ llm:
   model: 'llama2'
 ```
 
-## WizardLM-2-8x22b / Open LLM API / OpenAI Compatible API
+## WizardLM-2-8x22b via openrouter
 
 If you need wizardlm-2-8x22b, you can use the following configuration:
 
 ```yaml
 llm:
-  api_type: 'open_llm'
+  api_type: 'openrouter'
   base_url: 'https://openrouter.ai/api/v1'
   api_key: 'sk...'
   model: microsoft/wizardlm-2-8x22b
