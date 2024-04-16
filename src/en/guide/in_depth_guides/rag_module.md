@@ -10,6 +10,8 @@ This article focuses on the RAG functions provided by the current MetaGPT:
 4. Data update, addition of text and Python objects.
 5. Data storage and recovery, vectorization is not required each time.
 
+For more examples, please see [rag_pipeline](https://github.com/geekan/MetaGPT/blob/main/examples/rag_pipeline.py) and [rag_search](https://github.com/geekan/MetaGPT/blob/main/examples/rag_search.py)
+
 ## Prepare
 
 - Installation
@@ -24,11 +26,42 @@ pip install metagpt[rag]
 pip install -e .[rag]
 ```
 
-- Note
+> Note：
+>
+> 1. Some modules are quite large and use lazy loading, requiring manual installation. For example, to use ColbertRerank, you need to install `llama-index-postprocessor-colbert-rerank`.
 
+- Set embedding
+
+```yaml
+# openai
+embedding:
+  api_type: "openai"
+  base_url: "YOU_BASE_URL"
+  api_key: "YOU_API_KEY"
+
+# azure
+embedding:
+  api_type: "azure"
+  base_url: "YOU_BASE_URL"
+  api_key: "YOU_API_KEY"
+  api_version: "YOU_API_VERSION"
+
+# gemini
+embedding:
+  api_type: "gemini"
+  api_key: "YOU_API_KEY"
+
+# ollama
+embedding:
+  api_type: "ollama"
+  base_url: "YOU_BASE_URL"
+  model: "YOU_MODEL"
 ```
-1. Some modules are quite large and use lazy loading, requiring manual installation. For example, to use ColbertRerank, you need to install `llama-index-postprocessor-colbert-rerank`
-```
+
+> Note：
+>
+> 1. For backward compatibility, if the embedding is not set and the llm's api_type is either openai or azure, the llm's config will be used.
+> 2. If llm is ollama, there might be an error message "context size was not non-negative". In this case, you need to set the max_token in llm, for example, 2048.
 
 ## 1. Data input
 
