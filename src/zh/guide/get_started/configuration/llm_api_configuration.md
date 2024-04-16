@@ -210,7 +210,7 @@ llm:
   model: 'llama2'
 ```
 
-## WizardLM-2-8x22b via openrouter
+## WizardLM-2-8x22b via [openrouter](https://openrouter.ai/)
 
 If you need wizardlm-2-8x22b, you can use the following configuration:
 
