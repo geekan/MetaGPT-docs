@@ -209,3 +209,15 @@ llm:
   base_url: 'http://127.0.0.1:11434/api'
   model: 'llama2'
 ```
+
+## Open LLM API / OpenAI Compatible API / WizardLM-2-8x22b
+
+If you need wizardlm-2-8x22b, you can use the following configuration:
+
+```yaml
+llm:
+  api_type: 'open_llm'
+  base_url: 'https://openrouter.ai/api/v1'
+  api_key: "sk..."
+  model: microsoft/wizardlm-2-8x22b
+```
