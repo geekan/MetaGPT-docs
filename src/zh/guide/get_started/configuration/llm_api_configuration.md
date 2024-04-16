@@ -164,9 +164,9 @@ llm:
   model: 'moonshot-v1-8k'
 ```
 
-## FireWorks API
+## Fireworks API
 
-支持 `FireWorks`models模型，详见`metagpt/utils/token_counter.py`
+支持 `Fireworks`models模型，详见`metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
