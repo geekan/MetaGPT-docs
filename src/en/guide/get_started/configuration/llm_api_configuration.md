@@ -210,7 +210,7 @@ llm:
   model: 'llama2'
 ```
 
-## Open LLM API / OpenAI Compatible API / WizardLM-2-8x22b
+## WizardLM-2-8x22b / Open LLM API / OpenAI Compatible API
 
 If you need wizardlm-2-8x22b, you can use the following configuration:
 
