@@ -18,7 +18,7 @@ from metagpt.logs import logger
 
 async def main():
     msg = "Write a PRD for a snake game"
-    context = Context()  # The session-level Context object must be created outside the Role object
+    context = Context()  # The session Context object is explicitly created, and the Role object implicitly shares it automatically with its own Action object
     role = ProductManager(context=context)
     while msg:
         msg = await role.run(msg)

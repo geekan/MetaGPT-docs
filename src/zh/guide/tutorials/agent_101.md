@@ -17,7 +17,7 @@ from metagpt.logs import logger
 
 async def main():
     msg = "Write a PRD for a snake game"
-    context = Context()  # 会话级的Context对象必须在Role对象外部创建
+    context = Context()  # 显式创建会话Context对象，Role对象会隐式的自动将它共享给自己的Action对象
     role = ProductManager(context=context)
     while msg:
         msg = await role.run(msg)
