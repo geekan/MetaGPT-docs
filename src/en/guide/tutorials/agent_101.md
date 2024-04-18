@@ -124,7 +124,7 @@ from metagpt.context import Context
 
 async def main():
     msg = "write a function that calculates the product of a list"
-    context = Context()  # 会话级的Context对象必须在Role对象外部创建
+    context = Context()
     role = SimpleCoder(context=context)
     logger.info(msg)
     result = await role.run(msg)
