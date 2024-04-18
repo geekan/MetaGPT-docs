@@ -11,14 +11,17 @@
 # 可导入任何角色，初始化它，用一个开始的消息运行它，完成！
 import asyncio
 
+from metagpt.context import Context
 from metagpt.roles.product_manager import ProductManager
 from metagpt.logs import logger
 
 async def main():
     msg = "Write a PRD for a snake game"
-    role = ProductManager()
-    result = await role.run(msg)
-    logger.info(result.content[:100])
+    context = Context()  # 会话级的Context对象必须在Role对象外部创建
+    role = ProductManager(context=context)
+    while msg:
+        msg = await role.run(msg)
+        logger.info(str(msg))
 
 if __name__ == '__main__':
     asyncio.run(main())

@@ -12,14 +12,17 @@ Import any role, initialize it, run it with a starting message, done!
 ```python
 import asyncio
 
+from metagpt.context import Context
 from metagpt.roles.product_manager import ProductManager
 from metagpt.logs import logger
 
 async def main():
     msg = "Write a PRD for a snake game"
-    role = ProductManager()
-    result = await role.run(msg)
-    logger.info(result.content[:100])
+    context = Context()  # The session-level Context object must be created outside the Role object
+    role = ProductManager(context=context)
+    while msg:
+        msg = await role.run(msg)
+        logger.info(str(msg))
 
 if __name__ == '__main__':
     asyncio.run(main())
