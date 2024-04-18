@@ -11,14 +11,17 @@
 # 可导入任何角色，初始化它，用一个开始的消息运行它，完成！
 import asyncio
 
+from metagpt.context import Context
 from metagpt.roles.product_manager import ProductManager
 from metagpt.logs import logger
 
 async def main():
     msg = "Write a PRD for a snake game"
-    role = ProductManager()
-    result = await role.run(msg)
-    logger.info(result.content[:100])
+    context = Context()  # 显式创建会话Context对象，Role对象会隐式的自动将它共享给自己的Action对象
+    role = ProductManager(context=context)
+    while msg:
+        msg = await role.run(msg)
+        logger.info(str(msg))
 
 if __name__ == '__main__':
     asyncio.run(main())
@@ -115,9 +118,12 @@ class SimpleCoder(Role):
 ```python
 import asyncio
 
+from metagpt.context import Context
+
 async def main():
     msg = "write a function that calculates the sum of a list"
-    role = SimpleCoder()
+    context = Context()
+    role = SimpleCoder(context=context)
     logger.info(msg)
     result = await role.run(msg)
     logger.info(result)
@@ -187,9 +193,12 @@ class RunnableCoder(Role):
 ```python
 import asyncio
 
+from metagpt.context import Context
+
 async def main():
     msg = "write a function that calculates the sum of a list"
-    role = RunnableCoder()
+    context = Context()
+    role = RunnableCoder(context=context)
     logger.info(msg)
     result = await role.run(msg)
     logger.info(result)

@@ -12,14 +12,17 @@ Import any role, initialize it, run it with a starting message, done!
 ```python
 import asyncio
 
+from metagpt.context import Context
 from metagpt.roles.product_manager import ProductManager
 from metagpt.logs import logger
 
 async def main():
     msg = "Write a PRD for a snake game"
-    role = ProductManager()
-    result = await role.run(msg)
-    logger.info(result.content[:100])
+    context = Context()  # The session Context object is explicitly created, and the Role object implicitly shares it automatically with its own Action object
+    role = ProductManager(context=context)
+    while msg:
+        msg = await role.run(msg)
+        logger.info(str(msg))
 
 if __name__ == '__main__':
     asyncio.run(main())
@@ -117,9 +120,12 @@ Now we can put our agent to work, just initialize it and run it with a starting 
 ```python
 import asyncio
 
+from metagpt.context import Context
+
 async def main():
     msg = "write a function that calculates the product of a list"
-    role = SimpleCoder()
+    context = Context()
+    role = SimpleCoder(context=context)
     logger.info(msg)
     result = await role.run(msg)
     logger.info(result)
@@ -189,9 +195,12 @@ Now you can put your agent to work, just initialize it and run it with a startin
 ```python
 import asyncio
 
+from metagpt.context import Context
+
 async def main():
     msg = "write a function that calculates the product of a list"
-    role = RunnableCoder()
+    context = Context()
+    role = RunnableCoder(context=context)
     logger.info(msg)
     result = await role.run(msg)
     logger.info(result)
