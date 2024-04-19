@@ -222,3 +222,7 @@ html[lang='zh'] .VPHome .text {
     ) !important;
   }
 }
+
+body {
+  font-size: 16px !important;
+}
