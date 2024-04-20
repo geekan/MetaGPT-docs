@@ -233,3 +233,15 @@ llm:
   api_key: 'sk...'
   model: meta-llama/llama-3-70b-instruct:nitro
 ```
+
+## Llama-3-70b via [groq](https://groq.com/)
+
+If you need llama3-70b, you can use the following configuration:
+
+```yaml
+llm:
+  # Visit https://console.groq.com/keys to create api key
+  base_url: "https://api.groq.com/openai/v1"
+  api_key: "YOUR_API_KEY"
+  model: "llama3-70b-8192"  # llama3-8b-8192，llama3-70b-8192，llama2-70b-4096 ，mixtral-8x7b-32768，gemma-7b-it
+```
