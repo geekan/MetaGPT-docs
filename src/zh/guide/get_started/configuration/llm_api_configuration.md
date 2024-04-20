@@ -210,14 +210,26 @@ llm:
   model: 'llama2'
 ```
 
-## WizardLM-2-8x22b via openrouter
+## WizardLM-2-8x22b via [openrouter](https://openrouter.ai/)
 
-If you need wizardlm-2-8x22b, you can use the following configuration:
+如果你需要 [wizardlm-2-8x22b](https://openrouter.ai/models/microsoft/wizardlm-2-8x22b)，可以使用如下配置
 
 ```yaml
 llm:
-  api_type: 'open_llm'
+  api_type: 'openrouter'
   base_url: 'https://openrouter.ai/api/v1'
   api_key: 'sk...'
   model: microsoft/wizardlm-2-8x22b
+```
+
+## Llama-3-70b instruct via [openrouter](https://openrouter.ai/)
+
+如果你需要 [llama-3-70b instruct](https://openrouter.ai/models/meta-llama/llama-3-70b-instruct:nitro)，可以使用如下配置
+
+```yaml
+llm:
+  api_type: 'openrouter'
+  base_url: 'https://openrouter.ai/api/v1'
+  api_key: 'sk...'
+  model: meta-llama/llama-3-70b-instruct:nitro
 ```
