@@ -19,11 +19,11 @@ MetaGPT允许你为团队中的不同Role和Action使用不同的LLM，这极大
 ```python
 from metagpt.config2 import Config
 
-# 以下是一些示例配置，分别为gpt-4-1106-preview、gpt-4-0613和gpt-3.5-turbo-1106。
-gpt4t = Config.from_home("gpt-4-1106-preview.yaml")  # 从`~/.metagpt`目录加载自定义配置`gpt-4-1106-preview.yaml`
-gpt4 = Config.default()  # 使用默认配置，即`config2.yaml`文件中的配置，此处`config2.yaml`文件中的model为"gpt-4-0613"
+# 以下是一些示例配置，分别为gpt-4、gpt-4-turbo 和 gpt-3.5-turbo。
+gpt4 = Config.from_home("gpt-4.yaml")  # 从`~/.metagpt`目录加载自定义配置`gpt-4.yaml`
+gpt4t = Config.default()  # 使用默认配置，即`config2.yaml`文件中的配置，此处`config2.yaml`文件中的model为"gpt-4-turbo"
 gpt35 = Config.default()
-gpt35.llm.model = "gpt-3.5-turbo-1106"  # 将model修改为"gpt-3.5-turbo-1106"
+gpt35.llm.model = "gpt-3.5-turbo"  # 将model修改为"gpt-3.5-turbo"
 ```
 
 ### 分配配置

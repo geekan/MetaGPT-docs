@@ -14,9 +14,9 @@
 
 ```yaml
 llm:
-  api_type: 'openai' # or azure / ollama / open_llm etc. Check LLMType for more options
+  api_type: 'openai' # or azure / ollama / groq etc. Check LLMType for more options
   api_key: 'sk-...' # YOUR_API_KEY
-  model: 'gpt-4-turbo-preview' # or gpt-3.5-turbo-1106 / gpt-4-1106-preview
+  model: 'gpt-4-turbo' # or gpt-3.5-turbo
   # base_url: 'https://api.openai.com/v1'  # or any forward url.
   # proxy: 'YOUR_LLM_PROXY_IF_NEEDED'  # Optional. If you want to use a proxy, set it here.
   # pricing_plan: 'YOUR_PRICING_PLAN' # Optional. If your pricing plan uses a different name than the `model`.

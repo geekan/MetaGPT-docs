@@ -302,4 +302,4 @@ The generated invoice information is in the xlsx file in the `/data/invoice_ocr`
 
 ## Note
 
-It is recommended to use a large text limit `llm` model `api`, such as `gpt-3.5-turbo-16k`, for this role. This helps to avoid limitations when interacting with the `llm` large model due to excessively large OCR recognition results.
+It is recommended to use a large text limit `llm` model `api`, such as `gpt-4-turbo`, for this role. This helps to avoid limitations when interacting with the `llm` large model due to excessively large OCR recognition results.
