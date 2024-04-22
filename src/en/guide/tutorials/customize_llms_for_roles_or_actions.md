@@ -21,11 +21,11 @@ You can use default configurations or customize LLM configurations in the `~/.me
 ```python
 from metagpt.config2 import Config
 
-# Example configurations for gpt-4-1106-preview, gpt-4-0613 and gpt-3.5-turbo-1106
-gpt4t = Config.from_home("gpt-4-1106-preview.yaml")  # Load custom configuration from `~/.metagpt` directory `gpt-4-1106-preview.yaml`
-gpt4 = Config.default()  # Use default configuration from `config2.yaml` file (model: "gpt-4-0613")
+# Example configurations for gpt-4, gpt-4-turbo and gpt-3.5-turbo
+gpt4 = Config.from_home("gpt-4.yaml")  # Load custom configuration from `~/.metagpt` directory `gpt-4.yaml`
+gpt4t = Config.default()  # Use default configuration from `config2.yaml` file (model: "gpt-4-turbo")
 gpt35 = Config.default()
-gpt35.llm.model = "gpt-3.5-turbo-1106"  # Modify model to "gpt-3.5-turbo-1106"
+gpt35.llm.model = "gpt-3.5-turbo"  # Modify model to "gpt-3.5-turbo"
 ```
 
 ### Assign Configurations
