@@ -189,6 +189,9 @@ if __name__ == "__main__":
 ```
 
 在这个示例中，我们先使用faiss进行检索，然后对检索出来的结果再用LLMRanker进行重排，得到最后检索的结果。
+> 注意点：
+>
+> 1. 因为使用LLM Reranker，如果LLM回答的不对，可能会遇到`IndexError: list index out of range`。
 
 ## 4. 数据更新
 
