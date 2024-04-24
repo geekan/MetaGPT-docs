@@ -60,7 +60,7 @@ embedding:
 
 > Note：
 >
-> 1. For backward compatibility, if the embedding is not set and the llm's api_type is either openai or azure, the llm's config will be used. 
+> 1. For backward compatibility, if the embedding is not set and the llm's api_type is either openai or azure, the llm's config will be used.
 > 2. If llm is ollama, there might be an error message "context size was not non-negative". In this case, you need to set the max_token in llm, for example, 2048.
 
 ## 1. Data input
