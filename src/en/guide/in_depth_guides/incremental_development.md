@@ -155,7 +155,9 @@ Create a new flappy bird Game project with the command below using gpt-4-turbo:
 metagpt "write a flappy bird game without any obstacles" --project-name "flappy_bird" --run-tests --n-round 20 --max-auto-summarize-code 0
 ```
 
-[video](../../../public/image/guide/tutorials/inc_req_and_fixbug/20231221-161603.mp4)
+<video  controls>
+  <source src="../../../public/image/guide/tutorials/inc_req_and_fixbug/20231221-161603.mp4" type="video/mp4">
+</video>
 
 - #### Fix bug
 
@@ -165,7 +167,9 @@ Fix bug using azure gpt-4:
 metagpt "for event in pygame.event.get(): pygame.error: video system not initialized" --project-path "/Users/iorishinier/github/bak/MetaGPT/workspace/flappy_bird" --run-tests --n-round 20 --max-auto-summarize-code 1
 ```
 
-[video](../../../public/image/guide/tutorials/inc_req_and_fixbug/20231221-170726.mp4)
+<video  controls>
+  <source src="../../../public/image/guide/tutorials/inc_req_and_fixbug/20231221-170726.mp4" type="video/mp4">
+</video>
 
 We can see that game.py is continuously refactored through code review:
 ![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/9ada7f82adfe4d63b45c9558cd986a7f.png)
@@ -198,7 +202,9 @@ The following are available project versions:
 metagpt "Add moving obstacles, move randomly, last for 5 seconds." --project-path "/Users/iorishinier/github/bak/MetaGPT/workspace/flappy_bird" --run-tests --n-round 20 --max-auto-summarize-code 1
 ```
 
-[video](../../../public/image/guide/tutorials/inc_req_and_fixbug/20231221-193811.mp4)
+<video  controls>
+  <source src="../../../public/image/guide/tutorials/inc_req_and_fixbug/20231221-193811.mp4" type="video/mp4">
+</video>
 
 Here is the new class view and the sequence view:
 
