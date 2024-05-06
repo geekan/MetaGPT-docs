@@ -78,7 +78,7 @@ llm:
   base_url: 'YOUR_AZURE_BASE_URL'
   api_key: 'YOUR_API_KEY'
   api_version: 'YOUR_API_VERSION' # such as '2024-03-01-preview'
-  model: 'YOUR_MODEL_NAME' # or YOUR_DEPLOYMENT_NAME
+  model: 'YOUR_MODEL_NAME'
 ```
 
 ## Google Gemini
@@ -244,4 +244,17 @@ llm:
   base_url: 'https://api.groq.com/openai/v1'
   api_key: 'YOUR_API_KEY'
   model: 'llama3-70b-8192' # llama3-8b-8192，llama3-70b-8192，llama2-70b-4096 ，mixtral-8x7b-32768，gemma-7b-it
+```
+
+## [Amazon Bedrock API](https://aws.amazon.com/bedrock)
+access key and secret key from [Amazon IAM](https://aws.amazon.com/iam)
+
+see `metagpt/provider/bedrock/utils.py` for all available models
+```yaml
+llm:
+  api_type: "bedrock" 
+  model: "meta.llama3-70b-instruct-v1:0"  
+  region_name: "REGION" # e.g. us-east-1
+  access_key: "YOUR_ACCESS_KEY"
+  secret_key: "YOUR_SECRET_KEY"
 ```
