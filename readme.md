@@ -56,4 +56,3 @@ follow steps below to start the dev server
 3. `npm run docs:dev`
 
 The dev server should be running at http://localhost:5173. Visit the URL in your browser to see your new site in action!
-
