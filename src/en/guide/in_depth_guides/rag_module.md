@@ -66,6 +66,7 @@ embedding:
 >
 > 1. For backward compatibility, if the embedding is not set and the llm's api_type is either openai or azure, the llm's config will be used.
 > 2. If llm is ollama, there might be an error message "context size was not non-negative". In this case, you need to set the max_token in llm, for example, 2048.
+> 3. If you need to use other types of embeddings, such as huggingface, bedrock, etc. The from_docs and from_objs functions provide the field `embed_model`, which can accept different embeddings, including [the embeddings supported by Llama Index](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings) and [the custom embeddings supported by Llama Index](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/).
 
 ## 1. Data input
 
@@ -270,6 +271,5 @@ if __name__ == "__main__":
 > Note:
 >
 > 1. Using Post-retrieval can obtain better result, if use LLM Reranker, due to the uncertainty of the capabilities of LLM, it is not always guaranteed that the output will be parseable for reranking, prefer `gpt-4-turbo`, otherwise might encounter `IndexError: list index out of range` or `ValueError: invalid literal for int() with base 10`.
-> 2. The from_docs and from_objs functions provide the field `embed_model`, which can accept different embeddings, including [the embeddings supported by Llama Index](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings) and [the custom embeddings supported by Llama Index](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/).
 
 In this example, we first save the vectorized data in persist_dir, then query after restoring from persist_dir.
