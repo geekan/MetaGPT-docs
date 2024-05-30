@@ -66,7 +66,7 @@ embedding:
 >
 > 1. 为了向后兼容，如果config不设置embedding，并且llm的api_type类型是openai或azure，那么会使用llm的配置进行embedding。
 > 2. 如果llm是ollama，可能会出现"context size was not non-negative"报错，这时需要在llm里配置max_token，比如2048。
-> 3. 如果需要使用其他embedding类型，比如`huggingface`、`bedrock`等，from_docs和from_objs提供了字段`embed_model`，可以接受不同的embedding，包括[Llama Index已支持的embedding](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings)、[Llama Index支持的自定义embedding](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/)。
+> 3. 如果需要使用其他embedding类型，比如`huggingface`、`bedrock`等，[from_docs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L82)和[from_objs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L123)提供了字段`embed_model`，可以接受不同的embedding，包括[Llama Index已支持的embedding](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings)、[Llama Index支持的自定义embedding](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/)。
 
 ## 1. 数据输入
 
