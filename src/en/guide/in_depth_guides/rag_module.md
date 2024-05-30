@@ -66,7 +66,7 @@ embedding:
 >
 > 1. For backward compatibility, if the embedding is not set and the llm's api_type is either openai or azure, the llm's config will be used.
 > 2. If llm is ollama, there might be an error message "context size was not non-negative". In this case, you need to set the max_token in llm, for example, 2048.
-> 3. If you need to use other types of embeddings, such as huggingface, bedrock, etc. The from_docs and from_objs functions provide the field `embed_model`, which can accept different embeddings, including [the embeddings supported by Llama Index](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings) and [the custom embeddings supported by Llama Index](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/).
+> 3. If you need to use other types of embeddings, such as huggingface, bedrock, etc. The [from_docs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L82) and [from_objs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L123) functions provide the field `embed_model`, which can accept different embeddings, including [the embeddings supported by Llama Index](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings) and [the custom embeddings supported by Llama Index](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/).
 
 ## 1. Data input
 
