@@ -272,5 +272,4 @@ if __name__ == "__main__":
 >
 > 1. 使用检索后处理可以得到更好的结果，如果是LLM Reranker，由于LLM能力的不确定性，不一定每次都能得到正确的格式，推荐`gpt-4-turbo`，不然可能会遇到报错：`IndexError: list index out of range` 或 `ValueError: invalid literal for int() with base 10`。
 
-
 在这个示例中，我们先把向量化相关数据保存在persist_dir，然后从persist_dir进行恢复后查询。
