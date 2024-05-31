@@ -190,6 +190,10 @@ if __name__ == "__main__":
 
 In this example, we first use faiss for retrieval, then apply LLMRanker to re-rank the retrieved results, and obtain the final search outcome.
 
+> Note:
+>
+> 1. Because use LLM Reranker, if the answer from the LLM is incorrect, may encounter `IndexError: list index out of range`.
+
 ## 4. Data update
 
 ### Example 4.1: Adding text and Python objects
