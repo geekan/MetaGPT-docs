@@ -6,7 +6,7 @@ RAG（Retrieval-Augmented Generation）通过引用外部权威知识库来优�
 
 1. 数据输入，支持多种格式文件（包括pdf/docx/md/csv/txt/ppt）、python对象
 2. 检索功能，支持faiss/bm25/chromadb/es，并支持混合检索
-3. 检索后处理，支持LLM Rerank/ColbertRerank，对上面检索出来的内容进行重排以得到更准确的数据
+3. 检索后处理，支持LLM Rerank/ColbertRerank/CohereRerank/BGERerank/ObjectRerank，对上面检索出来的内容进行重排以得到更准确的数据
 4. 数据更新，增加文本与python对象
 5. 数据保存及恢复，不用每次都进行向量化
 
@@ -38,6 +38,7 @@ embedding:
   api_type: "openai"
   base_url: "YOU_BASE_URL"
   api_key: "YOU_API_KEY"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 
 # azure
 embedding:
@@ -45,23 +46,27 @@ embedding:
   base_url: "YOU_BASE_URL"
   api_key: "YOU_API_KEY"
   api_version: "YOU_API_VERSION"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 
 # gemini
 embedding:
   api_type: "gemini"
   api_key: "YOU_API_KEY"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 
 # ollama
 embedding:
   api_type: "ollama"
   base_url: "YOU_BASE_URL"
   model: "YOU_MODEL"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 ```
 
 > 注意点：
 >
 > 1. 为了向后兼容，如果config不设置embedding，并且llm的api_type类型是openai或azure，那么会使用llm的配置进行embedding。
 > 2. 如果llm是ollama，可能会出现"context size was not non-negative"报错，这时需要在llm里配置max_token，比如2048。
+> 3. 如果需要使用其他embedding类型，比如`huggingface`、`bedrock`等，[from_docs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L82)和[from_objs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L123)提供了字段`embed_model`，可以接受不同的embedding，包括[Llama Index已支持的embedding](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings)、[Llama Index支持的自定义embedding](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/)。
 
 ## 1. 数据输入
 
@@ -266,5 +271,9 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+> 注意点：
+>
+> 1. 使用检索后处理可以得到更好的结果，如果是LLM Reranker，由于LLM能力的不确定性，不一定每次都能得到正确的格式，推荐`gpt-4-turbo`，不然可能会遇到报错：`IndexError: list index out of range` 或 `ValueError: invalid literal for int() with base 10`。
 
 在这个示例中，我们先把向量化相关数据保存在persist_dir，然后从persist_dir进行恢复后查询。

@@ -6,7 +6,7 @@ This article focuses on the RAG functions provided by the current MetaGPT:
 
 1. Data input, supports various file formats (including pdf/docx/md/csv/txt/ppt), Python objects.
 2. Retrieval, supports Faiss/BM25/ChromaDB/ES, and mixed retrieval.
-3. Post-retrieval, supports LLM Rerank/ColbertRerank, reordering the retrieved content to get more accurate data.
+3. Post-retrieval, supports LLM Rerank/ColbertRerank/CohereRerank/BGERerank/ObjectRerank, reordering the retrieved content to get more accurate data.
 4. Data update, addition of text and Python objects.
 5. Data storage and recovery, vectorization is not required each time.
 
@@ -38,6 +38,7 @@ embedding:
   api_type: "openai"
   base_url: "YOU_BASE_URL"
   api_key: "YOU_API_KEY"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 
 # azure
 embedding:
@@ -45,23 +46,27 @@ embedding:
   base_url: "YOU_BASE_URL"
   api_key: "YOU_API_KEY"
   api_version: "YOU_API_VERSION"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 
 # gemini
 embedding:
   api_type: "gemini"
   api_key: "YOU_API_KEY"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 
 # ollama
 embedding:
   api_type: "ollama"
   base_url: "YOU_BASE_URL"
   model: "YOU_MODEL"
+  dimensions: "YOUR_MODEL_DIMENSIONS" # output dimension of embedding model
 ```
 
 > Note：
 >
 > 1. For backward compatibility, if the embedding is not set and the llm's api_type is either openai or azure, the llm's config will be used.
 > 2. If llm is ollama, there might be an error message "context size was not non-negative". In this case, you need to set the max_token in llm, for example, 2048.
+> 3. If you need to use other types of embeddings, such as huggingface, bedrock, etc. The [from_docs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L82) and [from_objs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L123) functions provide the field `embed_model`, which can accept different embeddings, including [the embeddings supported by Llama Index](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings) and [the custom embeddings supported by Llama Index](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/).
 
 ## 1. Data input
 
@@ -266,5 +271,9 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+> Note:
+>
+> 1. Using Post-retrieval can obtain better result, if use LLM Reranker, due to the uncertainty of the capabilities of LLM, it is not always guaranteed that the output will be parseable for reranking, prefer `gpt-4-turbo`, otherwise might encounter `IndexError: list index out of range` or `ValueError: invalid literal for int() with base 10`.
 
 In this example, we first save the vectorized data in persist_dir, then query after restoring from persist_dir.
