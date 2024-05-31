@@ -247,14 +247,16 @@ llm:
 ```
 
 ## [Amazon Bedrock API](https://aws.amazon.com/bedrock)
+
 access key and secret key from [Amazon IAM](https://aws.amazon.com/iam)
 
 see `metagpt/provider/bedrock/utils.py` for all available models
+
 ```yaml
 llm:
-  api_type: "bedrock" 
-  model: "meta.llama3-70b-instruct-v1:0"  
-  region_name: "REGION" # e.g. us-east-1
-  access_key: "YOUR_ACCESS_KEY"
-  secret_key: "YOUR_SECRET_KEY"
+  api_type: 'bedrock'
+  model: 'meta.llama3-70b-instruct-v1:0'
+  region_name: 'REGION' # e.g. us-east-1
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
 ```

@@ -245,18 +245,20 @@ llm:
   api_key: 'YOUR_API_KEY'
   model: 'llama3-70b-8192' # llama3-8b-8192，llama3-70b-8192，llama2-70b-4096 ，mixtral-8x7b-32768，gemma-7b-it
 ```
-## [Amazon Bedrock API](https://aws.amazon.com/bedrock)
-可以在 [Amazon IAM](https://aws.amazon.com/iam) 中获取对应的Key
 
+## [Amazon Bedrock API](https://aws.amazon.com/bedrock)
+
+可以在 [Amazon IAM](https://aws.amazon.com/iam) 中获取对应的Key
 
 所有支持的模型可在 `metagpt/provider/bedrock/utils.py` 中查看
 
 > 注意，对于账单在中国大陆内的用户、claude和cohere可能无法使用
+
 ```yaml
 llm:
-  api_type: "bedrock" 
-  model: "meta.llama3-70b-instruct-v1:0"  
-  region_name: "REGION" # e.g. us-east-1
-  access_key: "YOUR_ACCESS_KEY"
-  secret_key: "YOUR_SECRET_KEY"
+  api_type: 'bedrock'
+  model: 'meta.llama3-70b-instruct-v1:0'
+  region_name: 'REGION' # e.g. us-east-1
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
 ```
