@@ -260,3 +260,16 @@ llm:
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
 ```
+
+## Tencent [HunYuan](https://cloud.tencent.com/document/product/1729) API
+
+support `hunyuan-*` models
+
+```yaml
+llm:
+  api_type: "hunyuan"
+  model: "hunyuan-standard" #  hunyuan-lite / hunyuan-standard / hunyuan-standard-256K / hunyuan-pro
+  endpoint: "hunyuan.tencentcloudapi.com"
+  secret_id: "YOUR_SECRET_ID"
+  secret_key: "YOUR_SECRET_KEY"
+```
