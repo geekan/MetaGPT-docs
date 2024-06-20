@@ -130,7 +130,7 @@ To illustrate the process, consider the following examples of customizing tools 
     from metagpt.tools.libs import calculator
 
     async def main(requirement: str):
-        role = DataInterpreter(tools=["calculator"]) # integrate the tool
+        role = DataInterpreter(tools=["Calculator"]) # integrate the tool
         await role.run(requirement)
 
     if __name__ == "__main__":
