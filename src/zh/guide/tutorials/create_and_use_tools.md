@@ -68,7 +68,7 @@
 1. **在 `metagpt/tools/libs` 中创建一个你自己的类，假设它是 `calculator.py`，并添加装饰器 `@register_tool` 以将其注册为工具**
 
    ```python
-   # metagpt/tools/libs/calculator.py
+   # metagpt/tools/libs/Calculator.py
    import math
    from metagpt.tools.tool_registry import register_tool
 
@@ -127,10 +127,10 @@
    # main.py
    import asyncio
    from metagpt.roles.di.data_interpreter import DataInterpreter
-   from metagpt.tools.libs import calculator
+   from metagpt.tools.libs import Calculator
 
    async def main(requirement: str):
-      role = DataInterpreter(tools=["calculator"])   # 集成工具
+      role = DataInterpreter(tools=["Calculator"])   # 集成工具
       await role.run(requirement)
 
    if __name__ == "__main__":
