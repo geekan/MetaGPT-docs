@@ -130,7 +130,7 @@
    from metagpt.tools.libs import calculator
 
    async def main(requirement: str):
-      role = DataInterpreter(tools=["calculator"])   # 集成工具
+      role = DataInterpreter(tools=["Calculator"])   # 集成工具
       await role.run(requirement)
 
    if __name__ == "__main__":
