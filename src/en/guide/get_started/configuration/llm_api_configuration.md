@@ -64,7 +64,7 @@ llm:
   app_id: 'YOUR_APPID'
   api_key: 'YOUR_API_KEY'
   api_secret: 'YOUR_API_SECRET'
-  domain: 'generalv2'
+  domain: 'generalv3'
   base_url: 'wss://spark-api.xf-yun.com/v3.1/chat'
 ```
 
