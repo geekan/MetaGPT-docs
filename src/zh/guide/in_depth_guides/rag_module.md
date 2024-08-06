@@ -68,6 +68,18 @@ embedding:
 > 2. 如果llm是ollama，可能会出现"context size was not non-negative"报错，这时需要在llm里配置max_token，比如2048。
 > 3. 如果需要使用其他embedding类型，比如`huggingface`、`bedrock`等，[from_docs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L82)和[from_objs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L123)提供了字段`embed_model`，可以接受不同的embedding，包括[Llama Index已支持的embedding](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings)、[Llama Index支持的自定义embedding](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/)。
 
+- 配置omniparse
+```yaml
+omniparse:
+    api_key: "YOUR_API_KEY"
+    base_url: "YOUR_BASE_URL"
+```
+
+> 注意点：
+>
+> 1. `omniparse` 为可选配置，目的是优化解析 `pdf` 效果。
+> 2. 如配置了 `omniparse` 只有 `pdf` 文件使用 `omniparse` 进行解析，其他文件依然是使用 `Llama Index` 内置的解析器。
+
 ## 1. 数据输入
 
 ### 示例 1.1: 文件或目录
