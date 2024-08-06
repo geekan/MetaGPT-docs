@@ -69,17 +69,17 @@ embedding:
 > 3. If you need to use other types of embeddings, such as huggingface, bedrock, etc. The [from_docs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L82) and [from_objs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L123) functions provide the field `embed_model`, which can accept different embeddings, including [the embeddings supported by Llama Index](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings) and [the custom embeddings supported by Llama Index](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/).
 
 - Set omniparse
+
 ```yaml
 omniparse:
-    api_key: "YOUR_API_KEY"
-    base_url: "YOUR_BASE_URL"
+  api_key: 'YOUR_API_KEY'
+  base_url: 'YOUR_BASE_URL'
 ```
 
 > Note：
 >
 > 1. `omniparse` is an optional configuration, the purpose is to optimize the parsing effect of `pdf`.
 > 2. If `omniparse` is configured, only `pdf` files are parsed using `omniparse`, and other files still use the built-in parser of `Llama Index`.
-> 
 
 ## 1. Data input
 

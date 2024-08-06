@@ -69,10 +69,11 @@ embedding:
 > 3. 如果需要使用其他embedding类型，比如`huggingface`、`bedrock`等，[from_docs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L82)和[from_objs](https://github.com/geekan/MetaGPT/blob/main/metagpt/rag/engines/simple.py#L123)提供了字段`embed_model`，可以接受不同的embedding，包括[Llama Index已支持的embedding](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings)、[Llama Index支持的自定义embedding](https://docs.llamaindex.ai/en/stable/examples/embeddings/custom_embeddings/)。
 
 - 配置omniparse
+
 ```yaml
 omniparse:
-    api_key: "YOUR_API_KEY"
-    base_url: "YOUR_BASE_URL"
+  api_key: 'YOUR_API_KEY'
+  base_url: 'YOUR_BASE_URL'
 ```
 
 > 注意点：
