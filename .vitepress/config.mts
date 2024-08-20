@@ -184,6 +184,21 @@ export default defineConfig({
             link: '/en/DataInterpreter/index',
             activeMatch: '/en/DataInterpreter/',
           },
+          ...arrVisible(
+            [
+              {
+                text: 'blogs',
+                link: '/en/blog/blogs',
+                activeMatch: '/en/blog/',
+              },
+              {
+                text: 'RFCs',
+                link: '/en/rfcs/RFC-116-MetaGPT优化方案',
+                activeMatch: '/en/rfcs/',
+              },
+            ],
+            blogAndRfcVisible
+          ),
           ...getVersions(),
         ],
         sidebar: {
