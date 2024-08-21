@@ -187,7 +187,7 @@ export default defineConfig({
           ...arrVisible(
             [
               {
-                text: 'blogs',
+                text: 'Blogs',
                 link: '/en/blog/blogs',
                 activeMatch: '/en/blog/',
               },
