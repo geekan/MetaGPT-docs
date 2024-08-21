@@ -9,7 +9,7 @@ list:
       - Multi-agents
       - SWE-Bench Lite
     link: /blog/swebench/MetaGPT X Technical Report
-    banner: /blog/swebench/images/1.png
+    banner: /blog-banners/swebench.png
   - title: Implementing Werewolf Game in MetaGPT
     description: 'In their paper, "Exploring Large Language Models for Communication Games: An Empirical Study on Werewolf," Xu et al. explore the potential of large language models (LLM) in the popular game Werewolf, using MetaGPT as a multi-agent framework. Their challenge: Can MetaGPT recreate vibrant gameplay? Today, they share their exciting affirmative answer!'
     author: DeepWisdom
