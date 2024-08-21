@@ -54,6 +54,7 @@ const genRfcLinks = (dir: string, prefixPath = '') => {
   }
   return data;
 };
+
 const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
 const sources = ['blog', 'rfcs', 'DataInterpreter'];
 const dests = ['zh', 'en'];
