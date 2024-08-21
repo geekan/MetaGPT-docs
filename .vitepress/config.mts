@@ -691,15 +691,6 @@ export default defineConfig({
               },
             ],
           },
-          '/zh/blog/': {
-            base: '/zh/blog/',
-            items: [
-              {
-                text: 'blogs',
-                link: 'blogs',
-              },
-            ],
-          },
           '/zh/rfcs/': {
             base: '/zh/rfcs/',
             items: [...rfcLinks],
