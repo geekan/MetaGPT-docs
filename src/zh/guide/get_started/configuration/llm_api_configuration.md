@@ -28,6 +28,17 @@ llm:
 > 注意：
 > MetaGPT将按照以下优先顺序读取您的设置：`~/.metagpt/config2.yaml > config/config2.yaml`
 
+如果想使用openai o1系列，需要额外配置下述信息  
+```yaml
+llm:
+  api_type: 'openai'
+  api_key: 'sk-...'
+  model: 'o1-mini'
+  use_system_prompt: false
+  stream: false
+```
+可以用于初始化LLM，由于o1系列使用有些限制，出现问题可以及时反馈我们。
+
 现在您可以开始使用了！请参阅[快速入门](./quickstart)或我们的[教程](/guide/tutorials/agent_101)以进行第一次运行！
 
 MetaGPT还支持各种LLM模型，根据您的需求配置模型API的密钥。
