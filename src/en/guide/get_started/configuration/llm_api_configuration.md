@@ -25,6 +25,17 @@ llm:
 > **Note**:
 > Configuration priority is `~/.metagpt/config2.yaml > config/config2.yaml`.
 
+If you want to use the openai o1 series, you need to configure the following additional information  
+```yaml
+llm:
+  api_type: 'openai'
+  api_key: 'sk-...'
+  model: 'o1-mini'
+  use_system_prompt: false
+  stream: false
+```
+It can be used to initialize LLM. Due to some restrictions on the use of o1 series, problems can be reported to us in time.
+
 With these steps, your setup is complete. For starting with MetaGPT, check out the [Quickstart guide](./quickstart) or our [Tutorials](/en/guide/tutorials/agent_101).
 
 MetaGPT supports a range of LLM models. Configure your model API keys as needed.
