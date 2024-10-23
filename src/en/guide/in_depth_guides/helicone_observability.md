@@ -8,13 +8,10 @@ For OpenAI:
 
 ```yaml
 llm:
-  api_type: "openai"
-  model: "gpt-4-turbo" # or gpt-3.5-turbo
-  base_url: "https://oai.helicone.ai/{HELICONE_API_KEY}/v1"
-  api_key: "YOUR_API_KEY"
-
+  api_type: 'openai'
+  model: 'gpt-4-turbo' # or gpt-3.5-turbo
+  base_url: 'https://oai.helicone.ai/{HELICONE_API_KEY}/v1'
+  api_key: 'YOUR_API_KEY'
 ```
 
 See [Helicone's docs](https://docs.helcione.ai/other-integrations/meta-gpt) for the most up to date information.
-
-
