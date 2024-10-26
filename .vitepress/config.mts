@@ -700,7 +700,7 @@ export default defineConfig({
                   },
                   {
                     text: '贡献指南',
-                    link: 'contribution/contribute_guide.md',
+                    link: 'contribution/contribution_guidelines.md',
                     items: [
                       {
                         text: '代码贡献',
