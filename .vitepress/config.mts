@@ -401,12 +401,30 @@ export default defineConfig({
                 ],
               },
               {
-                text: 'Contribute',
+                text: 'Contribution',
                 collapsed: false,
                 items: [
                   {
-                    text: 'Contribute guide',
-                    link: 'contribute/contribute_guide.md',
+                    text: 'Code of Conduct',
+                    link: 'contribution/code_of_conduct.md',
+                  },
+                  {
+                    text: 'Contribution Guidelines',
+                    link: 'contribution/contribution_guidelines.md',
+                    items: [
+                        {
+                            text: 'Code Contribution',
+                            link: 'contribution/guideline/code_contribution.md'
+                        },
+                        {
+                            text: 'Doc Contribution',
+                            link: 'contribution/guideline/doc_contribution.md'
+                        }
+                    ],
+                  },
+                  {
+                    text: 'FAQ',
+                    link: 'contribution/faq.md',
                   },
                 ],
               },
@@ -676,9 +694,27 @@ export default defineConfig({
                 text: '贡献',
                 collapsed: false,
                 items: [
+                    {
+                    text: '行为准则',
+                    link: 'contribution/code_of_conduct.md',
+                  },
                   {
                     text: '贡献指南',
-                    link: 'contribute/contribute_guide.md',
+                    link: 'contribution/contribute_guide.md',
+                    items: [
+                        {
+                            text: '代码贡献',
+                            link: 'contribution/guideline/code_contribution.md'
+                        },
+                        {
+                            text: '文档贡献',
+                            link: 'contribution/guideline/doc_contribution.md'
+                        }
+                    ],
+                  },
+                  {
+                    text: '常见问题',
+                    link: 'contribution/faq.md',
                   },
                 ],
               },

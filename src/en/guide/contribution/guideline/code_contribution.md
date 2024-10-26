@@ -1,11 +1,15 @@
-# Contribution Guide
+# Code Contribution
 
-MetaGPT welcomes developers to actively participate in open source community building, including but not limited to:
+## Development Environment Setup
 
-- Implement functions and submit PR according to the feature description of `docs/ROADMAP.md`.
-- Additional implementations besides ROADMAP (including new features, bug fixes, agent scenario cases, code annotations, etc.) and PR submissions.
-- The documentation site includes supplementary submissions of tutorials, usage samples, advanced guides and other documents.
-- Submit issues such as new features expected to be implemented by MetaGPT, bugs discovered during use, and exchanges on implemented applications.
+You can refer to [Installation](../../get_started/installation.md) to configure the development environment
+
+## Basic Guideline
+
+- Searching to see if there are similar issues or PRs to avoid duplicate creation
+- Describing the issue or submitted PR as clearly as possible
+- Performing comprehensive code formatting and unit test checks before writing code, and submit only after passing
+- Checking for updated dependency package versions to avoid installation failures in the new environment
 
 ## PR
 
@@ -13,6 +17,8 @@ Please use [fork and pull request](https://docs.github.com/en/get-started/explor
 
 Generally, **LGTM** needs to be reviewed by 2 contributors before it is allowed to be merged. After the PR with more than 10 lines of code is passed, the submitter can join the `MetaGPT-dev` group.
 In general, small amounts of code are encouraged to be submitted more often. Large PR submissions often require more context understanding and review time, and it would be better if you could provide more supporting materials.
+
+PR generally includes bug fixes and new feature submissions, and both need to be submitted as per the following process specifications as possible.
 
 ### Before submission
 
@@ -56,22 +62,3 @@ For bug feedback, in order to have enough problem context for analysis, the `sho
 - Bug solved method Bug solution (if you know how to solve it). Optional.
 - Environment information includes the large model type configuration used, system version, python version and some dependent package versions of the error stack. Required.
 - Screenshots or logs On-site screenshots or logs corresponding to the bug. Required.
-
-## Documentation contribution
-
-Documentation site address: https://docs.deepwisdom.ai
-At present, the documentation site mainly includes introductory and basic tutorials, single/multi-agent examples, advanced guides, etc. At the same time, the document site currently mainly supports Chinese and English versions, so it is expected that the documents you submit will also have both Chinese and English versions.
-Submitting documents also follows the [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) method.
-
-When adding documents, please refer to the following:
-
-- For different types of documents, please refer to the content structure of the corresponding existing document to supplement the content and save it as a markdown file.
-- English documents are located in the `src/en` directory and are created in the corresponding directory. For example, tutorial documents are located in the `src/en/guide/tutorials` directory.
-- Chinese documents are located in the `src/zh` directory and are created in the corresponding directory. For example, tutorial documents are located in the `src/zh/guide/tutorials` directory.
-- Media files, such as pictures and videos, are located in the `src/public` directory, and the storage location must correspond to the location of the document. For example, tutorial documents involving pictures are placed in the `src/public/image/guide/tutorials` directory, and a new subdirectory is created for each document. The corresponding access method in the document is: `![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/6d081360d0c74bb48794b9f8a2b0a23e.png)`. You need to pay attention to the relative path.
-- Adding and modifying the sidebar (navigation directory) of the document requires configuration in `locales.themeConfig.sidebar` or `locales.zhcn.themeConfig.sidebar` in `src/.vitepress/config.mts`.
-- For other documents, pictures and other resources that need to be referenced in the document, the same path can be specified for Chinese and English documents.
-
-After adding the document, if you need to verify the deployment effect, you can refer to [Document Station Local Deployment](https://github.com/geekan/MetaGPT-docs?tab=readme-ov-file#local-deployment) locally Check the rendering and make sure it is correct before submitting the PR. After the PR is approved, the new documents will be automatically updated online.
-
-If you encounter any problems during use, please go to [Discord Channel](https://discord.gg/ZRHeExS6xv) to communicate. We look forward to your participation!
