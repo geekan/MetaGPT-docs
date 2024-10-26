@@ -1,18 +1,24 @@
-# 贡献指南
+# 代码贡献
 
-MetaGPT欢迎开发者积极参与开源社区建设，包括但不局限于：
+## 开发环境配置
 
-- 根据`docs/ROADMAP.md`的特性描述进行功能实现和PR提交。
-- 除ROADMAP外的额外实现（包括新增功能、Bug修复、智能体场景案例、代码注释说明等）和PR提交。
-- 文档站上包括教程、使用样例、进阶指南等文档的补充提交。
-- 期望MetaGPT实现的新特性、使用过程中发现的问题Bug、落地应用交流等Issue提交。
+你可以参考[安装](../../get_started/installation.md)进行开发环境的配置
+
+## 基础指南
+
+- 先搜索判断是否存在相似的Issue或PR，避免重复创建
+- 尽可能清楚的描述Issue或提交的PR
+- 提前代码前进行全面的代码格式规范、单元测试检查，通过后再提交
+- 检查更新的依赖包版本，避免在新环境中安装失败
 
 ## PR提交
 
 请使用 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式进行代码提交。
 
-一般的，需要2个已贡献人员评审后的**LGTM**才允许合入。大于10行代码的PR通过后，提交者即可加入`MetaGPT-dev`群。  
+一般的，需要2个已贡献代码人员评审后的**LGTM**才允许合入。大于10行代码的PR通过后，提交者即可申请加入`MetaGPT-dev`群。  
 一般的，鼓励少量代码多提交。大的PR提交往往需要更多的上下文理解和评审时间，如果你可以提供更多的辅助资料将会更好。
+
+PR一般包括bug修复和新功能提交，都需要尽可能按下述流程规范进行提交。
 
 ### 提交前
 
@@ -57,21 +63,3 @@ Issue的内容可以包括Bug反馈、期望支持新特性描述、已支持功
 - Environment information 包括使用的大模型类型配置、系统版本、python版本及错误堆栈的部分依赖包版本。必填。
 - Screenshots or logs Bug对应的现场截图或日志。必填。
 
-## 文档贡献
-
-文档站地址：https://docs.deepwisdom.ai  
-目前文档站主要包括入门及基础教程、单/多智能体示例、进阶指南等。同时，文档站目前主要支持中英文版本，因此，期望你提交的文档也同时具备中英文版本。  
-提交文档同样遵循 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式。
-
-添加文档时，请参考下述内容：
-
-- 不同类型的文档，请参考对应已有文档的内容结构进行内容补充并保存为markdown文件。
-- 英文文档位于`src/en`目录下，在对应目录下新建。比如，教程文档位于`src/en/guide/tutorials`目录下。
-- 中文文档位于`src/zh`目录下，在对应目录下新建。比如，教程文档位于`src/zh/guide/tutorials`目录下。
-- 媒体文件，如图片和视频，位于`src/public`目录下，存放位置要和所在文档的位置相对应。比如，教程文档涉及图片放`src/public/image/guide/tutorials`目录下，一个文档新建一个子目录存放。对应在文档内的访问方式为：`![img](../../../public/image/guide/tutorials/inc_req_and_fixbug/6d081360d0c74bb48794b9f8a2b0a23e.png)`，需要注意相对路径。
-- 添加和修改文档的侧边栏（导航目录），需要在`src/.vitepress/config.mts` 中的`locales.themeConfig.sidebar`或`locales.zhcn.themeConfig.sidebar`进行配置。
-- 对于文档中需要引用的其他文档、图片和其他资源，中英文文档可指定相同的路径。
-
-添加完文档后，如果需要验证部署后的效果，可以参考[文档站本地部署](https://github.com/geekan/MetaGPT-docs?tab=readme-ov-file#local-deployment) 在本地进行渲染查看，确保无误后再发起PR提交。PR通过后，新增文档将会自动更新到线上。
-
-使用过程中碰到的任何问题，欢迎到[Discord Channel](https://discord.gg/ZRHeExS6xv) 进行交流。我们期待你的参与！
