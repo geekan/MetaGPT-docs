@@ -15,7 +15,7 @@ However you choose to contribute, please note and respect our [Code of Conduct](
 
 [Document Contribution](guideline/doc_contribution.md) Help us enrich the details of the documentation site so that developers can get started faster
 
-## Referrable Reviewers
+## Reference Reviewers
 
 When you submit a PR or Issue that requires the assistance of a specific reviewer, you can invite the major contributors of the corresponding module. Of course, you are also welcome to designate other contributors to assist.
 
