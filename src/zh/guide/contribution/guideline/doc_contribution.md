@@ -1,6 +1,6 @@
 # 文档贡献
 
-文档站地址：https://docs.deepwisdom.ai  
+文档站地址：https://docs.deepwisdom.ai
 
 目前文档站主要包括入门及基础教程、单/多智能体示例、进阶指南等。同时，文档站目前主要支持中英文版本，因此，期望你提交的文档也同时具备中英文版本。  
 除此之外，还包括API文档，但API文档主要由MetaGPT维护并自动更新得到，不在文档贡献的流程范畴内。
@@ -12,16 +12,18 @@
 支持在本地进行文档站部署环境的安装并进行预览，方便检查渲染结果是否符合预期
 
 ### 依赖
-- [Node.js](https://nodejs.org/en) 版本 18 或更高版本。 
-- 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 语法的文本编辑器。 
-    - 建议使用 [VSCode](https://code.visualstudio.com/) 以及 [官方 Vue 扩展](https://marketplace.visualstudio.com/items?itemName=Vue.volar) 。
+
+- [Node.js](https://nodejs.org/en) 版本 18 或更高版本。
+- 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 语法的文本编辑器。
+  - 建议使用 [VSCode](https://code.visualstudio.com/) 以及 [官方 Vue 扩展](https://marketplace.visualstudio.com/items?itemName=Vue.volar) 。
 
 ### 启动
+
 按照以下步骤启动开发服务器
 
 1. `corepack enable pnpm` 以使用 pnpm
 
-    或参考 [pnpm 安装](https://pnpm.io/installation)
+   或参考 [pnpm 安装](https://pnpm.io/installation)
 
 2. `pnpm i` 安装依赖项
 

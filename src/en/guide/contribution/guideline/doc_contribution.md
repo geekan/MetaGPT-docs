@@ -7,7 +7,6 @@ In addition, API documentation is also included, but the API documentation is ma
 
 Submitting documents also follows the [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) method.
 
-
 ## Local Setup
 
 Supporting local installation and preview of the document station deployment environment, making it easy to check whether the rendering results meet expectations
@@ -19,6 +18,7 @@ Supporting local installation and preview of the document station deployment env
   - [VSCode](https://code.visualstudio.com/) is recommended, along with the [official Vue extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar).
 
 ### Launching
+
 follow steps below to start the dev server
 
 1. `corepack enable pnpm` to use pnpm
@@ -30,7 +30,6 @@ follow steps below to start the dev server
 3. `npm run docs:dev`
 
 The dev server should be running at http://localhost:5173. Visit the URL in your browser to see your new site in action!
-
 
 ## Document Standards
 
