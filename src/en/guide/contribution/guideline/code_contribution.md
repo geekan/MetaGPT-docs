@@ -74,5 +74,5 @@ For bug feedback, in order to have enough problem context for analysis, the `sho
 
 - Bug description, Bug description. Required.
 - Bug solved method, Bug solution (if you know how to solve it). Optional.
-- Environment information, includes the large model type configuration used, system version, python version and some dependent package versions of the error stack. Required.
+- Environment information, includes the large model type configuration used, system version, python version, and some dependent package versions of the error stack. Required.
 - Screenshots or logs, On-site screenshots or logs corresponding to the bug. Required.
