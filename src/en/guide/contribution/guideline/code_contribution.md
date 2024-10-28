@@ -22,9 +22,18 @@ PR generally includes bug fixes and new feature submissions, and both need to be
 
 ### Before submission
 
-Please ensure that all unit tests involved in existing code modifications can pass the self-test (such as executing `pytest tests/metagpt/environment/*`).
-Please ensure that the newly added code file has a single test under the corresponding path and the self-test passes.
+Please ensure that the unit tests involved in the modification of existing code or the new unit tests corresponding to the new code can pass the self-test.
 Please ensure that the submitted code has a complete `Google Docstring` description and procedural functional comments.
+
+We use `pytest` for single testing. Before submitting, install `pytest` related dependency packages, update the unit test for the modified code or add a unit test for the newly added code. Generally, we expect the unit test file name to start with `test_` and be created using the same module path. For example: `role.py` implements role abstraction and is placed under `metagpt/roles/`. The corresponding unit test file should be `tests/metagpt/roles/test_role.py`.  
+In particular, for unit tests that require network access, such as `provider`, we recommend using the `mock` method to add it, which will not be affected by the network. A reference example is: `tests/metagpt/provider/test_qianfan_api.py`.
+
+```bash
+pip3 install pytest==7.2.2 pytest-mock==3.11.1 pytest-asyncio==0.21.1 # Recommended
+pytest tests # Example, execute all test files
+pytest tests/metagpt/environment/* # Example, execute multiple test files
+pytest tests/metagpt/environment/test_base_env.py # Example, execute a single test file
+```
 
 Before committing, install `pre-commit` and use it to check the code specification to meet the submission conditions. The specific usage is as follows:
 
@@ -55,10 +64,15 @@ After submission, the github-ci workflow will be used by default to check code s
 ## Issue
 
 Issue content can include bug feedback, description of new features expected to be supported, in-depth optimization of supported functions, etc.
-Among them, new features, optimization items, etc. can be described based on your demand scenarios to provide sufficient context for further communication between the two parties. After submission, community staff will contact you and we will update it to ROADMAP after communication and confirmation.
+
+Among them, new features, optimization items, etc. can be described based on your demand scenarios to provide sufficient context for further communication between the two parties. After submission, community staff will contact you and we will update it to ROADMAP after communication and confirmation. We have added the `request_new_features` template by default. When submitting, you need to add the necessary information, including:
+
+- Feature description, Feature description. Required.
+- Your Feature, Describes the motivation, idea, reference source or implementation process for implementing the Feature. Optional.
+
 For bug feedback, in order to have enough problem context for analysis, the `show_me_the_bug` template is added by default. Necessary information needs to be added when submitting, including:
 
-- Bug description Bug description. Required.
-- Bug solved method Bug solution (if you know how to solve it). Optional.
-- Environment information includes the large model type configuration used, system version, python version and some dependent package versions of the error stack. Required.
-- Screenshots or logs On-site screenshots or logs corresponding to the bug. Required.
+- Bug description, Bug description. Required.
+- Bug solved method, Bug solution (if you know how to solve it). Optional.
+- Environment information, includes the large model type configuration used, system version, python version and some dependent package versions of the error stack. Required.
+- Screenshots or logs, On-site screenshots or logs corresponding to the bug. Required.
