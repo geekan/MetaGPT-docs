@@ -22,9 +22,18 @@ PR一般包括bug修复和新功能提交，都需要尽可能按下述流程规
 
 ### 提交前
 
-请确保对已有代码修改涉及到的单测都能自测通过（比如执行`pytest tests/metagpt/environment/*`）。  
-请确保新增加的代码文件有对应路径下的单测且自测通过。  
+请确保对已有代码修改涉及到的单测或新增代码对应的新增单测可以自测通过。  
 请确保提交的代码有完整的`Google Docstring`说明和过程功能注释。
+
+我们使用`pytest`进行单测试下。在提交前，安装`pytest`相关依赖包，对修改的代码更新单测或新增的代码增加单测。一般的，我们期望单测文件名以`test_`为开头，并且使用相同的模块路径进行创建，例如：`role.py`实现了角色抽象，并放置在`metagpt/roles/`下，对应的单测文件应该为`tests/metagpt/roles/test_role.py`。  
+特别的，对于需要进行网络访问的单测，比如`provider`，我们建议使用`mock`方式进行添加，不会收到网络的影响。一个可参考的例子是：`tests/metagpt/provider/test_qianfan_api.py`。
+
+```bash
+pip3 install pytest==7.2.2 pytest-mock==3.11.1 pytest-asyncio==0.21.1  # 推荐的
+pytest tests                                        # 示例，执行全部单测文件
+pytest tests/metagpt/environment/*                  # 示例，执行多个单测文件
+pytest tests/metagpt/environment/test_base_env.py   # 示例，执行单个单测文件
+```
 
 在提交前，安装`pre-commit`，并使用其对代码规范进行检查以符合提交条件。具体使用如下：
 
@@ -54,11 +63,16 @@ pre-commit run --all-files  # 或检查个别文件  pre-commit run --files meta
 
 ## Issue提交
 
-Issue的内容可以包括Bug反馈、期望支持新特性描述、已支持功能的深度优化等。  
-其中，对于新特性、优化项等，可以针对你的需求场景展开描述，为双方进一步沟通提供足够的上下文。提交后，将会有社区工作人员联系，沟通确认后我们也会更新到ROADMAP中。  
+Issue的内容可以包括Bug反馈、期望支持新特性描述、已支持功能的深度优化等。
+
+其中，对于新特性、优化项等，可以针对你的需求场景展开描述，为双方进一步沟通提供足够的上下文。提交后，将会有社区工作人员联系，沟通确认后我们也会更新到ROADMAP中。我们默认添加了`request_new_features`模板，提交时需要补充必要的信息，包括：
+
+- Feature description，Feature描述。必填。
+- Your Feature，描述实现Feature的动机、想法、参考来源或实现过程。选填。
+
 对于Bug反馈，为了有足够的问题上下文进行分析，默认添加了`show_me_the_bug`模版，提交时需要补充必要的信息，包括：
 
-- Bug description Bug描述。必填。
-- Bug solved method Bug解决方式（如果你知道如何解决）。选填。
-- Environment information 包括使用的大模型类型配置、系统版本、python版本及错误堆栈的部分依赖包版本。必填。
-- Screenshots or logs Bug对应的现场截图或日志。必填。
+- Bug description，Bug描述。必填。
+- Bug solved method，Bug解决方式（如果你知道如何解决）。选填。
+- Environment information，包括使用的大模型类型配置、系统版本、python版本及错误堆栈的部分依赖包版本。必填。
+- Screenshots or logs，Bug对应的现场截图或日志。必填。
