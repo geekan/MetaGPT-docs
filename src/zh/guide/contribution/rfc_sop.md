@@ -1,23 +1,26 @@
 # RFC SOP
 
-我们使用 [MetaGPT-rfcs](https://github.com/geekan/MetaGPT-rfcs) 作为RFC集合的管理仓库，对应的目录结构为
+我们直接使用 [MetaGPT-docs](https://github.com/geekan/MetaGPT-docs) 下的一个子目录作为RFC集合的管理仓库，对应的目录结构为
 
 ```text
-MetaGPT-rfcs
-├── README.md
-├── assets
-│     └── 001                  # rfc number, to store figures and so on
-│     └── 002
-├── rfcs
-│     ├── 001_20241010_agent_communication.md
-│     └── xxx_yyyymmdd_rfc_template.md  # RFC撰写模板，以编号_提交日期_标题命名
+MetaGPT-docs
+├── readme.md
+├── src
+│    ├── public
+│    │    ├── image
+│    │    │    ├── rfcs
+│    │    │    │    ├── 001           # rfc number, to store figures and so on
+│    │    │    │    └── 002
+│    ├── rfcs
+│    │    ├── 001_20241010_agent_communication.md
+│    │    └── 000_yyyymmdd_rfc_template.md  # RFC撰写模板，以编号_提交日期_标题命名
 ```
 
 ## 了解 RFC SOP
 
 ### RFC 适用范围
 
-RFC是变更请求，主要用于描述`MetaGPT`的新特性或重要功能更新。通过`markdown`进行输出，并存储于`MetaGPT-rfcs`中，记录`MetaGPT`的历史实现功能。通过这些设计文档输出与交流反馈，让`MetaGPT`社区参与其中。  
+RFC是变更请求，主要用于描述`MetaGPT`的新特性或重要功能更新。通过`markdown`进行输出，并存储于`MetaGPT-docs`中，记录`MetaGPT`的历史实现功能。通过这些设计文档输出与交流反馈，让`MetaGPT`社区参与其中。  
 RFC的主要受众是`MetaGPT`开发社区，作为开发期间功能设计的指导指南。次要受众是功能设计出发点和实现过程感兴趣的一般用户和开发人员。
 
 #### 什么情况下需要写一个RFC
@@ -60,7 +63,7 @@ RFC的主要受众是`MetaGPT`开发社区，作为开发期间功能设计的�
 
 - 通过使用 [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) 的方式创建你的RFC请求
 
-  参考[RFC模版](https://github.com/geekan/MetaGPT-rfcs/rfcs/xxx_yyyymmdd_rfc_template.md) 按照`xxx_yyyymmdd_rfc_title`（编号\_日期\_RFC标题，xxx为当前已合入RFC最大编号值+1，yyyymmdd为提交日期，rfc_title为rfc标题，需尽量精练简短）进行RFC文件命名。例如，如果你的RFC标题为agent_communication，你可以命名为`001_20241010_agent_communication`。在文件中需要引入图片等素材时，将其放置到`assets/001`子文件夹下（001为你的RFC编号）。
+  参考[RFC模版](https://github.com/geekan/MetaGPT-docs/src/zh/guide/contribution/xxx_yyyymmdd_rfc_template.md) 按照`xxx_yyyymmdd_rfc_title`（编号\_日期\_RFC标题，xxx为当前已合入RFC最大编号值+1，yyyymmdd为提交日期，rfc_title为rfc标题，需尽量精练简短）进行RFC文件命名。例如，如果你的RFC标题为agent_communication，你可以命名为`001_20241010_agent_communication`。在文件中需要引入图片等素材时，将其放置到`src/public/image/rfcs/001`子文件夹下（001为你的RFC编号）。
 
   在RFC文件的前文填写包括创建者、发起者、更新日期等基础信息。
 
