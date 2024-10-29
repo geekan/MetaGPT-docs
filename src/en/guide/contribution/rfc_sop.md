@@ -31,7 +31,6 @@ As mentioned above, it is recommended to write an RFC in the following cases
 - When you have a better understanding of `MetaGPT` and want to add some new features and explain your ideas
 - When you have a better understanding of `MetaGPT` and found some changes and upgrades that are worth a larger scale of refactoring
 
-
 ### Who is involved
 
 #### Creator
@@ -65,7 +64,7 @@ If the corresponding sponsor is not found within 2 weeks after the PR is release
 
 - Create your RFC request by using [fork and pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)
 
-Refer to [RFC template](https://github.com/geekan/MetaGPT-docs/src/en/guide/contribution/xxx_yyyymmdd_rfc_template.md) and name the RFC file according to `xxx_yyyymmdd_rfc_title` (number\_date\_RFC title, xxx is the maximum number of the currently merged RFC + 1, yyyymmdd is the submission date, rfc_title is the rfc title, which should be as concise and short as possible). For example, if your RFC title is agent_communication, you can name it `001_20241010_agent_communication`. When you need to introduce images and other materials in the file, place them in the `src/public/image/rfcs/001` subfolder (001 is your RFC number).
+Refer to [RFC template](https://github.com/geekan/MetaGPT-docs/src/en/guide/contribution/xxx_yyyymmdd_rfc_template.md) and name the RFC file according to `xxx_yyyymmdd_rfc_title` (number_date_RFC title, xxx is the maximum number of the currently merged RFC + 1, yyyymmdd is the submission date, rfc_title is the rfc title, which should be as concise and short as possible). For example, if your RFC title is agent_communication, you can name it `001_20241010_agent_communication`. When you need to introduce images and other materials in the file, place them in the `src/public/image/rfcs/001` subfolder (001 is your RFC number).
 
 Fill in the basic information including creator, sponsor, update date, etc. in the front of the RFC file.
 

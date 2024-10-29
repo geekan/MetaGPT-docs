@@ -2,12 +2,12 @@
 
 Basic document information
 
-| Status | In progress, Under review, Merged |
-| -------- | ------------------------------- |
-| PR | PR url of this RFC |
-| Creator | Username of the contributor who proposed this RFC |
-| Initiator | Username of the maintainer who organized this RFC for review |
-| Update date | Date of the most recent update to this document |
+| Status      | In progress, Under review, Merged                            |
+| ----------- | ------------------------------------------------------------ |
+| PR          | PR url of this RFC                                           |
+| Creator     | Username of the contributor who proposed this RFC            |
+| Initiator   | Username of the maintainer who organized this RFC for review |
+| Update date | Date of the most recent update to this document              |
 
 # Background
 
@@ -74,11 +74,11 @@ Write possible questions and answers for readers
 ## Terminology
 
 | Terminology | Full Name | Explanation |
-| ---- | ---- | ---- |
-| | | |
-| | | |
-| | | |
-| | | |
-| | | |
+| ----------- | --------- | ----------- |
+|             |           |             |
+|             |           |             |
+|             |           |             |
+|             |           |             |
+|             |           |             |
 
 ## References
