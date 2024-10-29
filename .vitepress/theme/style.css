@@ -43,6 +43,28 @@
  *   in custom container, badges, etc.
  * -------------------------------------------------------------------------- */
 
+/**
+ * Colors: Text
+ *
+ * - `text-1`: Used for primary text.
+ *
+ * - `text-2`: Used for muted texts, such as "inactive menu" or "info texts".
+ *
+ * - `text-3`: Used for subtle texts, such as "placeholders" or "caret icon".
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --vp-c-text-1: rgba(0, 0, 0) !important;
+  --vp-c-text-2: rgba(0, 0, 0, 0.78) !important;
+  --vp-c-text-3: rgba(0, 0, 0, 0.56) !important;
+}
+
+.dark {
+  --vp-c-text-1: rgba(255, 255, 255) !important;
+  --vp-c-text-2: rgba(255, 255, 255, 0.6) !important;
+  --vp-c-text-3: rgba(255, 255, 255, 0.38) !important;
+}
+
 :root {
   --vp-c-default-1: var(--vp-c-gray-1);
   --vp-c-default-2: var(--vp-c-gray-2);
