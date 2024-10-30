@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch, nextTick, computed } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
-import IpynbViewer from './ipynbViewer.vue';
 import hljs from 'highlight.js/lib/core';
 import python from 'highlight.js/lib/languages/python';
 import 'highlight.js/styles/github.css';
@@ -11,27 +10,10 @@ import 'highlight.js/styles/github.css';
 hljs.registerLanguage('python', python);
 const trees = ref([]);
 
-// export const downloadFile = (filename, blob) => {
-//   const url = window.URL.createObjectURL(blob);
-
-//   const a = document.createElement('a');
-//   a.href = url;
-//   a.download = filename;
-//   a.click();
-//   // 5.释放这个临时的对象url
-//   window.URL.revokeObjectURL(url);
-// };
-
 // 动态导入所有 JSON 文件
 // const trees = import.meta.glob('./trees/*/*.json', { eager: true });
 // 动态导入所有 ipynb 文件
 // const notebooks = import.meta.glob('./trees/*/*.ipynb');
-
-// 获取文件夹名称
-function getMiddlePath(path) {
-  const match = path.match(/\/trees\/([^/]+)\/[^/]+\.json$/);
-  return match ? match[1] : null;
-}
 
 // 获取所有文件夹名称
 const folders = [
