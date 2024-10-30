@@ -56,7 +56,7 @@ const genRfcLinks = (dir: string, prefixPath = '') => {
 };
 
 const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
-const sources = ['blog', 'rfcs', 'DataInterpreter', 'sale'];
+const sources = ['blog', 'rfcs', 'DataInterpreter', 'sela'];
 const dests = ['zh', 'en'];
 
 const copyDir = (source: string, dest: string) => {
@@ -188,11 +188,11 @@ export default defineConfig({
                 link: '/en/DataInterpreter/index',
                 activeMatch: '/en/DataInterpreter/',
               },
-              {
-                text: 'SALE',
-                link: '/en/sale/index',
-                activeMatch: '/en/sale/',
-              },
+              // {
+              //   text: 'SELA',
+              //   link: '/en/sale/index',
+              //   activeMatch: '/en/sale/',
+              // },
             ],
           },
           ...arrVisible(
@@ -470,11 +470,11 @@ export default defineConfig({
                 link: '/zh/DataInterpreter/index',
                 activeMatch: '/zh/DataInterpreter/',
               },
-              {
-                text: 'SALE',
-                link: '/zh/sale/index',
-                activeMatch: '/zh/sale/',
-              },
+              // {
+              //   text: 'SELA',
+              //   link: '/zh/sale/index',
+              //   activeMatch: '/zh/sale/',
+              // },
             ],
           },
           ...arrVisible(

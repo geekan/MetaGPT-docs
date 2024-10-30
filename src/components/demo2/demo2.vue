@@ -17,13 +17,13 @@ const trees = ref([]);
 
 // 获取所有文件夹名称
 const folders = [
+  'mfeat-factors',
   'Click_prediction_small',
   'GesturePhaseSegmentationProcessed',
   'credit-g',
   'jasmine',
   'kc1',
   'kick',
-  'mfeat-factors',
   'segment',
   'smoker-status',
   'software-defects',
@@ -170,6 +170,34 @@ const draw = () => {
         ctx.closePath();
       }
     }
+    const actived = dataWithActive.value.filter((_) => _.active);
+
+    for (let i = 0; i < actived.length; i++) {
+      const node = actived[i];
+      const el = document.getElementById(node.id);
+      const { offsetTop, offsetLeft, offsetWidth, offsetHeight } = el;
+      const target = document.querySelectorAll('.rightpannel .node')[i];
+
+      const {
+        offsetTop: ot,
+        offsetLeft: ol,
+        offsetWidth: ow,
+        offsetHeight: oh,
+      } = target;
+
+      ctx.beginPath();
+      ctx.strokeStyle = '#cacdd4';
+      ctx.setLineDash([4]);
+      ctx.lineWidth = 1;
+      ctx.moveTo(offsetLeft + offsetWidth, offsetTop + offsetHeight / 2);
+      ctx.lineTo(ol, ot - 119 - 8);
+      ctx.lineTo(ol, ot + oh - 119 - 8);
+      // ctx.lineTo(offsetLeft + offsetWidth, offsetTop + offsetHeight / 2);
+      ctx.fillStyle = '#0000000b';
+      ctx.fill();
+      // ctx.stroke();
+      ctx.closePath();
+    }
   }
 };
 
@@ -238,7 +266,9 @@ nextTick(() => {
   if (folders.length > 0) {
     currentFolder.value = folders[0];
   }
-  draw();
+  nextTick(() => {
+    draw();
+  });
 });
 
 watch([index], () => {
@@ -270,7 +300,7 @@ const startAutoPlay = () => {
         },
         { dev_score: -999 }
       );
-      // console.log('maxNode', maxNode);
+
       setActiveTreeNode(maxNode);
 
       if (interval) {
@@ -688,13 +718,13 @@ pre {
   position: fixed;
   left: 10px;
   bottom: 10px;
-  font-size: 30px;
+  font-size: 26px;
   color: #88909b;
 }
 
 .colormap > div {
-  height: 40px;
-  width: 40px;
+  height: 36px;
+  width: 36px;
 }
 
 .colormap > .colorblock:nth-of-type(1) {
