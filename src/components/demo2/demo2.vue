@@ -49,20 +49,28 @@ const list = computed(() => {
   return newList;
 });
 
+const loading = ref(false);
+
+// 修改fetchTreeData函数
 const fetchTreeData = async (folder) => {
-  const promises = [];
-  promises.push(
-    fetch(
-      `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/sela/notebooks/${folder}/tree.json`
-    ).then((res) => res.json())
-  );
-  for (let i = 1; i < 11; i++) {
-    const url = `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/sela/notebooks/${folder}/tree_${i
-      .toString()
-      .padStart(2, '0')}.json`;
-    promises.push(fetch(url).then((res) => res.json()));
+  loading.value = true;
+  try {
+    const promises = [];
+    promises.push(
+      fetch(
+        `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/sela/notebooks/${folder}/tree.json`
+      ).then((res) => res.json())
+    );
+    for (let i = 1; i < 11; i++) {
+      const url = `https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/sela/notebooks/${folder}/tree_${i
+        .toString()
+        .padStart(2, '0')}.json`;
+      promises.push(fetch(url).then((res) => res.json()));
+    }
+    return await Promise.all(promises);
+  } finally {
+    loading.value = false;
   }
-  return await Promise.all(promises);
 };
 
 // 处理树形数据
@@ -363,114 +371,150 @@ watch(
 );
 </script>
 <template>
-  <div>
-    <div class="paper-reference">
-      Demo page for
-      <a href="https://arxiv.org/abs/2410.17238" target="_blank">SELA</a>
+  <div class="demo-container">
+    <!-- 添加loading遮罩 -->
+    <div v-if="loading" class="loading-overlay">
+      <div class="loading-spinner"></div>
     </div>
 
-    <!-- 文件夹选择器 -->
-    <label class="dataset-label">Datasets</label>
-    <select v-model="currentFolder" class="folder-select">
-      <option v-for="folder in folders" :key="folder" :value="folder">
-        {{ folder }}
-      </option>
-    </select>
+    <div>
+      <div class="paper-reference">
+        Demo page for
+        <a href="https://arxiv.org/abs/2410.17238" target="_blank">SELA</a>
+      </div>
 
-    <div class="wraper" ref="domref">
-      <div class="ballgraph">
-        <div
-          v-for="item of dataTree"
-          class="ballLine"
-          :style="`gap:${calGap(item.length)}px`"
-        >
+      <!-- 文件夹选择器 -->
+      <label class="dataset-label">Datasets</label>
+      <select v-model="currentFolder" class="folder-select">
+        <option v-for="folder in folders" :key="folder" :value="folder">
+          {{ folder }}
+        </option>
+      </select>
+
+      <div class="wraper" ref="domref">
+        <div class="ballgraph">
           <div
-            v-for="ite of item"
-            class="ball cursor-pointer"
-            :class="{
-              active: dataWithActive.find((n) => n.id === ite.id)?.active,
-              gray: dataWithActive.find((n) => n.id === ite.id)?.visits === 0,
-              selected: activeTreeNodeId === ite.id,
-            }"
-            :id="ite.id"
-            :style="
-              getStyle(dataWithActive.find((n) => n.id === ite.id) || ite)
-            "
-            @click="setActiveTreeNode(ite)"
+            v-for="item of dataTree"
+            class="ballLine"
+            :style="`gap:${calGap(item.length)}px`"
           >
-            <div>{{ getRealItem(ite).dev_score }}</div>
-          </div>
-        </div>
-        <canvas class="linecanvas"></canvas>
-      </div>
-
-      <div class="colormap">
-        <section>
-          <div>
-            <span class="text-35px font-500">score</span>
-            <div>max</div>
-          </div>
-        </section>
-        <div class="colorblock"></div>
-        <div class="colorblock"></div>
-        <div class="colorblock"></div>
-        <div class="colorblock"></div>
-        <div class="colorblock"></div>
-        <div class="colorblock"></div>
-        <div>min</div>
-      </div>
-
-      <div class="rightpannel">
-        <template v-if="activeTreeNodeId">
-          <div v-for="node in activeNodePath" :key="node.id" class="node">
-            <div class="instruction bg">Insight: {{ node.instruction }}</div>
-            <div>
-              <pre><code v-html="hljs.highlight(getCode(node.code), { language: 'python' }).value"></code></pre>
-            </div>
-          </div>
-        </template>
-        <!-- <template> -->
-        <template v-else>
-          <div v-for="node of activeNode" class="node">
-            <div class="instruction bg">Insight: {{ node.instruction }}</div>
-            <div>
-              <pre><code v-html="hljs.highlight(getCode(node.code), { language: 'python' }).value"></code></pre>
-            </div>
-          </div>
-        </template>
-        <div class="stacknodes">
-          <div>
-            <div class="node">
-              <div class="instruction">Vannila instruction without insight</div>
-              <div>
-                <pre><code v-html="hljs.highlight('More generated code for the rest of the pipeline ...', { language: 'python' }).value"></code></pre>
-              </div>
-            </div>
-            <div class="node">
-              <div class="instruction">Vannila instruction without insight</div>
-              <div>
-                <pre><code v-html="hljs.highlight('More generated code for the rest of the pipeline ...', { language: 'python' }).value"></code></pre>
-              </div>
-            </div>
-            <div class="node">
-              <div class="instruction">Vannila instruction without insight</div>
-              <div>
-                <pre><code v-html="hljs.highlight('More generated code for the rest of the pipeline ...', { language: 'python' }).value"></code></pre>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div v-if="activeTreeNodeId" class="node">
-          <div class="instruction">Complete Code</div>
-          <div class="download-container">
-            <a
-              download
-              :href="`https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/sela/notebooks/${currentFolder}/Node-${activeTreeNodeId}.ipynb`"
-              class="download-link"
+            <div
+              v-for="ite of item"
+              class="ball cursor-pointer"
+              :class="{
+                active: dataWithActive.find((n) => n.id === ite.id)?.active,
+                gray: dataWithActive.find((n) => n.id === ite.id)?.visits === 0,
+                selected: activeTreeNodeId === ite.id,
+              }"
+              :id="ite.id"
+              :style="
+                getStyle(dataWithActive.find((n) => n.id === ite.id) || ite)
+              "
+              @click="setActiveTreeNode(ite)"
             >
-              <div class="file-info">
-                <div class="file-icon">
+              <div>{{ getRealItem(ite).dev_score }}</div>
+            </div>
+          </div>
+          <canvas class="linecanvas"></canvas>
+        </div>
+
+        <div class="colormap">
+          <section>
+            <div>
+              <span class="text-35px font-500">score</span>
+              <div>max</div>
+            </div>
+          </section>
+          <div class="colorblock"></div>
+          <div class="colorblock"></div>
+          <div class="colorblock"></div>
+          <div class="colorblock"></div>
+          <div class="colorblock"></div>
+          <div class="colorblock"></div>
+          <div>min</div>
+        </div>
+
+        <div class="rightpannel">
+          <template v-if="activeTreeNodeId">
+            <div v-for="node in activeNodePath" :key="node.id" class="node">
+              <div class="instruction bg">Insight: {{ node.instruction }}</div>
+              <div>
+                <pre><code v-html="hljs.highlight(getCode(node.code), { language: 'python' }).value"></code></pre>
+              </div>
+            </div>
+          </template>
+          <!-- <template> -->
+          <template v-else>
+            <div v-for="node of activeNode" class="node">
+              <div class="instruction bg">Insight: {{ node.instruction }}</div>
+              <div>
+                <pre><code v-html="hljs.highlight(getCode(node.code), { language: 'python' }).value"></code></pre>
+              </div>
+            </div>
+          </template>
+          <div class="stacknodes">
+            <div>
+              <div class="node">
+                <div class="instruction">
+                  Vannila instruction without insight
+                </div>
+                <div>
+                  <pre><code v-html="hljs.highlight('More generated code for the rest of the pipeline ...', { language: 'python' }).value"></code></pre>
+                </div>
+              </div>
+              <div class="node">
+                <div class="instruction">
+                  Vannila instruction without insight
+                </div>
+                <div>
+                  <pre><code v-html="hljs.highlight('More generated code for the rest of the pipeline ...', { language: 'python' }).value"></code></pre>
+                </div>
+              </div>
+              <div class="node">
+                <div class="instruction">
+                  Vannila instruction without insight
+                </div>
+                <div>
+                  <pre><code v-html="hljs.highlight('More generated code for the rest of the pipeline ...', { language: 'python' }).value"></code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div v-if="activeTreeNodeId" class="node">
+            <div class="instruction">Complete Code</div>
+            <div class="download-container">
+              <a
+                download
+                :href="`https://public-frontend-1300249583.cos.ap-nanjing.myqcloud.com/sela/notebooks/${currentFolder}/Node-${activeTreeNodeId}.ipynb`"
+                class="download-link"
+              >
+                <div class="file-info">
+                  <div class="file-icon">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V9L13 2Z"
+                        stroke="#88909B"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="file-details">
+                    <div class="file-name">
+                      Node-{{ activeTreeNodeId }}.ipynb
+                    </div>
+                    <!-- <div class="file-size">40.61KB</div> -->
+                  </div>
+                </div>
+                <div class="download-icon">
                   <svg
                     width="24"
                     height="24"
@@ -479,7 +523,21 @@ watch(
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M13 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V9L13 2Z"
+                      d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
+                      stroke="#88909B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7 10L12 15L17 10"
+                      stroke="#88909B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M12 15V3"
                       stroke="#88909B"
                       stroke-width="2"
                       stroke-linecap="round"
@@ -487,52 +545,50 @@ watch(
                     />
                   </svg>
                 </div>
-                <div class="file-details">
-                  <div class="file-name">Node-{{ activeTreeNodeId }}.ipynb</div>
-                  <!-- <div class="file-size">40.61KB</div> -->
-                </div>
-              </div>
-              <div class="download-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
-                    stroke="#88909B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M7 10L12 15L17 10"
-                    stroke="#88909B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M12 15V3"
-                    stroke="#88909B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
+          <!-- </template> -->
         </div>
-        <!-- </template> -->
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.demo-container {
+  position: relative;
+  min-height: 400px;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ebf3fe;
+  border-radius: 50%;
+  border-top-color: #2c3fcb;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .folder-select {
   margin: 10px;
   padding: 5px 10px;
