@@ -262,7 +262,7 @@ const activeNodePath = computed(() => {
 
 useResizeObserver(domref, draw);
 
-nextTick(() => {
+onMounted(() => {
   if (folders.length > 0) {
     currentFolder.value = folders[0];
   }
@@ -382,23 +382,25 @@ const setActiveTreeNode = (node) => {
   });
 };
 
-watch(
-  currentFolder,
-  async () => {
-    stopAutoPlay();
-    index.value = 0;
-    activeTreeNodeId.value = null;
-    trees.value = await fetchTreeData(currentFolder.value);
+onMounted(() => {
+  watch(
+    currentFolder,
+    async () => {
+      stopAutoPlay();
+      index.value = 0;
+      activeTreeNodeId.value = null;
+      trees.value = await fetchTreeData(currentFolder.value);
 
-    startAutoPlay();
-    nextTick(() => {
-      draw();
-    });
-  },
-  {
-    immediate: true,
-  }
-);
+      startAutoPlay();
+      nextTick(() => {
+        draw();
+      });
+    },
+    {
+      immediate: true,
+    }
+  );
+});
 </script>
 <template>
   <div class="demo-container">
