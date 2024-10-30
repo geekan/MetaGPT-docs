@@ -15,4 +15,5 @@ src/*/blog
 src/*/rfcs
 src/*/DataInterpreter
 src/*/demos
+src/*/sela
 src/utils/diff.ts
