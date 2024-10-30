@@ -10,7 +10,7 @@ RAG（Retrieval-Augmented Generation）通过引用外部权威知识库来优�
 4. 数据更新，增加文本与python对象
 5. 数据保存及恢复，不用每次都进行向量化
 
-更多的例子请查看 [rag_pipeline](https://github.com/geekan/MetaGPT/blob/main/examples/rag_pipeline.py) 和 [rag_search](https://github.com/geekan/MetaGPT/blob/main/examples/rag_search.py)
+更多的例子请查看 [rag_pipeline](https://github.com/geekan/MetaGPT/blob/main/examples/rag/rag_pipeline.py) 和 [rag_search](https://github.com/geekan/MetaGPT/blob/main/examples/rag/rag_search.py)
 
 ## 前置准备
 

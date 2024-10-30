@@ -10,7 +10,7 @@ This article focuses on the RAG functions provided by the current MetaGPT:
 4. Data update, addition of text and Python objects.
 5. Data storage and recovery, vectorization is not required each time.
 
-For more examples, please see [rag_pipeline](https://github.com/geekan/MetaGPT/blob/main/examples/rag_pipeline.py) and [rag_search](https://github.com/geekan/MetaGPT/blob/main/examples/rag_search.py)
+For more examples, please see [rag_pipeline](https://github.com/geekan/MetaGPT/blob/main/examples/rag/rag_pipeline.py) and [rag_search](https://github.com/geekan/MetaGPT/blob/main/examples/rag/rag_search.py)
 
 ## Prepare
 
