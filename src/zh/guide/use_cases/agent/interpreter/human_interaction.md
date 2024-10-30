@@ -12,6 +12,8 @@
 
 ### 代码
 
+[examples/di/machine_learning.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/machine_learning.py)
+
 ```
 python examples/di/machine_learning.py --auto_run False
 ```

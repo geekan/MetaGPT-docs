@@ -14,6 +14,8 @@ OCR，是一种识别图片中文字，得到结构化文本信息的技术手�
 
 ### 代码
 
+[examples/di/ocr_receipt.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/ocr_receipt.py)
+
 > 注意：你需要事先安装Paddle相关依赖以运行此示例，可执行
 > `pip install metagpt[ocr]`
 

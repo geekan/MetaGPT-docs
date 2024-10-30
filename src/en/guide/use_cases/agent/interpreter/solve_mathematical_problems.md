@@ -12,6 +12,12 @@ At a school, all 60 students play on at least one of three teams: Basketball, So
 
 ### Code
 
+[examples/di/solve_math_problems.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/solve_math_problems.py)
+
+```bash
+python examples/di/solve_math_problems.py
+```
+
 ```python
 import asyncio
 

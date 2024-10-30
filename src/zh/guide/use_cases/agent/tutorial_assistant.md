@@ -12,7 +12,7 @@
 
 ### 源码
 
-[GitHub Source Code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/tutorial_assistant.py)
+[metagpt/roles/tutorial_assistant.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/tutorial_assistant.py)
 
 ## 角色定义
 
@@ -195,7 +195,9 @@
 
 ### 执行命令样例
 
-贴对应的执行命令样例
+```bash
+python examples/write_tutorial.py
+```
 
 ### 执行结果
 

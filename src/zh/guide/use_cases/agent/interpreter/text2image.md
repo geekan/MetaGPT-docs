@@ -12,6 +12,8 @@ Text2Image，指通过文字描述获取图片
 
 ### 代码
 
+[examples/di/sd_tool_usage.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/sd_tool_usage.py)
+
 ```bash
 python examples/di/sd_tool_usage.py
 ```

@@ -16,7 +16,7 @@
 python examples/di/data_visualization.py
 ```
 
-`examples/di/data_visualization.py`文件中的代码具体为：
+[examples/di/data_visualization.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/data_visualization.py) 文件中的代码具体为：
 
 ```python
 import asyncio

@@ -13,7 +13,7 @@
 
 ### 源码
 
-[GitHub Source Code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/invoice_ocr_assistant.py)
+[metagpt/roles/invoice_ocr_assistant.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/invoice_ocr_assistant.py)
 
 ## 角色定义
 
@@ -301,7 +301,7 @@
 
 ### 执行命令样例
 
-在项目根目录下，执行命令行 `python3 /examples/invoice_ocr.py`。
+在项目根目录下，执行命令行 `python3 examples/invoice_ocr.py`。
 
 ### 执行结果
 

@@ -12,6 +12,8 @@
 
 ### 代码
 
+[examples/di/rm_image_background.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/rm_image_background.py)
+
 ```bash
 python examples/di/rm_image_background.py
 ```

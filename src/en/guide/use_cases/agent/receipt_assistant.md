@@ -13,7 +13,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
 
 ### Source Code
 
-[GitHub Source Code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/invoice_ocr_assistant.py)
+[metagpt/roles/invoice_ocr_assistant.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/invoice_ocr_assistant.py)
 
 ## Role Definition
 
@@ -292,7 +292,7 @@ Supports OCR recognition of invoice files in `pdf`, `png`, `jpg`, and `zip` form
 
 ### Execution Command Example
 
-In the project's root directory, execute the command `python3 /examples/invoice_ocr.py`.
+In the project's root directory, execute the command `python3 examples/invoice_ocr.py`.
 
 ### Execution Results
 

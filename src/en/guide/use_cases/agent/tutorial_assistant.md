@@ -12,7 +12,7 @@ The design approach involves using the `LLM` (Large Language Model) to initially
 
 ### Source Code
 
-[GitHub Source Code](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/tutorial_assistant.py)
+[metagpt/roles/tutorial_assistant.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/roles/tutorial_assistant.py)
 
 ## Role Definition
 
@@ -190,7 +190,9 @@ The design approach involves using the `LLM` (Large Language Model) to initially
 
 ### Execution Command Examples
 
-Provide corresponding execution command examples.
+```bash
+python examples/write_tutorial.py
+```
 
 ### Execution Results
 
