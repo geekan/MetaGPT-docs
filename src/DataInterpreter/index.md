@@ -4,8 +4,7 @@ footer: false
 ---
 
 <script setup>
-  // import DemoList from '@/components/demoList.vue';
-  import Demo2 from '@/components/demo2/demo2.vue';
+  import DemoList from '@/components/demoList.vue';
 </script>
 
-<Demo2 />
+<DemoList />
