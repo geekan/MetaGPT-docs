@@ -202,6 +202,12 @@ const draw = () => {
 };
 
 const activeTreeNodeId = ref(null);
+const activeTreeNode = computed(() => {
+  return (
+    list.value?.[index.value]?.find((_) => _.id === activeTreeNodeId.value) ||
+    {}
+  );
+});
 // 获取从根节点到目标节点的路径ID数组
 const getNodePathIds = (nodeId, allNodes) => {
   const pathIds = [];
@@ -453,7 +459,7 @@ onMounted(() => {
         <div class="colormap">
           <section>
             <div>
-              <span class="text-35px font-500">score</span>
+              <span class="text-24px font-500">score</span>
               <div>max</div>
             </div>
           </section>
@@ -513,7 +519,10 @@ onMounted(() => {
             </div>
           </div>
 
-          <div v-if="activeTreeNodeId" class="node">
+          <div
+            v-if="activeTreeNodeId && activeTreeNode?.visits >= 1"
+            class="node"
+          >
             <div class="instruction">Complete Code</div>
             <div class="download-container">
               <a
@@ -695,11 +704,11 @@ onMounted(() => {
 }
 
 .instruction {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.5;
   color: #1d2129;
   border-left: 1px solid #e5e6eb;
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 0 10px 10px 0;
 }
 
@@ -712,7 +721,7 @@ pre {
   border-radius: 5px;
   background-color: #e5e6eb;
   overflow: auto;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -720,13 +729,13 @@ pre {
   position: fixed;
   left: 10px;
   bottom: 10px;
-  font-size: 26px;
+  font-size: 16px;
   color: #88909b;
 }
 
 .colormap > div {
-  height: 36px;
-  width: 36px;
+  height: 24px;
+  width: 24px;
 }
 
 .colormap > .colorblock:nth-of-type(1) {

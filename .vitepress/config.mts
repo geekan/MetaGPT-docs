@@ -188,11 +188,11 @@ export default defineConfig({
                 link: '/en/DataInterpreter/index',
                 activeMatch: '/en/DataInterpreter/',
               },
-              // {
-              //   text: 'SELA',
-              //   link: '/en/sale/index',
-              //   activeMatch: '/en/sale/',
-              // },
+              {
+                text: 'SELA',
+                link: '/en/sela/index',
+                activeMatch: '/en/sela/',
+              },
             ],
           },
           ...arrVisible(
@@ -470,11 +470,11 @@ export default defineConfig({
                 link: '/zh/DataInterpreter/index',
                 activeMatch: '/zh/DataInterpreter/',
               },
-              // {
-              //   text: 'SELA',
-              //   link: '/zh/sale/index',
-              //   activeMatch: '/zh/sale/',
-              // },
+              {
+                text: 'SELA',
+                link: '/zh/sela/index',
+                activeMatch: '/zh/sela/',
+              },
             ],
           },
           ...arrVisible(
