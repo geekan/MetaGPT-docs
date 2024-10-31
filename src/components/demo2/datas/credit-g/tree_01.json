@@ -1,0 +1,24 @@
+[
+    {
+        "id": "0",
+        "parent_id": null,
+        "avg_score": "73.7",
+        "dev_score": "83.4",
+        "visits": 10,
+        "order": 1,
+        "instruction": "Perform exploratory data analysis on the train and dev sets to understand the dataset structure and characteristics.\n\nPreprocess the train, dev, and test sets by handling missing values, encoding categorical variables, and scaling numerical features.",
+        "code": "import pandas as pd\nimport numpy as np\n\n# Load the dataset\ntrain_df = pd.read_csv('/data/chiyizhou/datasets/jasmine/split_train.csv')\ndev_df = pd.read_csv('/data/chiyizhou/datasets/jasmine/split_dev.csv')\n\n# Display basic information about the datasets\nprint(\"Train Dataset Info:\")\nprint(train_df.info())\nprint(\"\\nDev Dataset Info:\")\nprint(dev_df.info())\n\n# Display summary statistics for numerical columns\nprint(\"\\nTrain Dataset Summary Statistics:\")\nprint(train_df.describe())\nprint(\"\\nDev Dataset Summary Statistics:\")\nprint(dev_df.describe())\n\n# Display the number of unique values for categorical columns\ncategorical_columns = train_df.select_dtypes(include=['object', 'category']).columns\nprint(\"\\nUnique Values in Categorical Columns:\")\nfor col in categorical_columns:\n    print(f\"{col}: {train_df[col].nunique()} unique values\")\n\n# Check for missing values\nprint(\"\\nMissing Values in Train Dataset:\")\nprint(train_df.isnull().sum())\nprint(\"\\nMissing Values in Dev Dataset:\")\nprint(dev_df.isnull().sum())\n\n# Check the distribution of the target column\nprint(\"\\nTarget Column Distribution in Train Dataset:\")\nprint(train_df['class'].value_counts(normalize=True))\nprint(\"\\nTarget Column Distribution in Dev Dataset:\")\nprint(dev_df['class'].value_counts(normalize=True))\n\n\nfrom sklearn.preprocessing import StandardScaler\n\n# Function to preprocess data\ndef preprocess_data(df, scaler=None):\n    df_copy = df.copy()\n    \n    # Separate target column if it exists\n    if 'class' in df_copy.columns:\n        y = df_copy.pop('class')\n    else:\n        y = None\n    \n    # Scale numerical features\n    if scaler is None:\n        scaler = StandardScaler()\n        df_copy[df_copy.columns] = scaler.fit_transform(df_copy)\n    else:\n        df_copy[df_copy.columns] = scaler.transform(df_copy)\n    \n    # Reattach target column if it was separated\n    if y is not None:\n        df_copy['class'] = y\n    \n    return df_copy, scaler\n\n# Preprocess train, dev, and test sets\ntrain_df_processed, scaler = preprocess_data(train_df)\ndev_df_processed, _ = preprocess_data(dev_df, scaler)\ntest_df = pd.read_csv('/data/chiyizhou/datasets/jasmine/split_test_wo_target.csv')\ntest_df_processed, _ = preprocess_data(test_df, scaler)\n\n# Display the first few rows of the processed train dataset\nprint(\"Processed Train Dataset:\")\nprint(train_df_processed.head())\n",
+        "active": true
+    },
+    {
+        "id": "0-4",
+        "parent_id": "0",
+        "avg_score": "0.0",
+        "dev_score": "0.0",
+        "visits": 0,
+        "order": "1.5",
+        "instruction": "Perform Principal Component Analysis (PCA) to reduce dimensionality and understand the variance captured by different components, then engineer features based on the most significant principal components to improve model performance.",
+        "code": "",
+        "active": false
+    }
+]

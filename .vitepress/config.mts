@@ -56,7 +56,7 @@ const genRfcLinks = (dir: string, prefixPath = '') => {
 };
 
 const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
-const sources = ['blog', 'rfcs', 'DataInterpreter'];
+const sources = ['blog', 'rfcs', 'DataInterpreter', 'sela'];
 const dests = ['zh', 'en'];
 
 const copyDir = (source: string, dest: string) => {
@@ -181,9 +181,19 @@ export default defineConfig({
             activeMatch: '/en/guide/',
           },
           {
-            text: 'Data Interpreter',
-            link: '/en/DataInterpreter/index',
-            activeMatch: '/en/DataInterpreter/',
+            text: 'Demo',
+            items: [
+              {
+                text: 'Data Interpreter',
+                link: '/en/DataInterpreter/index',
+                activeMatch: '/en/DataInterpreter/',
+              },
+              // {
+              //   text: 'SELA',
+              //   link: '/en/sale/index',
+              //   activeMatch: '/en/sale/',
+              // },
+            ],
           },
           ...arrVisible(
             [
@@ -453,9 +463,19 @@ export default defineConfig({
             activeMatch: '/zh/guide/',
           },
           {
-            text: 'Data Interpreter',
-            link: '/zh/DataInterpreter/index',
-            activeMatch: '/zh/DataInterpreter/',
+            text: '样例',
+            items: [
+              {
+                text: 'Data Interpreter',
+                link: '/zh/DataInterpreter/index',
+                activeMatch: '/zh/DataInterpreter/',
+              },
+              // {
+              //   text: 'SELA',
+              //   link: '/zh/sale/index',
+              //   activeMatch: '/zh/sale/',
+              // },
+            ],
           },
           ...arrVisible(
             [
