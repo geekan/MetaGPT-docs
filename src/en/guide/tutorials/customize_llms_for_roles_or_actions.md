@@ -76,22 +76,25 @@ asyncio.run(team.run(idea="Topic: climate change. Under 80 words per message.", 
 ```
 
 ### Complete code and corresponding configuration examples
+
 Default configuration： `~/.metagpt/config2.yaml`
+
 ```yaml
 llm:
-   api_type: 'openai'
-   model: 'gpt-4-turbo'
-   base_url: 'https://api.openai.com/v1'
-   api_key: 'sk-...'  # YOUR_API_KEY
+  api_type: 'openai'
+  model: 'gpt-4-turbo'
+  base_url: 'https://api.openai.com/v1'
+  api_key: 'sk-...' # YOUR_API_KEY
 ```
 
 Custom configuration： `~/.metagpt/gpt-4.yaml`
+
 ```yaml
 llm:
-   api_type: 'openai'
-   model: 'gpt-4o'
-   base_url: 'https://api.openai.com/v1'
-   api_key: 'sk-...'  # YOUR_API_KEY
+  api_type: 'openai'
+  model: 'gpt-4o'
+  base_url: 'https://api.openai.com/v1'
+  api_key: 'sk-...' # YOUR_API_KEY
 ```
 
 ```python

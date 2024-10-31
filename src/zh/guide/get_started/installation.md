@@ -26,15 +26,15 @@ pip install metagpt
 
 ### 安装子模块
 
-- RAG, `pip install 'metagpt[rag]'`. 
+- RAG, `pip install 'metagpt[rag]'`.
   用途：用于基于 RAG（Retrieval-Augmented Generation，检索增强生成）的系统，结合多个 LLM（大语言模型）和向量存储技术。
-- OCR, `pip install 'metagpt[ocr]'`. 
+- OCR, `pip install 'metagpt[ocr]'`.
   用途：用于光学字符识别（OCR）任务，识别和提取图像中的文本。
-- search-ddg, `pip install 'metagpt[search-ddg]'`. 
+- search-ddg, `pip install 'metagpt[search-ddg]'`.
   用途：用于 DuckDuckGo 搜索功能。
-- search-google, `pip install 'metagpt[search-google]'`. 
+- search-google, `pip install 'metagpt[search-google]'`.
   用途：用于与 Google API（如 Google 搜索 API）进行交互。
-- selenium, `pip install 'metagpt[selenium]'`. 
+- selenium, `pip install 'metagpt[selenium]'`.
   用途：用于自动化浏览器操作和网页抓取。
 
 ## 安装最新的开发版本

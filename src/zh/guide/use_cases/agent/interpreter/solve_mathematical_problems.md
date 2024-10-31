@@ -38,7 +38,6 @@ if __name__ == "__main__":
 
 ```
 
-
 ### 运行结果
 
 1. `DataInterpreter` 提出的`task`如下:

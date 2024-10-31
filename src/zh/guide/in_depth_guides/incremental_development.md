@@ -11,10 +11,10 @@
 
 通过使用以下参数，可以连续迭代 MetaGPT 生成的现有项目。
 
-| CLI 参数名称 | 值类型 | 可选/必填 | 描述                                                                                                       | 用法                                                                                                                                                |
-| :----------------- | :--------- | :---------------- | :---------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--project-path`   | TEXT       | Optional          | 指定metagpt创建的旧版本项目的目录路径，以满足增量需求。 | metagpt "BUG_FEEDBACK_XXX" --project-path "YOUR_PROJECT_FULL_PATH"<br/><br/>metagpt "INCREMENT_REQUIREMENTS" --project-path "YOUR_PROJECT_FULL_PATH" |
-| `--project-name`   | TEXT       | Optional          | 唯一的项目名称，例如“game_2048”。                                                                        | metagpt "NEW_REQUIREMENTS" --project-name "YOUR_PROJECT_NAME"                                                                                        |
+| CLI 参数名称     | 值类型 | 可选/必填 | 描述                                                    | 用法                                                                                                                                                 |
+| :--------------- | :----- | :-------- | :------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--project-path` | TEXT   | Optional  | 指定metagpt创建的旧版本项目的目录路径，以满足增量需求。 | metagpt "BUG_FEEDBACK_XXX" --project-path "YOUR_PROJECT_FULL_PATH"<br/><br/>metagpt "INCREMENT_REQUIREMENTS" --project-path "YOUR_PROJECT_FULL_PATH" |
+| `--project-name` | TEXT   | Optional  | 唯一的项目名称，例如“game_2048”。                       | metagpt "NEW_REQUIREMENTS" --project-name "YOUR_PROJECT_NAME"                                                                                        |
 
 有关更多命令选项，请检查 `metagpt --help`.
 
@@ -34,12 +34,12 @@ metagpt "Write a cli snake game based on pygame" --project-name "snake_game" --r
 
 其中，相关参数的功能说明如下：
 
-| CLI 参数名称        | 值        | 描述                                                                               |
-| :------------------------ | :----------- | :---------------------------------------------------------------------------------------- |
+| CLI 参数名称              | 值           | 描述                                                   |
+| :------------------------ | :----------- | :----------------------------------------------------- |
 | --project-name            | "snake_game" | 新创建的软件项目的文件夹名称和项目名称是“snake_game”。 |
-| --run-tests               |              | 启用单元测试阶段。                                                           |
-| --n-round                 | 20           | 进行20轮。                                                                        |
-| --max-auto-summarize-code | 1            | 修复“总结代码”中发现的问题最多允许 1 次。                  |
+| --run-tests               |              | 启用单元测试阶段。                                     |
+| --n-round                 | 20           | 进行20轮。                                             |
+| --max-auto-summarize-code | 1            | 修复“总结代码”中发现的问题最多允许 1 次。              |
 
 整个流程如下：
 ![part1](../../../public/image/guide/tutorials/inc_req_and_fixbug/20231218-165803.gif)
@@ -57,7 +57,7 @@ metagpt "Add a randomly appearing enemy that lasts for 5 seconds. If the enemy i
 
 其中，相关参数的功能说明如下：
 
-| CLI 参数名称        | 值                                                        | 描述                                                              |
+| CLI 参数名称              | 值                                                           | 描述                                                                     |
 | :------------------------ | :----------------------------------------------------------- | :----------------------------------------------------------------------- |
 | --project-path            | "/Users/iorishinier/github/bak/MetaGPT/workspace/snake_game" | Project path of the existing project.                                    |
 | --run-tests               |                                                              | Enable the unit testing phase.                                           |
@@ -85,11 +85,11 @@ metagpt "TypeError: draw() takes 1 positional argument but 2 were given" --proje
 
 其中，相关参数的功能说明如下：
 
-| CLI 参数名称        | 值                                                        | 描述                                         |
-| :------------------------ | :----------------------------------------------------------- | :-------------------------------------------------- |
-| --project-path            | "/Users/iorishinier/github/bak/MetaGPT/workspace/snake_game" | 现有项目的项目路径。              |
-| --run-tests               |                                                              | 启用单元测试阶段。                      |
-| --n-round                 | 10                                                           | 进行 10 轮。                                 |
+| CLI 参数名称              | 值                                                           | 描述                             |
+| :------------------------ | :----------------------------------------------------------- | :------------------------------- |
+| --project-path            | "/Users/iorishinier/github/bak/MetaGPT/workspace/snake_game" | 现有项目的项目路径。             |
+| --run-tests               |                                                              | 启用单元测试阶段。               |
+| --n-round                 | 10                                                           | 进行 10 轮。                     |
 | --max-auto-summarize-code | 0                                                            | 不要修复“总结代码”中发现的问题。 |
 
 整个流程如下：
@@ -121,25 +121,25 @@ Software Company 是一个实验室项目，旨在展示 MetaGPT 框架的功能
 对相关文件进行必要的修改后，使用“metagpt”命令启动新一轮的增量迭代。
 以下是软件公司生成的文件夹结构的说明。项目迭代期间使用的文件应放置在“docs”目录中。
 
-| 路径                           | 可编辑 | 描述                                                                                                                                                                                                    |
-| ------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| .dependencies.json             | No       | 存储文件之间显式的依赖关系。                                                                                                                                                           |
-| docs/requirement.txt           | No       | 存储本次迭代新添加的需求。在项目处理过程中，里面的内容会被拆分并合并到`docs/prds/`中。请使用metagpt 命令修改此文件。 |
-| docs/bugfix.txt                | No       | 存储本轮的bug反馈信息。<br/>在迭代过程中，将bug反馈转化为需求的输入；不要直接修改该文件。                                                     |
-| docs/prds                      | Yes      | 项目需求的最终细目。                                                                                                                                                                  |
-| docs/system_designs            | Yes      | 该项目的最终系统设计。                                                                                                                                                                  |
-| docs/tasks                     | Yes      | 项目的编码任务。                                                                                                                                                                              |
-| docs/code_summaries            | Yes      | 整个代码库的审核结果。                                                                                                                                                                  |
-| resources/competitive_analysis | No       | 竞争对手分析                                                                                                                                                                                            |
-| resources/data_api_design      | No       | 类查看文件                                                                                                                                                                                             |
-| resources/seq_flow             | No       | 序列视图文件                                                                                                                                                                                            |
-| resources/system_design        | No       | 系统设计文件                                                                                                                                                                                           |
-| resources/prd                  | No       | PRD 文件                                                                                                                                                                                                    |
-| resources/api_spec_and_tasks   | No       | 用于编码的任务文件                                                                                                                                                                                         |
-| tmp                            | No       | 项目处理过程中生成的中间文件。这些文件不会被 git 归档。                                                                                                   |
-| &lt;workspace&gt;              | Yes      | 项目源码目录                                                                                                                                                                                  |
-| tests                          | Yes      | 单元测试代码                                                                                                                                                                                                |
-| test_outputs                   | No       | 单元测试执行结果                                                                                                                                                                                |
+| 路径                           | 可编辑 | 描述                                                                                                                 |
+| ------------------------------ | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| .dependencies.json             | No     | 存储文件之间显式的依赖关系。                                                                                         |
+| docs/requirement.txt           | No     | 存储本次迭代新添加的需求。在项目处理过程中，里面的内容会被拆分并合并到`docs/prds/`中。请使用metagpt 命令修改此文件。 |
+| docs/bugfix.txt                | No     | 存储本轮的bug反馈信息。<br/>在迭代过程中，将bug反馈转化为需求的输入；不要直接修改该文件。                            |
+| docs/prds                      | Yes    | 项目需求的最终细目。                                                                                                 |
+| docs/system_designs            | Yes    | 该项目的最终系统设计。                                                                                               |
+| docs/tasks                     | Yes    | 项目的编码任务。                                                                                                     |
+| docs/code_summaries            | Yes    | 整个代码库的审核结果。                                                                                               |
+| resources/competitive_analysis | No     | 竞争对手分析                                                                                                         |
+| resources/data_api_design      | No     | 类查看文件                                                                                                           |
+| resources/seq_flow             | No     | 序列视图文件                                                                                                         |
+| resources/system_design        | No     | 系统设计文件                                                                                                         |
+| resources/prd                  | No     | PRD 文件                                                                                                             |
+| resources/api_spec_and_tasks   | No     | 用于编码的任务文件                                                                                                   |
+| tmp                            | No     | 项目处理过程中生成的中间文件。这些文件不会被 git 归档。                                                              |
+| &lt;workspace&gt;              | Yes    | 项目源码目录                                                                                                         |
+| tests                          | Yes    | 单元测试代码                                                                                                         |
+| test_outputs                   | No     | 单元测试执行结果                                                                                                     |
 
 ---
 

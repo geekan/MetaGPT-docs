@@ -36,7 +36,7 @@ pip install metagpt
   Purpose: Used to interact with Google APIs (such as the Google Search API).
 - selenium, `pip install 'metagpt[selenium]'`.
   Purpose: Used to automate browser operations and web scraping.
-  
+
 ## Install latest development version
 
 Best for experiencing newest features.
