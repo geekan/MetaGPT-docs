@@ -1,4 +1,4 @@
-# 配置大模型API
+configuration# 配置大模型API
 
 ## OpenAI API
 
@@ -92,7 +92,7 @@ llm:
   base_url: 'YOUR_AZURE_BASE_URL'
   api_key: 'YOUR_API_KEY'
   api_version: 'YOUR_API_VERSION' # such as '2024-03-01-preview'
-  model: 'YOUR_MODEL_NAME' # or YOUR_DEPLOYMENT_NAME
+  model: 'YOUR_MODEL_      NAME' # or YOUR_DEPLOYMENT_NAME
 ```
 
 ## 谷歌 Gemini
@@ -274,4 +274,18 @@ llm:
   region_name: 'REGION' # e.g. us-east-1
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
+```
+
+## 火山方舟的API
+
+支持模型名列表，在`metagpt/utils/token_counter.py`的`doubao-*`
+
+```yaml
+llm:
+  api_type: 'ark'
+  base_url: 'https://ark.cn-beijing.volces.com/api/v3'
+  api_key: 'YOUR_API_KEY'
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'doubao-lite'
 ```

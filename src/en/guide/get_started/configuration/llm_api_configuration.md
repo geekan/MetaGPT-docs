@@ -273,3 +273,17 @@ llm:
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
 ```
+
+## Ark API
+
+support `doubao-*`models，see `metagpt/utils/token_counter.py`
+
+```yaml
+llm:
+  api_type: 'ark'
+  base_url: 'https://ark.cn-beijing.volces.com/api/v3'
+  api_key: 'YOUR_API_KEY'
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'doubao-lite'
+```

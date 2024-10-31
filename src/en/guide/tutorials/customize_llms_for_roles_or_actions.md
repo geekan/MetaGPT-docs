@@ -74,3 +74,57 @@ team = Team(investment=10.0, env=env, roles=[A, B, C])
 asyncio.run(team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3))
 # await team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3) # If running in Jupyter Notebook, use this line of code
 ```
+
+### Complete code and corresponding configuration examples
+Default configuration： `~/.metagpt/config2.yaml`
+```yaml
+llm:
+   api_type: 'openai'
+   model: 'gpt-4-turbo'
+   base_url: 'https://api.openai.com/v1'
+   api_key: 'sk-...'  # YOUR_API_KEY
+```
+
+Custom configuration： `~/.metagpt/gpt-4.yaml`
+```yaml
+llm:
+   api_type: 'openai'
+   model: 'gpt-4o'
+   base_url: 'https://api.openai.com/v1'
+   api_key: 'sk-...'  # YOUR_API_KEY
+```
+
+```python
+from metagpt.config2 import Config
+from metagpt.roles import Role
+from metagpt.actions import Action
+import asyncio
+from metagpt.environment import Environment
+from metagpt.team import Team
+
+# Example configurations for gpt-4, gpt-4-turbo and gpt-3.5-turbo
+gpt4 = Config.from_home("gpt-4.yaml")  # Load custom configuration from `~/.metagpt` directory `gpt-4.yaml`
+gpt4t = Config.default()  # Use default configuration from `config2.yaml` file (model: "gpt-4-turbo")
+gpt35 = Config.default()
+gpt35.llm.model = "gpt-3.5-turbo"  # Modify model to "gpt-3.5-turbo"
+
+# Create three Actions: a1, a2, and a3. Assign the configuration of gpt4t to a1.
+a1 = Action(config=gpt4t, name="Say", instruction="Say your opinion with emotion and don't repeat it")
+a2 = Action(name="Say", instruction="Say your opinion with emotion and don't repeat it")
+a3 = Action(name="Vote", instruction="Vote for the candidate, and say why you vote for him/her")
+
+# Create three Roles: A, B, and C. Representing "Democratic candidate," "Republican candidate," and "Voter" respectively.
+# Although A is configured with gpt4 in Role config, it will use the configuration with model gpt4 for a1 due to the Action config setting.
+A = Role(name="A", profile="Democratic candidate", goal="Win the election", actions=[a1], watch=[a2], config=gpt4)
+# Since B is configured with gpt35 in Role config, and a2 has no Action config, both B and a2 will use Role config, i.e., the configuration with model gpt35.
+B = Role(name="B", profile="Republican candidate", goal="Win the election", actions=[a2], watch=[a1], config=gpt35)
+# Since C has no config set, and a3 also has no config set, both C and a3 will use the Global config, i.e., the configuration with model gpt4.
+C = Role(name="C", profile="Voter", goal="Vote for the candidate", actions=[a3], watch=[a1, a2])
+
+# Create an environment described as "US election live broadcast"
+env = Environment(desc="US election live broadcast")
+team = Team(investment=10.0, env=env, roles=[A, B, C])
+# Run the team, and you should observe collaboration between them
+asyncio.run(team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3))
+# await team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3) # If running in Jupyter Notebook, use this line of code
+```

@@ -72,3 +72,57 @@ team = Team(investment=10.0, env=env, roles=[A, B, C])
 asyncio.run(team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3))
 # await team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3) # 如果在Jupyter Notebook中运行，使用这行代码
 ```
+
+### 完整代码和对应配置示例
+默认配置： `~/.metagpt/config2.yaml`
+```yaml
+llm:
+   api_type: 'openai'
+   model: 'gpt-4-turbo'
+   base_url: 'https://api.openai.com/v1'
+   api_key: 'sk-...'  # YOUR_API_KEY
+```
+
+自定义配置： `~/.metagpt/gpt-4.yaml`
+```yaml
+llm:
+   api_type: 'openai'
+   model: 'gpt-4o'
+   base_url: 'https://api.openai.com/v1'
+   api_key: 'sk-...'  # YOUR_API_KEY
+```
+
+```python
+from metagpt.config2 import Config
+from metagpt.roles import Role
+from metagpt.actions import Action
+import asyncio
+from metagpt.environment import Environment
+from metagpt.team import Team
+
+# 以下是一些示例配置，分别为gpt-4、gpt-4-turbo 和 gpt-3.5-turbo。
+gpt4 = Config.from_home("gpt-4.yaml")  # 从`~/.metagpt`目录加载自定义配置`gpt-4.yaml`
+gpt4t = Config.default()  # 使用默认配置，即`config2.yaml`文件中的配置，此处`config2.yaml`文件中的model为"gpt-4-turbo"
+gpt35 = Config.default()
+gpt35.llm.model = "gpt-3.5-turbo"  # 将model修改为"gpt-3.5-turbo"
+
+# 创建a1、a2和a3三个Action。并为a1指定`gpt4t`的配置。
+a1 = Action(config=gpt4t, name="Say", instruction="Say your opinion with emotion and don't repeat it")
+a2 = Action(name="Say", instruction="Say your opinion with emotion and don't repeat it")
+a3 = Action(name="Vote", instruction="Vote for the candidate, and say why you vote for him/her")
+
+# 创建A，B，C三个角色，分别为“民主党候选人”、“共和党候选人”和“选民”。
+# 虽然A设置了config为gpt4，但因为a1已经配置了Action config，所以A将使用model为gpt4的配置，而a1将使用model为gpt4t的配置。
+A = Role(name="A", profile="Democratic candidate", goal="Win the election", actions=[a1], watch=[a2], config=gpt4)
+# 因为B设置了config为gpt35，而为a2未设置Action config，所以B和a2将使用Role config，即model为gpt35的配置。
+B = Role(name="B", profile="Republican candidate", goal="Win the election", actions=[a2], watch=[a1], config=gpt35)
+# 因为C未设置config，而a3也未设置config，所以C和a3将使用Global config，即model为gpt4的配置。
+C = Role(name="C", profile="Voter", goal="Vote for the candidate", actions=[a3], watch=[a1, a2])
+
+# 创建一个描述为“美国大选现场直播”的环境
+env = Environment(desc="US election live broadcast")
+team = Team(investment=10.0, env=env, roles=[A, B, C])
+# 运行团队，我们应该会看到它们之间的协作
+asyncio.run(team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3))
+# await team.run(idea="Topic: climate change. Under 80 words per message.", send_to="A", n_round=3) # 如果在Jupyter Notebook中运行，使用这行代码
+```
