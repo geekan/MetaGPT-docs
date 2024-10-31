@@ -80,76 +80,76 @@ MetaGPT Community - The position of Chief Evangelist rotates on a monthly basis.
 
 10. **What Does Max Token Mean?**:
 
-- This sets OpenAI’s maximum response length; exceeding the max token count will truncate the response.
+    - This sets OpenAI’s maximum response length; exceeding the max token count will truncate the response.
 
 11. **How to Change Investment Amount**:
 
-- Use the `--investment` parameter.
-- Run `python {startup.py} --help` to view all available commands.
+    - Use the `--investment` parameter.
+    - Run `python {startup.py} --help` to view all available commands.
 
 12. **Which Python Version is Stable?**
 
-- Python 3.9 and 3.10.
+    - Python 3.9 and 3.10.
 
 13. **GPT-4 Not Available, Model Not Found (`The model gpt-4 does not exist`)**:
 
-- OpenAI requires a minimum $1 spend to access GPT-4. Running a small workload with gpt-3.5-turbo (after free credits are used) generally unlocks GPT-4 access.
+    - OpenAI requires a minimum $1 spend to access GPT-4. Running a small workload with gpt-3.5-turbo (after free credits are used) generally unlocks GPT-4 access.
 
 14. **Can It Generate Code for Unseen Games?**
 
-- Per the README, it can produce recommendations or code for complex systems, such as a recommendation system similar to TikTok's. The prompt would be “Write a recommendation system like TikTok’s.”
+    - Per the README, it can produce recommendations or code for complex systems, such as a recommendation system similar to TikTok's. The prompt would be “Write a recommendation system like TikTok’s.”
 
 15. **Common Error Scenarios**:
 
-- Code over 500 lines: Some functions may be left unimplemented.
-- Database usage: Initialization often has errors because the SQL DB setup is missing in the code.
-- For large codebases, hallucinations may occur, like calling nonexistent APIs.
+    - Code over 500 lines: Some functions may be left unimplemented.
+    - Database usage: Initialization often has errors because the SQL DB setup is missing in the code.
+    - For large codebases, hallucinations may occur, like calling nonexistent APIs.
 
 16. **SD Skill Instructions**:
 
-- The SD skill is a callable tool, instantiated via `SDEngine` (see `metagpt/tools/libs/sd_engine.py`).
-- Deployment details are in [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), for instance:
-  1.  `python webui.py --enable-insecure-extension-access --port xxx --no-gradio-queue --nowebui`
-  2.  Access the SD service after model loading (~1 min). Set `sd_url` to `IP:Port` (default 7860).
+    - The SD skill is a callable tool, instantiated via `SDEngine` (see `metagpt/tools/libs/sd_engine.py`).
+    - Deployment details are in [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), for instance:
+      1. `python webui.py --enable-insecure-extension-access --port xxx --no-gradio-queue --nowebui`
+      2. Access the SD service after model loading (~1 min). Set `sd_url` to `IP:Port` (default 7860).
 
 17. **File in Use Error during Installation**:
 
-- Delete the file and retry, or manually run `pip install -r requirements.txt`.
+    - Delete the file and retry, or manually run `pip install -r requirements.txt`.
 
 18. **Origin of MetaGPT’s Name?**:
 
-- After several rounds with GPT-4, it suggested and rated “MetaGPT” highly.
+    - After several rounds with GPT-4, it suggested and rated “MetaGPT” highly.
 
 19. **Is there a More Step-by-Step Installation Guide?**
 
-- YouTube: [MetaGPT Overview](https://youtu.be/Bp95b8yIH5c)
+    - YouTube: [MetaGPT Overview](https://youtu.be/Bp95b8yIH5c)
 
 20. **openai.error.RateLimitError**:
 
-- If free credits remain, set `RPM` to 3 or lower.
-- Consider upgrading to a paid plan if credits are depleted.
+    - If free credits remain, set `RPM` to 3 or lower.
+    - Consider upgrading to a paid plan if credits are depleted.
 
 21. **What Does `borg` in `n_borg` Mean?**:
 
-- [Borg Civilization on Wikipedia](https://en.wikipedia.org/wiki/Borg) - refers to a collective or hive mind.
+    - [Borg Civilization on Wikipedia](https://en.wikipedia.org/wiki/Borg) - refers to a collective or hive mind.
 
 22. **How to Use the Claude API?**:
 
-- Configure `llm` in `config2.yaml`. Details: [Claude API Configuration](https://docs.deepwisdom.ai/main/zh/guide/get_started/configuration/llm_api_configuration.html#anthropic-claude-api).
+    - Configure `llm` in `config2.yaml`. Details: [Claude API Configuration](https://docs.deepwisdom.ai/main/zh/guide/get_started/configuration/llm_api_configuration.html#anthropic-claude-api).
 
 23. **Does it Support Llama2/3?**
 
-- Llama2 was tested the first day it was released. Llama2 requires an extended context window for optimal project output (at least 8k tokens). See [Llama-3 Configuration](https://docs.deepwisdom.ai/main/zh/guide/get_started/configuration/llm_api_configuration.html#llama-3-70b-instruct-via-openrouter).
+    - Llama2 was tested the first day it was released. Llama2 requires an extended context window for optimal project output (at least 8k tokens). See [Llama-3 Configuration](https://docs.deepwisdom.ai/main/zh/guide/get_started/configuration/llm_api_configuration.html#llama-3-70b-instruct-via-openrouter).
 
 24. **SyntaxError in `mermaid-cli`**:
 
-- Update Node.js to version 14.x or later.
-- Use `npm install -g n` followed by `n stable` to install the stable Node version (v18.x).
+    - Update Node.js to version 14.x or later.
+    - Use `npm install -g n` followed by `n stable` to install the stable Node version (v18.x).
 
 25. **Tenacity Retry Error (`RetryError`)**:
 
-- Refer to FAQ #8 for network solutions.
-- Use model `gpt-3.5-turbo-16k` or `gpt-4`. See [GitHub Issue #117](https://github.com/geekan/MetaGPT/issues/117).
+    - Refer to FAQ #8 for network solutions.
+    - Use model `gpt-3.5-turbo-16k` or `gpt-4`. See [GitHub Issue #117](https://github.com/geekan/MetaGPT/issues/117).
 
 ### Reference
 
