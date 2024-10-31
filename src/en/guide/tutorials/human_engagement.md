@@ -1,6 +1,6 @@
 # Human Engagement
 
-When we talk about agents, we usually mean it to be LLM-driven. However, in some real scenarios, we do want humans to step in, whether it's for quality assurance in a project, guidance offering in critical decision-making, or role playing in a game. In this tutorial, we talk about how to take humans into the loop.
+When we talk about agents, we usually mean it to be LLM-driven. However, in some real scenarios, we do want humans to step in, whether it's for quality assurance in a project, guidance offering in critical decision-making, or role playing in a game. In this tutorial, we talk about how to take humans into the SOP.
 
 After this tutorial, you will be able to:
 

@@ -8,13 +8,34 @@
 
 ### 任务
 
-At a school, all 60 students play on at least one of three teams: Basketball, Soccer, and Mathletics. 8 students play all three sports, half the students play basketball, and the ratio of the size of the math team to the size of the basketball team to the size of the soccer team is $4:3:2$. How many students at the school play on exactly two teams?
+在一所学校，所有 60 名学生至少参加三支球队之一：篮球队、足球队和数学队。 8 名学生参加所有三项运动，一半学生参加篮球，数学队的规模、篮球队的规模和足球队的规模之比为 $4:3:2$。学校有多少名学生同时参加两支球队？
 
 ### 代码
 
 ```bash
 python examples/di/solve_math_problems.py
 ```
+
+`examples/di/solve_math_problems.py`文件中的代码具体为：
+
+```python
+import asyncio
+
+from metagpt.roles.di.data_interpreter import DataInterpreter
+
+
+async def main(requirement: str = ""):
+    di = DataInterpreter()
+    await di.run(requirement)
+
+
+if __name__ == "__main__":
+    requirement = "Solve this math problem: The greatest common divisor of positive integers m and n is 6. The least common multiple of m and n is 126. What is the least possible value of m + n?"
+    # answer: 60 (m = 18, n = 42)
+    asyncio.run(main(requirement))
+
+```
+
 
 ### 运行结果
 

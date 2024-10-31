@@ -176,7 +176,7 @@ Now that we have defined our three `Role`s, it's time to put them together. We i
 Run the `Team`, we should see the collaboration between them!
 
 ```python
-import asyncio
+import fire
 import typer
 from metagpt.logs import logger
 from metagpt.team import Team
@@ -201,10 +201,10 @@ def main(
 
     team.invest(investment=investment)
     team.run_project(idea)
-    asyncio.run(team.run(n_round=n_round))
+    await team.run(n_round=n_round)
 
-if __name__ == '__main__':
-    app()
+if __name__ == "__main__":
+    fire.Fire(main)
 ```
 
 ## Complete script of this tutorial
