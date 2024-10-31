@@ -174,7 +174,7 @@ class SimpleReviewer(Role):
 运行 `Team`，我们应该会看到它们之间的协作！
 
 ```python
-import asyncio
+import fire
 import typer
 from metagpt.logs import logger
 from metagpt.team import Team
@@ -201,8 +201,8 @@ def main(
     team.run_project(idea)
     await team.run(n_round=n_round)
 
-if __name__ == '__main__':
-    app()
+if __name__ == "__main__":
+    fire.Fire(main)
 ```
 
 ## 本教程的完整脚本

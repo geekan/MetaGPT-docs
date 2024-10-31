@@ -26,8 +26,17 @@ pip install metagpt
 
 ### Install submodules
 
-- RAG, `pip install metagpt[rag]`. On macOS/zsh: `pip install 'metagpt[rag]'`
-
+- RAG, `pip install 'metagpt[rag]'`.
+  Purpose: Used in systems based on RAG (Retrieval-Augmented Generation), combining multiple LLM (Large Language Model) and vector storage technologies.
+- OCR, `pip install 'metagpt[ocr]'`.
+  Purpose: For optical character recognition (OCR) tasks, identifying and extracting text from images.
+- search-ddg, `pip install 'metagpt[search-ddg]'`.
+  Purpose: Used in the DuckDuckGo search function.
+- search-google, `pip install 'metagpt[search-google]'`.
+  Purpose: Used to interact with Google APIs (such as the Google Search API).
+- selenium, `pip install 'metagpt[selenium]'`.
+  Purpose: Used to automate browser operations and web scraping.
+  
 ## Install latest development version
 
 Best for experiencing newest features.
@@ -151,3 +160,5 @@ Comparison
 | Generates svg | ✔ | ✔ | ✔ | ✔ |
 | Generates pdf | ✔ | ✔ | ✔ | ✘ |
 | Offline Running | ✔ | ✔ | ✔ | ✘ |
+
+- **Installation Simplicity**: The more stars, the lower the difficulty of installation.

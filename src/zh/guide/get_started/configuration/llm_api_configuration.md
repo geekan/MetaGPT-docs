@@ -275,3 +275,17 @@ llm:
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
 ```
+
+## 火山方舟的API
+
+支持模型名列表，在`metagpt/utils/token_counter.py`的`doubao-*`
+
+```yaml
+llm:
+  api_type: 'ark'
+  base_url: 'https://ark.cn-beijing.volces.com/api/v3'
+  api_key: 'YOUR_API_KEY'
+  access_key: 'YOUR_ACCESS_KEY'
+  secret_key: 'YOUR_SECRET_KEY'
+  model: 'doubao-lite'
+```
