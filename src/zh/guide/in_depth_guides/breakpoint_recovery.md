@@ -29,7 +29,9 @@
       team.json          # 包含团队、环境、角色、动作等信息
 ```
 
-`team.json`对应内容的数据概要示例。
+<details>
+
+<summary>team.json 对应内容的数据概要示例。</summary>
 
 ```json
 {
@@ -139,6 +141,8 @@
   "idea": "write a snake game"
 }
 ```
+
+</details>
 
 ### 恢复时的执行顺序
 

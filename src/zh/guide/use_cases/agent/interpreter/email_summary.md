@@ -12,6 +12,8 @@
 
 ### 代码
 
+[examples/di/email_summary.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/email_summary.py)
+
 ```bash
 python examples/di/email_summary.py
 ```

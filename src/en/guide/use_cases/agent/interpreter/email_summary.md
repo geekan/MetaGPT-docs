@@ -12,6 +12,8 @@ After logging into the email, display the sender and the body of the latest 5 em
 
 ### Code
 
+[examples/di/email_summary.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/email_summary.py)
+
 ```bash
 python examples/di/email_summary.py
 ```

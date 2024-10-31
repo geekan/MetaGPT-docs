@@ -12,6 +12,8 @@
 
 ### 代码
 
+[examples/di/machine_learning.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/machine_learning.py)
+
 ```bash
 python examples/di/machine_learning.py
 ```

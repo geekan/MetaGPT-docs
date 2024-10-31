@@ -12,6 +12,8 @@ We use the same [machine learning scenario](./machine_learning.md) as an example
 
 ### Code
 
+[examples/di/machine_learning.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/machine_learning.py)
+
 ```
 python examples/di/machine_learning.py --auto_run False
 ```

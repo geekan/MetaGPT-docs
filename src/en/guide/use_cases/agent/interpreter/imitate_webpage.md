@@ -12,6 +12,8 @@ Given a URL or an image of a webpage, use the MetaGPT tool integrated with GPT-4
 
 ### Code
 
+[examples/di/imitate_webpage.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/imitate_webpage.py)
+
 ```bash
 python examples/di/imitate_webpage.py
 ```

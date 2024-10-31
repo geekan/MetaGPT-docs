@@ -8,6 +8,8 @@ Use `DataInterpreter` to model and predict the [titanic](https://www.kaggle.com/
 
 ### Code
 
+[examples/di/machine_learning_with_tools.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/machine_learning_with_tools.py)
+
 ```bash
 python examples/di/machine_learning_with_tools.py
 ```

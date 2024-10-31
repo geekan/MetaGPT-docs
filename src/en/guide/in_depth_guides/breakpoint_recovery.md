@@ -29,7 +29,9 @@ When the program is interrupted or terminated, the file structure in the storage
       team.json          # Contains information such as team, environment, roles, actions, etc.
 ```
 
-Example of data summary corresponding to `team.json`.
+<details>
+
+<summary>Example of data summary corresponding to team.json </summary>
 
 ```json
 {
@@ -139,6 +141,8 @@ Example of data summary corresponding to `team.json`.
   "idea": "write a snake game"
 }
 ```
+
+</details>
 
 ### Execution order during recovery
 
