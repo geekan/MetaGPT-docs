@@ -12,6 +12,8 @@
 
 ### 代码
 
+[examples/di/imitate_webpage.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/imitate_webpage.py)
+
 ```bash
 python examples/di/imitate_webpage.py
 ```

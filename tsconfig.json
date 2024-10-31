@@ -10,6 +10,7 @@
     "strict": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",
+    "lib": ["esnext", "dom", "ESNext.Array"],
     "baseUrl": ".",
     "paths": {
       "@theme/*": [".vitepress/theme/*"],

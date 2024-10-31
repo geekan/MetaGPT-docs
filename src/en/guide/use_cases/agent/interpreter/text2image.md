@@ -12,6 +12,8 @@ Use the text-to-image tool of stable diffusion to generate an image from a given
 
 ### Code
 
+[examples/di/sd_tool_usage.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/sd_tool_usage.py)
+
 ```bash
 python examples/di/sd_tool_usage.py
 ```

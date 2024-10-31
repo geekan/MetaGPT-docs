@@ -12,6 +12,8 @@
 
 ### 代码
 
+[examples/di/crawl_webpage.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/crawl_webpage.py)
+
 ```bash
 python examples/di/crawl_webpage.py
 ```

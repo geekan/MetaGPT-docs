@@ -14,6 +14,8 @@ Use `DataInterpreter` to perform OCR recognition on the following receipt, extra
 
 ### Code
 
+[examples/di/ocr_receipt.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/ocr_receipt.py)
+
 > Note: You need to install Paddle-related dependencies to run this example, execute
 > `pip install metagpt[ocr]`
 

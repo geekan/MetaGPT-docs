@@ -39,7 +39,7 @@
         >
           <div class="font-500 h44px">{{ item.project }}</div>
           <Tooltip :content="item.prompt" position="top">
-            <div class="line-clamp-3 font-300 text-12px">{{ item.prompt }}</div>
+            <div class="line-clamp-3 font-400 text-12px">{{ item.prompt }}</div>
           </Tooltip>
         </div>
       </template>

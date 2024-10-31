@@ -16,7 +16,7 @@ Use `DataInterpreter` to perform a simple data analysis and visualize the sklear
 python examples/di/data_visualization.py
 ```
 
-The code in `examples/di/data_visualization.py` is as follows:
+The code in [examples/di/data_visualization.py](https://github.com/geekan/MetaGPT/blob/main/examples/di/data_visualization.py) is as follows:
 
 ```python
 import asyncio
