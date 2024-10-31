@@ -64,7 +64,7 @@ MetaGPT社区-首席布道师 单月轮值，主要职责如下
 
    - 在[ROADMAP](https://github.com/geekan/MetaGPT/blob/main/docs/ROADMAP.md)上，已支持
 
-7. **想加入贡献者团队，怎么做?\*\***
+7. **想加入贡献者团队，怎么做?**
 
    - 合入一个PR就可以加入贡献者团队。目前主要在做的工作都在[ROADMAP](https://github.com/geekan/MetaGPT/blob/main/docs/ROADMAP.md)上
 
