@@ -443,7 +443,7 @@ export default defineConfig({
                 link: 'api',
               },
               {
-                text: 'FAQ',
+                text: 'Index / FAQ',
                 link: 'faq',
               },
             ],
@@ -743,7 +743,7 @@ export default defineConfig({
                 link: 'api',
               },
               {
-                text: '常见问题解答',
+                text: '项目索引 / 常见问题解答',
                 link: 'faq',
               },
             ],
