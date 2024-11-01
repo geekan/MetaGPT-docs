@@ -16,4 +16,6 @@ src/*/rfcs
 src/*/DataInterpreter
 src/*/demos
 src/*/sela
+src/*/reference
+src/reference
 src/utils/diff.ts

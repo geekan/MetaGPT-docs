@@ -32,14 +32,21 @@ const Logo = `
 `;
 
 const genRfcLinks = (dir: string, prefixPath = '') => {
+  if (!existsSync(dir)) {
+    return [];
+  }
   const files = readdirSync(dir);
   const data: DefaultTheme.SidebarItem[] = [];
   for (const filename of files) {
     const file = statSync(join(dir, filename));
     if (file.isDirectory()) {
-      const childData = genRfcLinks(join(dir, filename), `${filename}/`);
+      const childData = genRfcLinks(
+        join(dir, filename),
+        `${prefixPath}${filename}/`
+      );
       data.push({
         text: filename,
+        collapsed: false,
         items: childData,
       });
       continue;
@@ -56,7 +63,24 @@ const genRfcLinks = (dir: string, prefixPath = '') => {
 };
 
 const rfcLinks = genRfcLinks(resolve(__dirname, '../src/rfcs'));
-const sources = ['blog', 'rfcs', 'DataInterpreter', 'sela'];
+const apidocLinks = genRfcLinks(resolve(__dirname, '../src/reference'));
+
+let firstApidoclink = '';
+if (apidocLinks.length) {
+  let t;
+  t = apidocLinks[0];
+  while (t) {
+    if (!t.link) {
+      t = t.items?.[0];
+      continue;
+    }
+    firstApidoclink = t.link;
+    break;
+  }
+}
+
+const hasApiDoc = existsSync(resolve(__dirname, '../src/reference'));
+const sources = ['blog', 'rfcs', 'DataInterpreter', 'sela', 'reference'];
 const dests = ['zh', 'en'];
 
 const copyDir = (source: string, dest: string) => {
@@ -100,8 +124,9 @@ for (const source of sources) {
   for (const dest of dests) {
     const sourceDir = resolve(__dirname, `../src/${source}`);
     const destDir = resolve(__dirname, `../src/${dest}/${source}`);
-
-    copyDir(sourceDir, destDir);
+    if (existsSync(sourceDir)) {
+      copyDir(sourceDir, destDir);
+    }
   }
 }
 // }
@@ -195,6 +220,15 @@ export default defineConfig({
               },
             ],
           },
+          ...(hasApiDoc
+            ? [
+                {
+                  text: 'Reference',
+                  link: `en/reference/${firstApidoclink}`,
+                  activeMatch: '/en/reference/',
+                },
+              ]
+            : []),
           ...arrVisible(
             [
               {
@@ -448,6 +482,10 @@ export default defineConfig({
               },
             ],
           },
+          '/en/reference': {
+            base: '/en/reference/',
+            items: [...apidocLinks],
+          },
         },
       },
     },
@@ -477,6 +515,15 @@ export default defineConfig({
               },
             ],
           },
+          ...(hasApiDoc
+            ? [
+                {
+                  text: 'Reference',
+                  link: `/zh/reference/${firstApidoclink}`,
+                  activeMatch: '/zh/reference/',
+                },
+              ]
+            : []),
           ...arrVisible(
             [
               {
@@ -751,6 +798,10 @@ export default defineConfig({
           '/zh/rfcs/': {
             base: '/zh/rfcs/',
             items: [...rfcLinks],
+          },
+          '/zh/reference': {
+            base: '/zh/reference/',
+            items: [...apidocLinks],
           },
         },
       },
