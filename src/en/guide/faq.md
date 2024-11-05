@@ -151,6 +151,10 @@ MetaGPT Community - The position of Chief Evangelist rotates on a monthly basis.
     - Refer to FAQ #8 for network solutions.
     - Use model `gpt-3.5-turbo-16k` or `gpt-4`. See [GitHub Issue #117](https://github.com/geekan/MetaGPT/issues/117).
 
+26. **Playwright encountered NotImplementedError when used in Jupyter.**
+    
+    - Refer to https://github.com/microsoft/playwright-python/issues/178 to modify the code in kernelapp.py of the ipykernel package.
+
 ### Reference
 
 1. [MetaGPT-Dev-SOP](https://deepwisdom.feishu.cn/wiki/EI91wZdcciqmtvknZMkcgHGgn3e)
