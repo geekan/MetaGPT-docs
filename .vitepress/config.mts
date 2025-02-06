@@ -408,6 +408,20 @@ export default defineConfig({
                       },
                     ],
                   },
+                  {
+                    text: 'Atomized Agent',
+                    link: 'in_depth_guides/atomized_roles/intro.md',
+                    items: [
+                      {
+                        text: 'RoleZero',
+                        link: 'in_depth_guides/atomized_roles/role_zero.md',
+                      },
+                      {
+                        text: 'TeamLeader',
+                        link: 'in_depth_guides/atomized_roles/team_leader.md',
+                      },
+                    ],
+                  },
                 ],
               },
               {
@@ -705,6 +719,20 @@ export default defineConfig({
                       {
                         text: '安卓模拟器',
                         link: 'in_depth_guides/environment/android.md',
+                      },
+                    ],
+                  },
+                  {
+                    text: '原子化智能体',
+                    link: 'in_depth_guides/atomized_roles/intro.md',
+                    items: [
+                      {
+                        text: 'RoleZero',
+                        link: 'in_depth_guides/atomized_roles/role_zero.md',
+                      },
+                      {
+                        text: 'TeamLeader',
+                        link: 'in_depth_guides/atomized_roles/team_leader.md',
                       },
                     ],
                   },
