@@ -244,6 +244,16 @@ export default defineConfig({
                 collapsed: false,
                 items: [
                   { text: 'Concepts', link: 'tutorials/concepts.md' },
+                  {
+                    text: 'Atomized Agent',
+                    link: 'tutorials/atomized_roles/intro.md',
+                    items: [
+                      {
+                        text: 'RoleZero',
+                        link: 'tutorials/atomized_roles/role_zero.md',
+                      },
+                    ],
+                  },
                   { text: 'Agent 101', link: 'tutorials/agent_101.md' },
                   {
                     text: 'MultiAgent 101',
@@ -408,20 +418,6 @@ export default defineConfig({
                       },
                     ],
                   },
-                  {
-                    text: 'Atomized Agent',
-                    link: 'in_depth_guides/atomized_roles/intro.md',
-                    items: [
-                      {
-                        text: 'RoleZero',
-                        link: 'in_depth_guides/atomized_roles/role_zero.md',
-                      },
-                      {
-                        text: 'TeamLeader',
-                        link: 'in_depth_guides/atomized_roles/team_leader.md',
-                      },
-                    ],
-                  },
                 ],
               },
               {
@@ -551,6 +547,16 @@ export default defineConfig({
                   {
                     text: '概念简述',
                     link: 'tutorials/concepts',
+                  },
+                  {
+                    text: '原子化智能体',
+                    link: 'tutorials/atomized_roles/intro.md',
+                    items: [
+                      {
+                        text: 'RoleZero',
+                        link: 'tutorials/atomized_roles/role_zero.md',
+                      },
+                    ],
                   },
                   {
                     text: '智能体入门',
@@ -719,20 +725,6 @@ export default defineConfig({
                       {
                         text: '安卓模拟器',
                         link: 'in_depth_guides/environment/android.md',
-                      },
-                    ],
-                  },
-                  {
-                    text: '原子化智能体',
-                    link: 'in_depth_guides/atomized_roles/intro.md',
-                    items: [
-                      {
-                        text: 'RoleZero',
-                        link: 'in_depth_guides/atomized_roles/role_zero.md',
-                      },
-                      {
-                        text: 'TeamLeader',
-                        link: 'in_depth_guides/atomized_roles/team_leader.md',
                       },
                     ],
                   },
