@@ -245,12 +245,12 @@ export default defineConfig({
                 items: [
                   { text: 'Concepts', link: 'tutorials/concepts.md' },
                   {
-                    text: 'Atomized Agent',
-                    link: 'tutorials/atomized_roles/intro.md',
+                    text: 'Atomic Agent',
+                    link: 'tutorials/atomic_roles/intro.md',
                     items: [
                       {
                         text: 'RoleZero',
-                        link: 'tutorials/atomized_roles/role_zero.md',
+                        link: 'tutorials/atomic_roles/role_zero.md',
                       },
                     ],
                   },
@@ -550,11 +550,11 @@ export default defineConfig({
                   },
                   {
                     text: '原子化智能体',
-                    link: 'tutorials/atomized_roles/intro.md',
+                    link: 'tutorials/atomic_roles/intro.md',
                     items: [
                       {
                         text: 'RoleZero',
-                        link: 'tutorials/atomized_roles/role_zero.md',
+                        link: 'tutorials/atomic_roles/role_zero.md',
                       },
                     ],
                   },

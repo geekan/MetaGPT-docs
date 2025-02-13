@@ -14,7 +14,7 @@ For example, in a software company, SOPs require agents to interact with data in
 
 The goal of RoleZero is to **overcome the limitations of SOPs through atomic functional elements and dynamic process orchestration**, achieving the following capabilities:
 
-1.  **Flexible process orchestration**: Solve business problems dynamically using `while loops` or **chained atomic units** without custom development.
+1.  **Flexible process orchestration**: Solve business problems dynamically using `think->action loops` or **chained atomic units** without custom development.
 1.  **Breakpoint recovery**: Resume tasks from the last successful node in case of an exception.
 1.  **Seamless business integration**: Support cross-domain collaboration (e.g., software company SOPs directly modifying third-party code) without additional development.
 
