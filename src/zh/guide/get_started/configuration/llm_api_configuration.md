@@ -41,7 +41,7 @@ llm:
 
 可以用于初始化LLM，由于o1系列使用有些限制，出现问题可以及时反馈我们。
 
-现在您可以开始使用了！请参阅[快速入门](./quickstart)或我们的[教程](/guide/tutorials/agent_101)以进行第一次运行！
+现在您可以开始使用了！请参阅[快速入门](./quickstart.md)或我们的[教程](/guide/tutorials/agent_101.md)以进行第一次运行！
 
 MetaGPT还支持各种LLM模型，根据您的需求配置模型API的密钥。
 
