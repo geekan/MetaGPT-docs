@@ -14,7 +14,7 @@
 
 ## RoleZero role operation mechanism
 
-![Operation Mechanism转存失败，建议直接上传图片文件](/public/image/guide/tutorials/role_zero.png)
+![Operation Mechanism](/public/image/guide/tutorials/role_zero.png)
 
 ## Code Encapsulation and Detailed Explanation
 
@@ -206,51 +206,9 @@ class ProductManager(RoleZero):
 
 ```
 
-### **1. `use_fixed_sop` is compatible with SOP mode**
+### **1. `Action` configuration and execution**
 
-`use_fixed_sop` enables `ProductManager` to:
-
-- **Turn on fixed SOP mode**:
-
-  - Turn off memory (`self.enable_memory = False`).
-
-  - `set_actions()` predefines the SOP process to ensure the execution order of PRD generation.
-
-  - `self.rc.react_mode = RoleReactMode.BY_ORDER`: Execute predefined `Action` in order.
-
-- **Turn on flexible reasoning mode**:
-
-  - Inherit `RoleZero` for dynamic thinking (`_think()`).
-
-**Code snippet**
-
-```python
-def __init__(self, **kwargs) -> None:
-    super().__init__(**kwargs)
-    if self.use_fixed_sop:
-        self.enable_memory = False
-        self.set_actions([PrepareDocuments(send_to=any_to_str(self)), WritePRD])
-        self._watch([UserRequirement, PrepareDocuments])
-        self.rc.react_mode = RoleReactMode.BY_ORDER
-```
-
-- **When `use_fixed_sop=True`**:
-
-  - Turn off memory (`self.enable_memory = False`) to prevent context from affecting SOP execution.
-  - Preset the execution order of `PrepareDocuments → WritePRD` to ensure the PRD document writing process.
-  - `_watch([UserRequirement, PrepareDocuments])` listens to `UserRequirement` and triggers `PrepareDocuments` when the requirement changes.
-
-- **When `use_fixed_sop=False`**:
-
-  - `ProductManager` inherits `RoleZero` and dynamically decides the `Action` to be executed.
-
----
-
-### **2. `Action` and `Tools` definitions**
-
-**`Action` configuration**
-
-In `ProductManager`, `todo_action` sets the default `Action`:
+In `ProductManager`, `todo_action` sets the default `Action` to ensure that the role can automatically execute the PRD generation task:
 
 ```python
 todo_action: str = any_to_name(WritePRD)
@@ -258,13 +216,11 @@ todo_action: str = any_to_name(WritePRD)
 
 This means:
 
-- The default execution task is `WritePRD`, which is used to write PRD documents.
+- `WritePRD` is executed by default to write the product requirement document (PRD).
 
-- When `use_fixed_sop=True`, `PrepareDocuments` is used as a pre-step to ensure that the materials required for PRD generation are ready.
+- The role can automatically enter the execution logic of `WritePRD` according to the `todo_action` task guide.
 
-**`Action Tools` registration**
-
-In `_update_tool_execution()`:
+In addition, in the `_update_tool_execution()` method, `WritePRD` is registered to the `tool_execution_map` to ensure that `ProductManager` can correctly call the `WritePRD.run()` method:
 
 ```python
 def _update_tool_execution(self):
@@ -272,36 +228,38 @@ def _update_tool_execution(self):
     self.tool_execution_map.update(tool2name(WritePRD, ["run"], wp.run))
 ```
 
-- `WritePRD` is registered to `tool_execution_map` via the `tool2name` method, enabling `ProductManager` to execute `WritePRD.run()`.
+`WritePRD` is registered to the `tool_execution_map` through the `tool2name` method, which allows the role to directly call the `run()` method of `WritePRD` when executing the task to complete the generation of the PRD document.
 
-### **3. Role tool (`Tools`) registration and use**
+### **2. Configuration and use of role tools (`Tools`)**
 
-`ProductManager` inherits `RoleZero` and registers some tools:
+`ProductManager` inherits `RoleZero` and registers some tools to enable it to have search, editing, interaction and other capabilities:
 
 ```python
-tools: list[str] = ["RoleZero", Browser.__name__, Editor.__name__, SearchEnhancedQA.__name__]
+tools: list[str] = [
+    "RoleZero",
+    Browser.__name__,
+    Editor.__name__,
+    SearchEnhancedQA.__name__
+]
 ```
 
 Among them:
 
-- `RoleZero`: Register tools registered with RoleZero (`ask_human`, `reply_to_human`).
+- **`Browser`**: used for web search and information query.
 
-- `Browser`: Register browser operations as tools.
+- **`Editor`**: provides text editing capabilities, such as document modification and adjustment.
 
-- `Editor`: Register editor tools.
+- **`SearchEnhancedQA`**: enhances search capabilities and supports intelligent question and answer based on search engines.
 
-- `SearchEnhancedQA`: Register search engine tools.
+The execution logic of these tools is managed internally by `RoleZero` and registered through the `_update_tool_execution()` method so that they can be called in the `ProductManager` role. For example, `SearchEnhancedQA` can be used to intelligently query competitor information, and `Editor` can be used to write and modify PRD documents.
 
-The execution logic of these tools is managed internally by `RoleZero` and registered through `_update_tool_execution()` so that they can be called in the `ProductManager` role.
+### **3. `_think` method analysis**
 
-### **4. `_think` method analysis**
+In the `_think()` method, `ProductManager` decides the next action and checks whether the `WritePRD` task needs to be executed:
 
 ```python
 async def _think(self) -> bool:
     """Decide what to do"""
-    if not self.use_fixed_sop:
-        return await super()._think()
-
     if GitRepository.is_git_dir(self.config.project_path) and not self.config.git_reinit:
         self._set_state(1)
     else:
@@ -311,42 +269,35 @@ async def _think(self) -> bool:
     return bool(self.rc.todo)
 ```
 
-**Method logic**
+**Method logic analysis**:
 
-- **`use_fixed_sop=False`** → Enter `_think()` logic of `RoleZero` and make independent decisions on the next action.
+- **Check Git repository status**:
 
-  - When the role is in `think`, dynamically select `WritePRD` and fill in the appropriate parameters. When `act`, execute `WritePRD.run` (corresponding parameters)
+- If the project is a Git repository, execute the task (`self._set_state(1)`).
+- Otherwise, reset `todo_action` to `WritePRD` to ensure that the PRD generation task proceeds normally.
 
-  ```python
-  class WritePRD(Action):
+This ensures that `ProductManager` executes `WritePRD` at the appropriate time to complete the writing of the product requirement document.
 
-    def run(
-        self,
-        with_messages: List[Message] = None,
-        *,
-        user_requirement: str = "",
-        output_path: str = "",  # Output PRD path
-        exists_prd_filename: str = "",  # Original PRD path
-        extra_info: str = "",  # If additional information search is performed
-    ) -> Message:  # Messsage.content contains the path of the output PRD
-        ...
-  ```
+### **4. Summary**
 
-- **`use_fixed_sop=True`**:
+`RoleZero` and its subclass `ProductManager` enable the role to have efficient task execution capabilities while ensuring its scalability through **flexible configuration of tools (`Tools`) and tasks (`Action`)**.
 
-  - If the Git repository exists (`GitRepository.is_git_dir(self.config.project_path)`):
+- **Tools (`Tools`) configuration**
 
-    - `self._set_state(1)` indicates that the PRD generation task can be executed.
+- The role can directly register tools such as `Browser`, `Editor`, `SearchEnhancedQA`, etc., and can enhance functions without additional development.
 
-  - Otherwise:
+- The tool calling method is flexible, supporting direct specification of tool `class name` and `class name.method name` mapping, which facilitates the role to perform complex tasks.
 
-    - `self._set_state(0)` and reset `self.config.git_reinit = False` to ensure the correct order of task execution.
-    - Reset `todo_action = any_to_name(WritePRD)` to specify that the `WritePRD` task is to be executed.
+- **Task (`Action`) configuration and execution**
 
-### **5. Summary**
+- Set the default task through `todo_action` to ensure that `WritePRD` can be automatically executed.
 
-`RoleZero` and its subclasses can be compatible with fixed SOP processes through `use_fixed_sop` to achieve strict execution order, while also making flexible decisions in dynamic mode.
+- For `Action` or custom tool methods, `_update_tool_execution()` can be overridden, and `Action` can be converted to a tool through the `tool2name` method, and mapped to `tool_execution_map` for registration, making `RoleZero` highly scalable and flexible.
 
-In addition, the `tools` attribute allows for convenient configuration of tools, supporting direct specification of tool class names or `class name.method name` formats, allowing roles to seamlessly call various functions. For example, tools such as browsers (`Browser`), editors (`Editor`), and search engines (`SearchEnhancedQA`) can be directly registered and used.
+- **Execution logic (`_think`)**
 
-For `Action` or custom tool methods, `_update_tool_execution()` can be overridden, and `Action` can be converted to a tool through the `tool2name` method, and mapped to `tool_execution_map` for registration, making `RoleZero` highly scalable and flexible. This design not only ensures the controllability of the SOP method, but also allows roles to dynamically adjust tools and tasks according to specific scenarios.
+- The `ProductManager` role will dynamically decide whether to execute the PRD task based on the project status.
+
+- Combined with the configuration of tools and tasks, the role can efficiently and accurately complete tasks such as PRD writing and market research.
+
+This design not only ensures the controllability of the SOP method, but also allows the role to dynamically adjust tools and tasks according to specific scenarios to achieve more intelligent task processing.

@@ -145,7 +145,7 @@ class RoleZero(Role):
 
 ## **产品经理 (`ProductManager`) 角色案例解析**
 
-在 `ProductManager` 角色实现中，我们可以看到 `use_fixed_sop` 用于兼容 SOP 方式，使角色在固定流程和灵活思考模式之间切换。此外，该角色还定义了工具、配置了 `Action`，并实现了工具的注册和使用。
+在 ProductManager 角色实现中，我们可以看到该角色定义了工具 (Tools)，配置了任务 (Action)，并实现了工具的注册与调用，使其能够高效完成产品需求文档（PRD）的编写和市场/竞品调研等工作。
 
 ```python
 from metagpt.actions import UserRequirement, WritePRD
@@ -207,47 +207,9 @@ class ProductManager(RoleZero):
 
 ```
 
-### **1. `use_fixed_sop` 兼容 SOP 方式**
+### **1. `Action` 配置与执行**
 
-`use_fixed_sop` 使 `ProductManager` 能够：
-
-- **开启固定 SOP 模式**：
-
-  - 关闭记忆（`self.enable_memory = False`）。
-  - `set_actions()` 预定义 SOP 流程，确保 PRD 生成的执行顺序。
-  - `self.rc.react_mode = RoleReactMode.BY_ORDER`：按顺序执行预定义 `Action`。
-
-- **开启灵活推理模式**：
-
-  - 继承 `RoleZero`，进行动态思考 (`_think()`)。
-
-**代码片段**
-
-```python
-def __init__(self, **kwargs) -> None:
-    super().__init__(**kwargs)
-    if self.use_fixed_sop:
-        self.enable_memory = False
-        self.set_actions([PrepareDocuments(send_to=any_to_str(self)), WritePRD])
-        self._watch([UserRequirement, PrepareDocuments])
-        self.rc.react_mode = RoleReactMode.BY_ORDER
-```
-
-- **当 `use_fixed_sop=True`**：
-
-  - 关闭记忆 (`self.enable_memory = False`)，避免上下文影响 SOP 执行。
-  - 预设 `PrepareDocuments → WritePRD` 执行顺序，确保 PRD 文档编写流程。
-  - `_watch([UserRequirement, PrepareDocuments])` 监听 `UserRequirement`，在需求变更时触发 `PrepareDocuments`。
-
-- **当 `use_fixed_sop=False`**：
-
-  - `ProductManager` 继承 `RoleZero`，动态决策要执行的 `Action`。
-
-### **2. `Action` 及 `Tools` 定义**
-
-**`Action` 配置**
-
-在 `ProductManager` 里，`todo_action` 设定了默认的 `Action`：
+在 `ProductManager` 里，`todo_action` 设定了默认执行的 `Action`，确保角色能够自动执行 PRD 生成任务：
 
 ```python
 todo_action: str = any_to_name(WritePRD)
@@ -255,12 +217,10 @@ todo_action: str = any_to_name(WritePRD)
 
 这意味着：
 
-- 默认的执行任务是 `WritePRD`，用于编写 PRD 文档。
-- `use_fixed_sop=True` 时，`PrepareDocuments` 作为前置步骤，确保 PRD 生成所需的资料已准备好。
+- 默认执行 `WritePRD`，用于编写产品需求文档（PRD）。
+- 角色可根据 `todo_action` 任务指引，自动进入 `WritePRD` 的执行逻辑。
 
-**`Action Tools` 注册**
-
-在 `_update_tool_execution()` 里：
+此外，在 `_update_tool_execution()` 方法中，`WritePRD` 被注册到 `tool_execution_map`，确保 `ProductManager` 能够正确调用 `WritePRD.run()` 方法：
 
 ```python
 def _update_tool_execution(self):
@@ -268,33 +228,36 @@ def _update_tool_execution(self):
     self.tool_execution_map.update(tool2name(WritePRD, ["run"], wp.run))
 ```
 
-- 通过 `tool2name` 方法将 `WritePRD` 被注册到 `tool_execution_map`，使 `ProductManager` 能够执行 `WritePRD.run()`。
+通过 `tool2name` 方法将 `WritePRD` 被注册到 `tool_execution_map`，这使得角色在执行任务时，可以直接调用 `WritePRD` 的 `run()` 方法，完成 PRD 文档的生成。
 
-### **3. 角色工具 (`Tools`) 注册与使用**
+### **2. 角色工具 (`Tools`) 配置与使用**
 
-`ProductManager` 继承 `RoleZero` 并注册了一些工具：
+`ProductManager` 继承 `RoleZero`，并注册了一些工具，使其具备搜索、编辑、交互等能力：
 
 ```python
-tools: list[str] = ["RoleZero", Browser.__name__, Editor.__name__, SearchEnhancedQA.__name__]
+tools: list[str] = [
+    "RoleZero",
+    Browser.__name__,
+    Editor.__name__,
+    SearchEnhancedQA.__name__
+]
 ```
 
 其中：
 
-- `RoleZero`：注册使用RoleZero注册的工具（`ask_human`、`reply_to_human`）。
-- `Browser`：注册浏览器操作为工具。
-- `Editor`：注册编辑器工具。
-- `SearchEnhancedQA`：注册搜索引擎工具。
+- **`Browser`**：用于网页搜索、信息查询。
+- **`Editor`**：提供文本编辑能力，如文档修改与调整。
+- **`SearchEnhancedQA`**：增强搜索能力，支持基于搜索引擎的智能问答。
 
-这些工具的执行逻辑由 `RoleZero` 内部管理，通过 `_update_tool_execution()` 进行注册，使其可在 `ProductManager` 角色中被调用。
+这些工具的执行逻辑由 `RoleZero` 内部管理，并通过 `_update_tool_execution()` 方法进行注册，使其可以在 `ProductManager` 角色中被调用。例如，`SearchEnhancedQA` 可用于智能查询竞品信息，`Editor` 可用于撰写和修改 PRD 文档。
 
-### **4. `_think` 方法解析**
+### **3. `_think` 方法解析**
+
+在 `_think()` 方法中，`ProductManager` 决策下一步行动，并检查是否需要执行 `WritePRD` 任务：
 
 ```python
 async def _think(self) -> bool:
     """Decide what to do"""
-    if not self.use_fixed_sop:
-        return await super()._think()
-
     if GitRepository.is_git_dir(self.config.project_path) and not self.config.git_reinit:
         self._set_state(1)
     else:
@@ -304,42 +267,32 @@ async def _think(self) -> bool:
     return bool(self.rc.todo)
 ```
 
-**方法逻辑**
+**方法逻辑解析**：
 
-- **`use_fixed_sop=False`** → 进入 `RoleZero` 的 `_think()` 逻辑，自主决策下一步行动。
+- **检查 Git 仓库状态**：
 
-  - 角色在 `think` 时，动态选择 `WritePRD` 并填入适当参数，在 `act` 时，执行 `WritePRD.run`(对应参数)
+  - 若项目是 Git 仓库，则执行任务 (`self._set_state(1)`)。
+  - 否则，重新设置 `todo_action` 为 `WritePRD`，确保 PRD 生成任务正常进行。
 
-  ```python
-  class WritePRD(Action):
+这保证了 `ProductManager` 在适当时机执行 `WritePRD`，从而完成产品需求文档的编写。
 
-    def run(
-        self,
-        with_messages: List[Message] = None,
-        *,
-        user_requirement: str = "",
-        output_path: str = "",  # 输出PRD的路径
-        exists_prd_filename: str = "",  # 原有PRD的路径
-        extra_info: str = "",  # 若进行了额外的信息搜索
-    ) -> Message:  # Messsage.content中包含输出的PRD的路径
-        ...
-  ```
+### **4. 总结**
 
-- **`use_fixed_sop=True`**：
+`RoleZero` 及其子类 `ProductManager` 通过 **工具 (`Tools`) 和任务 (`Action`) 的灵活配置**，使角色具备高效的任务执行能力，同时确保其可扩展性。
 
-  - 如果 Git 仓库存在 (`GitRepository.is_git_dir(self.config.project_path)`)：
+- **工具 (`Tools`) 配置**
 
-    - `self._set_state(1)`，表示可以执行 PRD 生成任务。
+  - 角色可直接注册 `Browser`、`Editor`、`SearchEnhancedQA` 等工具，无需额外开发即可增强功能。
+  - 工具调用方式灵活，支持直接指定工具 `类名` 和 `类名.方法名` 方式映射，便于角色执行复杂任务。
 
-  - 否则：
+- **任务 (`Action`) 配置与执行**
 
-    - `self._set_state(0)`，并重置 `self.config.git_reinit = False`，确保任务执行顺序正确。
-    - 重新设置 `todo_action = any_to_name(WritePRD)`，指定要执行 `WritePRD` 任务。
+  - 通过 `todo_action` 设定默认任务，确保 `WritePRD` 能够自动执行。
+  - 对于 `Action` 或自定义工具方法，`_update_tool_execution()` 可被重写，通过 `tool2name` 方法将 `Action` 转换为工具，并映射到 `tool_execution_map` 进行注册，使 `RoleZero` 具备高度的可扩展性和灵活性。
 
-### **5. 总结**
+- **执行逻辑 (`_think`)**
 
-`RoleZero` 及其子类可以通过 `use_fixed_sop` 兼容固定的 SOP 流程，实现严格的执行顺序，同时也可以在动态模式下灵活决策行动。
+  - `ProductManager` 角色会根据项目状态，动态决策是否执行 PRD 任务。
+  - 结合工具和任务的配置，使角色能够高效、准确地完成 PRD 编写和市场调研等工作。
 
-此外，`tools` 属性允许便捷配置工具，支持直接指定工具类名或 `类名.方法名` 的形式，使角色能够无缝调用各种功能。例如，浏览器 (`Browser`)、编辑器 (`Editor`)、搜索引擎 (`SearchEnhancedQA`) 等工具可以直接注册并使用。
-
-对于 `Action` 或自定义工具方法，`_update_tool_execution()` 可被重写，通过 `tool2name` 方法将 `Action` 转换为工具，并映射到 `tool_execution_map` 进行注册，使 `RoleZero` 具备高度的可扩展性和灵活性。这种设计不仅确保了 SOP 方式的可控性，也允许角色根据具体场景动态调整工具与任务。
+这种设计不仅确保了 SOP 方式的可控性，也允许角色根据具体场景动态调整工具与任务，实现更智能化的任务处理。
