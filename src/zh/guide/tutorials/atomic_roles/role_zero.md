@@ -1,6 +1,6 @@
 # RoleZero
 
-## RoleZero 是干嘛的？
+## RoleZero 核心概念
 
 `RoleZero` 是 MetaGPT 系统中的一个角色，它继承自基础角色类 `Role`，用于实现一个能够动态思考和行动的智能体（Agent）。`RoleZero` 类的主要作用是为智能体提供一个灵活的框架，使其能够根据环境中的信息动态地选择和执行任务。具体来说，`RoleZero` 能够：
 

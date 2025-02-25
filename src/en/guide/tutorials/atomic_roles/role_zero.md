@@ -1,6 +1,6 @@
 # RoleZero
 
-## What is RoleZero?
+## RoleZero Core Concepts
 
 `RoleZero` is a role in the MetaGPT system. It inherits from the base role class `Role` and is used to implement an agent that can think and act dynamically. The main function of the `RoleZero` class is to provide a flexible framework for the agent, so that it can dynamically select and execute tasks based on the information in the environment. Specifically, `RoleZero` can:
 
