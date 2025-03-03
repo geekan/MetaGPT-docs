@@ -297,11 +297,11 @@ async def run_on_mgx_env():
 
 1.  **初始化 `MGXEnv` 运行环境**，并创建 `SimpleReviewAssistant` 角色 (`ra`)。
 
-1.  **添加角色**（`TeamLeader()` 和 `SimpleReviewAssistant()`）。
+2.  **添加角色**（`TeamLeader()` 和 `SimpleReviewAssistant()`）。
 
-1.  **发布任务**，例如 `"Write a good review for airpods pro2"`。
+3.  **发布任务**，例如 `"Write a good review for airpods pro2"`。
 
-1.  **循环检测 `MGXEnv` 状态**：
+4.  **循环检测 `MGXEnv` 状态**：
 
     - 若 `MGXEnv` 处于活跃状态，则运行任务。
     - 角色根据任务和工具信息动态决定选择合适的工具进行执行。
