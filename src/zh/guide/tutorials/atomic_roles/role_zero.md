@@ -143,142 +143,172 @@ class RoleZero(Role):
         pass
 ```
 
-## **产品经理 (`ProductManager`) 角色案例解析**
+## **`SimpleReviewAssistant` 角色案例解析**
 
-在 ProductManager 角色实现中，我们可以看到该角色定义了工具 (Tools)，配置了任务 (Action)，并实现了工具的注册与调用，使其能够高效完成产品需求文档（PRD）的编写和市场/竞品调研等工作。
+在 `SimpleReviewAssistant` 角色的实现中，该角色被设计为一个简单的自动化好评生成助手，它能够使用 `GeneratePositiveReview` 工具生成针对产品、商店或服务的正面评价。该角色继承自 `RoleZero`，并注册了必要的工具，使其具备浏览器、好评生成工具等功能。
 
 ```python
-from metagpt.actions import UserRequirement, WritePRD
-from metagpt.actions.prepare_documents import PrepareDocuments
-from metagpt.actions.search_enhanced_qa import SearchEnhancedQA
-from metagpt.prompts.product_manager import PRODUCT_MANAGER_INSTRUCTION
-from metagpt.roles.di.role_zero import RoleZero
-from metagpt.roles.role import RoleReactMode
-from metagpt.tools.libs.browser import Browser
-from metagpt.tools.libs.editor import Editor
-from metagpt.utils.common import any_to_name, any_to_str, tool2name
-from metagpt.utils.git_repository import GitRepository
+class SimpleReviewAssistant(RoleZero):
+    """Rating Assistant helps users automatically generate positive reviews for products, stores or services"""
 
+    name: str = "SimpleReviewAssistant"
+    profile: str = "Automated Positive Review Generator"
+    goal: str = "Generate positive reviews for your product, store or service."
+    tools: list[str] = ["RoleZero", Browser.__name__, "GeneratePositiveReview"]
 
-class ProductManager(RoleZero):
-    """
-    Represents a Product Manager role responsible for product development and management.
-
-    Attributes:
-        name (str): Name of the product manager.
-        profile (str): Role profile, default is 'Product Manager'.
-        goal (str): Goal of the product manager.
-        constraints (str): Constraints or limitations for the product manager.
-    """
-
-    name: str = "Alice"
-    profile: str = "Product Manager"
-    goal: str = "Create a Product Requirement Document or market research/competitive product research."
-    constraints: str = "utilize the same language as the user requirements for seamless communication"
-    instruction: str = PRODUCT_MANAGER_INSTRUCTION
-    tools: list[str] = ["RoleZero", Browser.__name__, Editor.__name__, SearchEnhancedQA.__name__]
-
-    todo_action: str = any_to_name(WritePRD)
-
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
-        if self.use_fixed_sop:
-            self.enable_memory = False
-            self.set_actions([PrepareDocuments(send_to=any_to_str(self)), WritePRD])
-            self._watch([UserRequirement, PrepareDocuments])
-            self.rc.react_mode = RoleReactMode.BY_ORDER
+    instruction: str = "Use GeneratePositiveReview tool to generate a positive review for a given product, store or service."
 
     def _update_tool_execution(self):
-        wp = WritePRD()
-        self.tool_execution_map.update(tool2name(WritePRD, ["run"], wp.run))
+        review_generator = GeneratePositiveReview()
+        self.tool_execution_map.update(tool2name(GeneratePositiveReview, ["run"], review_generator.run))
+```
 
-    async def _think(self) -> bool:
-        """Decide what to do"""
-        if not self.use_fixed_sop:
-            return await super()._think()
+## **1. `Action` 配置与执行**
 
-        if GitRepository.is_git_dir(self.config.project_path) and not self.config.git_reinit:
-            self._set_state(1)
-        else:
-            self._set_state(0)
-            self.config.git_reinit = False
-            self.todo_action = any_to_name(WritePRD)
-        return bool(self.rc.todo)
+`SimpleReviewAssistant` 依赖 `GeneratePositiveReview` 这一 `Action` 来完成自动化评论生成任务。
+
+```python
+@register_tool(include_functions=["run"])
+class GeneratePositiveReview(Action):
+    """Generates a positive review for a product, store, or service."""
+
+    name: str = "GeneratePositiveReview"
+    input_args: Optional[BaseModel] = Field(default=None, exclude=True)
+
+    PROMPT_TEMPLATE: str = """
+    You are a professional product reviewer, and your task is to write a positive review for the following item:
+
+    Item Type: {category}
+    Item Name: {item_name}
+
+    Review Guidelines:
+    - Use a friendly, engaging, and positive tone.
+    - Highlight key advantages such as quality, value for money, experience, or convenience.
+    - Add a touch of personal experience to make the review more authentic.
+    - Ensure the review fits the intended platform, such as an e-commerce site (Amazon, eBay, Shopify), a food delivery service (UberEats, DoorDash, Meituan), or a local store/service.
+
+    Examples of Positive Reviews:
+
+    E-commerce Product (Electronics):
+    - "The {item_name} is absolutely fantastic! The build quality is excellent, and the performance exceeded my expectations. Battery life is great, and the sleek design makes it super stylish. Highly recommend!"
+
+    Restaurant (Food Delivery - Meituan, UberEats, Yelp):
+    - "I ordered from {item_name}, and the food was delicious! Fresh ingredients, perfect seasoning, and fast delivery. The packaging was neat, and the portion size was generous. Will definitely order again!"
+
+    Local Store (Retail, Clothing, Cosmetics):
+    - "Shopping at {item_name} was a wonderful experience! The store was well-organized, the staff was friendly, and the product selection was amazing. Prices were fair, and I found exactly what I needed!"
+
+    Service (Salon, Repair, Cleaning, etc.):
+    - "I booked a service at {item_name}, and I’m beyond satisfied! The staff was professional, punctual, and highly skilled. Everything was handled smoothly, and I felt valued as a customer. Highly recommend!"
+
+    Please generate a 50-100 word review following these examples:
+    """
+
+    async def run(
+            self,
+            with_messages: List[Message] = None,
+            *,
+            item_name: str = "This product",
+            category: str = "General",
+            **kwargs,
+    ) -> Union[AIMessage, str]:
+        """
+        Generates a positive review for a product, store, or service.
+
+        Args:
+            item_name (str): The name of the product, store, or service (default: "This product").
+            category (str): The category of the item (e.g., "Electronics", "Restaurant", "Service").
+
+        Returns:
+            AIMessage: A well-crafted positive review.
+
+        Example:
+            >>> action = GeneratePositiveReview()
+            >>> result = await action.run(item_name="Wireless Earbuds", category="Electronics")
+            >>> print(result)
+            AIMessage(content="These wireless earbuds are fantastic! The sound quality is crisp, the fit is comfortable, and the battery lasts forever. Highly recommend!")
+        """
+        if not item_name:
+            return AIMessage(content="Please provide an item name for the review.", cause_by=self)
+
+        # Fill the prompt with user inputs
+        prompt = self.PROMPT_TEMPLATE.format(item_name=item_name, category=category)
+
+        # Generate a review using LLM
+        generated_review = await self._aask(prompt)
+
+        return AIMessage(content=generated_review, cause_by=self)
 
 ```
 
-### **1. `Action` 配置与执行**
+### **`GeneratePositiveReview` 作用**
 
-在 `ProductManager` 里，`todo_action` 设定了默认执行的 `Action`，确保角色能够自动执行 PRD 生成任务：
+- `GeneratePositiveReview` 是一个 `Action`，被注册到 `tool_registry`，并可以在 `SimpleReviewAssistant` 角色中调用。
+- 其 `run()` 方法会使用 LLM 生成符合 `PROMPT_TEMPLATE` 规范的正面评价。
+- `run` 方法接收 `item_name`（商品/店铺/服务名称）和 `category`（类别），然后填充 `PROMPT_TEMPLATE`，向 LLM 发送请求，最终返回 AI 生成的评论。
+- 工具方法需要严格说明其作用、参数含义以及调用方式等信息，这有助于角色动态选择这工具并生成相应的参数进行调用。
+
+---
+
+## **2. 角色工具 (`Tools`) 配置**
+
+在 `SimpleReviewAssistant` 角色定义中，注册了多个工具，包括：
 
 ```python
-todo_action: str = any_to_name(WritePRD)
+tools: list[str] = ["RoleZero", Browser.__name__, "GeneratePositiveReview"]
 ```
 
-这意味着：
+- **`RoleZero`**：继承的基础角色框架。
+- **`Browser`**：提供网页搜索能力（如获取产品评论数据）。
+- **`GeneratePositiveReview`**：用于自动生成好评的 `Action`。
 
-- 默认执行 `WritePRD`，用于编写产品需求文档（PRD）。
-- 角色可根据 `todo_action` 任务指引，自动进入 `WritePRD` 的执行逻辑。
-
-此外，在 `_update_tool_execution()` 方法中，`WritePRD` 被注册到 `tool_execution_map`，确保 `ProductManager` 能够正确调用 `WritePRD.run()` 方法：
+这些工具被 `RoleZero` 内部管理，并可通过 `_update_tool_execution()` 进行注册，使角色能够正确调用 `GeneratePositiveReview`：
 
 ```python
+
 def _update_tool_execution(self):
-    wp = WritePRD()
-    self.tool_execution_map.update(tool2name(WritePRD, ["run"], wp.run))
+    review_generator = GeneratePositiveReview()
+    self.tool_execution_map.update(tool2name(GeneratePositiveReview, ["run"], review_generator.run))
 ```
 
-通过 `tool2name` 方法将 `WritePRD` 被注册到 `tool_execution_map`，这使得角色在执行任务时，可以直接调用 `WritePRD` 的 `run()` 方法，完成 PRD 文档的生成。
+也可以通过 `tool2name` 方法将 `GeneratePositiveReview` 被注册到 `tool_execution_map`，这使得角色在执行任务时，可以直接调用 `GeneratePositiveReview` 的 `run()` 方法，完成好评的生成。
 
-### **2. 角色工具 (`Tools`) 配置与使用**
+---
 
-`ProductManager` 继承 `RoleZero`，并注册了一些工具，使其具备搜索、编辑、交互等能力：
+## **3. `MGXEnv` 运行流程**
 
 ```python
-tools: list[str] = [
-    "RoleZero",
-    Browser.__name__,
-    Editor.__name__,
-    SearchEnhancedQA.__name__
-]
+async def run_on_mgx_env():
+    mgx_env = MGXEnv()
+    ra = SimpleReviewAssistant()
+    msg = Message(content="Write a good review for airpods pro2")
+    mgx_env.add_roles([TeamLeader(), ra])
+    mgx_env.publish_message(msg)
+
+    start_time = time.time()
+    while time.time() - start_time < 15:
+        if not mgx_env.is_idle:
+            ret = await mgx_env.run()
+            logger.debug(ret)
+            start_time = time.time()
 ```
 
-其中：
+### **执行流程解析**
 
-- **`Browser`**：用于网页搜索、信息查询。
-- **`Editor`**：提供文本编辑能力，如文档修改与调整。
-- **`SearchEnhancedQA`**：增强搜索能力，支持基于搜索引擎的智能问答。
+1.  **初始化 `MGXEnv` 运行环境**，并创建 `SimpleReviewAssistant` 角色 (`ra`)。
 
-这些工具的执行逻辑由 `RoleZero` 内部管理，并通过 `_update_tool_execution()` 方法进行注册，使其可以在 `ProductManager` 角色中被调用。例如，`SearchEnhancedQA` 可用于智能查询竞品信息，`Editor` 可用于撰写和修改 PRD 文档。
+1.  **添加角色**（`TeamLeader()` 和 `SimpleReviewAssistant()`）。
 
-### **3. `_think` 方法解析**
+1.  **发布任务**，例如 `"Write a good review for airpods pro2"`。
 
-在 `_think()` 方法中，`ProductManager` 决策下一步行动，并检查是否需要执行 `WritePRD` 任务：
+1.  **循环检测 `MGXEnv` 状态**：
 
-```python
-async def _think(self) -> bool:
-    """Decide what to do"""
-    if GitRepository.is_git_dir(self.config.project_path) and not self.config.git_reinit:
-        self._set_state(1)
-    else:
-        self._set_state(0)
-        self.config.git_reinit = False
-        self.todo_action = any_to_name(WritePRD)
-    return bool(self.rc.todo)
-```
-
-**方法逻辑解析**：
-
-- **检查 Git 仓库状态**：
-
-  - 若项目是 Git 仓库，则执行任务 (`self._set_state(1)`)。
-  - 否则，重新设置 `todo_action` 为 `WritePRD`，确保 PRD 生成任务正常进行。
-
-这保证了 `ProductManager` 在适当时机执行 `WritePRD`，从而完成产品需求文档的编写。
+    - 若 `MGXEnv` 处于活跃状态，则运行任务。
+    - 角色根据任务和工具信息动态决定选择合适的工具进行执行。
 
 ### **4. 总结**
 
-`RoleZero` 及其子类 `ProductManager` 通过 **工具 (`Tools`) 和任务 (`Action`) 的灵活配置**，使角色具备高效的任务执行能力，同时确保其可扩展性。
+`RoleZero` 及其子类 `SimpleReviewAssistant` 通过 **工具 (`Tools`) 和任务 (`Action`) 的灵活配置**，使角色具备动态的任务执行能力，同时确保其可扩展性。
 
 - **工具 (`Tools`) 配置**
 
@@ -287,12 +317,6 @@ async def _think(self) -> bool:
 
 - **任务 (`Action`) 配置与执行**
 
-  - 通过 `todo_action` 设定默认任务，确保 `WritePRD` 能够自动执行。
   - 对于 `Action` 或自定义工具方法，`_update_tool_execution()` 可被重写，通过 `tool2name` 方法将 `Action` 转换为工具，并映射到 `tool_execution_map` 进行注册，使 `RoleZero` 具备高度的可扩展性和灵活性。
-
-- **执行逻辑 (`_think`)**
-
-  - `ProductManager` 角色会根据项目状态，动态决策是否执行 PRD 任务。
-  - 结合工具和任务的配置，使角色能够高效、准确地完成 PRD 编写和市场调研等工作。
 
 这种设计不仅确保了 SOP 方式的可控性，也允许角色根据具体场景动态调整工具与任务，实现更智能化的任务处理。

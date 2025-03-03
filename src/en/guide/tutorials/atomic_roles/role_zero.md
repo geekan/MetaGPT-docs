@@ -142,145 +142,172 @@ Rewrite `_update_tool_execution`. This step mainly specifies how the command gen
         pass
 ```
 
-## **Product Manager Role Case Analysis**
+## **`SimpleReviewAssistant` role case analysis**
 
-In the `ProductManager` role implementation, we can see that `use_fixed_sop` is used to be compatible with the SOP method, allowing the role to switch between fixed processes and flexible thinking modes. In addition, the role also defines tools, configures `Action`, and implements tool registration and use.
+In the implementation of the `SimpleReviewAssistant` role, the role is designed as a simple automated review generation assistant that can use the `GeneratePositiveReview` tool to generate positive reviews for products, stores, or services. This role inherits from `RoleZero` and registers the necessary tools to enable it to have functions such as a browser and a review generation tool.
 
 ```python
-from metagpt.actions import UserRequirement, WritePRD
-from metagpt.actions.prepare_documents import PrepareDocuments
-from metagpt.actions.search_enhanced_qa import SearchEnhancedQA
-from metagpt.prompts.product_manager import PRODUCT_MANAGER_INSTRUCTION
-from metagpt.roles.di.role_zero import RoleZero
-from metagpt.roles.role import RoleReactMode
-from metagpt.tools.libs.browser import Browser
-from metagpt.tools.libs.editor import Editor
-from metagpt.utils.common import any_to_name, any_to_str, tool2name
-from metagpt.utils.git_repository import GitRepository
+class SimpleReviewAssistant(RoleZero):
+    """Rating Assistant helps users automatically generate positive reviews for products, stores or services"""
 
+    name: str = "SimpleReviewAssistant"
+    profile: str = "Automated Positive Review Generator"
+    goal: str = "Generate positive reviews for your product, store or service."
+    tools: list[str] = ["RoleZero", Browser.__name__, "GeneratePositiveReview"]
 
-class ProductManager(RoleZero):
-    """
-    Represents a Product Manager role responsible for product development and management.
-
-    Attributes:
-        name (str): Name of the product manager.
-        profile (str): Role profile, default is 'Product Manager'.
-        goal (str): Goal of the product manager.
-        constraints (str): Constraints or limitations for the product manager.
-    """
-
-    name: str = "Alice"
-    profile: str = "Product Manager"
-    goal: str = "Create a Product Requirement Document or market research/competitive product research."
-    constraints: str = "utilize the same language as the user requirements for seamless communication"
-    instruction: str = PRODUCT_MANAGER_INSTRUCTION
-    tools: list[str] = ["RoleZero", Browser.__name__, Editor.__name__, SearchEnhancedQA.__name__]
-
-    todo_action: str = any_to_name(WritePRD)
-
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
-        if self.use_fixed_sop:
-            self.enable_memory = False
-            self.set_actions([PrepareDocuments(send_to=any_to_str(self)), WritePRD])
-            self._watch([UserRequirement, PrepareDocuments])
-            self.rc.react_mode = RoleReactMode.BY_ORDER
+    instruction: str = "Use GeneratePositiveReview tool to generate a positive review for a given product, store or service."
 
     def _update_tool_execution(self):
-        wp = WritePRD()
-        self.tool_execution_map.update(tool2name(WritePRD, ["run"], wp.run))
-
-    async def _think(self) -> bool:
-        """Decide what to do"""
-        if not self.use_fixed_sop:
-            return await super()._think()
-
-        if GitRepository.is_git_dir(self.config.project_path) and not self.config.git_reinit:
-            self._set_state(1)
-        else:
-            self._set_state(0)
-            self.config.git_reinit = False
-            self.todo_action = any_to_name(WritePRD)
-        return bool(self.rc.todo)
-
+        review_generator = GeneratePositiveReview()
+        self.tool_execution_map.update(tool2name(GeneratePositiveReview, ["run"], review_generator.run))
 ```
 
 ### **1. `Action` configuration and execution**
 
-In `ProductManager`, `todo_action` sets the default `Action` to ensure that the role can automatically execute the PRD generation task:
+`SimpleReviewAssistant` relies on the `GeneratePositiveReview` `Action` to complete the automatic review generation task.
 
 ```python
-todo_action: str = any_to_name(WritePRD)
+@register_tool(include_functions=["run"])
+class GeneratePositiveReview(Action):
+    """Generates a positive review for a product, store, or service."""
+
+    name: str = "GeneratePositiveReview"
+    input_args: Optional[BaseModel] = Field(default=None, exclude=True)
+
+    PROMPT_TEMPLATE: str = """
+    You are a professional product reviewer, and your task is to write a positive review for the following item:
+
+    Item Type: {category}
+    Item Name: {item_name}
+
+    Review Guidelines:
+    - Use a friendly, engaging, and positive tone.
+    - Highlight key advantages such as quality, value for money, experience, or convenience.
+    - Add a touch of personal experience to make the review more authentic.
+    - Ensure the review fits the intended platform, such as an e-commerce site (Amazon, eBay, Shopify), a food delivery service (UberEats, DoorDash, Meituan), or a local store/service.
+
+    Examples of Positive Reviews:
+
+    E-commerce Product (Electronics):
+    - "The {item_name} is absolutely fantastic! The build quality is excellent, and the performance exceeded my expectations. Battery life is great, and the sleek design makes it super stylish. Highly recommend!"
+
+    Restaurant (Food Delivery - Meituan, UberEats, Yelp):
+    - "I ordered from {item_name}, and the food was delicious! Fresh ingredients, perfect seasoning, and fast delivery. The packaging was neat, and the portion size was generous. Will definitely order again!"
+
+    Local Store (Retail, Clothing, Cosmetics):
+    - "Shopping at {item_name} was a wonderful experience! The store was well-organized, the staff was friendly, and the product selection was amazing. Prices were fair, and I found exactly what I needed!"
+
+    Service (Salon, Repair, Cleaning, etc.):
+    - "I booked a service at {item_name}, and I’m beyond satisfied! The staff was professional, punctual, and highly skilled. Everything was handled smoothly, and I felt valued as a customer. Highly recommend!"
+
+    Please generate a 50-100 word review following these examples:
+    """
+
+    async def run(
+            self,
+            with_messages: List[Message] = None,
+            *,
+            item_name: str = "This product",
+            category: str = "General",
+            **kwargs,
+    ) -> Union[AIMessage, str]:
+        """
+        Generates a positive review for a product, store, or service.
+
+        Args:
+            item_name (str): The name of the product, store, or service (default: "This product").
+            category (str): The category of the item (e.g., "Electronics", "Restaurant", "Service").
+
+        Returns:
+            AIMessage: A well-crafted positive review.
+
+        Example:
+            >>> action = GeneratePositiveReview()
+            >>> result = await action.run(item_name="Wireless Earbuds", category="Electronics")
+            >>> print(result)
+            AIMessage(content="These wireless earbuds are fantastic! The sound quality is crisp, the fit is comfortable, and the battery lasts forever. Highly recommend!")
+        """
+        if not item_name:
+            return AIMessage(content="Please provide an item name for the review.", cause_by=self)
+
+        # Fill the prompt with user inputs
+        prompt = self.PROMPT_TEMPLATE.format(item_name=item_name, category=category)
+
+        # Generate a review using LLM
+        generated_review = await self._aask(prompt)
+
+        return AIMessage(content=generated_review, cause_by=self)
+
 ```
 
-This means:
+**What `GeneratePositiveReview` does**
 
-- `WritePRD` is executed by default to write the product requirement document (PRD).
+- `GeneratePositiveReview` is an `Action` that is registered to `tool_registry` and can be called from the `SimpleReviewAssistant` role.
+- Its `run()` method uses LLM to generate a positive review that conforms to the `PROMPT_TEMPLATE` specification.
+- The `run` method receives `item_name` (product/store/service name) and `category` (category), then fills in `PROMPT_TEMPLATE`, sends a request to LLM, and finally returns the AI-generated review.
+- Tool methods need to strictly explain their functions, parameter meanings, and calling methods, which helps roles dynamically select this tool and generate corresponding parameters for calling.
 
-- The role can automatically enter the execution logic of `WritePRD` according to the `todo_action` task guide.
+---
 
-In addition, in the `_update_tool_execution()` method, `WritePRD` is registered to the `tool_execution_map` to ensure that `ProductManager` can correctly call the `WritePRD.run()` method:
+### **2. Role Tools (`Tools`) Configuration**
+
+In the `SimpleReviewAssistant` role definition, multiple tools are registered, including:
 
 ```python
+tools: list[str] = ["RoleZero", Browser.__name__, "GeneratePositiveReview"]
+```
+
+- **`RoleZero`**: The inherited basic role framework.
+- **`Browser`**: Provides web search capabilities (such as obtaining product review data).
+- **`GeneratePositiveReview`**: An `Action` for automatically generating positive reviews.
+
+These tools are managed internally by `RoleZero` and can be registered through `_update_tool_execution()`, so that the role can correctly call `GeneratePositiveReview`:
+
+```python
+
 def _update_tool_execution(self):
-    wp = WritePRD()
-    self.tool_execution_map.update(tool2name(WritePRD, ["run"], wp.run))
+    review_generator = GeneratePositiveReview()
+    self.tool_execution_map.update(tool2name(GeneratePositiveReview, ["run"], review_generator.run))
 ```
 
-`WritePRD` is registered to the `tool_execution_map` through the `tool2name` method, which allows the role to directly call the `run()` method of `WritePRD` when executing the task to complete the generation of the PRD document.
+You can also register `GeneratePositiveReview` to `tool_execution_map` through the `tool2name` method, so that when the role executes the task, it can directly call the `run()` method of `GeneratePositiveReview` to complete the generation of positive reviews.
 
-### **2. Configuration and use of role tools (`Tools`)**
+---
 
-`ProductManager` inherits `RoleZero` and registers some tools to enable it to have search, editing, interaction and other capabilities:
+### **3. `MGXEnv` operation process**
 
 ```python
-tools: list[str] = [
-    "RoleZero",
-    Browser.__name__,
-    Editor.__name__,
-    SearchEnhancedQA.__name__
-]
+async def run_on_mgx_env():
+    mgx_env = MGXEnv()
+    ra = SimpleReviewAssistant()
+    msg = Message(content="Write a good review for airpods pro2")
+    mgx_env.add_roles([TeamLeader(), ra])
+    mgx_env.publish_message(msg)
+
+    start_time = time.time()
+    while time.time() - start_time < 15:
+        if not mgx_env.is_idle:
+            ret = await mgx_env.run()
+            logger.debug(ret)
+            start_time = time.time()
 ```
 
-Among them:
+**Execution process analysis**
 
-- **`Browser`**: used for web search and information query.
+1. **Initialize the `MGXEnv` runtime environment** and create the `SimpleReviewAssistant` role (`ra`).
 
-- **`Editor`**: provides text editing capabilities, such as document modification and adjustment.
+2. **Add roles** (`TeamLeader()` and `SimpleReviewAssistant()`).
 
-- **`SearchEnhancedQA`**: enhances search capabilities and supports intelligent question and answer based on search engines.
+3. **Publish tasks**, such as `"Write a good review for airpods pro2"`.
 
-The execution logic of these tools is managed internally by `RoleZero` and registered through the `_update_tool_execution()` method so that they can be called in the `ProductManager` role. For example, `SearchEnhancedQA` can be used to intelligently query competitor information, and `Editor` can be used to write and modify PRD documents.
+4. **Loop to check the `MGXEnv` status**:
 
-### **3. `_think` method analysis**
-
-In the `_think()` method, `ProductManager` decides the next action and checks whether the `WritePRD` task needs to be executed:
-
-```python
-async def _think(self) -> bool:
-    """Decide what to do"""
-    if GitRepository.is_git_dir(self.config.project_path) and not self.config.git_reinit:
-        self._set_state(1)
-    else:
-        self._set_state(0)
-        self.config.git_reinit = False
-        self.todo_action = any_to_name(WritePRD)
-    return bool(self.rc.todo)
-```
-
-**Method logic analysis**:
-
-- **Check Git repository status**:
-
-- If the project is a Git repository, execute the task (`self._set_state(1)`).
-- Otherwise, reset `todo_action` to `WritePRD` to ensure that the PRD generation task proceeds normally.
-
-This ensures that `ProductManager` executes `WritePRD` at the appropriate time to complete the writing of the product requirement document.
+   - If `MGXEnv` is active, run the task.
+   - The role dynamically decides to select the appropriate tool for execution based on the task and tool information.
 
 ### **4. Summary**
 
-`RoleZero` and its subclass `ProductManager` enable the role to have efficient task execution capabilities while ensuring its scalability through **flexible configuration of tools (`Tools`) and tasks (`Action`)**.
+`RoleZero` and its subclass `SimpleReviewAssistant` enable the role to have dynamic task execution capabilities while ensuring its scalability through \*\*flexible configuration of tools (`Tools`) and tasks (`Action`).
 
 - **Tools (`Tools`) configuration**
 
@@ -290,14 +317,6 @@ This ensures that `ProductManager` executes `WritePRD` at the appropriate time t
 
 - **Task (`Action`) configuration and execution**
 
-- Set the default task through `todo_action` to ensure that `WritePRD` can be automatically executed.
-
 - For `Action` or custom tool methods, `_update_tool_execution()` can be overridden, and `Action` can be converted to a tool through the `tool2name` method, and mapped to `tool_execution_map` for registration, making `RoleZero` highly scalable and flexible.
 
-- **Execution logic (`_think`)**
-
-- The `ProductManager` role will dynamically decide whether to execute the PRD task based on the project status.
-
-- Combined with the configuration of tools and tasks, the role can efficiently and accurately complete tasks such as PRD writing and market research.
-
-This design not only ensures the controllability of the SOP method, but also allows the role to dynamically adjust tools and tasks according to specific scenarios to achieve more intelligent task processing.
+This design not only ensures the controllability of the SOP method, but also allows the role to dynamically adjust tools and tasks according to specific scenarios, achieving more intelligent task processing.
