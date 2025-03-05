@@ -76,7 +76,7 @@ MetaGPT社区-首席布道师 单月轮值，主要职责如下
    - 注意：OpenAI的默认API设计尾部会有个v1，正确配置示例： `OPENAI_API_BASE: "``https://api.openai.com/v1``"`
    - 网络问题始终解决不了的同学，建议使用云端环境，参考 [MetaGPT快速体验](https://deepwisdom.feishu.cn/wiki/Q8ycw6J9tiNXdHk66MRcIN8Pnlg)
 
-9. **Absolutely! How can I assist you today?**
+9. **是否使用了Chi或者类似的服务？**
 
    - 是否使用了Chi或者类似的服务？这些服务有概率出错，目测在GPT-4 3.5k-4k token消耗时出错概率高
 

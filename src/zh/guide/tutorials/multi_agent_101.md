@@ -23,7 +23,7 @@ metagpt "write a function that calculates the product of a list"
 2. 基于标准作业程序（SOP）确保每个角色遵守它。通过使每个角色观察上游的相应输出结果，并为下游发布自己的输出结果，可以实现这一点。
 3. 初始化所有角色，创建一个带有环境的智能体团队，并使它们之间能够进行交互。
 
-完整的代码在本教程的末尾可用
+完整代码见本教程末尾
 
 ### 定义动作和角色
 
@@ -40,6 +40,8 @@ metagpt "write a function that calculates the product of a list"
 我们列举了三个 `Action`。
 
 ````python
+from metagpt.actions import Action
+
 class SimpleWriteCode(Action):
     PROMPT_TEMPLATE: str = """
     Write a python function that can {instruction}.
@@ -137,16 +139,16 @@ class SimpleTester(Role):
         super().__init__(**kwargs)
         self.set_actions([SimpleWriteTest])
         self._watch([SimpleWriteCode])
-        # self._watch([SimpleWriteCode, SimpleWriteReview])  # feel free to try this too
+        # self._watch([SimpleWriteCode, SimpleWriteReview])  # 欢迎尝试此配置
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
         todo = self.rc.todo
 
-        # context = self.get_memories(k=1)[0].content # use the most recent memory as context
-        context = self.get_memories()  # use all memories as context
+        # context = self.get_memories(k=1)[0].content # 使用最近一条记忆作为上下文
+        context = self.get_memories()  # 使用全部记忆作为上下文
 
-        code_text = await todo.run(context, k=5)  # specify arguments
+        code_text = await todo.run(context, k=5)  # 指定参数
         msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
         return msg
@@ -182,7 +184,7 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    idea: str = typer.Argument(..., help="write a function that calculates the product of a list"),
+    idea: str = typer.Argument(..., help="write a cli flappy bird game"),
     investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
     n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
 ):
@@ -212,14 +214,14 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_multi_agen
 使用以下命令运行：
 
 ```sh
-python3 examples/build_customized_multi_agents.py --idea "write a function that calculates the product of a list"
+python3 examples/build_customized_multi_agents.py --idea "write a cli flappy bird game"
 ```
 
-或在Colab上运行
+或在 Colab 中体验：
 
 [![在Colab中打开](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1h36AqLl7LqZO9bllpeJHpb4Ar-NW0Kwv?usp=sharing)
 
-## 机制解释
+## 机制详解
 
 虽然用户可以编写几行代码来设置运行的`Role`，但描述内部机制是有益的，这样用户就能理解设置代码的含义，并对框架有一个整体的了解。
 

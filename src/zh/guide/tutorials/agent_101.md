@@ -1,6 +1,6 @@
 # 智能体入门
 
-完成本节，你将能够：
+完成本教程后，你将能够：
 
 1. 使用现成的智能体
 2. 开发你的第一个能够执行一个或多个动作的智能体
@@ -8,7 +8,6 @@
 ## 使用现成的智能体
 
 ```python
-# 可导入任何角色，初始化它，用一个开始的消息运行它，完成！
 import asyncio
 
 from metagpt.context import Context
@@ -49,6 +48,7 @@ if __name__ == '__main__':
 在我们的场景中，我们定义了一个 `SimpleWriteCode` 子类 `Action`。虽然它主要是一个围绕提示和 LLM 调用的包装器，但我们认为这个 `Action` 抽象更直观。在下游和高级任务中，使用它作为一个整体感觉更自然，而不是分别制作提示和调用 LLM，尤其是在智能体的框架内。
 
 ````python
+import re
 from metagpt.actions import Action
 
 class SimpleWriteCode(Action):
@@ -100,9 +100,9 @@ class SimpleCoder(Role):
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
-        todo = self.rc.todo  # todo will be SimpleWriteCode()
+        todo = self.rc.todo  # todo 此时是 SimpleWriteCode()
 
-        msg = self.get_memories(k=1)[0]  # find the most recent messages
+        msg = self.get_memories(k=1)[0]  # 获取最近一条消息
         code_text = await todo.run(msg.content)
         msg = Message(content=code_text, role=self.profile, cause_by=type(todo))
 
@@ -113,7 +113,7 @@ class SimpleCoder(Role):
 
 ### 运行你的角色
 
-现在我们可以让我们的智能体开始工作，只需初始化它并使用一个起始消息运行它。
+现在可以让智能体工作，只需初始化并用初始消息运行：
 
 ```python
 import asyncio
@@ -128,7 +128,7 @@ async def main():
     result = await role.run(msg)
     logger.info(result)
 
-asyncio.run(main)
+asyncio.run(main())
 ```
 
 ## 具有多个动作的智能体
@@ -144,6 +144,8 @@ asyncio.run(main)
 接下来，定义 `SimpleRunCode`。如前所述，从概念上讲，一个动作可以利用LLM，也可以在没有LLM的情况下运行。在`SimpleRunCode`的情况下，LLM不涉及其中。我们只需启动一个子进程来运行代码并获取结果。我们希望展示的是，对于动作逻辑的结构，我们没有设定任何限制，用户可以根据需要完全灵活地设计逻辑。
 
 ```python
+import subprocess
+
 class SimpleRunCode(Action):
     name: str = "SimpleRunCode"
 
@@ -174,11 +176,11 @@ class RunnableCoder(Role):
 
     async def _act(self) -> Message:
         logger.info(f"{self._setting}: to do {self.rc.todo}({self.rc.todo.name})")
-        # By choosing the Action by order under the hood
-        # todo will be first SimpleWriteCode() then SimpleRunCode()
+        # 底层按顺序选择 Action
+        # todo 会依次是 SimpleWriteCode() 和 SimpleRunCode()
         todo = self.rc.todo
 
-        msg = self.get_memories(k=1)[0]  # find the most k recent messages
+        msg = self.get_memories(k=1)[0]  # 获取最近k条消息
         result = await todo.run(msg.content)
 
         msg = Message(content=result, role=self.profile, cause_by=type(todo))
@@ -203,7 +205,7 @@ async def main():
     result = await role.run(msg)
     logger.info(result)
 
-asyncio.run(main)
+asyncio.run(main())
 ```
 
 ## 本节完整脚本
@@ -216,6 +218,6 @@ https://github.com/geekan/MetaGPT/blob/main/examples/build_customized_agent.py
 python3 examples/build_customized_agent.py --msg "write a function that calculates the sum of a list"
 ```
 
-或在Colab上运行
+或在 Colab 中尝试：
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1SF3bJiDjKw6Xwnz2Rf0j8Hc0U4KsSB2L?usp=sharing)
