@@ -38,7 +38,7 @@ if __name__ == "__main__":
     asyncio.run(main(requirement))
 ```
 
-执行上面的代码，生成的plan和code会分别保存在 `dada/output/当前时间/plan.json`和 `dada/output/当前时间/code.ipynb`中。
+执行上述代码后，生成的plan和code将分别保存在 `data/output/当前时间/plan.json` 和 `data/output/当前时间/code.ipynb` 中。
 
 ### 运行结果
 
@@ -80,14 +80,14 @@ iris_data.keys()
 # ----------------------------------task2------------------------------------
 import pandas as pd
 
-# Create a DataFrame from the iris dataset
+# 从数据集创建DataFrame
 iris_df = pd.DataFrame(iris_data['data'], columns=iris_data['feature_names'])
 iris_df['species'] = pd.Categorical.from_codes(iris_data['target'], iris_data['target_names'])
 
-# Summary statistics
+# 统计摘要
 summary_statistics = iris_df.describe()
 
-# Check for missing values
+# 检查缺失值
 missing_values = iris_df.isnull().sum()
 
 (summary_statistics, missing_values)
@@ -95,7 +95,7 @@ missing_values = iris_df.isnull().sum()
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Use seaborn's pairplot to visualize the dataset features
+# 使用seaborn的pairplot进行特征可视化
 sns.set(style='whitegrid', context='notebook')
 iris_pairplot = sns.pairplot(iris_df, hue='species', height=2.5)
 plt.show()

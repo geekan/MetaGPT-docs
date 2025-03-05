@@ -10,13 +10,15 @@ pip install metagpt
 
 ## 配置
 
-完整配置不同LLM API（比如OpenAI、Azure、Anthropic等）的方法可在 [配置](./configuration/llm_api_configuration.md) 部分找到。
+不同LLM API（OpenAI、Azure、Anthropic等）及其他组件的配置方法请参考[配置指南](./configuration/llm_api_configuration.md)
 
-## 一句话需求的软件开发
+对于正式使用MetaGPT，建议使用config2.yaml进行配置。具体说明请参考[配置文档](./configuration)
+
+## 用一句话需求开发软件
 
 > 注意：
 >
-> 下面为 [software startup example](https://github.com/geekan/MetaGPT/blob/main/metagpt/software_company.py) 的节选。如果你使用`git clone`方法进行安装，只需简单执行
+> 以下是对[软件启动示例](https://github.com/geekan/MetaGPT/blob/main/metagpt/software_company.py)的分解说明。如果您通过git clone方式安装MetaGPT，只需直接运行：
 >
 > ```
 > metagpt "write a cli blackjack game"
@@ -64,7 +66,7 @@ await startup(idea="write a cli blackjack game") # blackjack: 二十一点
 
 运行效果大致如下:
 
-<video  controls>
+<video controls>
   <source src="https://user-images.githubusercontent.com/2707039/250054654-5e8c1062-8c35-440f-bb20-2b0320f8d27d.mp4" type="video/mp4">
 </video>
 
@@ -79,27 +81,24 @@ await startup(idea="write a cli blackjack game") # blackjack: 二十一点
 ```
  Usage: metagpt [OPTIONS] [IDEA]
 
- Start a new project.
+ 启动新项目
 
 ╭─ Arguments ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│   idea      [IDEA]  Your innovative idea, such as 'Create a 2048 game.' [default: None]                                                                                                                                │
+│   idea      [IDEA]  您的创新想法，例如'创建2048游戏' [default: None]                                                                                                                                                     │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --investment                                     FLOAT    Dollar amount to invest in the AI company. [default: 3.0]                                                                                                    │
-│ --n-round                                        INTEGER  Number of rounds for the simulation. [default: 5]                                                                                                            │
-│ --code-review                --no-code-review             Whether to use code review. [default: code-review]                                                                                                           │
-│ --run-tests                  --no-run-tests               Whether to enable QA for adding & running tests. [default: no-run-tests]                                                                                     │
-│ --implement                  --no-implement               Enable or disable code implementation. [default: implement]                                                                                                  │
-│ --project-name                                   TEXT     Unique project name, such as 'game_2048'.                                                                                                                    │
-│ --inc                        --no-inc                     Incremental mode. Use it to coop with existing repo. [default: no-inc]                                                                                       │
-│ --project-path                                   TEXT     Specify the directory path of the old version project to fulfill the incremental requirements.                                                               │
-│ --reqa-file                                      TEXT     Specify the source file name for rewriting the quality assurance code.                                                                                       │
-│ --max-auto-summarize-code                        INTEGER  The maximum number of times the 'SummarizeCode' action is automatically invoked, with -1 indicating unlimited. This parameter is used for debugging the      │
-│                                                           workflow.                                                                                                                                                    │
-│                                                           [default: 0]                                                                                                                                                 │
-│ --recover-path                                   TEXT     recover the project from existing serialized storage [default: None]                                                                                         │
-│ --init-config                --no-init-config             Initialize the configuration file for MetaGPT. [default: no-init-config]                                                                                     │
-│ --help                                                    Show this message and exit.                                                                                                                                  │
+│ --investment                                     FLOAT    对AI公司的投资金额（美元）[default: 3.0]                                                                                                                     │
+│ --n-round                                        INTEGER  模拟轮数 [default: 5]                                                                                                                                        │
+│ --code-review                --no-code-review             是否启用代码审查 [default: code-review]                                                                                                                      │
+│ --run-tests                  --no-run-tests               是否启用测试质量保障 [default: no-run-tests]                                                                                                                 │
+│ --implement                  --no-implement               是否启用代码实现 [default: implement]                                                                                                                       │
+│ --project-name                                   TEXT     唯一项目名称，例如'game_2048'                                                                                                                               │
+│ --inc                        --no-inc                     增量模式。用于与现有仓库协作 [default: no-inc]                                                                                                              │
+│ --project-path                                   TEXT     指定旧版本项目的目录路径以满足增量需求                                                                                                                      │
+│ --reqa-file                                      TEXT     指定质量保障代码重写的源文件名                                                                                                                              │
+│ --max-auto-summarize-code                        INTEGER  自动调用'SummarizeCode'操作的最大次数，-1表示无限制。该参数用于调试工作流 [default: 0]                                                                      │
+│ --recover-path                                   TEXT     从现有序列化存储恢复项目 [default: None]                                                                                                                    │
+│ --init-config                --no-init-config             初始化MetaGPT的配置文件 [default: no-init-config]                                                                                                           │
+│ --help                                                    显示帮助信息并退出                                                                                                                                          │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
 ```

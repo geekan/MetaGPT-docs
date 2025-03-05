@@ -14,21 +14,18 @@
 
 ```yaml
 llm:
-  api_type: 'openai' # or azure / ollama / groq etc. Check LLMType for more options
-  api_key: 'sk-...' # YOUR_API_KEY
-  model: 'gpt-4-turbo' # or gpt-3.5-turbo
-  # base_url: 'https://api.openai.com/v1'  # or any forward url.
-  # proxy: 'YOUR_LLM_PROXY_IF_NEEDED'  # Optional. If you want to use a proxy, set it here.
-  # pricing_plan: 'YOUR_PRICING_PLAN' # Optional. If your pricing plan uses a different name than the `model`.
+  api_type: 'openai' # 或 azure/ollama/groq 等，更多选项请查看 LLMType
+  model: 'gpt-4-turbo' # 或 gpt-3.5-turbo
+  base_url: 'https://api.openai.com/v1' # 或转发地址/其他LLM地址
+  api_key: 'YOUR_API_KEY'
+  # proxy: 'YOUR_LLM_PROXY_IF_NEEDED' # 可选。如需使用代理请在此设置
+  # pricing_plan: 'YOUR_PRICING_PLAN' # 可选。如果您的资费计划名称与`model`不同
 ```
 
-请记住：如果您按照[安装](./installation)中的`git clone`方法，`config/config2.yaml`
-文件已经存在。只需编辑它或创建一个名为`~/.metagpt/config2.yaml`的副本进行编辑。这样您就不会意外地使用git提交和共享您的API密钥。
+> **注意**：
+> 配置优先级为 `~/.metagpt/config2.yaml > config/config2.yaml`
 
-> 注意：
-> MetaGPT将按照以下优先顺序读取您的设置：`~/.metagpt/config2.yaml > config/config2.yaml`
-
-如果想使用openai o1系列，需要额外配置下述信息
+如需使用OpenAI o1系列模型，需要添加以下额外配置：
 
 ```yaml
 llm:
@@ -39,15 +36,15 @@ llm:
   stream: false
 ```
 
-可以用于初始化LLM，由于o1系列使用有些限制，出现问题可以及时反馈我们。
+该配置可用于初始化LLM。由于o1系列存在使用限制，遇到问题请及时向我们反馈。
 
-现在您可以开始使用了！请参阅[快速入门](./quickstart)或我们的[教程](/guide/tutorials/agent_101)以进行第一次运行！
+完成上述步骤后，您的配置即告完成。要开始使用MetaGPT，请查看[快速入门指南](./quickstart)或我们的[教程](/en/guide/tutorials/agent_101)。
 
 MetaGPT还支持各种LLM模型，根据您的需求配置模型API的密钥。
 
 ## Anthropic / Claude API
 
-支持模型名列表，在`metagpt/utils/token_counter.py`的`claude-*`
+支持模型列表请查看 `metagpt/utils/token_counter.py` 中的 `claude-*` 系列
 
 ```yaml
 llm:
@@ -57,9 +54,9 @@ llm:
   model: 'claude-3-opus-20240229'
 ```
 
-## 智谱 API
+## 智谱AI API
 
-访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
+完整配置请参考[llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py)
 
 ```yaml
 llm:
@@ -71,6 +68,8 @@ llm:
 ## 科大讯飞的大模型 Spark API：
 
 访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
+
+通常只需修改 `SPARK_APPID`、`SPARK_API_SECRET` 和 `SPARK_API_KEY`
 
 ```yaml
 llm:
@@ -84,20 +83,20 @@ llm:
 
 ## Azure OpenAI API
 
-访问 [llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py) 获得更新详情。
+完整配置请参考[llm_config.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/configs/llm_config.py)
 
 ```yaml
 llm:
   api_type: 'azure'
   base_url: 'YOUR_AZURE_BASE_URL'
   api_key: 'YOUR_API_KEY'
-  api_version: 'YOUR_API_VERSION' # such as '2024-03-01-preview'
-  model: 'YOUR_MODEL_NAME' # or YOUR_DEPLOYMENT_NAME
+  api_version: 'YOUR_API_VERSION' # 例如 '2024-03-01-preview'
+  model: 'YOUR_MODEL_NAME' # 或您的部署名称
 ```
 
 ## 谷歌 Gemini
 
-默认支持模型`gemini-pro`
+默认支持模型 `gemini-pro`
 
 ```yaml
 llm:
@@ -108,7 +107,7 @@ llm:
 
 ## 百度 千帆 API
 
-支持`ERNIE-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`
+支持 `ERNIE-*` 模型及主流开源模型，完整列表见 `metagpt/utils/token_counter.py`
 
 ### 使用安全认证AK/SK鉴权
 
@@ -119,7 +118,7 @@ llm:
   api_type: 'qianfan'
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
-  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+  model: 'ERNIE-Bot-turbo' # 示例模型名称
 ```
 
 使用`endpoint`进行调用
@@ -129,45 +128,45 @@ llm:
   api_type: 'qianfan'
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
-  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+  endpoint: 'ernie_speed' # 示例终端节点名称
 ```
 
 ### 使用应用AK/SK鉴权（不推荐）
 
-使用`model`进行调用
+使用`model`参数：
 
 ```yaml
 llm:
   api_type: 'qianfan'
   api_key: 'YOUR_API_KEY'
   secret_key: 'YOUR_SECRET_KEY'
-  model: 'YOUR_MODEL_NAME like ERNIE-Bot-turbo'
+  model: 'ERNIE-Bot-turbo' # 示例模型名称
 ```
 
-使用`endpoint`进行调用
+使用`endpoint`参数（适用于自部署模型）：
 
 ```yaml
 llm:
   api_type: 'qianfan'
   api_key: 'YOUR_API_KEY'
   secret_key: 'YOUR_SECRET_KEY'
-  endpoint: 'YOUR_ENDPOINT_NAME like ernie_speed'
+  endpoint: 'ernie_speed' # 示例终端节点名称
 ```
 
 ## 阿里云 灵积 DashScope API
 
-支持`qwen-*`模型和部分主流开源模型，详见`metagpt/utils/token_counter.py`
+支持 `qwen-*` 模型及主流开源模型，完整列表见 `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
   api_type: 'dashscope'
   api_key: 'YOUR_API_KEY'
-  model: 'YOUR_ENDPOINT_NAME like qwen-max'
+  model: 'qwen-max' # 示例模型名称
 ```
 
 ## 月之暗面 Moonshot / Kimi API
 
-支持 `moonshot-v1-*`模型，详见`metagpt/utils/token_counter.py`
+支持 `moonshot-v1-*` 模型，完整列表见 `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
@@ -179,7 +178,7 @@ llm:
 
 ## Fireworks API
 
-支持 `Fireworks`models模型，详见`metagpt/utils/token_counter.py`
+支持 `Fireworks` 模型，完整列表见 `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
@@ -191,7 +190,7 @@ llm:
 
 ## Mistral API
 
-支持 `Mistral`models模型，详见`metagpt/utils/token_counter.py`
+支持 `Mistral` 模型，完整列表见 `metagpt/utils/token_counter.py`
 
 ```yaml
 llm:
@@ -214,7 +213,7 @@ llm:
   max_token: 4000
 ```
 
-## ollama API
+## Ollama API
 
 ```yaml
 llm:
@@ -223,9 +222,9 @@ llm:
   model: 'llama2'
 ```
 
-## WizardLM-2-8x22b via [openrouter](https://openrouter.ai/)
+## 通过[OpenRouter](https://openrouter.ai/)使用WizardLM-2-8x22b
 
-如果你需要 [wizardlm-2-8x22b](https://openrouter.ai/models/microsoft/wizardlm-2-8x22b)，可以使用如下配置
+如需使用 [wizardlm-2-8x22b](https://openrouter.ai/models/microsoft/wizardlm-2-8x22b)，请使用以下配置：
 
 ```yaml
 llm:
@@ -235,9 +234,9 @@ llm:
   model: microsoft/wizardlm-2-8x22b
 ```
 
-## Llama-3-70b instruct via [openrouter](https://openrouter.ai/)
+## 通过[OpenRouter](https://openrouter.ai/)使用Llama-3-70b-instruct
 
-如果你需要 [llama-3-70b instruct](https://openrouter.ai/models/meta-llama/llama-3-70b-instruct:nitro)，可以使用如下配置
+如需使用 [llama-3-70b-instruct](https://openrouter.ai/models/meta-llama/llama-3-70b-instruct:nitro)，请使用以下配置：
 
 ```yaml
 llm:
@@ -247,16 +246,16 @@ llm:
   model: meta-llama/llama-3-70b-instruct:nitro
 ```
 
-## Llama-3-70b via [groq](https://groq.com/)
+## 通过[Groq](https://groq.com/)使用Llama-3-70b
 
-如果你需要 llama3-70b，可以使用如下配置
+如需使用llama3-70b，请使用以下配置：
 
 ```yaml
 llm:
-  # Visit https://console.groq.com/keys to create api key
+  # 访问 https://console.groq.com/keys 创建API密钥
   base_url: 'https://api.groq.com/openai/v1'
   api_key: 'YOUR_API_KEY'
-  model: 'llama3-70b-8192' # llama3-8b-8192，llama3-70b-8192，llama2-70b-4096 ，mixtral-8x7b-32768，gemma-7b-it
+  model: 'llama3-70b-8192' # 可选模型：llama3-8b-8192，llama3-70b-8192，llama2-70b-4096，mixtral-8x7b-32768，gemma-7b-it
 ```
 
 ## [Amazon Bedrock API](https://aws.amazon.com/bedrock)
@@ -271,12 +270,12 @@ llm:
 llm:
   api_type: 'bedrock'
   model: 'meta.llama3-70b-instruct-v1:0'
-  region_name: 'REGION' # e.g. us-east-1
+  region_name: 'REGION' # 例如 us-east-1
   access_key: 'YOUR_ACCESS_KEY'
   secret_key: 'YOUR_SECRET_KEY'
 ```
 
-## 火山方舟的API
+## 火山方舟API
 
 支持模型名列表，在`metagpt/utils/token_counter.py`的`doubao-*`
 

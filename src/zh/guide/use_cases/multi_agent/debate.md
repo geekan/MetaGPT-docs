@@ -14,11 +14,11 @@
 
 ### 定义动作
 
-首先，我们需要定义一个`Action`。这是一个辩论场景，所以让我们将其命名为 `SpeakAloud`
+首先需要定义辩论场景的专属`Action`，我们将其命名为`SpeakAloud`
 
 ```python
 class SpeakAloud(Action):
-    """动作：在辩论中大声说话（争吵）"""
+    """辩论场景中的发言动作"""
 
     PROMPT_TEMPLATE = """
     ## BACKGROUND
@@ -71,7 +71,7 @@ class Debator(Role):
 ```python
 async def _observe(self) -> int:
         await super()._observe()
-        # accept messages sent (from opponent) to self, disregard own messages from the last round
+        # 过滤消息：仅处理对手发送给自己的消息，忽略自身历史消息
         self.rc.news = [msg for msg in self.rc.news if msg.send_to == self.name]
         return len(self.rc.news)
 ```
@@ -85,6 +85,7 @@ async def _act(self) -> Message:
 
     memories = self.get_memories()
     context = "\n".join(f"{msg.sent_from}: {msg.content}" for msg in memories)
+    # print(context)
 
     rsp = await todo.run(context=context, name=self.name, opponent_name=self.opponent_name)
 
@@ -118,7 +119,7 @@ class Debator(Role):
 
     async def _observe(self) -> int:
         await super()._observe()
-        # accept messages sent (from opponent) to self, disregard own messages from the last round
+        # 过滤消息：仅处理对手发送给自己的消息，忽略自身历史消息
         self.rc.news = [msg for msg in self.rc.news if msg.send_to == self.name]
         return len(self.rc.news)
 
@@ -139,6 +140,8 @@ class Debator(Role):
             send_to=self.opponent_name,
         )
 
+        self.rc.memory.add(msg)  # 将生成的消息加入记忆系统
+
         return msg
 ```
 
@@ -156,9 +159,8 @@ async def debate(idea: str, investment: float = 3.0, n_round: int = 5):
     team = Team()
     team.hire([Biden, Trump])
     team.invest(investment)
-    team.run_project(idea, send_to="Biden")  # 将辩论主题发送给拜登，让他先说话
+    team.run_project(idea, send_to="Biden")  # 将辩论主题发送给拜登触发首轮发言
     await team.run(n_round=n_round)
-
 
 import asyncio
 import platform
@@ -168,15 +170,15 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    idea: str = typer.Argument(..., help="Economic Policy: Discuss strategies and plans related to taxation, employment, fiscal budgeting, and economic growth."),
-    investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
-    n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
+    idea: str = typer.Argument(..., help="经济政策：讨论税收、就业、财政预算和经济增长相关策略"),
+    investment: float = typer.Option(default=3.0, help="投资金额（美元）"),
+    n_round: int = typer.Option(default=5, help="模拟轮次"),
 ):
     """
-    :param idea: Debate topic, such as "Topic: The U.S. should commit more in climate change fighting"
-                 or "Trump: Climate change is a hoax"
-    :param investment: contribute a certain dollar amount to watch the debate
-    :param n_round: maximum rounds of the debate
+    :param idea: 辩论主题，例如"美国应加大应对气候变化的投入"
+                或"特朗普：气候变化是骗局"
+    :param investment: 支付金额观看辩论
+    :param n_round: 最大辩论轮次
     :return:
     """
     if platform.system() == "Windows":
@@ -197,6 +199,6 @@ https://github.com/geekan/MetaGPT/blob/main/examples/debate.py
 python3 examples/debate.py --idea "Talk about how the U.S. should respond to climate change"
 ```
 
-运行结果如下：
+运行效果演示：
 
 ![img](/image/guide/use_cases/debate_log.png)

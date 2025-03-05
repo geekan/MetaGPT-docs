@@ -11,10 +11,10 @@
 
 ## 其他配置（可选）
 
-Check [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) and
-[config2.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) for more details.
+请查看 [config2.example.yaml](https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml) 和
+[config2.py](https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py) 获取完整配置参考。
 
 ```yaml
-enable_longterm_memory: false
-prompt_schema: json #json or markdown
+enable_longterm_memory: false  # 是否启用长期记忆
+prompt_schema: json # 提示词格式（json 或 markdown）
 ```
