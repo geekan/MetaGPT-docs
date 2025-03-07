@@ -15,6 +15,8 @@ class Message(BaseModel):
     cause_by: str = Field(default="", validate_default=True)
     sent_from: str = Field(default="", validate_default=True)
     send_to: set[str] = Field(default={MESSAGE_ROUTE_TO_ALL}, validate_default=True)
+    metadata: Dict[str, Any] = Field(default_factory=dict)  # metadata for `content` and `instruct_content`
+
 ```
 
 When planning the message forwarding process between agents, it's essential to first determine the functional boundaries of the agents, similar to designing a function:

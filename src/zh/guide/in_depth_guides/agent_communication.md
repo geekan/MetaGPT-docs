@@ -15,6 +15,8 @@ class Message(BaseModel):
     cause_by: str = Field(default="", validate_default=True)
     sent_from: str = Field(default="", validate_default=True)
     send_to: set[str] = Field(default={MESSAGE_ROUTE_TO_ALL}, validate_default=True)
+    metadata: Dict[str, Any] = Field(default_factory=dict)  # metadata for `content` and `instruct_content`
+
 ```
 
 在规划智能体之间的消息转发流程时，首先要确定智能体的功能边界，这跟设计一个函数的套路一样：

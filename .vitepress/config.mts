@@ -244,6 +244,16 @@ export default defineConfig({
                 collapsed: false,
                 items: [
                   { text: 'Concepts', link: 'tutorials/concepts.md' },
+                  {
+                    text: 'Atomic Agent',
+                    link: 'tutorials/atomic_roles/intro.md',
+                    items: [
+                      {
+                        text: 'RoleZero',
+                        link: 'tutorials/atomic_roles/role_zero.md',
+                      },
+                    ],
+                  },
                   { text: 'Agent 101', link: 'tutorials/agent_101.md' },
                   {
                     text: 'MultiAgent 101',
@@ -537,6 +547,16 @@ export default defineConfig({
                   {
                     text: '概念简述',
                     link: 'tutorials/concepts',
+                  },
+                  {
+                    text: '原子化智能体',
+                    link: 'tutorials/atomic_roles/intro.md',
+                    items: [
+                      {
+                        text: 'RoleZero',
+                        link: 'tutorials/atomic_roles/role_zero.md',
+                      },
+                    ],
                   },
                   {
                     text: '智能体入门',
