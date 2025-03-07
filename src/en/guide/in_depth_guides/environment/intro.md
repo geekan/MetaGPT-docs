@@ -20,4 +20,5 @@ Currently, we provide several scenario environments and provide corresponding sc
 - Added, [Werewolf Environment](./werewolf.md)
 - Added, [Stanford Town Environment](./stanford_town.md)
 - Added, [Android Environment](./android.md)
+- Added, [MGXEnv Environment](./mgx.md)
 - ToBeAdded, [Web Environment](./web.md)
