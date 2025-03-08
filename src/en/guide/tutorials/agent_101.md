@@ -205,7 +205,7 @@ async def main():
     result = await role.run(msg)
     logger.info(result)
 
-asyncio.run(main)
+asyncio.run(main())
 ```
 
 ## Complete script of this tutorial
