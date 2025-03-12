@@ -11,17 +11,30 @@
 # 可导入任何角色，初始化它，用一个开始的消息运行它，完成！
 import asyncio
 
-from metagpt.context import Context
 from metagpt.roles.product_manager import ProductManager
 from metagpt.logs import logger
+from metagpt.schema import Message
 
 async def main():
-    msg = "Write a PRD for a snake game"
-    context = Context()  # 显式创建会话Context对象，Role对象会隐式的自动将它共享给自己的Action对象
-    role = ProductManager(context=context)
-    while msg:
-        msg = await role.run(msg)
-        logger.info(str(msg))
+    # 1. ProductManager实例
+    pm = ProductManager(
+        name="Alice",  # 使用默认名称或自定义
+        use_fixed_sop=True,  # 启用固定SOP模式
+    )
+
+    # 2. 准备用户需求
+    requirement = "Write a PRD for a snake game"
+
+    # 3. 创建需求消息
+    requirement_msg = Message(
+        content=requirement,
+        role="user"
+    )
+
+    # 4. 运行ProductManager获取PRD
+    result = await pm.run(with_message=requirement_msg)
+
+    logger.info(result.content[:100])
 
 if __name__ == '__main__':
     asyncio.run(main())

@@ -12,7 +12,7 @@ Definition:
 
 ```python
 from gymnasium import spaces
-from metagpt.environment.werewolf.const import STEP_INSTRUCTIONS
+from metagpt.environment.werewolf.werewolf_ext_env import STEP_INSTRUCTIONS
 
 space = spaces.Dict(
      {

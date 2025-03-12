@@ -12,20 +12,34 @@ Import any role, initialize it, run it with a starting message, done!
 ```python
 import asyncio
 
-from metagpt.context import Context
 from metagpt.roles.product_manager import ProductManager
 from metagpt.logs import logger
+from metagpt.schema import Message
 
 async def main():
-    msg = "Write a PRD for a snake game"
-    context = Context()  # The session Context object is explicitly created, and the Role object implicitly shares it automatically with its own Action object
-    role = ProductManager(context=context)
-    while msg:
-        msg = await role.run(msg)
-        logger.info(str(msg))
+    # 1. Create ProductManager instance
+    pm = ProductManager(
+        name="Alice",  # Use default name or customize
+        use_fixed_sop=True,  # Enable fixed Standard Operating Procedure mode
+    )
+
+    # 2. Prepare user requirement
+    requirement = "Write a PRD for a snake game"
+
+    # 3. Create requirement message
+    requirement_msg = Message(
+        content=requirement,
+        role="user"
+    )
+
+    # 4. Run ProductManager to get PRD
+    result = await pm.run(with_message=requirement_msg)
+
+    logger.info(result)
 
 if __name__ == '__main__':
     asyncio.run(main())
+
 ```
 
 ## Develop your first agent

@@ -16,7 +16,7 @@
 
 在`gymnasium`定义观察、动作空间时，一般是定义离散值或连续值。但在支持的这些场景环境中，由于更多是需要通过API或者接口访问游戏引擎服务或者外部模拟器。因此，对于动作空间（`gymnasium.spaces.Dict`），其包含不同的动作类型及不同动作下的所需入参的子空间定义。对于搜索空间（`gymnasium.spaces.Dict`），其包含可从环境中得到的环境信息，比如地图、屏幕截图等。
 
-`metagpt/environment/base_env_space.py`内的`BaseEnvActionType`定义了动作类型，`BaseEnvAction`定义了动作空间对应的一组取值，`BaseEnvObsType`定义了观察类型。  
+`metagpt.base.base_env_space`内的`BaseEnvActionType`定义了动作类型，`BaseEnvAction`定义了动作空间对应的一组取值，`BaseEnvObsType`定义了观察类型。  
 一般的，`gymnasium`内得到的观察空间值是一组完整的观察值，但在实际应用中，往往需要从环境中得到局部观察值（比如在斯坦福小镇中，需要获取智能体所处位置视野范围内的地图信息，而非完整地图）。我们添加了`observe(self, obs_params: Optional[BaseEnvObsParams] = None)`方法来获取局部环境信息，`BaseEnvObsParams`定义了获取观察值的所需参数，包括观察类型和其所需入参。
 
 ## 不同场景环境
@@ -28,3 +28,4 @@
 - 已添加，[斯坦福小镇环境](./stanford_town.md)
 - 已添加，[安卓模拟器环境](./android.md)
 - 待添加，[网页环境](./web.md)
+- 已添加，[MGX环境](./mgx.md)

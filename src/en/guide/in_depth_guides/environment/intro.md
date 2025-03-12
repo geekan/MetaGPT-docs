@@ -12,6 +12,13 @@ In `ExtEnv`, we refer to the design of `gymnasium` in the reinforcement learning
 
 In addition, the decorators `mark_as_readable` and `mark_as_writeable` for the different `read-write` interfaces provided by `ExtEnv` are also provided to facilitate the unified management of method interfaces for external environment docking, so that subsequent agents can use them as A tool capability that can directly and automatically call different external environment docking interfaces based on the input natural language (this part of the function is to be opened).
 
+### Observation space, action space definition specification
+
+When defining observation and action space in `gymnasium`, discrete values ​​or continuous values ​​are generally defined. However, in the supported scene environments, game engine services or external simulators are more often accessed through APIs or interfaces. Therefore, for the action space (`gymnasium.spaces.Dict`), it contains subspace definitions of different action types and required input parameters under different actions. For the search space (`gymnasium.spaces.Dict`), it contains environmental information that can be obtained from the environment, such as maps, screenshots, etc.
+
+`BaseEnvActionType` in `metagpt.base.base_env_space` defines the action type, `BaseEnvAction` defines a set of values ​​corresponding to the action space, and `BaseEnvObsType` defines the observation type.
+Generally, the observation space values ​​obtained in `gymnasium` are a complete set of observation values, but in practical applications, it is often necessary to obtain local observation values ​​from the environment (for example, in Stanford Town, it is necessary to obtain map information within the field of view of the agent's location, rather than the complete map). We have added the `observe(self, obs_params: Optional[BaseEnvObsParams] = None)` method to obtain local environment information. `BaseEnvObsParams` defines the parameters required to obtain observation values, including the observation type and its required input parameters.
+
 ## Different Environments
 
 Currently, we provide several scenario environments and provide corresponding scenario usage entrances under `MetaGPT/examples/`.
@@ -20,4 +27,5 @@ Currently, we provide several scenario environments and provide corresponding sc
 - Added, [Werewolf Environment](./werewolf.md)
 - Added, [Stanford Town Environment](./stanford_town.md)
 - Added, [Android Environment](./android.md)
+- Added, [MGXEnv Environment](./mgx.md)
 - ToBeAdded, [Web Environment](./web.md)

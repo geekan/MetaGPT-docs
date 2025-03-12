@@ -1,4 +1,5 @@
 # LLM API Configuration
+ # LLM API Configuration
 
 After completing the installation, follow these steps to configure the LLM API, using the OpenAI API as an example. This process is similar for other LLM APIs.
 
@@ -38,7 +39,7 @@ llm:
 
 It can be used to initialize LLM. Due to some restrictions on the use of o1 series, problems can be reported to us in time.
 
-With these steps, your setup is complete. For starting with MetaGPT, check out the [Quickstart guide](./quickstart) or our [Tutorials](/en/guide/tutorials/agent_101).
+With these steps, your setup is complete. For starting with MetaGPT, check out the [Quickstart guide](./quickstart.md) or our [Tutorials](/en/guide/tutorials/agent_101.md).
 
 MetaGPT supports a range of LLM models. Configure your model API keys as needed.
 
