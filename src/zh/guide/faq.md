@@ -161,6 +161,10 @@ MetaGPT社区-首席布道师 单月轮值，主要职责如下
     - 参考 faq8 解决网络问题
     - model 使用 gpt-3.5-turbo-16k / gpt-4 https://github.com/geekan/MetaGPT/issues/117
 
+26. **Playwright 在jupyter中使用出现NotImplementedError**
+    
+    - 参考 https://github.com/microsoft/playwright-python/issues/178 修改ipykernel包中kernelapp.py的代码
+
 ### 参考
 
 1.  [MetaGPT-Dev-SOP](https://deepwisdom.feishu.cn/wiki/EI91wZdcciqmtvknZMkcgHGgn3e)
