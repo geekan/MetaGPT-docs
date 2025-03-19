@@ -66,7 +66,7 @@ class AgentA(Role):
 2. 第二步： `AgentAAction`中，将用户需求拆分成10份
 
 ```python
-class AgentAAction(Aciton):
+class AgentAAction(Action):
     async def run(self, with_messages:List[Message]=None, **kwargs) -> List[str]:
         subtasks: List[str] = split_10_subtask(with_messages[0].content)
         return subtasks
