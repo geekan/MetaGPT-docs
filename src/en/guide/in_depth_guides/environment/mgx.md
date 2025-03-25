@@ -11,11 +11,12 @@ MGXEnv is a generic multi-agent collaboration environment that provides a flexib
 MGXEnv mainly handles message routing and publishing in a multi-agent environment. The core message space is defined by the Message class with the following structure:
 
 Definition:
+
 ```python
 from gymnasium import spaces
 
 space = {
-    "role": spaces.Text(16),         # Message role type 
+    "role": spaces.Text(16),         # Message role type
     "content": spaces.Text(1024),    # Actual message content
     "sent_from": spaces.Text(32),    # Sender name
     "send_to": spaces.Set(spaces.Text(32)),  # Set of recipient names
@@ -25,21 +26,22 @@ space = {
 
 Message Space Components:
 
-| Field | Description | Value Range |
-|-------|-------------|-------------|
-| role | Message role type | One of ["user", "assistant", "system"] |
-| content | Actual message content | Maximum length 1024 characters |
-| sent_from | Message sender name | Maximum length 32 characters |
-| send_to | Set of recipient names | Each name maximum 32 characters |
-| metadata | Additional message metadata | Dictionary containing optional fields (like images) |
+| Field     | Description                 | Value Range                                         |
+| --------- | --------------------------- | --------------------------------------------------- |
+| role      | Message role type           | One of ["user", "assistant", "system"]              |
+| content   | Actual message content      | Maximum length 1024 characters                      |
+| sent_from | Message sender name         | Maximum length 32 characters                        |
+| send_to   | Set of recipient names      | Each name maximum 32 characters                     |
+| metadata  | Additional message metadata | Dictionary containing optional fields (like images) |
 
 Message Example:
+
 ```python
 from metagpt.schema import Message
 
 Message(
     role="assistant",
-    content="Analysis completed.", 
+    content="Analysis completed.",
     sent_from="Alice",
     send_to={"Mike", "<all>"},
     metadata={"agent": "Emma"}
@@ -51,11 +53,13 @@ Message(
 The environment supports two communication modes:
 
 1. Public Chat Mode (default)
+
 - All messages visible to all roles (send_to includes <all>)
 - Message flow coordinated by team leader (Mike)
 - Messages stored in environment history
 
-2. Direct Chat Mode 
+2. Direct Chat Mode
+
 - Triggered when user directly messages a specific role
 - Communication only between user and target role
 - Bypasses team leader
