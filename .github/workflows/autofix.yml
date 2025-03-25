@@ -34,6 +34,4 @@ jobs:
       - name: Run prettier
         run: pnpm run format
 
-      - uses: autofix-ci/action@d3e591514b99d0fca6779455ff8338516663f7cc
-        with:
-          artifact-name: autofix-ci
+      - uses: autofix-ci/action@v1.3.1
