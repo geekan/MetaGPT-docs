@@ -1,5 +1,6 @@
 # LLM API Configuration
- # LLM API Configuration
+
+# LLM API Configuration
 
 After completing the installation, follow these steps to configure the LLM API, using the OpenAI API as an example. This process is similar for other LLM APIs.
 
