@@ -183,7 +183,7 @@ from metagpt.team import Team
 app = typer.Typer()
 
 @app.command()
-def main(
+def async main(
     idea: str = typer.Argument(..., help="write a function that calculates the product of a list"),
     investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
     n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
