@@ -100,7 +100,7 @@ In MetaGPT, class `Role` is the logical abstraction for an agent. A `Role` can p
 In the example, we create a `SimpleCoder` who can write code based on a human's natural language description. The steps are:
 
 1. We give it a name and profile
-2. We equip it with the expected action `SimpleWriteCode` with the `self._init_action` function
+2. We equip it with the expected action `SimpleWriteCode` with the `self.set_actions` function
 3. We overwrite the `_act` function, which is where the agent's specific acting logic goes in. We write that our agent will retrieve human instruction from latest memory, run equipped action, which MetaGPT makes it as the todo (`self.rc.todo`) under the hood, and finally return a complete message
 
 ```python
