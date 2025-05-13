@@ -225,6 +225,18 @@ llm:
   model: 'llama2'
 ```
 
+## Llama API
+
+Llama API is a Meta-hosted API service that helps you integrate Llama models quickly and efficiently. Using OpenAI comptability endpoints, you can easily access the power of Llama models without the need for complex setup or configuration!
+
+Join the [waitlist](https://llama.developer.meta.com?utm_source=partner-metagpt&utm_medium=readme) to get access!
+
+Try the Llama API provider with any of the following LLM Model names:
+- Llama-4-Scout-17B-16E-Instruct-FP8
+- Llama-4-Maverick-17B-128E-Instruct-FP8
+- Llama-3.3-8B-Instruct
+- Llama-3-70B-Instruct
+
 ## WizardLM-2-8x22b via [openrouter](https://openrouter.ai/)
 
 If you need [wizardlm-2-8x22b](https://openrouter.ai/models/microsoft/wizardlm-2-8x22b), you can use the following configuration:
