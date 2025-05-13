@@ -225,11 +225,11 @@ llm:
   model: 'llama2'
 ```
 
-## Llama API
+## [Llama API](https://llama.developer.meta.com?utm_source=partner-metagpt&utm_medium=website)
 
 Llama API is a Meta-hosted API service that helps you integrate Llama models quickly and efficiently. Using OpenAI comptability endpoints, you can easily access the power of Llama models without the need for complex setup or configuration!
 
-Join the [waitlist](https://llama.developer.meta.com?utm_source=partner-metagpt&utm_medium=readme) to get access!
+Join the [waitlist](https://llama.developer.meta.com?utm_source=partner-metagpt&utm_medium=website) to get access!
 
 Try the Llama API provider with any of the following LLM Model names:
 - Llama-4-Scout-17B-16E-Instruct-FP8
