@@ -1,15 +1,6 @@
 ---
 layout: page
 list:
-  - title: MetaGPT X Technical Report
-    description: 'Recently, multi-agent systems powered by Large Language Models (LLMs) have gained popularity for tasks ranging from research to software development.  Our goal is to build autonomous agents that significantly accelerate the workflow in software development, enhancing capabilities in natural language programming.'
-    author: DeepWisdom
-    date: 2024-08-20T00:00:00.000+00:00
-    tag:
-      - Multi-agents
-      - SWE-Bench Lite
-    link: /blog/swebench/MetaGPT X Technical Report
-    banner: /blog-banners/swebench.png
   - title: Implementing Werewolf Game in MetaGPT
     description: 'In their paper, "Exploring Large Language Models for Communication Games: An Empirical Study on Werewolf," Xu et al. explore the potential of large language models (LLM) in the popular game Werewolf, using MetaGPT as a multi-agent framework. Their challenge: Can MetaGPT recreate vibrant gameplay? Today, they share their exciting affirmative answer!'
     author: DeepWisdom
