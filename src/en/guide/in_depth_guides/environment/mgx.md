@@ -54,7 +54,7 @@ The environment supports two communication modes:
 
 1. Public Chat Mode (default)
 
-- All messages visible to all roles (send_to includes <all>)
+- All messages visible to all roles (send_to includes \<all\>)
 - Message flow coordinated by team leader (Mike)
 - Messages stored in environment history
 
