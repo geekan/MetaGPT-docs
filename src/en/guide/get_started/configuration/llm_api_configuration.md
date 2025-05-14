@@ -232,6 +232,7 @@ Llama API is a Meta-hosted API service that helps you integrate Llama models qui
 Join the [waitlist](https://llama.developer.meta.com?utm_source=partner-metagpt&utm_medium=website) to get access!
 
 Try the Llama API provider with any of the following LLM Model names:
+
 - Llama-4-Scout-17B-16E-Instruct-FP8
 - Llama-4-Maverick-17B-128E-Instruct-FP8
 - Llama-3.3-8B-Instruct
